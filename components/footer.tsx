@@ -50,8 +50,8 @@ export default function Footer() {
         <div className="mt-8 flex flex-col lg:flex-row gap-6 justify-center text-center lg:mt-5 text-xs border-t pt-8">
           <p className="text-foreground/60">
             &copy; {getCurrentYear()} Built by{" "}
-            <Link href="https://x.com/serge_0v" target="_blank" rel="noopener">
-              @serge_0v
+            <Link href="https://www.instagram.com/kirillunited/" target="_blank" rel="noopener">
+              @kirillunited
             </Link>
             .
           </p>
