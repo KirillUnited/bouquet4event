@@ -12,7 +12,7 @@ export default function NotFoundPage() {
   return (
     <>
       <Header />
-      <Custom404 />
+      {/* <Custom404 /> */}
       <Footer />
     </>
   );
