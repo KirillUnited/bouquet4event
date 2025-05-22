@@ -1,23 +1,6 @@
 import Link from "next/link";
 import Logo from "@/components/logo";
-
-const navItems = [
-  {
-    label: "Home",
-    href: "/",
-    target: false,
-  },
-  {
-    label: "Blog",
-    href: "/blog",
-    target: false,
-  },
-  {
-    label: "About",
-    href: "/about",
-    target: false,
-  },
-];
+import { NAV_ITEMS } from "@/constants";
 
 export default function Footer() {
   const getCurrentYear = () => {
@@ -35,7 +18,7 @@ export default function Footer() {
           <Logo />
         </Link>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-7 text-primary">
-          {navItems.map((navItem) => (
+          {NAV_ITEMS.map((navItem) => (
             <Link
               key={navItem.label}
               href={navItem.href}

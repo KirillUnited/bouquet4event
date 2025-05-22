@@ -3,24 +3,7 @@ import Logo from "@/components/logo";
 import MobileNav from "@/components/header/mobile-nav";
 import DesktopNav from "@/components/header/desktop-nav";
 import { ModeToggle } from "@/components/menu-toggle";
-
-const navItems = [
-  {
-    label: "Home",
-    href: "/index",
-    target: false,
-  },
-  {
-    label: "Blog",
-    href: "#",
-    target: false,
-  },
-  {
-    label: "About",
-    href: "#",
-    target: false,
-  },
-];
+import { NAV_ITEMS } from "@/constants";
 
 export default function Header() {
   return (
@@ -30,12 +13,12 @@ export default function Header() {
           <Logo />
         </Link>
         <div className="hidden xl:flex gap-7 items-center justify-between">
-          <DesktopNav navItems={navItems} />
+          <DesktopNav navItems={NAV_ITEMS} />
           <ModeToggle />
         </div>
         <div className="flex items-center xl:hidden">
           <ModeToggle />
-          <MobileNav navItems={navItems} />
+          <MobileNav navItems={NAV_ITEMS} />
         </div>
       </div>
     </header>
