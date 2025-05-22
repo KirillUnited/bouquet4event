@@ -69,7 +69,7 @@ export default function GridCard({
           variant={stegaClean(link?.buttonVariant)}
           asChild
         >
-          <div>{link?.title ?? "Learn More"}</div>
+          <div>{link?.title ?? "Подробнее"}</div>
         </Button>
       </div>
     </Link>
