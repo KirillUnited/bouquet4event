@@ -7,7 +7,7 @@ import { ModeToggle } from "@/components/menu-toggle";
 const navItems = [
   {
     label: "Home",
-    href: "/",
+    href: "/index",
     target: false,
   },
   {
