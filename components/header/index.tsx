@@ -8,7 +8,7 @@ import { NAV_ITEMS } from "@/constants";
 export default function Header() {
   return (
     <header className="sticky top-0 w-full border-border/40 bg-background/95 z-50">
-      <div className="container flex items-center justify-between min-h-14 py-4">
+      <div className="container flex items-center justify-between min-h-14 py-2">
         <Link href="/" aria-label="Home page" className="w-60 h-16">
           <Logo />
         </Link>

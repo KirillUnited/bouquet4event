@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Logo from "@/components/logo";
 import { NAV_ITEMS } from "@/constants";
-import { InstagramIcon } from "lucide-react";
 
 export default function Footer() {
   const getCurrentYear = () => {
