@@ -11,8 +11,8 @@ const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
   title: {
-    template: "%s | Bouquet4Event Starter",
-    default: "Sanity Next.js Website | Bouquet4Event Starter",
+    template: "%s | Bouquet4Event",
+    default: "Bouquet4Event",
   },
   openGraph: {
     images: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         height: 630,
       },
     ],
-    locale: "en_US",
+    locale: "ru-RU",
     type: "website",
   },
   robots: !isProduction ? "noindex, nofollow" : "index, follow",
@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ru" suppressHydrationWarning>
       <link rel="icon" href="/favicon.ico" />
       <body
         className={cn(
