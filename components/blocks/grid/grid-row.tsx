@@ -34,7 +34,7 @@ export default function GridRow({
         <div
           className={cn(
             `grid grid-cols-1 gap-6`,
-            `lg:${stegaClean(gridColumns)}`
+            `md:${stegaClean(gridColumns)}`
           )}
         >
           {columns.map((column) => {

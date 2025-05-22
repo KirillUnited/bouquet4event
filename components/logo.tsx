@@ -8,6 +8,7 @@ export default function Logo() {
       width={300}
       height={145}
       priority
+      className="w-full max-h-full"
     />
   );
 }
