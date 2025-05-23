@@ -19,9 +19,10 @@ export default function Hero1({
   links,
 }: Hero1Props) {
   return (
-    <div className="container dark:bg-background py-20">
+    <section className="container dark:bg-background py-20 relative">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#004D4D]/95 to-transparent z-10"></div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center z-10">
           {tagLine && (
             <p className="leading-[0] font-sans animate-fade-up [animation-delay:100ms] opacity-0 border-1 rounded-md p-2">
               <span className="text-base font-semibold">{tagLine}</span>
@@ -60,7 +61,7 @@ export default function Hero1({
         <div className="flex flex-col justify-center">
           {image && image.asset?._id && (
             <Image
-              className="rounded-xl animate-fade-up [animation-delay:500ms] opacity-0"
+              className="rounded-xl animate-fade-up [animation-delay:500ms] opacity-0 absolute inset-0 h-full w-full object-cover"
               src={urlFor(image).url()}
               alt={image.alt || ""}
               width={image.asset?.metadata?.dimensions?.width || 800}
@@ -72,6 +73,6 @@ export default function Hero1({
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
