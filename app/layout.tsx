@@ -18,10 +18,11 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/og-image.png`,
-        width: 1200,
-        height: 630,
+        width: 64,
+        height: 64,
       },
     ],
+    siteName: "Bouquet4Event",
     locale: "ru-RU",
     type: "website",
   },
@@ -41,7 +42,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" suppressHydrationWarning>
-      <link rel="icon" href="/favicon.ico" />
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased overscroll-none",
