@@ -75,7 +75,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="border-t border-white/20 mt-8 pt-8 text-center text-sm">
+        <div className="border-t border-foreground/20 mt-8 pt-8 text-center text-sm">
           <p>© {getCurrentYear()} Bouquet4Event. Все права защищены.</p>
         </div>
       </div>
