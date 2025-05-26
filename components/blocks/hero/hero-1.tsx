@@ -5,74 +5,80 @@ import { urlFor } from "@/sanity/lib/image";
 import { stegaClean } from "next-sanity";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import React from "react";
 
 type Hero1Props = Extract<
-  NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
-  { _type: "hero-1" }
+    NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
+    { _type: "hero-1" }
 >;
 
 export default function Hero1({
-  tagLine,
-  title,
-  body,
-  image,
-  links,
+    tagLine,
+    title,
+    body,
+    image,
+    links,
 }: Hero1Props) {
-  return (
-    <section className="container dark:bg-background py-20 relative">
-      <div className="absolute inset-0 bg-gradient-to-r from-[#004D4D]/95 to-transparent z-10"></div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <div className="flex flex-col justify-center z-10">
-          {tagLine && (
-            <p className="leading-[0] font-sans animate-fade-up [animation-delay:100ms] opacity-0 border-1 border-primary rounded-md p-2">
-              <span className="text-base font-semibold">{tagLine}</span>
-            </p>
-          )}
-          {title && (
-            <h1 className="mt-6 font-bold leading-[1.1] text-4xl md:text-5xl lg:text-6xl animate-fade-up [animation-delay:200ms] opacity-0">
-              {title}
-            </h1>
-          )}
-          {body && (
-            <div className="text-lg mt-6 animate-fade-up [animation-delay:300ms] opacity-0">
-              <PortableTextRenderer value={body} />
+    return (
+        <section className="text-foreground-50 py-20 relative">
+            <div className="container">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div className="flex flex-col justify-center z-10">
+                        {tagLine && (
+                            <p className="leading-[0] animate-fade-up [animation-delay:100ms] opacity-0 border-1 border-primary rounded-md p-2">
+                                <span className="text-base font-light">{tagLine}</span>
+                            </p>
+                        )}
+                        {title && (
+                            <h1 className="mt-6 font-bold leading-[1.1] text-4xl md:text-5xl lg:text-6xl animate-fade-up [animation-delay:200ms] opacity-0">
+                                {title}
+                            </h1>
+                        )}
+                        {body && (
+                            <div className="text-lg mt-6 animate-fade-up [animation-delay:300ms] opacity-0">
+                                <PortableTextRenderer value={body} />
+                            </div>
+                        )}
+                        {links && links.length > 0 && (
+                            <div
+                                className="mt-10 flex flex-wrap gap-4 animate-fade-up [animation-delay:400ms] opacity-0">
+                                {links.map((link) => (
+                                    <Button
+                                        key={link.title}
+                                        variant={stegaClean(link?.buttonVariant)}
+                                        asChild
+                                        size="lg"
+                                    >
+                                        <Link
+                                            href={link.href as string}
+                                            target={link.target ? "_blank" : undefined}
+                                            rel={link.target ? "noopener" : undefined}
+                                        >
+                                            {link.title}
+                                        </Link>
+                                    </Button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
-          )}
-          {links && links.length > 0 && (
-            <div className="mt-10 flex flex-wrap gap-4 animate-fade-up [animation-delay:400ms] opacity-0">
-              {links.map((link) => (
-                <Button
-                  key={link.title}
-                  variant={stegaClean(link?.buttonVariant)}
-                  asChild
-                >
-                  <Link
-                    href={link.href as string}
-                    target={link.target ? "_blank" : undefined}
-                    rel={link.target ? "noopener" : undefined}
-                  >
-                    {link.title}
-                  </Link>
-                </Button>
-              ))}
+            <div className="absolute inset-0 z-0">
+                {image && image.asset?._id && (
+                    <Image
+                        className="animate-fade-up [animation-delay:500ms] opacity-0 h-full w-full object-cover"
+                        src={urlFor(image).url()}
+                        alt={image.alt || ""}
+                        width={image.asset?.metadata?.dimensions?.width || 800}
+                        height={image.asset?.metadata?.dimensions?.height || 800}
+                        placeholder={image?.asset?.metadata?.lqip ? "blur" : undefined}
+                        blurDataURL={image?.asset?.metadata?.lqip || ""}
+                        quality={100}
+                        priority
+                    />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-transparent"></div>
             </div>
-          )}
-        </div>
-        <div className="flex flex-col justify-center">
-          {image && image.asset?._id && (
-            <Image
-              className="rounded-xl animate-fade-up [animation-delay:500ms] opacity-0 absolute inset-0 h-full w-full object-cover"
-              src={urlFor(image).url()}
-              alt={image.alt || ""}
-              width={image.asset?.metadata?.dimensions?.width || 800}
-              height={image.asset?.metadata?.dimensions?.height || 800}
-              placeholder={image?.asset?.metadata?.lqip ? "blur" : undefined}
-              blurDataURL={image?.asset?.metadata?.lqip || ""}
-              quality={100}
-            />
-          )}
-        </div>
-      </div>
-    </section>
-  );
+        </section>
+    );
 }
