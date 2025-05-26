@@ -6,6 +6,8 @@ import { stegaClean } from "next-sanity";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import React from "react";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import FormRegister from "@/components/blocks/forms/register";
 
 type Hero1Props = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -42,22 +44,32 @@ export default function Hero1({
                         {links && links.length > 0 && (
                             <div
                                 className="mt-10 flex flex-wrap gap-4 animate-fade-up [animation-delay:400ms] opacity-0">
-                                {links.map((link) => (
-                                    <Button
-                                        key={link.title}
-                                        variant={stegaClean(link?.buttonVariant)}
-                                        asChild
-                                        size="lg"
-                                    >
-                                        <Link
-                                            href={link.href as string}
-                                            target={link.target ? "_blank" : undefined}
-                                            rel={link.target ? "noopener" : undefined}
+                                <Dialog>
+                                    {links.map((link) => (
+                                        <DialogTrigger
+                                            asChild
+                                            key={link.title}
                                         >
-                                            {link.title}
-                                        </Link>
-                                    </Button>
-                                ))}
+                                            <Button
+                                                key={link.title}
+                                                variant={stegaClean(link?.buttonVariant)}
+                                                asChild
+                                                size="lg"
+                                            >
+                                                <Link
+                                                    href={link.href as string}
+                                                    target={link.target ? "_blank" : undefined}
+                                                    rel={link.target ? "noopener" : undefined}
+                                                >
+                                                    {link.title}
+                                                </Link>
+                                            </Button>
+                                        </DialogTrigger>
+                                    ))}
+                                    <DialogContent className="w-full sm:max-w-5xl overflow-y-auto max-h-screen py-8" >
+                                        <FormRegister />
+                                    </DialogContent>
+                                </Dialog>
                             </div>
                         )}
                     </div>
