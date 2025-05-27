@@ -1,20 +1,29 @@
 import Link from "next/link";
 import { NavItem } from "@/types";
+import { Button } from "../ui/button";
 
 export default function DesktopNav({ navItems }: { navItems: NavItem[] }) {
   return (
-    <div className="hidden xl:flex items-center gap-7 text-primary">
+    <ul className="hidden xl:flex items-center gap-7 text-primary">
       {navItems.map((navItem) => (
-        <Link
-          key={navItem.label}
-          href={navItem.href}
-          target={navItem.target ? "_blank" : undefined}
-          rel={navItem.target ? "noopener noreferrer" : undefined}
-          className="transition-colors hover:text-foreground/80 text-foreground/60 text-sm"
-        >
-          {navItem.label}
-        </Link>
+        <li key={navItem.label}>
+          <Link
+            key={navItem.label}
+            href={navItem.href}
+            target={navItem.target ? "_blank" : undefined}
+            rel={navItem.target ? "noopener noreferrer" : undefined}
+            className="transition-colors hover:text-primary/50 text-foreground/80 text-sm  font-semibold"
+          >
+            {navItem.label}
+          </Link>
+        </li>
       ))}
-    </div>
+      <Button
+        asChild>
+        <Link href="#register">
+          Регистрация
+        </Link>
+      </Button>
+    </ul>
   );
 }
