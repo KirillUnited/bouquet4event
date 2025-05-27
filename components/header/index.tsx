@@ -3,7 +3,7 @@ import Logo from "@/components/logo";
 import MobileNav from "@/components/header/mobile-nav";
 import DesktopNav from "@/components/header/desktop-nav";
 import { ModeToggle } from "@/components/menu-toggle";
-import { NAV_ITEMS } from "@/constants";
+import { NAV_ITEMS } from "@/config";
 
 export default function Header() {
   return (
