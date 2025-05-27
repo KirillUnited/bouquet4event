@@ -22,17 +22,17 @@ export default function Hero1({
     links,
 }: Hero1Props) {
     return (
-        <section className="text-foreground-50 py-20 relative">
+        <section className="py-20 relative">
             <div className="container">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     <div className="flex flex-col justify-center z-10">
                         {tagLine && (
-                            <p className="leading-[0] animate-fade-up [animation-delay:100ms] opacity-0 border-1 border-primary rounded-md p-2">
+                            <p className="backdrop-blur-lg bg-background/30 leading-[0] animate-fade-up [animation-delay:100ms] opacity-0 border-1 border-primary rounded-md p-2">
                                 <span className="text-base font-light">{tagLine}</span>
                             </p>
                         )}
                         {title && (
-                            <h1 className="mt-6 font-bold leading-[1.1] text-4xl md:text-5xl lg:text-6xl animate-fade-up [animation-delay:200ms] opacity-0">
+                            <h1 className="mt-6 animate-fade-up [animation-delay:200ms] opacity-0">
                                 {title}
                             </h1>
                         )}

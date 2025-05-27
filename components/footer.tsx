@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Logo from "@/components/logo";
-import { NAV_ITEMS } from "@/constants";
+import { NAV_ITEMS } from "@/config";
 
 export default function Footer() {
   const getCurrentYear = () => {
