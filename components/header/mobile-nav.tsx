@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { NavItem } from "@/types";
-import Logo from "@/components/logo";
+import { LogoMobile } from "@/components/logo";
 import { useState } from "react";
 import { AlignRight } from "lucide-react";
 
@@ -29,9 +29,7 @@ export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <div className="mx-auto">
-            <Logo />
-          </div>
+          <LogoMobile className="w-16 h-16"/>
           <div className="sr-only">
             <SheetTitle>Main Navigation</SheetTitle>
             <SheetDescription>Navigate to the website pages</SheetDescription>
@@ -48,12 +46,21 @@ export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
                       href={navItem.href}
                       target={navItem.target ? "_blank" : undefined}
                       rel={navItem.target ? "noopener noreferrer" : undefined}
-                      className="hover:text-decoration-none hover:opacity-50 text-lg"
+                      className="hover:text-decoration-none hover:opacity-50 text-lg uppercase"
                     >
                       {navItem.label}
                     </Link>
                   </li>
                 ))}
+
+                <Button
+                  asChild
+                  className="w-full"
+                >
+                  <Link href="#register">
+                    Регистрация
+                  </Link>
+                </Button>
               </>
             </ul>
           </div>

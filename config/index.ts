@@ -19,9 +19,4 @@ export const NAV_ITEMS = [
     href: "#",
     target: false,
   },
-  {
-    label: "Регистрация",
-    href: "#",
-    target: false,
-  },
 ];
