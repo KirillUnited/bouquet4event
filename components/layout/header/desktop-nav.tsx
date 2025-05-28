@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { NavItem } from "@/types";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 export default function DesktopNav({ navItems }: { navItems: NavItem[] }) {
   return (
@@ -18,12 +18,6 @@ export default function DesktopNav({ navItems }: { navItems: NavItem[] }) {
           </Link>
         </li>
       ))}
-      <Button
-        asChild>
-        <Link href="#register">
-          Регистрация
-        </Link>
-      </Button>
     </ul>
   );
 }

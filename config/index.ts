@@ -5,17 +5,22 @@ export const NAV_ITEMS = [
     target: false,
   },
   {
-    label: "О сервисе",
-    href: "#",
-    target: false,
-  },
-  {
     label: "Как это работает",
     href: "#",
     target: false,
   },
   {
     label: "Преимущества",
+    href: "#",
+    target: false,
+  },
+  {
+    label: "О нас",
+    href: "#",
+    target: false,
+  },
+  {
+    label: "Контакты",
     href: "#",
     target: false,
   },

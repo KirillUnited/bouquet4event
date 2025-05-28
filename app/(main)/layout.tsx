@@ -1,4 +1,4 @@
-import Header from "@/components/header";
+import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { VisualEditing } from "next-sanity";
