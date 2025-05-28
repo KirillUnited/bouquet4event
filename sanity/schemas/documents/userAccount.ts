@@ -43,6 +43,14 @@ export default defineType({
             validation: (Rule) => Rule.required().precision(2),
             initialValue: 0,
         }),
+        defineField({
+            name: "createdAt",
+            title: "Дата создания",
+            type: "datetime",
+            description: "Дата создания аккаунта пользователя",
+            validation: (Rule) => Rule.required(),
+            initialValue: () => new Date().toISOString(),
+        }),
     ],
     preview: {
         select: {
