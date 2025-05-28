@@ -18,12 +18,6 @@ export default function DesktopNav({ navItems }: { navItems: NavItem[] }) {
           </Link>
         </li>
       ))}
-      <Button
-        asChild>
-        <Link href="#register">
-          Регистрация
-        </Link>
-      </Button>
     </ul>
   );
 }
