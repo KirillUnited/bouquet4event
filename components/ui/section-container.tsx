@@ -15,7 +15,7 @@ export default function SectionContainer({
   className,
 }: SectionContainerProps) {
   return (
-    <div
+    <section
       className={cn(
         `bg-${color} relative`,
         padding?.top ? "pt-16 xl:pt-20" : undefined,
@@ -24,6 +24,6 @@ export default function SectionContainer({
       )}
     >
       <div className="container">{children}</div>
-    </div>
+    </section>
   );
 }
