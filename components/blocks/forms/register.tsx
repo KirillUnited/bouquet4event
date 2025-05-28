@@ -23,7 +23,7 @@ function RegisterForm({ onSubmit, isSubmitting, formControl }: RegisterFormProps
     return (
         <div className="flex flex-col gap-8">
             <DialogHeader>
-                <DialogTitle className="text-2xl sm:text-4xl">
+                <DialogTitle className="text-2xl sm:text-4xl text-balance">
                     Зарегистрировать цветочный счёт
                 </DialogTitle>
                 <DialogDescription className="text-foreground-85">
