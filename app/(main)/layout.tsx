@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import Footer from "@/components/footer";
+import Footer from "@/components/layout/footer";
 import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";

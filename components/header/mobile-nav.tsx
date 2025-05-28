@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { NavItem } from "@/types";
-import { LogoMobile } from "@/components/logo";
+import { LogoMobile } from "@/components/ui/logo";
 import { useState } from "react";
 import { AlignRight } from "lucide-react";
 

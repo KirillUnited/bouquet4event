@@ -1,4 +1,4 @@
-import SectionContainer from "@/components/ui/section-container";
+import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
 import Timeline1 from "@/components/blocks/timeline/timeline-1";
 import { PAGE_QUERYResult, ColorVariant } from "@/sanity.types";

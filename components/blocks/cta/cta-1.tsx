@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import SectionContainer from "@/components/ui/section-container";
+import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
 import Link from "next/link";
 import PortableTextRenderer from "@/components/portable-text-renderer";

@@ -1,9 +1,9 @@
 'use client';
 import Link from "next/link";
-import { Logo, LogoMobile } from "@/components/logo";
+import { Logo, LogoMobile } from "@/components/ui/logo";
 import MobileNav from "@/components/header/mobile-nav";
 import DesktopNav from "@/components/header/desktop-nav";
-import { ModeToggle } from "@/components/menu-toggle";
+import { ModeToggle } from "@/components/ui/menu-toggle";
 import { NAV_ITEMS } from "@/config";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
