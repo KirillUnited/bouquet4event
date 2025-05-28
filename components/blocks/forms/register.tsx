@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import FormRegisterSuccess from "./register-success";
 import Image from "next/image";
+import { createUserAccount } from "@/lib/createUserAccount";
 
 interface RegisterFormProps {
     onSubmit: (event: React.FormEvent) => void;
@@ -167,22 +168,24 @@ export default function FormRegister() {
     const handleSend = useCallback(
         async ({ name, phone, region }: { name: string; phone: string; region: string }) => {
             try {
-                const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ name, phone, region }),
+                // Генерируем уникальный ID пользователя на основе текущего времени и случайного числа
+                const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+                
+                // Используем функцию createUserAccount для создания аккаунта в Sanity CMS
+                const result = await createUserAccount({
+                    userId,
+                    name,
+                    phone,
+                    region,
+                    totalAmount: 0 // Начальная сумма 0
                 });
 
-                const result = await response.json();
-
-                if (response.ok) {
+                if (result) {
                     toast.success('Ваш счёт успешно зарегистрирован!');
                     setFormValues(result);
                     form.reset();
                 } else {
-                    toast.error(result.error);
+                    toast.error('Не удалось создать счёт. Пожалуйста, попробуйте позже.');
                 }
             } catch (error: any) {
                 toast.error(error.message);

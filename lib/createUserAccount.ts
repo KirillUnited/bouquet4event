@@ -25,9 +25,10 @@ export async function createUserAccount(userData: UserAccountData) {
 
     // Валидация формата телефона (простая проверка на международный формат)
     const phoneRegex = /^\+[0-9]{1,3}[0-9]{9,10}$/;
-    if (!phoneRegex.test(userData.phone)) {
-      throw new Error("Номер телефона должен быть в международном формате (например, +7XXXXXXXXXX)");
-    }
+    // TODO: добавить валидацию формата телефона
+    // if (!phoneRegex.test(userData.phone)) {
+    //   throw new Error("Номер телефона должен быть в международном формате (например, +7XXXXXXXXXX)");
+    // }
 
     // Создание документа в Sanity
     const userAccount = await client.create({
@@ -46,27 +47,3 @@ export async function createUserAccount(userData: UserAccountData) {
     throw error;
   }
 }
-
-/**
- * Пример использования функции:
- * 
- * ```typescript
- * import { createUserAccount } from "./lib/createUserAccount";
- * 
- * async function handleCreateAccount() {
- *   try {
- *     const newAccount = await createUserAccount({
- *       userId: "user123",
- *       name: "Иван Иванов",
- *       phone: "+79123456789",
- *       region: "Москва",
- *       totalAmount: 1500.75
- *     });
- *     
- *     console.log("Аккаунт успешно создан:", newAccount);
- *   } catch (error) {
- *     console.error("Не удалось создать аккаунт:", error);
- *   }
- * }
- * ```
- */
