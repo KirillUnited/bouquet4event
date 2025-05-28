@@ -12,7 +12,7 @@ export default function DesktopNav({ navItems }: { navItems: NavItem[] }) {
             href={navItem.href}
             target={navItem.target ? "_blank" : undefined}
             rel={navItem.target ? "noopener noreferrer" : undefined}
-            className="transition-colors hover:text-primary/50 text-foreground/80 text-sm  font-semibold"
+            className="transition-colors hover:text-primary/70 dark:hover:text-primary text-foreground/85 text-sm  font-semibold"
           >
             {navItem.label}
           </Link>
