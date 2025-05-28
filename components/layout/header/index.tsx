@@ -19,14 +19,12 @@ export default function Header() {
         <div className="hidden xl:flex self-center">
           <DesktopNav navItems={NAV_ITEMS} />
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center">
+        <div className="flex items-center">
             <ModeToggle />
             <div className="xl:hidden">
               <MobileNav navItems={NAV_ITEMS} />
             </div>
           </div>
-        </div>
       </div>
     </header>
   );
