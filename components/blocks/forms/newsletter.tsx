@@ -8,7 +8,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import SectionContainer from "@/components/ui/section-container";
+import SectionContainer from "@/components/layout/section-container";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
