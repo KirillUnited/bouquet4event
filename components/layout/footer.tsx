@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 import { NAV_ITEMS } from "@/config";
+import { SocialsList } from "../shared/socials";
 
 export default function Footer() {
   const getCurrentYear = () => {
@@ -16,26 +17,7 @@ export default function Footer() {
             <p className="mb-4">
               Сервис коллективной цветочной подписки
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="transition-colors cursor-pointer"
-              >
-                <i className="fa-brands fa-instagram text-2xl"></i>
-              </a>
-              <a
-                href="#"
-                className="transition-colors cursor-pointer"
-              >
-                <i className="fa-brands fa-telegram text-2xl"></i>
-              </a>
-              <a
-                href="#"
-                className="transition-colors cursor-pointer"
-              >
-                <i className="fa-brands fa-whatsapp text-2xl"></i>
-              </a>
-            </div>
+            <SocialsList />
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-4">Контакты</h3>
