@@ -26,7 +26,7 @@ function RegisterForm({ onSubmit, isSubmitting, formControl }: RegisterFormProps
                 <DialogTitle className="text-2xl sm:text-4xl">
                     Зарегистрировать цветочный счёт
                 </DialogTitle>
-                <DialogDescription className="text-gray-600">
+                <DialogDescription className="text-foreground-85">
                     Заполните форму, и мы свяжемся с вами в ближайшее время,
                     чтобы обсудить все детали вашей цветочной подписки.
                 </DialogDescription>
