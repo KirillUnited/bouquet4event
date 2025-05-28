@@ -28,7 +28,7 @@ export const RegisterDialog: React.FC<RegisterDialogProps> = ({ title, buttonVar
                     {title}
                 </Button>
             </DialogTrigger>
-            <DialogContent className="w-full sm:max-w-5xl overflow-y-auto max-h-screen py-8" >
+            <DialogContent className="w-full sm:max-w-5xl overflow-y-auto max-h-[calc(100vh-2rem)] py-8" >
                 <FormRegister />
             </DialogContent>
         </Dialog>

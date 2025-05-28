@@ -66,7 +66,7 @@ export default function Hero1({
                                             </Button>
                                         </DialogTrigger>
                                     ))}
-                                    <DialogContent className="w-full sm:max-w-5xl overflow-y-auto max-h-screen py-8" >
+                                    <DialogContent className="w-full sm:max-w-5xl overflow-y-auto max-h-[calc(100svh-2rem)] py-8" >
                                         <FormRegister />
                                     </DialogContent>
                                 </Dialog>
