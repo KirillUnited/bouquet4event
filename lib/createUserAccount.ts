@@ -1,4 +1,6 @@
+'use server';
 import { client } from "../sanity/lib/client";
+import { token } from "../sanity/lib/token";
 
 /**
  * Интерфейс для данных аккаунта пользователя
@@ -31,7 +33,8 @@ export async function createUserAccount(userData: UserAccountData) {
     // }
 
     // Создание документа в Sanity
-    const userAccount = await client.create({
+    const clientWithToken = client.withConfig({ token });
+    const userAccount = await clientWithToken.create({
       _type: "userAccount",
       userId: userData.userId,
       name: userData.name,
