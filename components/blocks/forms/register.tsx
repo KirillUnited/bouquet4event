@@ -14,6 +14,7 @@ import FormRegisterSuccess from "./register-success";
 import { createUserAccount } from "@/lib/createUserAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
 import { cn } from "@/lib/utils";
+import { PhoneInput } from "@/components/shared/forms";
 
 interface RegisterFormProps {
     onSubmit: (event: React.FormEvent) => void;
@@ -64,18 +65,11 @@ function RegisterForm({ onSubmit, isSubmitting, formControl }: RegisterFormProps
                         </FormItem>
                     )}
                 />
-                <FormField
+                <PhoneInput
                     control={formControl}
                     name="phone"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Телефон</FormLabel>
-                            <FormControl>
-                                <Input {...field} placeholder="+7 (___) ___-__-__" className="mt-1" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
+                    required
+                    className="mt-1"
                 />
                 <FormField
                     control={formControl}
@@ -113,7 +107,11 @@ export default function Register() {
     const [formValues, setFormValues] = useState({});
     const formSchema = z.object({
         name: z.string().min(1, { message: "Пожалуйста, введите ваше имя" }),
-        phone: z.string().min(1, { message: "Пожалуйста, введите ваш телефон" }),
+        phone: z.string()
+            .min(1, { message: "Пожалуйста, введите ваш телефон" })
+            .regex(/^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/, {
+                message: "Телефон должен соответствовать формату +7 (XXX) XXX-XX-XX"
+            }),
         region: z.string().min(1, { message: "Пожалуйста, выберите ваш регион" }),
     });
 
