@@ -4,6 +4,8 @@ import React from 'react'
 import { toast } from 'sonner';
 
 function FormRegisterSuccess({ values }: any) {
+    const userLink = `${process.env.NEXT_PUBLIC_SITE_URL}/account/${values.userId}`;
+
     return (
         <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center overflow-hidden text-center">
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
@@ -17,27 +19,27 @@ function FormRegisterSuccess({ values }: any) {
             </p>
             {/* !TODO: Temporary block */}
             <div className="mb-4 w-full max-w-fit p-4 border-1 rounded-lg">
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div className="text-left text-gray-500">Имя:</div>
-                    <div className="text-right font-medium">{values.name}</div>
-                    <div className="text-left text-gray-500">Телефон:</div>
-                    <div className="text-right font-medium">{values.phone}</div>
-                    <div className="text-left text-gray-500">Регион:</div>
-                    <div className="text-right font-medium">{values.region}</div>
-                    <div className="text-left text-gray-500">Номер счёта:</div>
-                    <div className="text-right font-medium">{values.userId}</div>
-                </div>
+                <ul className="grid grid-cols-2 gap-2 text-sm overflow-x-auto">
+                    <li className="text-left text-foreground/60">Имя:</li>
+                    <li className="text-right font-medium">{values.name}</li>
+                    <li className="text-left text-foreground/60">Телефон:</li>
+                    <li className="text-right font-medium">{values.phone}</li>
+                    <li className="text-left text-foreground/60">Регион:</li>
+                    <li className="text-right font-medium">{values.region}</li>
+                    <li className="text-left text-foreground/60">Номер счёта:</li>
+                    <li className="text-right font-medium">{values.userId}</li>
+                </ul>
             </div>
             <div className="w-full bg-gray-50 p-4 rounded-lg mb-6">
                 <div className="flex items-center justify-between gap-2">
                     <code className="text-sm text-gray-800 flex-1 overflow-hidden overflow-ellipsis">
-                        https://bouquet4event.ru/account/{values.name.toLowerCase().replace(/\s+/g, '-')}-{Date.now()}
+                        {userLink}
                     </code>
                     <Button
                         variant="outline"
                         size="sm"
                         onClick={() => {
-                            navigator.clipboard.writeText(`https://bouquet4event.ru/account/${values.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`);
+                            navigator.clipboard.writeText(userLink);
                             toast.success('Ссылка скопирована!');
                         }}
                     >
