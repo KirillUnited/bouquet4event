@@ -180,6 +180,8 @@ export default function FormRegister() {
                     totalAmount: 0 // Начальная сумма 0
                 });
 
+                console.log('Result:', result);
+
                 if (result) {
                     toast.success('Ваш счёт успешно зарегистрирован!');
                     setFormValues(result);

@@ -1,5 +1,5 @@
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
-import { Files, BookA, User, ListCollapse, Quote } from "lucide-react";
+import { Files, BookA, User, ListCollapse, Quote, UsersIcon } from "lucide-react";
 
 export const structure = (S: any, context: any) =>
   S.list()
@@ -20,20 +20,7 @@ export const structure = (S: any, context: any) =>
             .title("Post")
             .defaultOrdering([{ field: "_createdAt", direction: "desc" }]) // Default ordering
         ),
-      orderableDocumentListDeskItem({
-        type: "category",
-        title: "Categories",
-        icon: BookA,
-        S,
-        context,
-      }),
-      orderableDocumentListDeskItem({
-        type: "author",
-        title: "Authors",
-        icon: User,
-        S,
-        context,
-      }),
+      S.divider(),
       orderableDocumentListDeskItem({
         type: "faq",
         title: "FAQs",
@@ -48,4 +35,29 @@ export const structure = (S: any, context: any) =>
         S,
         context,
       }),
+      S.divider(),
+      orderableDocumentListDeskItem({
+        type: "category",
+        title: "Categories",
+        icon: BookA,
+        S,
+        context,
+      }),
+      orderableDocumentListDeskItem({
+        type: "author",
+        title: "Authors",
+        icon: User,
+        S,
+        context,
+      }),
+      S.divider(),
+      S.listItem()
+        .title("User Accounts")
+        .schemaType("userAccount")
+        .icon(UsersIcon)
+        .child(
+          S.documentTypeList("userAccount")
+            .title("User Accounts")
+            .defaultOrdering([{ field: "_createdAt", direction: "desc" }])
+        ),
     ]);
