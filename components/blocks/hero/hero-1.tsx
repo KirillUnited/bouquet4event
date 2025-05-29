@@ -7,7 +7,7 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import FormRegister from "@/components/blocks/forms/register";
+import Register from "@/components/blocks/forms/register";
 
 type Hero1Props = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -67,7 +67,7 @@ export default function Hero1({
                                         </DialogTrigger>
                                     ))}
                                     <DialogContent className="w-full max-w-full sm:max-w-5xl overflow-y-auto max-h-[100svh] py-8 rounded-none sm:rounded-lg" >
-                                        <FormRegister />
+                                        <Register />
                                     </DialogContent>
                                 </Dialog>
                             </div>
