@@ -27,17 +27,17 @@ export default function Hero1({
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     <div className="flex flex-col justify-center z-10">
                         {tagLine && (
-                            <p className="backdrop-blur-lg bg-background/30 leading-[0] animate-fade-up [animation-delay:100ms] opacity-0 border-1 border-primary rounded-md p-2">
+                            <p className="backdrop-blur-lg bg-background/30 leading-[0] animate-fade-up [animation-delay:100ms] opacity-0 border-1 border-primary rounded-md p-2 text-pretty">
                                 <span className="text-base font-light">{tagLine}</span>
                             </p>
                         )}
                         {title && (
-                            <h1 className="mt-6 animate-fade-up [animation-delay:200ms] opacity-0">
+                            <h1 className="mt-6 animate-fade-up [animation-delay:200ms] opacity-0 text-pretty">
                                 {title}
                             </h1>
                         )}
                         {body && (
-                            <div className="text-lg mt-6 animate-fade-up [animation-delay:300ms] opacity-0">
+                            <div className="text-lg mt-6 animate-fade-up [animation-delay:300ms] opacity-0 text-pretty">
                                 <PortableTextRenderer value={body} />
                             </div>
                         )}
