@@ -25,7 +25,7 @@ function FormRegisterSuccess({ values }: any) {
                     <div className="text-left text-gray-500">Регион:</div>
                     <div className="text-right font-medium">{values.region}</div>
                     <div className="text-left text-gray-500">Номер счёта:</div>
-                    <div className="text-right font-medium">{values.name.toLowerCase().replace(/\s+/g, '-')}-{Date.now()}</div>
+                    <div className="text-right font-medium">{values.userId}</div>
                 </div>
             </div>
             <div className="w-full bg-gray-50 p-4 rounded-lg mb-6">
