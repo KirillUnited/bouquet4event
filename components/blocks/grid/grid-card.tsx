@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { PAGE_QUERYResult, ColorVariant } from "@/sanity.types";
-import { RegisterDialog } from "@/components/shared/dialog";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type GridRow = Extract<Block, { _type: "grid-row" }>;
@@ -64,8 +63,14 @@ export default function GridCard({
             {excerpt && <p>{excerpt}</p>}
           </div>
         </div>
-
-        <RegisterDialog title={link?.title ?? "Подробнее"} buttonVariant={link?.buttonVariant} triggerClassName="mt-6" />
+        <Button
+          className="mt-6"
+          size="lg"
+          variant={stegaClean(link?.buttonVariant)}
+          asChild
+        >
+          <div>{link?.title ?? "Подробнее"}</div>
+        </Button>
       </div>
     </Link>
   );
