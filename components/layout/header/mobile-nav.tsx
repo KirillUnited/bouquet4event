@@ -13,6 +13,7 @@ import { NavItem } from "@/types";
 import { LogoMobile } from "@/components/ui/logo";
 import { useState } from "react";
 import { AlignRight } from "lucide-react";
+import { SocialsList } from "@/components/shared/socials";
 
 export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
   const [open, setOpen] = useState(false);
@@ -29,40 +30,39 @@ export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <LogoMobile className="w-16 h-16"/>
+          <LogoMobile className="w-10 h-10" />
           <div className="sr-only">
             <SheetTitle>Main Navigation</SheetTitle>
             <SheetDescription>Navigate to the website pages</SheetDescription>
           </div>
         </SheetHeader>
         <div className="pt-10 pb-20">
-          <div className="container">
-            <ul className="list-none text-center space-y-3">
-              <>
-                {navItems.map((navItem) => (
-                  <li key={navItem.label}>
-                    <Link
-                      onClick={() => setOpen(false)}
-                      href={navItem.href}
-                      target={navItem.target ? "_blank" : undefined}
-                      rel={navItem.target ? "noopener noreferrer" : undefined}
-                      className="hover:text-decoration-none hover:opacity-50 text-lg uppercase"
-                    >
-                      {navItem.label}
-                    </Link>
-                  </li>
-                ))}
-
-                <Button
-                  asChild
-                  className="w-full"
-                >
-                  <Link href="#register">
-                    Регистрация
+          <div className="container flex flex-col gap-6 items-center">
+            <ul className="text-center space-y-3">
+              {navItems.map((navItem) => (
+                <li key={navItem.label}>
+                  <Link
+                    onClick={() => setOpen(false)}
+                    href={navItem.href}
+                    target={navItem.target ? "_blank" : undefined}
+                    rel={navItem.target ? "noopener noreferrer" : undefined}
+                    className="hover:text-decoration-none hover:opacity-50 text-lg uppercase"
+                  >
+                    {navItem.label}
                   </Link>
-                </Button>
-              </>
+                </li>
+              ))}
             </ul>
+
+            <Button
+              asChild
+              className="w-full"
+            >
+              <Link href="#register">
+                Регистрация
+              </Link>
+            </Button>
+            <SocialsList />
           </div>
         </div>
       </SheetContent>
