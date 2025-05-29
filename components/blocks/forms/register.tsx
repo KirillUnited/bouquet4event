@@ -1,8 +1,6 @@
 'use client';
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Form } from "@/components/ui/form";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +12,7 @@ import FormRegisterSuccess from "./register-success";
 import { createUserAccount } from "@/lib/createUserAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
 import { cn } from "@/lib/utils";
-import { PhoneInput } from "@/components/shared/forms";
+import { PhoneInput, RegionSelect, TextInput } from "@/components/shared/forms";
 
 interface RegisterFormProps {
     onSubmit: (event: React.FormEvent) => void;
@@ -52,18 +50,13 @@ function RegisterForm({ onSubmit, isSubmitting, formControl }: RegisterFormProps
     return (
         <form onSubmit={onSubmit}>
             <div className="space-y-6">
-                <FormField
+                <TextInput
                     control={formControl}
                     name="name"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Имя</FormLabel>
-                            <FormControl>
-                                <Input {...field} placeholder="Введите ваше имя" className="mt-1" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
+                    label="Имя"
+                    placeholder="Введите ваше имя"
+                    className="mt-1"
+                    required
                 />
                 <PhoneInput
                     control={formControl}
@@ -71,28 +64,11 @@ function RegisterForm({ onSubmit, isSubmitting, formControl }: RegisterFormProps
                     required
                     className="mt-1"
                 />
-                <FormField
+                <RegionSelect
                     control={formControl}
                     name="region"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Регион</FormLabel>
-                            <Select onValueChange={field.onChange} value={field.value}>
-                                <FormControl>
-                                    <SelectTrigger className="mt-1 w-full">
-                                        <SelectValue placeholder="Выберите регион" className="w-full" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="Москва">Москва</SelectItem>
-                                    <SelectItem value="Московская область">Московская область</SelectItem>
-                                    <SelectItem value="Санкт-Петербург">Санкт-Петербург</SelectItem>
-                                    <SelectItem value="Другой">Другой регион</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                        </FormItem>
-                    )}
+                    required
+                    className="mt-1"
                 />
                 <Button type="submit" disabled={isSubmitting} className="w-full">
                     {isSubmitting && <Loader2Icon className="w-6 h-6 mr-2 animate-spin" />}
