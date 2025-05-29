@@ -47,9 +47,8 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
                                 ref={inputRef}
                                 placeholder={placeholder}
                                 className={className}
-                                type="number"
+                                type="tel"
                                 inputMode="numeric"
-                                // Обработчик для синхронизации значения с react-hook-form
                                 onChange={(e) => {
                                     field.onChange(e.target.value);
                                 }}
