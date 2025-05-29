@@ -5,6 +5,7 @@ import DesktopNav from "@/components/layout/header/desktop-nav";
 import { ModeToggle } from "@/components/ui/menu-toggle";
 import { NAV_ITEMS } from "@/config";
 import { cn } from "@/lib/utils";
+import { SocialsList } from "@/components/shared/socials";
 
 export default function Header() {
   return (
@@ -20,11 +21,12 @@ export default function Header() {
           <DesktopNav navItems={NAV_ITEMS} />
         </div>
         <div className="flex items-center">
-            <ModeToggle />
-            <div className="xl:hidden">
-              <MobileNav navItems={NAV_ITEMS} />
-            </div>
+          <SocialsList className="hidden xl:flex mr-4" />
+          <ModeToggle />
+          <div className="xl:hidden">
+            <MobileNav navItems={NAV_ITEMS} />
           </div>
+        </div>
       </div>
     </header>
   );
