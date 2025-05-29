@@ -1,4 +1,4 @@
-import FormRegister from '@/components/blocks/forms/register'
+import Register from '@/components/blocks/forms/register'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
@@ -29,7 +29,7 @@ export const RegisterDialog: React.FC<RegisterDialogProps> = ({ title, buttonVar
                 </Button>
             </DialogTrigger>
             <DialogContent className="w-full sm:max-w-5xl overflow-y-auto max-h-[calc(100vh-2rem)] py-8" >
-                <FormRegister />
+                <Register />
             </DialogContent>
         </Dialog>
     )
