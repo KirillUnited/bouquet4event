@@ -23,8 +23,6 @@ const RegionSelect: React.FC<RegionSelectProps> = ({
     regions = [
         { value: "Москва", label: "Москва" },
         { value: "Московская область", label: "Московская область" },
-        { value: "Санкт-Петербург", label: "Санкт-Петербург" },
-        { value: "Другой", label: "Другой регион" },
     ],
 }) => {
     return (
