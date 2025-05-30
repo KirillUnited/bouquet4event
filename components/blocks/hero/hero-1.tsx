@@ -8,6 +8,7 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Register from "@/components/blocks/forms/register";
+import {ArrowUpRightIcon} from "lucide-react";
 
 type Hero1Props = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -25,7 +26,7 @@ export default function Hero1({
         <section className="py-20 relative">
             <div className="container">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    <div className="flex flex-col justify-center z-10">
+                    <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left z-10">
                         {tagLine && (
                             <p className="backdrop-blur-lg bg-background/30 leading-[0] animate-fade-up [animation-delay:100ms] opacity-0 border-1 border-primary rounded-md p-2 text-pretty">
                                 <span className="text-base font-light">{tagLine}</span>
@@ -55,6 +56,7 @@ export default function Hero1({
                                                 variant={stegaClean(link?.buttonVariant)}
                                                 asChild
                                                 size="lg"
+                                                className="w-full md:w-auto group"
                                             >
                                                 <Link
                                                     href={link.href as string}
@@ -62,6 +64,12 @@ export default function Hero1({
                                                     rel={link.target ? "noopener" : undefined}
                                                 >
                                                     {link.title}
+                                                    {link.target && (
+                                                        <ArrowUpRightIcon
+                                                            className="ml-2 group-hover:translate-x-1 transition-transform"
+                                                            size={16}
+                                                        />
+                                                    )}
                                                 </Link>
                                             </Button>
                                         </DialogTrigger>

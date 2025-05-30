@@ -39,7 +39,7 @@ export default function SplitContent({
         className={cn(
           "flex flex-col items-start",
           sticky ? "lg:sticky lg:top-56" : undefined,
-          noGap ? "px-10" : undefined
+          noGap ? "px-0 md:px-10" : undefined
         )}
       >
         {tagLine && <TagLine title={tagLine} element="h2" />}
