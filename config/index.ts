@@ -16,7 +16,7 @@ export const NAV_ITEMS = [
   },
   {
     label: "О нас",
-    href: "#",
+    href: "/about",
     target: false,
   },
   {
