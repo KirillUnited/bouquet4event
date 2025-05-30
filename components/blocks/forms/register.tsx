@@ -1,83 +1,14 @@
 'use client';
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2Icon } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
-import { DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import FormRegisterSuccess from "./register-success";
 import { createUserAccount } from "@/lib/createUserAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
-import { cn } from "@/lib/utils";
-import { PhoneInput, RegionSelect, TextInput } from "@/components/shared/forms";
-
-interface RegisterFormProps {
-    onSubmit: (event: React.FormEvent) => void;
-    isSubmitting: boolean;
-    formControl: any; // Adjust the type based on your form control type
-}
-
-interface RegisterFormContainerProps {
-    className?: string;
-    title?: string;
-    description?: string;
-    children: React.ReactNode;
-}
-
-function RegisterFormContainer({ className, title, description, children }: RegisterFormContainerProps) {
-    return (
-        <div className={cn("flex flex-col gap-8", className)}>
-            <DialogHeader>
-                <DialogTitle className="text-2xl sm:text-4xl text-balance">
-                    Зарегистрировать цветочный счёт
-                    {title}
-                </DialogTitle>
-                <DialogDescription className="text-foreground-85">
-                    Заполните форму, и мы свяжемся с вами в ближайшее время,
-                    чтобы обсудить все детали вашей цветочной подписки.
-                    {description}
-                </DialogDescription>
-            </DialogHeader>
-            {children}
-        </div>
-    );
-}
-
-function RegisterForm({ onSubmit, isSubmitting, formControl }: RegisterFormProps) {
-    return (
-        <form onSubmit={onSubmit}>
-            <div className="space-y-6">
-                <TextInput
-                    control={formControl}
-                    name="name"
-                    label="Имя"
-                    placeholder="Введите ваше имя"
-                    className="mt-1"
-                    required
-                />
-                <PhoneInput
-                    control={formControl}
-                    name="phone"
-                    required
-                    className="mt-1"
-                />
-                <RegionSelect
-                    control={formControl}
-                    name="region"
-                    required
-                    className="mt-1"
-                />
-                <Button type="submit" disabled={isSubmitting} className="w-full">
-                    {isSubmitting && <Loader2Icon className="w-6 h-6 mr-2 animate-spin" />}
-                    Отправить заявку
-                </Button>
-            </div>
-        </form>
-    );
-}
+import { RegisterForm, RegisterFormContainer } from "@/components/shared/forms";
 
 export default function Register() {
     const [formValues, setFormValues] = useState({});
@@ -105,10 +36,8 @@ export default function Register() {
     const handleSend = useCallback(
         async ({ name, phone, region }: { name: string; phone: string; region: string }) => {
             try {
-                // Генерируем уникальный ID пользователя на основе текущего времени и случайного числа
                 const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 
-                // Используем функцию createUserAccount для создания аккаунта в Sanity CMS
                 const result = await createUserAccount({
                     userId,
                     name,
@@ -141,7 +70,11 @@ export default function Register() {
             <FormRegisterSuccess values={formValues} />
         ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <RegisterFormContainer>
+                <RegisterFormContainer
+                    title="Зарегистрировать цветочный счёт"
+                    description="Заполните форму, и мы свяжемся с вами в ближайшее время,
+                    чтобы обсудить все детали вашей цветочной подписки."
+                >
                     <Form {...form}>
                         <RegisterForm onSubmit={onSubmit} isSubmitting={isSubmitting} formControl={form.control} />
                     </Form >
