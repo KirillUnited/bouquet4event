@@ -1,14 +1,10 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { stegaClean } from "next-sanity";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import React from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import Register from "@/components/blocks/forms/register";
-import { ArrowUpRightIcon } from "lucide-react";
+import { CTAButton } from "@/components/shared/buttons";
 
 type Hero1Props = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -45,39 +41,15 @@ export default function Hero1({
                         {links && links.length > 0 && (
                             <div
                                 className="mt-10 flex flex-wrap gap-4 animate-fade-up [animation-delay:400ms] opacity-0">
-                                <Dialog>
-                                    {links.map((link) => (
-                                        <DialogTrigger
-                                            asChild
-                                            key={link.title}
-                                        >
-                                            <Button
-                                                key={link.title}
-                                                variant={stegaClean(link?.buttonVariant)}
-                                                asChild
-                                                size="lg"
-                                                className="w-full md:w-auto group"
-                                            >
-                                                <Link
-                                                    href={link.href as string}
-                                                    target={link.target ? "_blank" : undefined}
-                                                    rel={link.target ? "noopener" : undefined}
-                                                >
-                                                    {link.title}
-                                                    {link.target && (
-                                                        <ArrowUpRightIcon
-                                                            className="ml-2 group-hover:translate-x-1 transition-transform"
-                                                            size={16}
-                                                        />
-                                                    )}
-                                                </Link>
-                                            </Button>
-                                        </DialogTrigger>
-                                    ))}
-                                    <DialogContent className="w-full max-w-full sm:max-w-5xl overflow-y-auto max-h-[100svh] py-8 rounded-none sm:rounded-lg" >
-                                        <Register />
-                                    </DialogContent>
-                                </Dialog>
+                                {links.map((link) => (
+                                    <CTAButton
+                                        key={link.title}
+                                        title={link.title}
+                                        href={link.href as string}
+                                        buttonVariant={stegaClean(link?.buttonVariant)}
+                                        target={link.target}
+                                    />
+                                ))}
                             </div>
                         )}
                     </div>
