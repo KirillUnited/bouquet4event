@@ -14,11 +14,11 @@ export default function Footer() {
         <div className="flex flex-wrap justify-between">
           <div>
             <div className="w-32"><Logo /></div>
-            <p className="mb-4">
+            <p className="text-sm">
               Сервис коллективной цветочной подписки
             </p>
           </div>
-          <SocialsList />
+          <SocialsList className="items-start" />
         </div>
         <div className="flex flex-wrap justify-between gap-8">
           <div>

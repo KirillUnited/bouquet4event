@@ -7,6 +7,7 @@ import { Loader2Icon } from 'lucide-react';
 import { RegisterFormContainerProps, RegisterFormProps } from './forms.type';
 import { DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
+import CheckboxInput from './CheckboxInput';
 
 export default function RegisterForm({ onSubmit, isSubmitting, formControl }: RegisterFormProps) {
     return (
@@ -29,6 +30,15 @@ export default function RegisterForm({ onSubmit, isSubmitting, formControl }: Re
                 <RegionSelect
                     control={formControl}
                     name="region"
+                    required
+                    className="mt-1"
+                />
+                <CheckboxInput
+                    control={formControl}
+                    name="privacyPolicy"
+                    label={
+                        <span className="text-sm">Я согласен с <a href="/privacy" target="_blank" className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a> и на обработку персональных данных</span>
+                    }
                     required
                     className="mt-1"
                 />

@@ -11,6 +11,7 @@ export interface UserAccountData {
   phone: string;
   region: string;
   totalAmount?: number;
+  privacyPolicy?: boolean;
 }
 
 /**
@@ -21,7 +22,7 @@ export interface UserAccountData {
 export async function createUserAccount(userData: UserAccountData) {
   try {
     // Проверка обязательных полей
-    if (!userData.userId || !userData.name || !userData.phone || !userData.region) {
+    if (!userData.userId || !userData.name || !userData.phone || !userData.region || !userData.privacyPolicy) {
       throw new Error("Все обязательные поля должны быть заполнены");
     }
 
@@ -40,6 +41,7 @@ export async function createUserAccount(userData: UserAccountData) {
       name: userData.name,
       phone: userData.phone,
       region: userData.region,
+      privacyPolicy: userData.privacyPolicy || false,
       totalAmount: userData.totalAmount || 0,
       createdAt: new Date().toISOString(),
     });
