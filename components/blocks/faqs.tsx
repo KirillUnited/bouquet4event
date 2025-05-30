@@ -22,7 +22,7 @@ export default function FAQs({ padding, colorVariant, faqs }: FAQProps) {
         <Accordion className="space-y-4" type="multiple">
           {faqs.map((faq) => (
             <AccordionItem key={faq.title} value={`item-${faq._id}`}>
-              <AccordionTrigger>{faq.title}</AccordionTrigger>
+              <AccordionTrigger className="text-xl font-semibold mb-3 cursor-pointer">{faq.title}</AccordionTrigger>
               <AccordionContent>
                 <PortableTextRenderer value={faq.body || []} />
               </AccordionContent>
