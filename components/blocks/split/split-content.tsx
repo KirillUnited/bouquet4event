@@ -53,9 +53,9 @@ export default function SplitContent({
           )}
         {body && <PortableTextRenderer value={body} />}
         {link?.href && (
-          <div className="flex flex-col">
+          <div className="flex flex-col self-stretch md:self-auto">
             <Button
-              className="mt-2"
+              className="mt-2 w-full md:w-auto"
               variant={stegaClean(link?.buttonVariant)}
               size="lg"
               asChild

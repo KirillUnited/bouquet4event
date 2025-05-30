@@ -9,7 +9,7 @@ export default function Footer() {
   };
 
   return (
-    <footer>
+    <footer className="bg-primary text-primary-foreground">
       <div className="container py-12 flex flex-col gap-8">
         <div className="flex flex-wrap justify-between">
           <div>
