@@ -10,15 +10,17 @@ export default function Footer() {
 
   return (
     <footer>
-      <div className="container py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="container py-12 flex flex-col gap-8">
+        <div className="flex flex-wrap justify-between">
           <div>
             <div className="w-32"><Logo /></div>
             <p className="mb-4">
               Сервис коллективной цветочной подписки
             </p>
-            <SocialsList />
           </div>
+          <SocialsList />
+        </div>
+        <div className="flex flex-wrap justify-between gap-8">
           <div>
             <h3 className="text-xl font-semibold mb-4">Контакты</h3>
             <p className="mb-2">
@@ -33,7 +35,7 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-4">Информация</h3>
+            <h3 className="text-xl font-semibold mb-4">Карта сайта</h3>
             <ul className="space-y-2">
               {NAV_ITEMS.map((navItem) => (
                 <li key={navItem.label}>
@@ -45,6 +47,19 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Информация</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href={"/privacy"}
+                  className="transition-colors"
+                >
+                  Политика конфиденциальности
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
