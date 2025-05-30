@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { ArrowUpRightIcon } from "lucide-react";
+import { ArrowUpRightIcon, UserPlusIcon } from "lucide-react";
 import Link from "next/link";
 import Register from "@/components/blocks/forms/register";
 import { ButtonVariant } from "@/sanity.types";
@@ -19,17 +19,23 @@ export function CTAButton({ title, href, buttonVariant = "default", target, clas
             variant={buttonVariant}
             asChild
             size="lg"
-            className={`w-full md:w-auto group ${className || ''}`}
+            className={`w-full md:w-auto md:min-w-40 group ${className || ''}`}
         >
             <Link
                 href={href}
                 target={target ? "_blank" : undefined}
                 rel={target ? "noopener" : undefined}
             >
+                {buttonVariant === "default" && (
+                    <UserPlusIcon
+                        className="group-hover:scale-125 transition-transform"
+                        size={16}
+                    />
+                )}
                 {title}
                 {target && (
                     <ArrowUpRightIcon
-                        className="ml-2 group-hover:translate-x-1 transition-transform"
+                        className="group-hover:translate-x-1 transition-transform"
                         size={16}
                     />
                 )}

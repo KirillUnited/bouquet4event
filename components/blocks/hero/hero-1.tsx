@@ -40,7 +40,7 @@ export default function Hero1({
                         )}
                         {links && links.length > 0 && (
                             <div
-                                className="mt-10 flex flex-wrap gap-4 animate-fade-up [animation-delay:400ms] opacity-0">
+                                className="mt-10 flex flex-wrap gap-4 animate-fade-up [animation-delay:400ms] opacity-0 w-full">
                                 {links.map((link) => (
                                     <CTAButton
                                         key={link.title}
