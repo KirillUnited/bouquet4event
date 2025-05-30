@@ -8,7 +8,7 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import React from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Register from "@/components/blocks/forms/register";
-import {ArrowUpRightIcon} from "lucide-react";
+import { ArrowUpRightIcon } from "lucide-react";
 
 type Hero1Props = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -28,8 +28,8 @@ export default function Hero1({
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left z-10">
                         {tagLine && (
-                            <p className="backdrop-blur-lg bg-background/30 leading-[0] animate-fade-up [animation-delay:100ms] opacity-0 border-1 border-primary rounded-md p-2 text-pretty">
-                                <span className="text-base font-light">{tagLine}</span>
+                            <p className="backdrop-blur-lg bg-background/30 leading-none animate-fade-up [animation-delay:100ms] opacity-0 border-primary rounded-sm text-pretty text-foreground/70 text-center px-3 py-1 text-sm/6 ring-1 ring-primary/10 hover:ring-primary/20">
+                                {tagLine}
                             </p>
                         )}
                         {title && (
