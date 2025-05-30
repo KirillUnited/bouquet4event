@@ -36,6 +36,12 @@ export default defineType({
             validation: (Rule) => Rule.required().warning("Регион обязателен"),
         }),
         defineField({
+            name: "privacyPolicy",
+            title: "Согласие на обработку персональных данных",
+            type: "boolean",
+            description: "Согласие на обработку персональных данных пользователя",
+        }),
+        defineField({
             name: "totalAmount",
             title: "Сумма перечисленных денег",
             type: "number",

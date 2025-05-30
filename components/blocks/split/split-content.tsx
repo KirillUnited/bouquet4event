@@ -31,8 +31,8 @@ export default function SplitContent({
     <div
       className={cn(
         !sticky ? "flex flex-col justify-center" : undefined,
-        padding?.top ? "pt-16 xl:pt-20" : undefined,
-        padding?.bottom ? "pb-16 xl:pb-20" : undefined
+        padding?.top ? "pt-0 xl:pt-20" : undefined,
+        padding?.bottom ? "pb-0 xl:pb-20" : undefined
       )}
     >
       <div
@@ -53,9 +53,9 @@ export default function SplitContent({
           )}
         {body && <PortableTextRenderer value={body} />}
         {link?.href && (
-          <div className="flex flex-col">
+          <div className="flex flex-col self-stretch md:self-auto">
             <Button
-              className="mt-2"
+              className="mt-2 w-full md:w-auto"
               variant={stegaClean(link?.buttonVariant)}
               size="lg"
               asChild

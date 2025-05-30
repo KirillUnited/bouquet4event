@@ -1,13 +1,10 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { stegaClean } from "next-sanity";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import React from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import Register from "@/components/blocks/forms/register";
+import { CTAButton } from "@/components/shared/buttons";
 
 type Hero1Props = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -22,13 +19,13 @@ export default function Hero1({
     links,
 }: Hero1Props) {
     return (
-        <section className="py-20 relative">
-            <div className="container">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    <div className="flex flex-col justify-center z-10">
+        <section className="relative">
+            <div className="container py-20 min-h-[80svh]">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                    <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left z-10">
                         {tagLine && (
-                            <p className="backdrop-blur-lg bg-background/30 leading-[0] animate-fade-up [animation-delay:100ms] opacity-0 border-1 border-primary rounded-md p-2 text-pretty">
-                                <span className="text-base font-light">{tagLine}</span>
+                            <p className="backdrop-blur-lg bg-background/30 leading-none animate-fade-up [animation-delay:100ms] opacity-0 border-primary rounded-sm text-pretty text-foreground/70 text-center px-3 py-1 text-sm/6 ring-1 ring-primary/10 hover:ring-primary/20">
+                                {tagLine}
                             </p>
                         )}
                         {title && (
@@ -43,33 +40,16 @@ export default function Hero1({
                         )}
                         {links && links.length > 0 && (
                             <div
-                                className="mt-10 flex flex-wrap gap-4 animate-fade-up [animation-delay:400ms] opacity-0">
-                                <Dialog>
-                                    {links.map((link) => (
-                                        <DialogTrigger
-                                            asChild
-                                            key={link.title}
-                                        >
-                                            <Button
-                                                key={link.title}
-                                                variant={stegaClean(link?.buttonVariant)}
-                                                asChild
-                                                size="lg"
-                                            >
-                                                <Link
-                                                    href={link.href as string}
-                                                    target={link.target ? "_blank" : undefined}
-                                                    rel={link.target ? "noopener" : undefined}
-                                                >
-                                                    {link.title}
-                                                </Link>
-                                            </Button>
-                                        </DialogTrigger>
-                                    ))}
-                                    <DialogContent className="w-full max-w-full sm:max-w-5xl overflow-y-auto max-h-[100svh] py-8 rounded-none sm:rounded-lg" >
-                                        <Register />
-                                    </DialogContent>
-                                </Dialog>
+                                className="mt-10 flex flex-wrap gap-4 animate-fade-up [animation-delay:400ms] opacity-0 w-full">
+                                {links.map((link) => (
+                                    <CTAButton
+                                        key={link.title}
+                                        title={link.title}
+                                        href={link.href as string}
+                                        buttonVariant={stegaClean(link?.buttonVariant)}
+                                        target={link.target}
+                                    />
+                                ))}
                             </div>
                         )}
                     </div>
