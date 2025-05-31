@@ -15,7 +15,7 @@ export default function Hero2({ tagLine, title, body, links }: Hero2Props) {
     <section className="text-[#f9fafb] py-20 lg:pt-40 text-center relative">
       <div className="absolute inset-0 z-0">
           <Image
-            className="animate-fade-up [animation-delay:500ms] opacity-0 h-full w-full object-cover object-bottom"
+            className="animate-fade-up [animation-delay:500ms] opacity-0 h-full w-full object-cover"
             src={'https://readdy.ai/api/search-image?query=modern%20minimalist%20wedding%20scene%20with%20elegant%20floral%20arrangements%2C%20deep%20teal%20and%20coral%20accents%2C%20architectural%20elements%2C%20clean%20lines%2C%20soft%20natural%20lighting%2C%20high%20end%20professional%20photography%2C%20luxury%20wedding%20atmosphere&width=1440&height=800&seq=7&orientation=landscape"'}
             alt={'Bouquet Photography'}
             width={1200}
