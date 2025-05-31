@@ -4,27 +4,32 @@ import { stegaClean } from "next-sanity";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 
 type Hero2Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "hero-2" }
 >;
 
-export default function Hero2({ tagLine, title, body, links }: Hero2Props) {
+export default function Hero2({ tagLine, title, body, links, image }: Hero2Props) {
   return (
     <section className="text-[#f9fafb] py-20 lg:pt-40 text-center relative">
-      <div className="absolute inset-0 z-0">
+      {image && image.asset?._id && (
+        <div className="absolute inset-0 z-0">
           <Image
             className="animate-fade-up [animation-delay:500ms] opacity-0 h-full w-full object-cover"
-            src={'https://readdy.ai/api/search-image?query=modern%20minimalist%20wedding%20scene%20with%20elegant%20floral%20arrangements%2C%20deep%20teal%20and%20coral%20accents%2C%20architectural%20elements%2C%20clean%20lines%2C%20soft%20natural%20lighting%2C%20high%20end%20professional%20photography%2C%20luxury%20wedding%20atmosphere&width=1440&height=800&seq=7&orientation=landscape"'}
-            alt={'Bouquet Photography'}
-            width={1200}
-            height={800}
+            src={urlFor(image).url()}
+            alt={image.alt || ""}
+            width={image.asset?.metadata?.dimensions?.width || 1200}
+            height={image.asset?.metadata?.dimensions?.height || 800}
+            placeholder={image?.asset?.metadata?.lqip ? "blur" : undefined}
+            blurDataURL={image?.asset?.metadata?.lqip || ""}
             priority
           />
           <div className="absolute inset-0 bg-[#030712]/70"></div>
         </div>
-      <div className="container"> 
+      )}
+      <div className="container">
         {tagLine && (
           <h1 className="leading-[0] font-sans animate-fade-up [animation-delay:100ms] opacity-0">
             <span className="text-base font-semibold">{tagLine}</span>
