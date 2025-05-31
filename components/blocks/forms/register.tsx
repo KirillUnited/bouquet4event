@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
-import FormRegisterSuccess from "./register-success";
+import FormRegisterSuccess from "@/components/shared/forms/FormRegisterSuccess";
 import { createUserAccount } from "@/lib/createUserAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
 import { RegisterForm, RegisterFormContainer } from "@/components/shared/forms";
