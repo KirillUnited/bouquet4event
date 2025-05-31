@@ -109,6 +109,7 @@ export type LogoCloud1 = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -149,6 +150,7 @@ export type Cta1 = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -194,6 +196,7 @@ export type Timelines1 = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -243,6 +246,7 @@ export type Carousel1 = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -299,6 +303,7 @@ export type GridCard = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -316,6 +321,7 @@ export type SplitInfo = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -346,6 +352,7 @@ export type SplitInfo = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -377,6 +384,7 @@ export type SplitImage = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -412,6 +420,7 @@ export type SplitCard = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -464,6 +473,7 @@ export type SplitContent = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -510,6 +520,19 @@ export type Hero2 = {
   _type: "hero-2";
   tagLine?: string;
   title?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
   body?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -534,6 +557,7 @@ export type Hero2 = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -579,6 +603,7 @@ export type Hero1 = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -598,6 +623,7 @@ export type Hero1 = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -650,6 +676,7 @@ export type BlockContent = Array<{
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
   };
+  media?: unknown;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   alt?: string;
@@ -662,6 +689,21 @@ export type BlockContent = Array<{
 } | {
   _key: string;
 } & Code>;
+
+export type UserAccount = {
+  _id: string;
+  _type: "userAccount";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  userId?: string;
+  name?: string;
+  phone?: string;
+  region?: string;
+  privacyPolicy?: boolean;
+  totalAmount?: number;
+  createdAt?: string;
+};
 
 export type Testimonial = {
   _id: string;
@@ -678,6 +720,7 @@ export type Testimonial = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -730,6 +773,7 @@ export type Post = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -753,6 +797,7 @@ export type Post = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -774,6 +819,7 @@ export type Author = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -827,6 +873,7 @@ export type Page = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -905,7 +952,7 @@ export type Code = {
   highlightedLines?: Array<number>;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | AllPosts | FormNewsletter | Faqs | LogoCloud1 | Cta1 | Timelines1 | TimelineRow | Carousel2 | Carousel1 | GridRow | GridPost | PricingCard | GridCard | SplitInfo | SplitInfoList | SplitImage | SplitCard | SplitCardsList | SplitContent | SplitRow | SectionHeader | Hero2 | Hero1 | SectionPadding | ButtonVariant | ColorVariant | Link | BlockContent | Testimonial | Faq | Category | Post | Author | Page | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug | Code;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | AllPosts | FormNewsletter | Faqs | LogoCloud1 | Cta1 | Timelines1 | TimelineRow | Carousel2 | Carousel1 | GridRow | GridPost | PricingCard | GridCard | SplitInfo | SplitInfoList | SplitImage | SplitCard | SplitCardsList | SplitContent | SplitRow | SectionHeader | Hero2 | Hero1 | SectionPadding | ButtonVariant | ColorVariant | Link | BlockContent | UserAccount | Testimonial | Faq | Category | Post | Author | Page | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug | Code;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./app/sitemap.ts
 // Variable: pagesQuery
@@ -1018,6 +1065,7 @@ export type PAGE_QUERYResult = {
             } | null;
           } | null;
         } | null;
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
@@ -1076,6 +1124,7 @@ export type PAGE_QUERYResult = {
           } | null;
         } | null;
       } | null;
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
@@ -1134,6 +1183,7 @@ export type PAGE_QUERYResult = {
             } | null;
           } | null;
         } | null;
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
@@ -1178,6 +1228,7 @@ export type PAGE_QUERYResult = {
             } | null;
           } | null;
         } | null;
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string | null;
@@ -1266,6 +1317,7 @@ export type PAGE_QUERYResult = {
           } | null;
         } | null;
       } | null;
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
@@ -1289,6 +1341,7 @@ export type PAGE_QUERYResult = {
           } | null;
         } | null;
       } | null;
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
@@ -1339,6 +1392,7 @@ export type PAGE_QUERYResult = {
           } | null;
         } | null;
       } | null;
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt?: string;
@@ -1371,6 +1425,7 @@ export type PAGE_QUERYResult = {
           } | null;
         } | null;
       } | null;
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
@@ -1437,6 +1492,7 @@ export type PAGE_QUERYResult = {
               } | null;
             } | null;
           } | null;
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           alt?: string;
@@ -1493,6 +1549,7 @@ export type PAGE_QUERYResult = {
             } | null;
           } | null;
         } | null;
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
@@ -1539,6 +1596,7 @@ export type PAGE_QUERYResult = {
               } | null;
             } | null;
           } | null;
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           alt: string | null;
@@ -1582,6 +1640,7 @@ export type PAGE_QUERYResult = {
               } | null;
             } | null;
           } | null;
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           alt?: string;
@@ -1640,6 +1699,7 @@ export type PAGE_QUERYResult = {
             } | null;
           } | null;
         } | null;
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt?: string;
@@ -1693,6 +1753,7 @@ export type POST_QUERYResult = {
         } | null;
       } | null;
     } | null;
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string | null;
@@ -1735,6 +1796,7 @@ export type POST_QUERYResult = {
         } | null;
       } | null;
     } | null;
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -1760,6 +1822,7 @@ export type POST_QUERYResult = {
           } | null;
         } | null;
       } | null;
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string | null;
