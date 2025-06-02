@@ -22,6 +22,7 @@ export const splitInfoListQuery = groq`
         },
         alt
       },
+      icon,
       title,
       body[]{
         ...,

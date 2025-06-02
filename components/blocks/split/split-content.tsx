@@ -28,7 +28,6 @@ export default function SplitContent({
   statistics,
   link,
 }: SplitContentProps) {
-  console.log(statistics)
   return (
     <div
       className={cn(
