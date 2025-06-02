@@ -25,8 +25,10 @@ export default function SplitContent({
   tagLine,
   title,
   body,
+  statistics,
   link,
 }: SplitContentProps) {
+  console.log(statistics)
   return (
     <div
       className={cn(
@@ -37,7 +39,7 @@ export default function SplitContent({
     >
       <div
         className={cn(
-          "flex flex-col items-start",
+          "flex flex-col",
           sticky ? "lg:sticky lg:top-56" : undefined,
           noGap ? "px-10" : undefined
         )}
@@ -52,6 +54,19 @@ export default function SplitContent({
             title
           )}
         {body && <PortableTextRenderer value={body} />}
+        {Array.isArray(statistics) && statistics.length > 0 && (
+          <div className="mt-8">
+            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {statistics.map(({ value, label }) => (
+                <li className="text-center">
+                  <p className="text-3xl font-bold text-primary mb-2">{value}</p>
+                  <p className=" font-normal text-foreground/70">{label}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+        }
         {link?.href && (
           <div className="flex flex-col self-stretch md:self-auto">
             <Button
@@ -70,6 +85,6 @@ export default function SplitContent({
           </div>
         )}
       </div>
-    </div>
+    </div >
   );
 }
