@@ -46,6 +46,7 @@ export default function Carousel2({
                             <AvatarImage
                               src={urlFor(item.image).url()}
                               alt={item.name ?? ""}
+                              className="object-contain object-top"
                             />
                           )}
                           <AvatarFallback>
