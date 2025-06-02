@@ -24,9 +24,9 @@ export default function Hero1({
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                     <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left z-10">
                         {tagLine && (
-                            <p className="backdrop-blur-lg bg-background/30 leading-none animate-fade-up [animation-delay:100ms] opacity-0 border-primary rounded-sm text-pretty text-foreground/70 text-center px-3 py-1 text-sm/6 ring-1 ring-primary/10 hover:ring-primary/20">
-                                {tagLine}
-                            </p>
+                            <span className="backdrop-blur-lg bg-background/30 leading-none animate-fade-up [animation-delay:100ms] opacity-0 border-primary rounded-sm text-pretty text-foreground/70 text-center px-3 py-1 text-sm/6 ring-1 ring-primary/10 hover:ring-primary/20">
+                                🌸 {tagLine}
+                            </span>
                         )}
                         {title && (
                             <h1 className="mt-6 animate-fade-up [animation-delay:200ms] opacity-0 text-pretty">
@@ -34,9 +34,9 @@ export default function Hero1({
                             </h1>
                         )}
                         {body && (
-                            <div className="text-lg mt-6 animate-fade-up [animation-delay:300ms] opacity-0 text-pretty">
+                            <article className="text-lg mt-6 animate-fade-up [animation-delay:300ms] opacity-0 text-pretty">
                                 <PortableTextRenderer value={body} />
-                            </div>
+                            </article>
                         )}
                         {links && links.length > 0 && (
                             <div
