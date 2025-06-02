@@ -6,6 +6,23 @@ export const splitCardsListQuery = groq`
     _type,
     _key,
     list[]{
+      image{
+        ...,
+        asset->{
+          _id,
+          url,
+          mimeType,
+          metadata {
+            lqip,
+            dimensions {
+              width,
+              height
+            }
+          }
+        },
+        alt
+      },
+      icon,
       tagLine,
       title,
       body[]{

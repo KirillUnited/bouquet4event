@@ -31,19 +31,19 @@ export default function Hero2({ tagLine, title, body, links, image }: Hero2Props
       )}
       <div className="container">
         {tagLine && (
-          <h1 className="leading-[0] font-sans animate-fade-up [animation-delay:100ms] opacity-0">
-            <span className="text-base font-semibold">{tagLine}</span>
-          </h1>
+          <span className="backdrop-blur-lg bg-background/30 leading-none animate-fade-up [animation-delay:100ms] opacity-0 border-primary rounded-sm text-pretty text-foreground/70 text-center px-3 py-1 text-sm/6 ring-1 ring-primary/10 hover:ring-primary/20">
+            🌸 {tagLine}
+          </span>
         )}
         {title && (
-          <h2 className="mt-6 font-bold leading-[1.1] text-4xl md:text-5xl lg:text-6xl animate-fade-up [animation-delay:200ms] opacity-0">
+          <h1 className="mt-6 font-bold leading-[1.1] text-4xl md:text-5xl lg:text-6xl animate-fade-up [animation-delay:200ms] opacity-0">
             {title}
-          </h2>
+          </h1>
         )}
         {body && (
-          <div className="text-lg mt-6 max-w-2xl mx-auto animate-fade-up [animation-delay:300ms] opacity-0">
+          <article className="text-lg mt-6 max-w-2xl mx-auto animate-fade-up [animation-delay:300ms] opacity-0">
             <PortableTextRenderer value={body} />
-          </div>
+          </article>
         )}
         {links && links.length > 0 && (
           <div className="mt-10 flex flex-wrap gap-4 justify-center animate-fade-up [animation-delay:400ms] opacity-0">
