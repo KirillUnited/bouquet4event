@@ -18,6 +18,26 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: "caption",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          type: "string",
+        }),
+        defineField({
+          name: "description",
+          type: "string",
+        }),
+        defineField({
+          name: "icon",
+          type: "image",
+        }),
+      ],
+      title: "Caption",
+      description: "Caption for the image",
+    }),
   ],
   preview: {
     select: {

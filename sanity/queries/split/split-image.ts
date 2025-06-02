@@ -20,5 +20,15 @@ export const splitImageQuery = groq`
       },
       alt
     },
+    caption{
+      ...,
+      _type == "image" => {
+       ...,
+        asset->{
+          _id,
+          url,
+        }
+      }
+    }
   }
 `;
