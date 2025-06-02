@@ -17,13 +17,15 @@ export default function SplitCardsList({ color, list }: SplitCardsListProps) {
   const colorParent = stegaClean(color);
 
   return (
-    <div className="flex flex-col justify-center gap-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center gap-8">
       {list &&
         list.length > 0 &&
         list.map((item, index) => (
           <SplitCardsItem
             key={index}
             color={colorParent}
+            icon={item.icon}
+            image={item.image}
             tagLine={item.tagLine}
             title={item.title}
             body={item.body}

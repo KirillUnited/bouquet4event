@@ -10,6 +10,23 @@ export default defineType({
     "Column with tag line, title and content body. Part of a split cards.",
   fields: [
     defineField({
+      name: "image",
+      type: "image",
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternative Text",
+        },
+      ],
+    }),
+    defineField({
+      name: "icon",
+      type: "string",
+      title: "Font Awesome Icon",
+      description: "Enter the Font Awesome icon class name (e.g. 'fa-solid fa-heart')",
+    }),
+    defineField({
       name: "tagLine",
       type: "string",
     }),

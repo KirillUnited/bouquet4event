@@ -22,6 +22,12 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "icon",
+      type: "string",
+      title: "Font Awesome Icon",
+      description: "Enter the Font Awesome icon class name (e.g. 'fa-solid fa-heart')",
+    }),
+    defineField({
       name: "title",
       type: "string",
     }),

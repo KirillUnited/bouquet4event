@@ -28,6 +28,7 @@ export const splitContentQuery = groq`
         }
       }
     },
+    statistics,
     link,
   }
 `;

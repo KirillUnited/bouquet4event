@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container py-12 flex flex-col gap-8">
-        <div className="flex flex-wrap justify-between">
+        <div className="flex flex-wrap justify-between gap-4">
           <div>
             <div className="w-32"><Logo /></div>
             <p className="text-sm">
@@ -20,7 +20,7 @@ export default function Footer() {
           </div>
           <SocialsList className="items-start" />
         </div>
-        <div className="flex flex-wrap justify-between gap-8">
+        <div className="flex flex-wrap flex-col md:flex-row justify-between gap-8">
           <div>
             <h3 className="text-xl font-semibold mb-4">Контакты</h3>
             <p className="mb-2">
