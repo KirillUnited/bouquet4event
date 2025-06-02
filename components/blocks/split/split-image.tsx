@@ -23,7 +23,7 @@ export default function SplitImage({ image, caption }: SplitImage) {
         quality={100}
       />
       {caption && caption.title && (
-        <div className="absolute -bottom-8 md:-left-8 bg-white p-4 rounded-lg shadow-xl">
+        <div className="absolute -bottom-8 md:-left-8 bg-background p-4 rounded-lg shadow-xl">
           <div className="flex items-center space-x-4">
             <i className="fa-solid fa-award text-2xl md:text-4xl text-primary"></i>
             <div>
