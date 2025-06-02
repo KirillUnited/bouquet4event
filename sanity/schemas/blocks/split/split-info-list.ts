@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { Info } from "lucide-react";
 import { extractPlainText } from "../../../../lib/utils";
+import { COLS_VARIANTS } from "../shared/layout-variants";
 
 export default defineType({
   name: "split-info-list",
@@ -10,6 +11,16 @@ export default defineType({
   description:
     "Column with list of cards. Each card has a title, content body, image and tags",
   fields: [
+    defineField({
+      name: "gridColumns",
+      type: "string",
+      title: "Grid Columns",
+      options: {
+        list: COLS_VARIANTS.map(({ title, value }) => ({ title, value })),
+        layout: "radio",
+      },
+      initialValue: "grid-cols-4",
+    }),
     defineField({
       name: "list",
       type: "array",

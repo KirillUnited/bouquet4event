@@ -57,7 +57,7 @@ export default function SplitContent({
           <div className="mt-8">
             <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {statistics.map(({ value, label }) => (
-                <li className="text-center">
+                <li key={label} className="text-center">
                   <p className="text-3xl font-bold text-primary mb-2">{value}</p>
                   <p className=" font-normal text-foreground/70">{label}</p>
                 </li>

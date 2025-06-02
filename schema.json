@@ -2708,6 +2708,27 @@
             "value": "split-info-list"
           }
         },
+        "gridColumns": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "grid-cols-2"
+              },
+              {
+                "type": "string",
+                "value": "grid-cols-3"
+              },
+              {
+                "type": "string",
+                "value": "grid-cols-4"
+              }
+            ]
+          },
+          "optional": true
+        },
         "list": {
           "type": "objectAttribute",
           "value": {

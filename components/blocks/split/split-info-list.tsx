@@ -1,5 +1,7 @@
 import SplitInfoItem from "@/components/blocks/split/split-info-item";
+import { cn } from "@/lib/utils";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { stegaClean } from "next-sanity";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type SplitRow = Extract<Block, { _type: "split-row" }>;
@@ -8,14 +10,18 @@ type SplitInfoList = Extract<
   { _type: "split-info-list" }
 >;
 
-export default function SplitInfoList({ list }: SplitInfoList) {
+export default function SplitInfoList({ gridColumns, list }: SplitInfoList) {
   return (
     <div className="flex items-center justify-center">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
-        {list &&
-          list.length > 0 &&
-          list.map((item, index) => <SplitInfoItem key={index} {...item} />)}
-      </div>
+      {list && list.length > 0 && (
+        <div className={cn(
+          "grid grid-cols-1 gap-8",
+          "md:grid-cols-2",
+          `lg:${stegaClean(gridColumns)}`
+        )}>
+          {list.map((item, index) => <SplitInfoItem key={index} {...item} />)}
+        </div>
+      )}
     </div>
   );
 }

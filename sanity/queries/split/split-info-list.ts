@@ -5,6 +5,7 @@ export const splitInfoListQuery = groq`
   _type == "split-info-list" => {
     _type,
     _key,
+    gridColumns,
     list[]{
       image{
         ...,
