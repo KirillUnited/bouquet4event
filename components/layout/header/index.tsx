@@ -28,7 +28,7 @@ export default async function Header() {
           <SocialsList className="hidden xl:flex mr-4" items={siteSettings?.siteContactInfo?.socialLinks}/>
           <ModeToggle />
           <div className="xl:hidden">
-            <MobileNav navItems={NAV_ITEMS} />
+            <MobileNav navItems={NAV_ITEMS} socials={siteSettings?.siteContactInfo?.socialLinks} />
           </div>
         </div>
       </div>
