@@ -16,25 +16,11 @@ export const SocialsList = ({ items, className }: SocialsListProps) => {
         <ul className={cn('flex gap-4 items-center', className)}>
             {
                 items?.map((item) => {
-                    switch (stegaClean(item.platform)) {
-                        case 'instagram':
-                            return (
-                                <li key={item._key} className='flex items-center'>
-                                    <SocialsItem platform='fa-brands fa-instagram' url={item.url} />
-                                </li>
-                            );
-                        case 'telegram':
-                            return (
-                                <li key={item._key} className='flex items-center'>
-                                    <SocialsItem platform='fa-brands fa-telegram' url={item.url} />
-                                </li>
-                            );
-
-                        default:
-                            return (
-                                <li key={item._key}></li>
-                            )
-                    }
+                    return (
+                        <li key={item._key} className='flex items-center'>
+                            <SocialsItem platform={stegaClean(item.platform)} url={item.url} />
+                        </li>
+                    );
                 })
             }
         </ul>
