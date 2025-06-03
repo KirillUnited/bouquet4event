@@ -10,10 +10,12 @@ export default async function Footer() {
   const phones = siteSettings?.siteContactInfo?.phones;
   const emails = siteSettings?.siteContactInfo?.emails;
   const address = siteSettings?.siteContactInfo?.address;
+  const workingHours = siteSettings?.siteContactInfo?.workingHours;
   const contacts = {
     phones,
     emails,
-    address
+    address,
+    workingHours
   };
   const getCurrentYear = () => {
     return new Date().getFullYear();
@@ -62,6 +64,14 @@ export default async function Footer() {
                   Политика конфиденциальности
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={"/agreement"}
+                  className="transition-colors"
+                >
+                  Пользовательское соглашение
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -75,6 +85,9 @@ export default async function Footer() {
           </div>
         </div>
         <div className="border-t border-foreground/20 mt-8 pt-8 text-center text-sm">
+              <p>
+                {siteSettings?.siteLegalInfo}
+              </p>
           <p>© {getCurrentYear()} Bouquet4Event. Все права защищены.</p>
         </div>
       </div>

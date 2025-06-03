@@ -34,6 +34,13 @@ export default function ContactList({ items }: { items: ContactListProps }) {
                     </li>
                 ))
             }
+            {
+                items?.workingHours && (
+                    <li className="mb-2" >
+                        <i className="fa-solid fa-clock mr-2"></i> {items.workingHours}
+                    </li>
+                )
+            }
         </ul>
     )
 }

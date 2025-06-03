@@ -10,7 +10,12 @@ export const siteSettingsType = defineType({
         defineField({
             name: "siteContactInfo",
             type: "contactInfo",
-        })
+        }),
+        defineField({
+            name: "siteLegalInfo",
+            title: "Реквизиты",
+            type: "text",
+        }),
     ],
     preview: {
         prepare() {

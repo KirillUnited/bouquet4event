@@ -989,6 +989,7 @@ export type SiteSettings = {
   _updatedAt: string;
   _rev: string;
   siteContactInfo?: ContactInfo;
+  siteLegalInfo?: string;
 };
 
 export type ContactInfo = {
@@ -2024,6 +2025,7 @@ export type SITE_SETTINGS_QUERYResult = {
   _updatedAt: string;
   _rev: string;
   siteContactInfo?: ContactInfo;
+  siteLegalInfo?: string;
 } | null;
 
 // Query TypeMap
