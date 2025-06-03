@@ -2,8 +2,11 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 import { NAV_ITEMS } from "@/config";
 import { SocialsList } from "../shared/socials";
+import { sanityFetch } from "@/sanity/lib/live";
+import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
 
-export default function Footer() {
+export default async function Footer() {
+   const {data: siteSettings} = await sanityFetch({query: SITE_SETTINGS_QUERY});
   const getCurrentYear = () => {
     return new Date().getFullYear();
   };
@@ -18,7 +21,7 @@ export default function Footer() {
               Сервис коллективной цветочной подписки
             </p>
           </div>
-          <SocialsList className="items-start" />
+          <SocialsList className="items-start" items={siteSettings?.siteContactInfo?.socialLinks}/>
         </div>
         <div className="flex flex-wrap flex-col md:flex-row justify-between gap-8">
           <div>
