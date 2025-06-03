@@ -44,7 +44,7 @@ export default function Carousel2({
                         <Avatar className="w-10 h-10 mr-3">
                           {item.image && (
                             <AvatarImage
-                              src={urlFor(item.image).url()}
+                              src={urlFor(item.image).width(40).height(40).url()}
                               alt={item.name ?? ""}
                               className="object-contain object-top"
                             />

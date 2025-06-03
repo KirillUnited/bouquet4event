@@ -13,7 +13,7 @@ export default async function MainLayout({
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main className="flex-1">{children}</main>
       <SanityLive />
       {(await draftMode()).isEnabled && (
         <>

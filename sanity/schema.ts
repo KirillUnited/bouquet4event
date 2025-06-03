@@ -38,10 +38,13 @@ import faqs from "./schemas/blocks/faqs";
 import newsletter from "./schemas/blocks/forms/newsletter";
 import allPosts from "./schemas/blocks/all-posts";
 import author from "./schemas/documents/author";
+import { siteSettingsType } from "./schemas/documents/siteSettingsType";
+import { contactInfoType } from "./schemas/blocks/contactInfoType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     // documents
+    siteSettingsType,
     page,
     post,
     category,
@@ -55,6 +58,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     colorVariant,
     buttonVariant,
     sectionPadding,
+    contactInfoType,
     // blocks
     hero1,
     hero2,

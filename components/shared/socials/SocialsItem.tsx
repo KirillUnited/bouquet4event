@@ -1,16 +1,18 @@
+import { SocialsFAClasses } from '@/config';
+import Link from 'next/link';
 import React from 'react'
 
-export interface SocialsItemProps {
-    social: {
-        href: string
-        iconClass: string
-    }
+interface SocialsItemProps {
+    platform?: string;
+    url?: string;
 }
 
-export const SocialsItem = ({social}: SocialsItemProps) => {
+export const SocialsItem = ({ platform, url }: SocialsItemProps) => {
+    const iconClassName = `${platform ? SocialsFAClasses[platform] : ''} text-2xl`;
+
     return (
-        <a href={social.href} className="transition-colors cursor-pointer hover:text-primary inline-flex items-center justify-center">
-            <i className={`${social.iconClass} text-2xl`}></i>
-        </a>
+        <Link href={url || "#"} className="transition-colors cursor-pointer hover:opacity-70 inline-flex items-center justify-center">
+            <i className={iconClassName}></i>
+        </Link>
     )
 }
