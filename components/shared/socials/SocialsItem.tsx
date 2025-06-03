@@ -9,9 +9,9 @@ interface SocialsItemProps {
 
 export const SocialsItem = ({ platform, url }: SocialsItemProps) => {
     const iconClassName = `${platform ? SocialsFAClasses[platform] : ''} text-2xl`;
-    
+
     return (
-        <Link href={url || "#"} className="transition-colors cursor-pointer hover:text-primary inline-flex items-center justify-center">
+        <Link href={url || "#"} className="transition-colors cursor-pointer hover:opacity-70 inline-flex items-center justify-center">
             <i className={iconClassName}></i>
         </Link>
     )
