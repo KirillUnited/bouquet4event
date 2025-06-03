@@ -14,8 +14,9 @@ import { LogoMobile } from "@/components/ui/logo";
 import { useState } from "react";
 import { AlignRight } from "lucide-react";
 import { SocialsList } from "@/components/shared/socials";
+import { SocialsListProps } from "@/components/shared/socials/SocialsList";
 
-export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
+export default function MobileNav({ navItems, socials }: { navItems: NavItem[], socials: SocialsListProps["items"] }) {
   const [open, setOpen] = useState(false);
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -62,7 +63,7 @@ export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
                 Регистрация
               </Link>
             </Button>
-            <SocialsList />
+            <SocialsList items={socials} />
           </div>
         </div>
       </SheetContent>

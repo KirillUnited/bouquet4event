@@ -6,8 +6,12 @@ import { ModeToggle } from "@/components/ui/menu-toggle";
 import { NAV_ITEMS } from "@/config";
 import { cn } from "@/lib/utils";
 import { SocialsList } from "@/components/shared/socials";
+import { sanityFetch } from "@/sanity/lib/live";
+import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
 
-export default function Header() {
+export default async function Header() {
+  const {data: siteSettings} = await sanityFetch({query: SITE_SETTINGS_QUERY});
+
   return (
     <header className={cn(
       "sticky top-0 w-full border-border/40 bg-background/70 backdrop-blur-lg z-50"
@@ -21,10 +25,10 @@ export default function Header() {
           <DesktopNav navItems={NAV_ITEMS} />
         </div>
         <div className="flex items-center">
-          <SocialsList className="hidden xl:flex mr-4" />
+          <SocialsList className="hidden xl:flex mr-4" items={siteSettings?.siteContactInfo?.socialLinks}/>
           <ModeToggle />
           <div className="xl:hidden">
-            <MobileNav navItems={NAV_ITEMS} />
+            <MobileNav navItems={NAV_ITEMS} socials={siteSettings?.siteContactInfo?.socialLinks} />
           </div>
         </div>
       </div>

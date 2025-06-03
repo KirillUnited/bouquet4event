@@ -1,9 +1,22 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 import { NAV_ITEMS } from "@/config";
-import { SocialsList } from "../shared/socials";
+import { ContactList, SocialsList } from "../shared/socials";
+import { sanityFetch } from "@/sanity/lib/live";
+import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
 
-export default function Footer() {
+export default async function Footer() {
+  const { data: siteSettings } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
+  const phones = siteSettings?.siteContactInfo?.phones;
+  const emails = siteSettings?.siteContactInfo?.emails;
+  const address = siteSettings?.siteContactInfo?.address;
+  const workingHours = siteSettings?.siteContactInfo?.workingHours;
+  const contacts = {
+    phones,
+    emails,
+    address,
+    workingHours
+  };
   const getCurrentYear = () => {
     return new Date().getFullYear();
   };
@@ -18,21 +31,12 @@ export default function Footer() {
               Сервис коллективной цветочной подписки
             </p>
           </div>
-          <SocialsList className="items-start" />
+          <SocialsList className="items-start" items={siteSettings?.siteContactInfo?.socialLinks} />
         </div>
         <div className="flex flex-wrap flex-col md:flex-row justify-between gap-8">
           <div>
             <h3 className="text-xl font-semibold mb-4">Контакты</h3>
-            <p className="mb-2">
-              <i className="fa-solid fa-phone mr-2"></i> +7 (495) 123-45-67
-            </p>
-            <p className="mb-2">
-              <i className="fa-solid fa-envelope mr-2"></i> info@flowerfund.ru
-            </p>
-            <p>
-              <i className="fa-solid fa-location-dot mr-2"></i> Москва, ул.
-              Цветочная, 15
-            </p>
+            <ContactList items={{_type: "contactInfo", ...contacts}} />
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-4">Карта сайта</h3>
@@ -60,6 +64,14 @@ export default function Footer() {
                   Политика конфиденциальности
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={"/agreement"}
+                  className="transition-colors"
+                >
+                  Пользовательское соглашение
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -73,6 +85,9 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-foreground/20 mt-8 pt-8 text-center text-sm">
+              <p>
+                {siteSettings?.siteLegalInfo}
+              </p>
           <p>© {getCurrentYear()} Bouquet4Event. Все права защищены.</p>
         </div>
       </div>
