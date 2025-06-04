@@ -12,6 +12,7 @@ import { logoCloud1Query } from "./logo-cloud/logo-cloud-1";
 import { faqsQuery } from "./faqs";
 import { formNewsletterQuery } from "./forms/newsletter";
 import { allPostsQuery } from "./all-posts";
+import { BREADCRUMBS_QUERY } from "./breadcrumbs";
 
 export const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug][0]{
@@ -19,6 +20,7 @@ export const PAGE_QUERY = groq`
       ${hero1Query},
       ${hero2Query},
       ${sectionHeaderQuery},
+      ${BREADCRUMBS_QUERY},
       ${splitRowQuery},
       ${gridRowQuery},
       ${carousel1Query},

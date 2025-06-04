@@ -41,6 +41,7 @@ export default defineType({
       of: [
         { type: "hero-1" },
         { type: "hero-2" },
+        { type: "breadcrumbs" },
         { type: "section-header" },
         { type: "split-row" },
         { type: "grid-row" },
@@ -70,6 +71,11 @@ export default defineType({
               name: "section-header",
               title: "Section Header",
               of: ["section-header"],
+            },
+            {
+              name: "breadcrumbs",
+              title: "Breadcrumbs",
+              of: ["breadcrumbs"],
             },
             {
               name: "grid",

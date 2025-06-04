@@ -36,3 +36,20 @@ export const extractPlainText = (blocks: BlockContent): string | null => {
     })
     .join(" ");
 };
+
+/**
+ * Count the number of items in an array or a number.
+ *
+ * @param {Array<any>|number} arr - The array or number to count.
+ * @param {string} [singular=item] - The singular form of the noun.
+ * @param {string} [plural] - The plural form of the noun.
+ * @returns {string} - The count and the pluralized noun.
+ */
+export function count(
+	arr: Array<any> | number,
+	singular: string = 'item',
+	plural?: string,
+): string {
+	const num = typeof arr === 'number' ? arr : arr?.length || 0
+	return `${num || 0} ${num === 1 ? singular : plural || singular + 's'}`
+}
