@@ -9,9 +9,19 @@ export default defineType({
     type: 'object',
     fields: [
         defineField({
+            name: "padding",
+            type: "section-padding",
+        }),
+        defineField({
+            name: "colorVariant",
+            type: "color-variant",
+            title: "Color Variant",
+            description: "Select a background color variant",
+        }),
+        defineField({
             name: 'crumbs',
             type: 'array',
-            of: [{ type: 'link', initialValue: { type: 'internal' } }],
+            of: [{ type: 'link' }],
             description: 'Current page is automatically included',
         }),
         defineField({
