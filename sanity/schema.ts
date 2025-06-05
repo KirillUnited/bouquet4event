@@ -40,6 +40,7 @@ import allPosts from "./schemas/blocks/all-posts";
 import author from "./schemas/documents/author";
 import { siteSettingsType } from "./schemas/documents/siteSettingsType";
 import { contactInfoType } from "./schemas/blocks/contactInfoType";
+import breadcrumbs from "./schemas/blocks/breadcrumbs";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -83,5 +84,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     faqs,
     newsletter,
     allPosts,
+    breadcrumbs,
   ],
 };
