@@ -6,15 +6,27 @@ export const siteSettingsType = defineType({
     title: "Site Settings",
     type: "document",
     icon: ControlsIcon,
+    groups: [
+        {
+            name: "siteInfo",
+            title: "Информация о сайте",
+        },
+        {
+            name: "siteContact",
+            title: "Контактная информация",
+        },
+    ],
     fields: [
         defineField({
             name: "siteContactInfo",
             type: "contactInfo",
+            group: "siteContact",
         }),
         defineField({
             name: "siteLegalInfo",
             title: "Реквизиты",
             type: "text",
+            group: "siteInfo",
         }),
     ],
     preview: {
