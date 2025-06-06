@@ -95,8 +95,8 @@ export default function Register({
             <SectionContainer color={color} padding={padding}>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <RegisterFormContainer
-                        title={title || ""}
-                        description={description || ""}
+                        title={title || "Зарегистрировать цветочный счёт"}
+                        description={description || "Заполните форму, и мы свяжемся с вами в ближайшее время, чтобы обсудить все детали вашей цветочной подписки."}
                     >
                         <Form {...form}>
                             <RegisterForm onSubmit={onSubmit} isSubmitting={isSubmitting} formControl={form.control} />
