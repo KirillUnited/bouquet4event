@@ -7,7 +7,11 @@ export const BREADCRUMBS_QUERY = groq`
       _key,
       padding,
       colorVariant,
-      crumbs,
+      crumbs[]->{
+        _id,
+        title,
+        slug
+      },
       hideCurrent,
     }
 `;

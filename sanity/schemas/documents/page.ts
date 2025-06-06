@@ -52,6 +52,7 @@ export default defineType({
         { type: "logo-cloud-1" },
         { type: "faqs" },
         { type: "form-newsletter" },
+        { type: "form-register" },
         { type: "all-posts" },
       ],
       options: {
@@ -110,7 +111,7 @@ export default defineType({
             {
               name: "forms",
               title: "Forms",
-              of: ["form-newsletter"],
+              of: ["form-newsletter", "form-register"],
             },
             {
               name: "all-posts",

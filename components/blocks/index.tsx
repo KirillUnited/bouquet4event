@@ -13,6 +13,7 @@ import FAQs from "@/components/blocks/faqs";
 import FormNewsletter from "@/components/blocks/forms/newsletter";
 import AllPosts from "@/components/blocks/all-posts";
 import Breadcrumbs from "@/components/blocks/breadcrumbs";
+import Register from "@/components/blocks/forms/register";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 
@@ -31,6 +32,7 @@ const componentMap: {
   "logo-cloud-1": LogoCloud1,
   faqs: FAQs,
   "form-newsletter": FormNewsletter,
+  "form-register": Register,
   "all-posts": AllPosts,
   "breadcrumbs": Breadcrumbs,
 };

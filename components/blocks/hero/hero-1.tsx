@@ -25,7 +25,7 @@ export default function Hero1({
                     <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left z-10">
                         {tagLine && (
                             <span className="backdrop-blur-lg bg-background/30 leading-none animate-fade-up [animation-delay:100ms] opacity-0 border-primary rounded-sm text-pretty text-foreground/70 text-center px-3 py-1 text-sm/6 ring-1 ring-primary/10 hover:ring-primary/20">
-                                🌸 {tagLine}
+                                {tagLine}
                             </span>
                         )}
                         {title && (
