@@ -36,7 +36,7 @@ export default async function Footer() {
         <div className="flex flex-wrap flex-col md:flex-row justify-between gap-8">
           <div>
             <h3 className="text-xl font-semibold mb-4">Контакты</h3>
-            <ContactList items={{_type: "contactInfo", ...contacts}} />
+            <ContactList items={{ _type: "contactInfo", ...contacts }} />
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-4">Карта сайта</h3>
@@ -72,6 +72,14 @@ export default async function Footer() {
                   Публичная оферта
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={"/dostavka-i-oplata"}
+                  className="transition-colors"
+                >
+                  Доставка и оплата
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -85,9 +93,9 @@ export default async function Footer() {
           </div>
         </div>
         <div className="border-t border-foreground/20 mt-8 pt-8 text-center text-sm">
-              <p>
-                {siteSettings?.siteLegalInfo}
-              </p>
+          <p>
+            {siteSettings?.siteLegalInfo}
+          </p>
           <p>© {getCurrentYear()} Bouquet4Event. Все права защищены.</p>
         </div>
       </div>
