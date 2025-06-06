@@ -6,26 +6,26 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import {Link as LinkProps, PAGE_QUERYResult} from "@/sanity.types";
+import { PAGE_QUERYResult } from "@/sanity.types";
 import Link from "next/link";
 import SectionContainer from "@/components/layout/section-container";
 import { HomeIcon, SlashIcon } from "lucide-react";
 import React from "react";
 
 type BreadcrumbsProps = Extract<
-  NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
-  { _type: "breadcrumbs" }
+    NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
+    { _type: "breadcrumbs" }
 >;
 
 const BreadcrumbCustomItem = ({
-                                  title,
-                                  href,
-                              }: LinkProps) => {
+    title,
+    slug,
+}: NonNullable<NonNullable<BreadcrumbsProps["crumbs"]>[number]>) => {
     return (
         <>
             <BreadcrumbItem className="font-bold text-primary">
                 <BreadcrumbLink className="hover:text-primary/70" asChild>
-                    <Link href={href || '#'}>{title}</Link>
+                    <Link href={slug?.current || '#'}>{title}</Link>
                 </BreadcrumbLink>
             </BreadcrumbItem>
         </>
@@ -33,11 +33,12 @@ const BreadcrumbCustomItem = ({
 };
 
 export default function Breadcrumbs({
-                                        padding,
-                                        colorVariant,
-                                        crumbs,
-                                        hideCurrent
-                                    }: BreadcrumbsProps) {
+    padding,
+    colorVariant,
+    crumbs,
+    hideCurrent
+}: BreadcrumbsProps) {
+    console.log(crumbs);
     return (
         <SectionContainer padding={padding} color={colorVariant}>
             <Breadcrumb className="my-3 lg:my-6">
@@ -50,7 +51,7 @@ export default function Breadcrumbs({
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     {crumbs?.map((crumb, index) => (
-                        <React.Fragment key={crumb._key}>
+                        <React.Fragment key={index}>
                             <BreadcrumbSeparator>
                                 <SlashIcon className="h-4 w-4" />
                             </BreadcrumbSeparator>

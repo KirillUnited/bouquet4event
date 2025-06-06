@@ -21,7 +21,7 @@ export default defineType({
         defineField({
             name: 'crumbs',
             type: 'array',
-            of: [{ type: 'link' }],
+            of: [{ type: 'reference', to: [{ type: 'page' }] }],
             description: 'Current page is automatically included',
         }),
         defineField({
