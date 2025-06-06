@@ -9,8 +9,24 @@ import FormRegisterSuccess from "@/components/shared/forms/FormRegisterSuccess";
 import { createUserAccount } from "@/lib/createUserAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
 import { RegisterForm, RegisterFormContainer } from "@/components/shared/forms";
+import { ColorVariant, PAGE_QUERYResult } from "@/sanity.types";
+import SectionContainer from "@/components/layout/section-container";
+import { stegaClean } from "next-sanity";
 
-export default function Register() {
+type FormRegisterProps = Extract<
+  NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
+  { _type: "form-register" }
+>;
+
+export default function Register({
+    padding,
+    colorVariant,
+    title,
+    subtitle,
+    buttonText,
+    successMessage,
+    privacyPolicyText
+}: FormRegisterProps) {
     const [formValues, setFormValues] = useState({});
     const formSchema = z.object({
         name: z.string().min(1, { message: "Пожалуйста, введите ваше имя" }),
@@ -70,22 +86,26 @@ export default function Register() {
         await handleSend(values);
     });
 
+    const color = stegaClean(colorVariant) as ColorVariant;
+
     return (
         isSubmitSuccessful ? (
             <FormRegisterSuccess values={formValues} />
         ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <RegisterFormContainer
-                    title="Зарегистрировать цветочный счёт"
-                    description="Заполните форму, и мы свяжемся с вами в ближайшее время,
-                    чтобы обсудить все детали вашей цветочной подписки."
-                >
-                    <Form {...form}>
-                        <RegisterForm onSubmit={onSubmit} isSubmitting={isSubmitting} formControl={form.control} />
-                    </Form >
-                </RegisterFormContainer>
-                <RegisterDialogOverview />
-            </div >
+            <SectionContainer color={color} padding={padding}>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <RegisterFormContainer
+                        title="Зарегистрировать цветочный счёт"
+                        description="Заполните форму, и мы свяжемся с вами в ближайшее время,
+                        чтобы обсудить все детали вашей цветочной подписки."
+                    >
+                        <Form {...form}>
+                            <RegisterForm onSubmit={onSubmit} isSubmitting={isSubmitting} formControl={form.control} />
+                        </Form >
+                    </RegisterFormContainer>
+                    <RegisterDialogOverview />
+                </div >
+            </SectionContainer>
         )
     );
 }

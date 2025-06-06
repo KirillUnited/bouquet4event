@@ -41,6 +41,7 @@ import author from "./schemas/documents/author";
 import { siteSettingsType } from "./schemas/documents/siteSettingsType";
 import { contactInfoType } from "./schemas/blocks/contactInfoType";
 import breadcrumbs from "./schemas/blocks/breadcrumbs";
+import registerType from "./schemas/blocks/forms/registerType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -83,6 +84,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     logoCloud1,
     faqs,
     newsletter,
+    registerType,
     allPosts,
     breadcrumbs,
   ],

@@ -55,18 +55,18 @@ export function RegisterFormContainer({ className, title, description, children 
     return (
         <div className={cn("flex flex-col gap-8", className)}>
             {(title || description) && (
-                <DialogHeader>
+                <div className='flex flex-col gap-4 text-center sm:text-left'>
                     {title && (
-                        <DialogTitle className="text-2xl sm:text-4xl text-balance">
+                        <h2 className="text-2xl sm:text-4xl text-balance">
                             {title}
-                        </DialogTitle>
+                        </h2>
                     )}
                     {description && (
-                        <DialogDescription className="text-foreground-85">
+                        <p className="text-foreground-85 text-pretty">
                             {description}
-                        </DialogDescription>
+                        </p>
                     )}
-                </DialogHeader>
+                </div>
             )}
             {children}
         </div>

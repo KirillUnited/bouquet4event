@@ -40,7 +40,7 @@ export default function RegisterDialogOverview() {
                 <Image
                     src="https://readdy.ai/api/search-image?query=happy%20couple%20receiving%20flower%20delivery%20at%20home%2C%20joyful%20moment%2C%20soft%20natural%20lighting%2C%20elegant%20bouquet%2C%20cozy%20home%20interior%2C%20soft%20beige%20background%2C%20high%20quality%20professional%20photography&width=400&height=300&seq=5&orientation=landscape"
                     alt="Счастливая пара получает доставку цветов"
-                    className="w-full h-48 object-cover object-top rounded-lg mb-4"
+                    className="w-full h-48 object-cover rounded-lg mb-4"
                     width={800}
                     height={400}
                     quality={50}
