@@ -6669,6 +6669,21 @@
                 },
                 "rest": {
                   "type": "inline",
+                  "name": "form-register"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
                   "name": "all-posts"
                 }
               }

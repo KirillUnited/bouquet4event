@@ -928,6 +928,8 @@ export type Page = {
     _key: string;
   } & FormNewsletter | {
     _key: string;
+  } & FormRegister | {
+    _key: string;
   } & AllPosts>;
   meta_title?: string;
   meta_description?: string;
@@ -1318,6 +1320,17 @@ export type PAGE_QUERYResult = {
     colorVariant: "accent" | "background" | "card" | "destructive" | "muted" | "primary" | "secondary" | null;
     stackAlign: "center" | "left" | null;
     consentText: string | null;
+    buttonText: string | null;
+    successMessage: string | null;
+  } | {
+    _type: "form-register";
+    _key: string;
+    padding: SectionPadding | null;
+    colorVariant: "accent" | "background" | "card" | "destructive" | "muted" | "primary" | "secondary" | null;
+    stackAlign: "center" | "left" | null;
+    title: string | null;
+    description: string | null;
+    privacyPolicyText: string | null;
     buttonText: string | null;
     successMessage: string | null;
   } | {

@@ -95,8 +95,8 @@ export default function Register({
             <SectionContainer color={color} padding={padding}>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <RegisterFormContainer
-                        title={title}
-                        description={description}
+                        title={title || ""}
+                        description={description || ""}
                     >
                         <Form {...form}>
                             <RegisterForm onSubmit={onSubmit} isSubmitting={isSubmitting} formControl={form.control} />
