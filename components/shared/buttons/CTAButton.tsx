@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowUpRightIcon, UserPlusIcon } from "lucide-react";
 import Link from "next/link";
 import Register from "@/components/blocks/forms/register";
 import { ButtonVariant } from "@/sanity.types";
-import { groq } from "next-sanity";
 
 type CTAButtonProps = {
     title?: string;
@@ -50,6 +49,7 @@ export function CTAButton({ title, href, buttonVariant = "default", target, clas
                 <DialogTrigger asChild>
                     {ButtonContent}
                 </DialogTrigger>
+                <DialogTitle className="hidden">{title}</DialogTitle>
                 <DialogContent className="w-full max-w-full sm:max-w-5xl overflow-y-auto max-h-[100svh] py-8 rounded-none sm:rounded-lg">
                     <Register
                         _key='register'

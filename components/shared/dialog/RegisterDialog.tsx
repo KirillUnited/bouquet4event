@@ -2,6 +2,7 @@ import Register from '@/components/blocks/forms/register'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ButtonVariant } from '@/sanity.types'
+import { DialogTitle } from '@radix-ui/react-dialog'
 import { stegaClean } from 'next-sanity'
 import React from 'react'
 
@@ -26,6 +27,7 @@ export const RegisterDialog: React.FC<RegisterDialogProps> = ({ title, buttonVar
                     {title}
                 </Button>
             </DialogTrigger>
+            <DialogTitle className="hidden">{title}</DialogTitle>
             <DialogContent className="w-full sm:max-w-5xl overflow-y-auto max-h-[calc(100vh-2rem)] py-8" >
                 <Register 
                     _key='register' 
