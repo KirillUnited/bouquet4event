@@ -5,7 +5,6 @@ import RegionSelect from './RegionSelect';
 import { Button } from '@/components/ui/button';
 import { Loader2Icon } from 'lucide-react';
 import { RegisterFormContainerProps, RegisterFormProps } from './forms.type';
-import { DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 import CheckboxInput from './CheckboxInput';
 
