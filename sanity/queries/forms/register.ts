@@ -15,3 +15,9 @@ export const formRegisterQuery = groq`
     successMessage,
   }
 `;
+
+export const REGISTER_QUERY = groq`*[_type == "page" && slug.current == $slug][0]{
+  blocks[]{
+    ${formRegisterQuery},
+  }
+}`;

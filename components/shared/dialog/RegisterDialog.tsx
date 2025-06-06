@@ -27,7 +27,18 @@ export const RegisterDialog: React.FC<RegisterDialogProps> = ({ title, buttonVar
                 </Button>
             </DialogTrigger>
             <DialogContent className="w-full sm:max-w-5xl overflow-y-auto max-h-[calc(100vh-2rem)] py-8" >
-                <Register />
+                <Register 
+                    _key='register' 
+                    _type='form-register'
+                    padding={null}
+                    colorVariant={null}
+                    stackAlign={null}
+                    title={null}
+                    description={null}
+                    buttonText={null}
+                    successMessage={null}
+                    privacyPolicyText={null}
+                />
             </DialogContent>
         </Dialog>
     )
