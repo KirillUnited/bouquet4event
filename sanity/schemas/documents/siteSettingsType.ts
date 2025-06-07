@@ -28,6 +28,39 @@ export const siteSettingsType = defineType({
             type: "text",
             group: "siteInfo",
         }),
+        defineField({
+            name: 'paymentMethod',
+            type: 'object',
+            title: 'Payment Method',
+            fields: [
+                {
+                    name: 'method',
+                    type: 'string',
+                    options: {
+                        list: [
+                            { title: 'Card', value: 'creditCard' },
+                            { title: 'Bank Transfer', value: 'bankTransfer' },
+                        ],
+                    }
+                },
+                {
+                    name: 'icon',
+                    type: 'image',
+                    title: 'Payment Method Icon',
+                    fields: [
+                        {
+                            name: 'faicon',
+                            type: 'string',
+                            title: 'Font Awesome Icon Class Name',
+                            description: 'Enter the Font Awesome icon class name (e.g. "fa-solid fa-heart")',
+                        },
+                    ],
+                    options: {
+                        hotspot: true
+                    }
+                }
+            ]
+        }),
     ],
     preview: {
         prepare() {
