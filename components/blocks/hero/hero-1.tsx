@@ -69,7 +69,7 @@ export default function Hero1({
                         priority
                     />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-transparent"></div>
+                <div className="absolute inset-0 bg-background/70"></div>
             </div>
         </section>
     );
