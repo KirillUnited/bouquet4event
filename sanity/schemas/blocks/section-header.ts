@@ -10,6 +10,12 @@ export default defineType({
   icon: LetterText,
   fields: [
     defineField({
+      name: "sectionID",
+      type: "string",
+      title: "Section ID",
+      description: "Section ID for anchor links",
+    }),
+    defineField({
       name: "padding",
       type: "section-padding",
     }),

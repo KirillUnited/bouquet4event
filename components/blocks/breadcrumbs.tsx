@@ -41,7 +41,7 @@ export default function Breadcrumbs({
     console.log(crumbs);
     return (
         <SectionContainer padding={padding} color={colorVariant}>
-            <Breadcrumb className="my-3 lg:my-6">
+            <Breadcrumb className="py-3 lg:py-6">
                 <BreadcrumbList>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>

@@ -4209,6 +4209,13 @@
             "value": "section-header"
           }
         },
+        "sectionID": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
         "padding": {
           "type": "objectAttribute",
           "value": {

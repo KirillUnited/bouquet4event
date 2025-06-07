@@ -10,6 +10,7 @@ type SectionHeaderProps = Extract<
 >;
 
 export default function SectionHeader({
+  sectionID,
   padding,
   colorVariant,
   sectionWidth = "default",
@@ -23,7 +24,7 @@ export default function SectionHeader({
   const color = stegaClean(colorVariant);
 
   return (
-    <SectionContainer color={color} padding={padding}>
+    <SectionContainer color={color} padding={padding} sectionID={sectionID || undefined}>
       <div
         className={cn(
           align === "center" ? "max-w-[48rem] text-center mx-auto" : undefined,
