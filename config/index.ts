@@ -6,12 +6,12 @@ export const NAV_ITEMS = [
   },
   {
     label: "Как это работает",
-    href: "#",
+    href: "#howitworks",
     target: false,
   },
   {
     label: "Преимущества",
-    href: "#",
+    href: "#benefits",
     target: false,
   },
   {

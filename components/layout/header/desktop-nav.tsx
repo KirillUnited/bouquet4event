@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { NavItem } from "@/types";
-import { Button } from "../../ui/button";
 
 export default function DesktopNav({ navItems }: { navItems: NavItem[] }) {
   return (
