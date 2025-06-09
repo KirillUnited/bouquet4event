@@ -18,7 +18,7 @@ export default function SplitImage({ image, caption }: SplitImage) {
         placeholder={image?.asset?.metadata?.lqip ? "blur" : undefined}
         blurDataURL={image?.asset?.metadata?.lqip || ""}
         fill
-        className="object-cover rounded-lg"
+        className="object-cover rounded-lg object-top"
         sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
         quality={100}
       />
