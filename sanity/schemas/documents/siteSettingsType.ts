@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { ControlsIcon } from "@sanity/icons";
+import { CreditCardIcon } from "lucide-react";
 
 export const siteSettingsType = defineType({
     name: "siteSettings",
@@ -30,36 +31,61 @@ export const siteSettingsType = defineType({
         }),
         defineField({
             name: 'paymentMethod',
-            type: 'object',
+            type: 'array',
             title: 'Payment Method',
-            fields: [
-                {
-                    name: 'method',
-                    type: 'string',
-                    options: {
-                        list: [
-                            { title: 'Card', value: 'creditCard' },
-                            { title: 'Bank Transfer', value: 'bankTransfer' },
-                        ],
+            icon: CreditCardIcon,
+            of: [{
+                type: 'object',
+                icon: CreditCardIcon,
+                fields: [
+                    {
+                        name: 'method',
+                        type: 'string',
+                        icon: CreditCardIcon,
+                        options: {
+                            list: [
+                                { title: 'Card', value: 'creditCard' },
+                                { title: 'Bank Transfer', value: 'bankTransfer' },
+                            ],
+                        }
+                    },
+                    {
+                        name: 'icon',
+                        type: 'object',
+                        title: 'Payment Method Icon',
+                        fields: [
+                            {
+                                name: 'iconType',
+                                type: 'string',
+                                title: 'Icon Type',
+                                options: {
+                                    list: [
+                                        { title: 'Font Awesome Icon', value: 'faicon' },
+                                        { title: 'Upload Image', value: 'image' }
+                                    ]
+                                }
+                            },
+                            {
+                                name: 'faicon',
+                                type: 'string',
+                                title: 'Font Awesome Icon Class Name',
+                                description: 'Enter the Font Awesome icon class name (e.g. "fa-solid fa-heart")',
+                                hidden: ({ parent }) => parent?.iconType !== 'faicon'
+                            },
+                            {
+                                name: 'imageIcon',
+                                type: 'image',
+                                title: 'Icon Image',
+                                options: {
+                                    hotspot: true
+                                },
+                                hidden: ({ parent }) => parent?.iconType !== 'image'
+                            }
+                        ]
                     }
-                },
-                {
-                    name: 'icon',
-                    type: 'image',
-                    title: 'Payment Method Icon',
-                    fields: [
-                        {
-                            name: 'faicon',
-                            type: 'string',
-                            title: 'Font Awesome Icon Class Name',
-                            description: 'Enter the Font Awesome icon class name (e.g. "fa-solid fa-heart")',
-                        },
-                    ],
-                    options: {
-                        hotspot: true
-                    }
-                }
-            ]
+                ],
+            }],
+            group: "siteInfo",
         }),
     ],
     preview: {

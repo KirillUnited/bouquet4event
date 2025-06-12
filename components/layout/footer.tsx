@@ -4,6 +4,7 @@ import { NAV_ITEMS } from "@/config";
 import { ContactList, SocialsList } from "../shared/socials";
 import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
+import { PaymentContainer } from "@/components/shared/site";
 
 export default async function Footer() {
   const { data: siteSettings } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
@@ -82,15 +83,7 @@ export default async function Footer() {
               </li>
             </ul>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Способы оплаты</h3>
-            <div className="flex space-x-4">
-              <i className="fa-brands fa-cc-visa text-3xl"></i>
-              <i className="fa-brands fa-cc-mastercard text-3xl"></i>
-              <i className="fa-brands fa-cc-apple-pay text-3xl"></i>
-              <i className="fa-solid fa-credit-card text-3xl"></i>
-            </div>
-          </div>
+          <PaymentContainer paymentMethods={siteSettings?.paymentMethod} />
         </div>
         <div className="border-t border-foreground/20 mt-8 pt-8 text-center text-sm">
           <p>
