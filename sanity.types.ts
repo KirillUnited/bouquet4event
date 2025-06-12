@@ -964,22 +964,26 @@ export type SiteSettings = {
   _rev: string;
   siteContactInfo?: ContactInfo;
   siteLegalInfo?: string;
-  paymentMethod?: {
+  paymentMethod?: Array<{
     method?: "creditCard" | "bankTransfer";
     icon?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
+      iconType?: "faicon" | "image";
       faicon?: string;
-      _type: "image";
+      imageIcon?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
     };
-  };
+    _key: string;
+  }>;
 };
 
 export type SanityImageCrop = {
@@ -2114,22 +2118,26 @@ export type SITE_SETTINGS_QUERYResult = {
   _rev: string;
   siteContactInfo?: ContactInfo;
   siteLegalInfo?: string;
-  paymentMethod?: {
+  paymentMethod?: Array<{
     method?: "bankTransfer" | "creditCard";
     icon?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
+      iconType?: "faicon" | "image";
       faicon?: string;
-      _type: "image";
+      imageIcon?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
     };
-  };
+    _key: string;
+  }>;
 } | null;
 
 // Query TypeMap
