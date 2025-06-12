@@ -69,7 +69,7 @@ export default async function Footer() {
                   href={"/agreement"}
                   className="transition-colors"
                 >
-                  Публичная оферта
+                  Пользовательское соглашение
                 </Link>
               </li>
               <li>
