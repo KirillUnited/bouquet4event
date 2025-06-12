@@ -21,7 +21,6 @@ export default async function Footer() {
   const getCurrentYear = () => {
     return new Date().getFullYear();
   };
-  console.log(siteSettings);
 
   return (
     <footer className="bg-primary text-primary-foreground">

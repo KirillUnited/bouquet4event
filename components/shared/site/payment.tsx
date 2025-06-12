@@ -25,9 +25,11 @@ const PaymentListItem: React.FC<PaymentListItemProps> = ({ method }) => {
 const PaymentList: React.FC<PaymentListProps> = ({ methods }) => {
     return (
         <ul className="flex flex-wrap gap-4">
-            <li>
-                <PaymentListItem method={methods} />
-            </li>
+            {methods?.map((method) => (
+                <li>
+                    <PaymentListItem method={method} />
+                </li>
+            ))}
         </ul>
     );
 };
