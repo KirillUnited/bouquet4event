@@ -1,7 +1,7 @@
 // src/lib/jsonLd.ts
 import { BreadcrumbList, LocalBusiness, WithContext } from "schema-dts";
 
-export const getLocalBusinessJsonLd = (post: any) => {
+export const getLocalBusinessJsonLd = (page: any) => {
     const localBusiness: WithContext<LocalBusiness> = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
@@ -45,14 +45,14 @@ export const getLocalBusinessJsonLd = (post: any) => {
             {
                 "@type": "ListItem",
                 position: 1,
-                name: "Посты",
+                name: "Главная",
                 item: `${process.env.NEXT_PUBLIC_SITE_URL}`,
             },
             {
                 "@type": "ListItem",
                 position: 2,
-                name: post.title,
-                item: `${process.env.NEXT_PUBLIC_SITE_URL}/${post.slug}`,
+                name: page.title,
+                item: `${process.env.NEXT_PUBLIC_SITE_URL}/${page.slug}`,
             },
         ],
     };
