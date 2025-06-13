@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { fontSans, fontSerif } from "@/config/fonts";
+import JsonLd from "@/components/JsonLd";
+import { getLocalBusinessJsonLd } from "@/lib/jsonLd";
 
 const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 
@@ -34,6 +36,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = getLocalBusinessJsonLd({});
   return (
     <html lang="ru" suppressHydrationWarning>
       <body
@@ -52,6 +55,7 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <Toaster position="top-center" richColors />
+        <JsonLd data={jsonLd} />
       </body>
     </html>
   );
