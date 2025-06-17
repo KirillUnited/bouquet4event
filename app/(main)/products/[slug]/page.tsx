@@ -1,3 +1,5 @@
+import SectionContainer from "@/components/layout/section-container";
+import { getProductBySlug } from "@/sanity/queries/product";
 
 export interface Props {
     slug: string,
@@ -6,7 +8,7 @@ export interface Props {
 
 export const generateMetadata = async ({ params }: { params: Promise<Props> }) => {
     const { slug } = await params;
-    const product: any = await getProductBySlug(slug);
+    const product: any = await getProductBySlug({ slug });
 
     const url = `https://bouquet4event.ru/products/${slug}`;
 
@@ -40,50 +42,39 @@ export const generateMetadata = async ({ params }: { params: Promise<Props> }) =
 
 export default async function ProductPage({ params }: { params: Promise<Props> }) {
     const { slug } = await params;
-    const [breadcrumbs, product] = await Promise.all([
-        getSanityDocuments(NAVIGATION_QUERY),
-        getProductBySlug(slug),
+    const [product] = await Promise.all([
+        getProductBySlug({ slug }),
     ]);
 
     if (!product) return (
-        <Section>
+        <SectionContainer>
             <div className="min-h-[50vh] flex flex-col items-center justify-center text-center gap-4">
                 <div className="w-16 h-16 border-4 border-indigo-200 border-t-indigo-500 rounded-full animate-spin"></div>
                 <h2 className="text-2xl font-medium text-gray-600">Товар не найден</h2>
                 <p className="text-gray-500">Товар, который вы ищете, не существует или был удален.</p>
             </div>
-        </Section>
+        </SectionContainer>
     )
 
-    const {
-        id,
-        name: productTitle = '',
-        description: general_description = '',
-        variation_description = '',
-        price = [],
-        colors,
-        sizes,
-        category,
-        items
-    } = product as any || {};
-    const Heading = () => {
-        return (
-            <>
-                <ProductBreadcrumb category={category} title={productTitle} slug={slug} items={breadcrumbs[0].links} />
+    
+    // const Heading = () => {
+    //     return (
+    //         <>
+    //             <ProductBreadcrumb category={category} title={productTitle} slug={slug} items={breadcrumbs[0].links} />
                 
-                <h1 className="text-2xl font-bold">{productTitle}</h1>
-            </>
-        )
-    }
+    //             <h1 className="text-2xl font-bold">{productTitle}</h1>
+    //         </>
+    //     )
+    // }
 
     return (
         <>
-            <Section>
+            <SectionContainer>
                     <div className='flex flex-col gap-4'>
-                        <Heading />
+                        {/* <Heading /> */}
                     </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <ProductCarousel className="md:sticky top-16" items={product} />
+                    {/* <ProductCarousel className="md:sticky top-16" items={product} />
                     <div className="flex flex-col gap-4">
                         <Card className="bg-indigo-100">
                             <CardBody>
@@ -104,13 +95,13 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                                 <AddToBasketButton product={product as any} />
                             </CardFooter>
                         </Card>
-                    </div>
+                    </div> */}
                 </div>
 
-                <ProductTabs description={general_description} options={variation_description} />
+                {/* <ProductTabs description={general_description} options={variation_description} /> */}
 
-            </Section>
-            <RelatedProducts product={product} />
+            </SectionContainer>
+            {/* <RelatedProducts product={product} /> */}
         </>
     )
 }

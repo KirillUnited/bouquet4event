@@ -1,3 +1,13 @@
+import { sanityFetch } from '../lib/live'
+import type {
+  Product,
+  GetProductBySlugParams,
+  GetProductsByCategoryParams,
+  GetProductsByTagParams,
+  SearchProductsParams,
+  GetRelatedProductsParams
+} from '../types/product'
+
 export const productFields = `
   _id,
   name,
@@ -76,3 +86,62 @@ export const getRelatedProductsQuery = `*[_type == "product" && _id != $currentP
 )] | order(_createdAt desc)[0...4] {
   ${productFields}
 }`
+
+// Helper functions to fetch data with proper typing
+export async function getAllProducts(): Promise<Product[]> {
+  const { data } = await sanityFetch({
+    query: getAllProductsQuery,
+  });
+  return data ?? [];
+}
+
+export async function getProductBySlug(params: GetProductBySlugParams): Promise<Product | null> {
+  const { data } = await sanityFetch({
+    query: getProductBySlugQuery,
+    params: { slug: params.slug },
+  });
+  return data ?? null;
+}
+
+export async function getProductsByCategory(params: GetProductsByCategoryParams): Promise<Product[]> {
+  const { data } = await sanityFetch({
+    query: getProductsByCategoryQuery,
+    params: { categoryId: params.categoryId },
+  });
+  return data ?? [];
+}
+
+export async function getProductsByTag(params: GetProductsByTagParams): Promise<Product[]> {
+
+  return [];
+}
+
+export async function getAvailableProducts(): Promise<Product[]> {
+  const { data } = await sanityFetch({
+    query: getAvailableProductsQuery,
+  });
+  return data ?? [];
+}
+
+export async function getProductsInStock(): Promise<Product[]> {
+  const { data } = await sanityFetch({
+    query: getProductsInStockQuery,
+  });
+  return data ?? [];
+}
+
+export async function searchProducts(params: SearchProductsParams): Promise<Product[]> {
+  const { data } = await sanityFetch({
+    query: searchProductsQuery,
+    params: { searchTerm: params.searchTerm },
+  });
+  return data ?? [];
+}
+
+export async function getRelatedProducts(params: GetRelatedProductsParams): Promise<Product[]> {
+  const { data } = await sanityFetch({
+    query: getRelatedProductsQuery,
+    params: { currentProductId: params.currentProductId, categoryIds: params.categoryIds, tags: params.tags },
+  });
+  return data ?? [];
+}

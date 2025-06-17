@@ -1,4 +1,4 @@
-import { Spinner, SpinnerProps } from '@heroui/spinner';
+import { Spinner, SpinnerProps } from '@/components/ui/spinner';
 import clsx from 'clsx';
 
 interface LoaderProps extends React.HTMLAttributes<HTMLDivElement> {}
