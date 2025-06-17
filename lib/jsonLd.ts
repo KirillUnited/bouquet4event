@@ -9,7 +9,7 @@ export const getLocalBusinessJsonLd = (page: any) => {
         "@id": "",
         "url": `${process.env.NEXT_PUBLIC_SITE_URL}`,
         "telephone": "+79060820745",
-        "priceRange": "BYN",
+        "priceRange": "RUB",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "",
