@@ -42,6 +42,7 @@ import { siteSettingsType } from "./schemas/documents/siteSettingsType";
 import { contactInfoType } from "./schemas/blocks/contactInfoType";
 import breadcrumbs from "./schemas/blocks/breadcrumbs";
 import registerType from "./schemas/blocks/forms/registerType";
+import productType from "./schemas/documents/productType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -54,6 +55,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     faq,
     testimonial,
     userAccount,
+    productType,
     // shared objects
     blockContent,
     link,
