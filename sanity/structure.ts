@@ -1,5 +1,5 @@
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
-import { Files, BookA, User, ListCollapse, Quote, UsersIcon } from "lucide-react";
+import { Files, BookA, User, ListCollapse, Quote, UsersIcon, Package } from "lucide-react";
 
 export const structure = (S: any, context: any) =>
   S.list()
@@ -25,6 +25,13 @@ export const structure = (S: any, context: any) =>
         context,
       }),
       S.divider(),
+      orderableDocumentListDeskItem({
+        type: "product",
+        title: "Products",
+        icon: Package,
+        S,
+        context,
+      }),
       orderableDocumentListDeskItem({
         type: "faq",
         title: "FAQs",
