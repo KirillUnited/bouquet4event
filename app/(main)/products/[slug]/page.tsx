@@ -1,5 +1,7 @@
 import SectionContainer from "@/components/layout/section-container";
+import { ProductGallery } from "@/components/shared/product";
 import { getProductBySlug } from "@/sanity/queries/product";
+import Image from "next/image";
 
 export interface Props {
     slug: string,
@@ -46,6 +48,8 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
         getProductBySlug({ slug }),
     ]);
 
+    console.log(product);
+
     if (!product) return (
         <SectionContainer>
             <div className="min-h-[50vh] flex flex-col items-center justify-center text-center gap-4">
@@ -56,52 +60,15 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
         </SectionContainer>
     )
 
-    
-    // const Heading = () => {
-    //     return (
-    //         <>
-    //             <ProductBreadcrumb category={category} title={productTitle} slug={slug} items={breadcrumbs[0].links} />
-                
-    //             <h1 className="text-2xl font-bold">{productTitle}</h1>
-    //         </>
-    //     )
-    // }
-
     return (
         <>
             <SectionContainer>
-                    <div className='flex flex-col gap-4'>
-                        {/* <Heading /> */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="col-span-1">
+                        <ProductGallery images={product.gallery} productName={product.name} />
                     </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* <ProductCarousel className="md:sticky top-16" items={product} />
-                    <div className="flex flex-col gap-4">
-                        <Card className="bg-indigo-100">
-                            <CardBody>
-                                <p className="my-0">
-                                    <ProductPrice price={getPrice(price, 1.1)} productId={id} />
-                                </p>
-                            </CardBody>
-                            <CardBody>
-                                <ProductDetails
-                                    items={items}
-                                    sizes={sizes}
-                                    colors={colors}
-                                    color={items?.[0]?.color || ''}
-                                    size={sizes?.[0] || ''}
-                                />
-                            </CardBody>
-                            <CardFooter className='relative'>
-                                <AddToBasketButton product={product as any} />
-                            </CardFooter>
-                        </Card>
-                    </div> */}
                 </div>
-
-                {/* <ProductTabs description={general_description} options={variation_description} /> */}
-
             </SectionContainer>
-            {/* <RelatedProducts product={product} /> */}
         </>
     )
 }
