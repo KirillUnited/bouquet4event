@@ -15,13 +15,12 @@ export const generateMetadata = async ({ params }: { params: Promise<Props> }) =
     const url = `https://bouquet4event.ru/products/${slug}`;
 
     return {
-        title: product.name,
-        description: product.description,
+        title: product?.seo?.metaTitle || product.name,
+        description: product?.seo?.metaDescription,
 
         openGraph: {
-            title: `${product.name}`,
-            description: `${product.description}`,
-            images: [`${product.image}`],
+            title: `${product?.seo?.metaTitle || product.name}`,
+            description: `${product?.seo?.metaDescription}`,
             type: 'website',
             locale: 'ru',
             siteName: 'Bouquet4Event',
@@ -29,11 +28,10 @@ export const generateMetadata = async ({ params }: { params: Promise<Props> }) =
         },
         twitter: {
             card: 'summary_large_image',
-            title: `${product.name}`,
-            description: `${product.description}`,
-            images: [`${product.image}`],
-            creator: '@artmarketprint',
-            site: '@artmarketprint',
+            title: `${product?.seo?.metaTitle || product.name}`,
+            description: `${product?.seo?.metaDescription}`,
+            creator: '@Bouquet4Event',
+            site: '@Bouquet4Event',
             url: `https://bouquet4event.ru/products/${slug}`,
         },
         alternates: {

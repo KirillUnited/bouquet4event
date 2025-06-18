@@ -113,10 +113,7 @@ export default function ProductGallery({
             onSwiper={setMainSwiper}
             modules={[Navigation, Pagination, Thumbs, Zoom]}
             thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-            navigation={{
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            }}
+            navigation={true}
             pagination={{
               clickable: true,
               dynamicBullets: true,
@@ -144,27 +141,8 @@ export default function ProductGallery({
             ))}
           </Swiper>
 
-          {/* Navigation Arrows */}
-          <button className="swiper-button-prev absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all duration-200">
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button className="swiper-button-next absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all duration-200">
-            <ChevronRight className="w-5 h-5" />
-          </button>
-
           {/* Zoom and Fullscreen Controls */}
           <div className="absolute top-2 right-2 z-10 flex gap-2">
-            <button
-              onClick={toggleZoom}
-              className="w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all duration-200"
-              title={isZoomed ? "Уменьшить" : "Увеличить"}
-            >
-              {isZoomed ? (
-                <ZoomOut className="w-4 h-4" />
-              ) : (
-                <ZoomIn className="w-4 h-4" />
-              )}
-            </button>
             <button
               onClick={openFullscreen}
               className="w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all duration-200"
@@ -174,11 +152,6 @@ export default function ProductGallery({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
               </svg>
             </button>
-          </div>
-
-          {/* Image Counter */}
-          <div className="absolute bottom-2 left-2 z-10 bg-black/50 text-white px-2 py-1 rounded text-sm">
-            {activeIndex + 1} / {images.length}
           </div>
         </div>
 
@@ -234,10 +207,7 @@ export default function ProductGallery({
             {/* Fullscreen Swiper */}
             <Swiper
               modules={[Navigation, Pagination, Zoom]}
-              navigation={{
-                nextEl: '.fullscreen-swiper-button-next',
-                prevEl: '.fullscreen-swiper-button-prev',
-              }}
+              navigation={true}
               pagination={{
                 clickable: true,
                 dynamicBullets: true,
@@ -265,19 +235,7 @@ export default function ProductGallery({
                 </SwiperSlide>
               ))}
             </Swiper>
-
-            {/* Fullscreen Navigation Arrows */}
-            <button className="fullscreen-swiper-button-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-all duration-200">
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button className="fullscreen-swiper-button-next absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-all duration-200">
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            {/* Fullscreen Image Counter */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 bg-black/50 text-white px-4 py-2 rounded-full text-lg">
-              {activeIndex + 1} / {images.length}
-            </div>
+            
           </div>
         </div>
       )}
