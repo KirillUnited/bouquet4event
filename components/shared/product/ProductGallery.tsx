@@ -30,7 +30,6 @@ export default function ProductGallery({
 }: ProductGalleryProps) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [mainSwiper, setMainSwiper] = useState<any>(null);
-  const [isZoomed, setIsZoomed] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [showFullscreen, setShowFullscreen] = useState(false);
   const fullscreenRef = useRef<HTMLDivElement>(null);
@@ -92,10 +91,6 @@ export default function ProductGallery({
     setActiveIndex(swiper.activeIndex);
   };
 
-  const toggleZoom = () => {
-    setIsZoomed(!isZoomed);
-  };
-
   const openFullscreen = () => {
     setShowFullscreen(true);
   };
@@ -106,7 +101,7 @@ export default function ProductGallery({
 
   return (
     <>
-      <div className={cn("relative", className)}>
+      <div className={cn("sticky top-0", className)}>
         {/* Main Swiper */}
         <div className="relative mb-4">
           <Swiper
