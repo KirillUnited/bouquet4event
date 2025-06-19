@@ -38,7 +38,6 @@ export default function Breadcrumbs({
     crumbs,
     hideCurrent
 }: BreadcrumbsProps) {
-    console.log(crumbs);
     return (
         <SectionContainer padding={padding} color={colorVariant}>
             <Breadcrumb className="py-3 lg:py-6">

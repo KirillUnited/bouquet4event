@@ -6,16 +6,6 @@ export default function Custom404() {
   return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <div className="max-w-3xl w-full text-center space-y-8">
-          {/* Animated 404 illustration */}
-          <div className="relative w-full h-64 sm:h-80 md:h-96 mx-auto">
-            <Image
-                src="/images/404-illustration.svg"
-                alt="Page not found"
-                fill
-                className="object-contain"
-                priority
-            />
-          </div>
 
           {/* Error message with responsive typography */}
           <div className="space-y-4">
