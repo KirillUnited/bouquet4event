@@ -1,5 +1,12 @@
+import Breadcrumbs from "@/components/blocks/breadcrumbs";
 import SectionContainer from "@/components/layout/section-container";
+import PortableTextRenderer from "@/components/portable-text-renderer";
+import { ProductGallery } from "@/components/shared/product";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import { getProductBySlug } from "@/sanity/queries/product";
+import Image from "next/image";
+import Link from "next/link";
 
 export interface Props {
     slug: string,
@@ -13,13 +20,12 @@ export const generateMetadata = async ({ params }: { params: Promise<Props> }) =
     const url = `https://bouquet4event.ru/products/${slug}`;
 
     return {
-        title: product.name,
-        description: product.description,
+        title: product?.seo?.metaTitle || product.name,
+        description: product?.seo?.metaDescription,
 
         openGraph: {
-            title: `${product.name}`,
-            description: `${product.description}`,
-            images: [`${product.image}`],
+            title: `${product?.seo?.metaTitle || product.name}`,
+            description: `${product?.seo?.metaDescription}`,
             type: 'website',
             locale: 'ru',
             siteName: 'Bouquet4Event',
@@ -27,11 +33,10 @@ export const generateMetadata = async ({ params }: { params: Promise<Props> }) =
         },
         twitter: {
             card: 'summary_large_image',
-            title: `${product.name}`,
-            description: `${product.description}`,
-            images: [`${product.image}`],
-            creator: '@artmarketprint',
-            site: '@artmarketprint',
+            title: `${product?.seo?.metaTitle || product.name}`,
+            description: `${product?.seo?.metaDescription}`,
+            creator: '@Bouquet4Event',
+            site: '@Bouquet4Event',
             url: `https://bouquet4event.ru/products/${slug}`,
         },
         alternates: {
@@ -52,56 +57,87 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                 <div className="w-16 h-16 border-4 border-indigo-200 border-t-indigo-500 rounded-full animate-spin"></div>
                 <h2 className="text-2xl font-medium text-gray-600">Товар не найден</h2>
                 <p className="text-gray-500">Товар, который вы ищете, не существует или был удален.</p>
+                <Button asChild>
+                    <Link href="/">Вернуться на главную</Link>
+                </Button>
             </div>
         </SectionContainer>
     )
 
-    
-    // const Heading = () => {
-    //     return (
-    //         <>
-    //             <ProductBreadcrumb category={category} title={productTitle} slug={slug} items={breadcrumbs[0].links} />
-                
-    //             <h1 className="text-2xl font-bold">{productTitle}</h1>
-    //         </>
-    //     )
-    // }
-
     return (
         <>
+            <Breadcrumbs
+                _type="breadcrumbs"
+                _key={product._id}
+                padding={null}
+                colorVariant={`background`}
+                hideCurrent={true}
+                crumbs={[
+                    {
+                        _id: 'products',
+                        title: 'Букеты',
+                        slug: {
+                            _type: 'slug',
+                            current: '/products',
+                        }
+                    },
+                    {
+                    _id: product._id,
+                    title: product.name,
+                    slug: {
+                        _type: 'slug',
+                        current: product.slug
+                    }
+                }]} />
             <SectionContainer>
-                    <div className='flex flex-col gap-4'>
-                        {/* <Heading /> */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="col-span-1">
+                        <ProductGallery images={product.gallery} productName={product.name} />
                     </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* <ProductCarousel className="md:sticky top-16" items={product} />
-                    <div className="flex flex-col gap-4">
-                        <Card className="bg-indigo-100">
-                            <CardBody>
-                                <p className="my-0">
-                                    <ProductPrice price={getPrice(price, 1.1)} productId={id} />
-                                </p>
-                            </CardBody>
-                            <CardBody>
-                                <ProductDetails
-                                    items={items}
-                                    sizes={sizes}
-                                    colors={colors}
-                                    color={items?.[0]?.color || ''}
-                                    size={sizes?.[0] || ''}
-                                />
-                            </CardBody>
-                            <CardFooter className='relative'>
-                                <AddToBasketButton product={product as any} />
-                            </CardFooter>
-                        </Card>
-                    </div> */}
+                    <div className="col-span-1">
+                        <h1 className="mb-8">{product.name}</h1>
+                        <div className="flex flex-col gap-4">
+                            <PortableTextRenderer value={product.description} />
+                        </div>
+                        <h2 className="text-2xl font-semibold mt-8 mb-4">Цена</h2>
+                        <p className="text-2xl font-semibold">{product.price} ₽</p>
+                        
+                        <div className="flex flex-col py-8">
+                            <h2 className="text-2xl font-semibold mb-4">Создайте счет</h2>
+                            <p className="text-gray-600 mb-6">Наш менеджер свяжется с вами в ближайшее время</p>
+                            <div className="flex gap-4">
+                                <Button asChild>
+                                    <Link href="/create-account">
+                                        <i className="fa fa-user-plus mr-2"></i>
+                                        создать счет
+                                    </Link>
+                                </Button>
+                                <Button asChild variant="outline">
+                                    <Link href="/request-call">
+                                        <i className="fa fa-phone-volume mr-2"></i>
+                                        обратная связь
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                {/* <ProductTabs description={general_description} options={variation_description} /> */}
-
             </SectionContainer>
-            {/* <RelatedProducts product={product} /> */}
+            <SectionContainer className="py-12">
+                <h2 className="text-xl font-semibold mb-4">Еще букеты</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="border rounded-lg overflow-hidden shadow-md">
+                        <Image src="/images/product-1.jpg" alt="Product Name" width={300} height={200} className="w-full h-auto" />
+                        <div className="p-4">
+                            <h3 className="text-lg font-medium">Название</h3>
+                            <p className="text-gray-500">Краткое описание</p>
+                            <Button asChild>
+                                <Link href="/products/product-slug">Подробнее</Link>
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </SectionContainer>
         </>
     )
 }
