@@ -75,6 +75,14 @@ export default async function Footer() {
               </li>
               <li>
                 <Link
+                  href={"/publichnaya-oferta"}
+                  className="transition-colors"
+                >
+                  Публичная оферта
+                </Link>
+              </li>
+              <li>
+                <Link
                   href={"/dostavka-i-oplata"}
                   className="transition-colors"
                 >
