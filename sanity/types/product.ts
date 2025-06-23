@@ -60,6 +60,6 @@ export interface SearchProductsParams {
 
 export interface GetRelatedProductsParams {
   currentProductId: string
-  categoryIds: string[]
-  tags: string[]
+  // categoryIds: string[]
+  // tags: string[]
 } 
