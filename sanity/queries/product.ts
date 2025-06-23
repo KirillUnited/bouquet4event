@@ -80,10 +80,7 @@ export const searchProductsQuery = `*[_type == "product" && (
 }`
 
 // Query for related products (by category or tags)
-export const getRelatedProductsQuery = `*[_type == "product" && _id != $currentProductId && (
-  count((categories[]->_id)[@ in $categoryIds]) > 0 ||
-  count((tags)[@ in $tags]) > 0
-)] | order(_createdAt desc)[0...4] {
+export const getRelatedProductsQuery = `*[_type == "product" && _id != $currentProductId] | order(_createdAt desc)[0...4] {
   ${productFields}
 }`
 
@@ -141,7 +138,7 @@ export async function searchProducts(params: SearchProductsParams): Promise<Prod
 export async function getRelatedProducts(params: GetRelatedProductsParams): Promise<Product[]> {
   const { data } = await sanityFetch({
     query: getRelatedProductsQuery,
-    params: { currentProductId: params.currentProductId, categoryIds: params.categoryIds, tags: params.tags },
+    params: { currentProductId: params.currentProductId, },
   });
   return data ?? [];
 }

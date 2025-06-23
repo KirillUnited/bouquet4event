@@ -5,6 +5,7 @@ import { ContactList, SocialsList } from "../shared/socials";
 import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
 import { PaymentContainer } from "@/components/shared/site";
+import { getCurrentYear } from "@/lib/utils";
 
 export default async function Footer() {
   const { data: siteSettings } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
@@ -17,9 +18,6 @@ export default async function Footer() {
     emails,
     address,
     workingHours
-  };
-  const getCurrentYear = () => {
-    return new Date().getFullYear();
   };
 
   return (
