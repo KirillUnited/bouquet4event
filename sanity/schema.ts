@@ -43,6 +43,7 @@ import { contactInfoType } from "./schemas/blocks/contactInfoType";
 import breadcrumbs from "./schemas/blocks/breadcrumbs";
 import registerType from "./schemas/blocks/forms/registerType";
 import productType from "./schemas/documents/productType";
+import gridProduct from "./schemas/blocks/grid/grid-product";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -77,6 +78,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     gridCard,
     pricingCard,
     gridPost,
+    gridProduct,
     gridRow,
     carousel1,
     carousel2,

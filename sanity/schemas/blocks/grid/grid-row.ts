@@ -36,6 +36,7 @@ export default defineType({
         { type: "grid-card" },
         { type: "grid-post" },
         { type: "pricing-card" },
+        { type: "grid-product" },
       ],
       options: {
         insertMenu: {
