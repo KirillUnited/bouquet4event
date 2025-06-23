@@ -53,7 +53,6 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
         getProductBySlug({ slug }),
     ]);
     const relatedProducts = await getRelatedProducts({ currentProductId: product?._id ?? '',});
-    console.log(relatedProducts)
 
     if (!product) return (
         <SectionContainer>
@@ -95,10 +94,10 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                 }]} />
             <SectionContainer>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-                    <div className="col-span-1 sticky top-10">
+                    <div className="col-span-1 lg:sticky top-10">
                         <ProductGallery images={product.gallery} productName={product.name} />
                     </div>
-                    <div className="col-span-1 sticky top-10">
+                    <div className="col-span-1 lg:sticky top-10">
                         <h1 className="mb-8">{product.name}</h1>
                         <article>
                             <PortableTextRenderer value={product.description} />
