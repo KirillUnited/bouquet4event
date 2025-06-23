@@ -14,8 +14,8 @@ import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
 
 type FormRegisterProps = Extract<
-  NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
-  { _type: "form-register" }
+    NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
+    { _type: "form-register" }
 >;
 
 export default function Register({
@@ -89,9 +89,10 @@ export default function Register({
     const color = stegaClean(colorVariant) as ColorVariant;
 
     return (
-        isSubmitSuccessful ? (
-            <FormRegisterSuccess values={formValues} />
-        ) : (
+        <>
+            {isSubmitSuccessful && (
+                <FormRegisterSuccess values={formValues} />
+            )}
             <SectionContainer color={color} padding={padding}>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <RegisterFormContainer
@@ -105,6 +106,6 @@ export default function Register({
                     <RegisterDialogOverview />
                 </div >
             </SectionContainer>
-        )
+        </>
     );
 }
