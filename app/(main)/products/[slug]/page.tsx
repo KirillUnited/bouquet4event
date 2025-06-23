@@ -92,7 +92,7 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                     }]} />
             <SectionContainer>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-                    <div className="col-span-1 lg:sticky top-10">
+                    <div className="col-span-1">
                         <ProductGallery images={product.gallery} productName={product.name} />
                     </div>
                     <div className="col-span-1 lg:sticky top-10">
