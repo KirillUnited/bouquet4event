@@ -5,6 +5,7 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import GridCard from "./grid-card";
 import PricingCard from "./pricing-card";
 import GridPost from "./grid-post";
+import FeaturedProduct from "@/components/shared/product/FeaturedProduct";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type GridRow = Extract<Block, { _type: "grid-row" }>;
@@ -18,6 +19,7 @@ const componentMap: {
   "grid-card": GridCard,
   "pricing-card": PricingCard,
   "grid-post": GridPost,
+  "grid-product": FeaturedProduct,
 };
 
 export default function GridRow({

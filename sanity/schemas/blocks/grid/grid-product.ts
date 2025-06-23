@@ -21,7 +21,7 @@ export default defineType({
     },
     prepare({ title, media }) {
       return {
-        title: "Grid Card",
+        title: "Grid Product",
         subtitle: title || "No title",
         media,
       };
