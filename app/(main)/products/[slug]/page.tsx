@@ -4,10 +4,8 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import { CTAButton } from "@/components/shared/buttons";
 import { ProductGallery } from "@/components/shared/product";
 import { FeaturedProductList } from "@/components/shared/product/FeaturedProduct";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { getProductBySlug, getRelatedProducts } from "@/sanity/queries/product";
-import Image from "next/image";
 import Link from "next/link";
 
 export interface Props {
@@ -52,7 +50,7 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
     const [product] = await Promise.all([
         getProductBySlug({ slug }),
     ]);
-    const relatedProducts = await getRelatedProducts({ currentProductId: product?._id ?? '',});
+    const relatedProducts = await getRelatedProducts({ currentProductId: product?._id ?? '' });
 
     if (!product) return (
         <SectionContainer>
@@ -85,13 +83,13 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                         }
                     },
                     {
-                    _id: product._id,
-                    title: product.name,
-                    slug: {
-                        _type: 'slug',
-                        current: product.slug
-                    }
-                }]} />
+                        _id: product._id,
+                        title: product.name,
+                        slug: {
+                            _type: 'slug',
+                            current: product.slug
+                        }
+                    }]} />
             <SectionContainer>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
                     <div className="col-span-1 lg:sticky top-10">
@@ -104,7 +102,7 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                         </article>
                         <h2 className="text-2xl font-semibold mt-8 mb-4">Цена</h2>
                         <p className="text-2xl font-semibold">{product.price} ₽</p>
-                        
+
                         <div className="flex flex-col py-8">
                             <h2 className="text-2xl font-semibold mb-4">Создайте счет</h2>
                             <p className="text-gray-600 mb-6">Наш менеджер свяжется с вами в ближайшее время</p>
@@ -121,10 +119,12 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                     </div>
                 </div>
             </SectionContainer>
-            <SectionContainer className="py-16">
-                <h2 className="text-2xl font-semibold mb-4">Еще букеты</h2>
-                <FeaturedProductList products={relatedProducts} />
-            </SectionContainer>
+            {relatedProducts.length > 0 && (
+                <SectionContainer className="py-16">
+                    <h2 className="text-2xl font-semibold mb-4">Еще букеты</h2>
+                    <FeaturedProductList products={relatedProducts} />
+                </SectionContainer>
+            )}
         </>
     )
 }
