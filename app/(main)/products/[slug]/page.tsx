@@ -94,15 +94,15 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                     }
                 }]} />
             <SectionContainer>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    <div className="col-span-1">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                    <div className="col-span-1 sticky top-10">
                         <ProductGallery images={product.gallery} productName={product.name} />
                     </div>
-                    <div className="col-span-1">
+                    <div className="col-span-1 sticky top-10">
                         <h1 className="mb-8">{product.name}</h1>
-                        <div className="flex flex-col gap-4">
+                        <article>
                             <PortableTextRenderer value={product.description} />
-                        </div>
+                        </article>
                         <h2 className="text-2xl font-semibold mt-8 mb-4">Цена</h2>
                         <p className="text-2xl font-semibold">{product.price} ₽</p>
                         
