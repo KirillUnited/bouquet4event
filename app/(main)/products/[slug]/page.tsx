@@ -96,12 +96,11 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                         <ProductGallery images={product.gallery} productName={product.name} />
                     </div>
                     <div className="col-span-1 lg:sticky top-10">
-                        <h1 className="mb-8">{product.name}</h1>
+                        <h1 className="mb-2">{product.name}</h1>
+                        <p className="text-3xl font-semibold mb-6">{product.price} ₽</p>
                         <article>
                             <PortableTextRenderer value={product.description} />
                         </article>
-                        <h2 className="text-2xl font-semibold mt-8 mb-4">Цена</h2>
-                        <p className="text-2xl font-semibold">{product.price} ₽</p>
 
                         <div className="flex flex-col py-8">
                             <h2 className="text-2xl font-semibold mb-4">Создайте счет</h2>
@@ -121,8 +120,8 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
             </SectionContainer>
             {relatedProducts.length > 0 && (
                 <SectionContainer className="py-16">
-                    <h2 className="text-2xl font-semibold mb-4">Еще букеты</h2>
-                    <FeaturedProductList products={relatedProducts} />
+                    <h3 className="font-semibold mb-4">Еще букеты</h3>
+                    <FeaturedProductList products={relatedProducts as any} />
                 </SectionContainer>
             )}
         </>

@@ -21,7 +21,7 @@ export default function FeaturedProduct({ color, product }: GridProductProps) {
     if (!product) return null;
 
     const { name, description, gallery, price, slug } = product;
-    
+
     return (
         <Card className="overflow-hidden h-full group">
             {(gallery && gallery.length > 0) && (
@@ -71,11 +71,11 @@ export default function FeaturedProduct({ color, product }: GridProductProps) {
     )
 }
 
-export const FeaturedProductList = ({ products }: { products: GridProduct[] }) => {
+export const FeaturedProductList = ({ products }: { products: GridProductProps[] }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {products.map((product, index) => (
-                <FeaturedProduct key={index} {...product} />
+            {products.map((product: any, index: number) => (
+                <FeaturedProduct color={product.color} _id={product._id} key={index} product={product} />
             ))}
         </div>
     )
