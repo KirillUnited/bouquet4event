@@ -63,3 +63,55 @@ export const getBreadcrumbListJsonLd = (name: any, slug: string) => {
 
     return [breadcrumbList];
 };
+
+export const getProductJsonLd = (name: any, slug: string, description: any) => {
+    const product: WithContext<LocalBusiness> = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "image": `${process.env.NEXT_PUBLIC_SITE_URL}/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.9b0ef703.png&w=96&q=75`,
+        "url": `${process.env.NEXT_PUBLIC_SITE_URL}/products/${slug}`,
+        "brand": "Артмаркетпринт",
+        "model": name,
+        "name": name,
+        "description": description,
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/PreOrder",
+            "price": "0",
+            "priceCurrency": "BYN",
+            "url": `${process.env.NEXT_PUBLIC_SITE_URL}/products/${slug}`,
+
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "itemReviewed": "Web Development",
+            "ratingValue": "4.9",
+            "reviewCount": "46"
+        }
+    };
+    const breadcrumbList: WithContext<BreadcrumbList> = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            {
+                "@type": "ListItem",
+                position: 1,
+                name: "Главная",
+                item: `${process.env.NEXT_PUBLIC_SITE_URL}`,
+            },
+            {
+                "@type": "ListItem",
+                position: 2,
+                name: "Букеты",
+                item: `${process.env.NEXT_PUBLIC_SITE_URL}/products`,
+            },
+            {
+                "@type": "ListItem",
+                position: 3,
+                name: name,
+            },
+        ],
+    };
+
+    return [product, breadcrumbList];
+};
