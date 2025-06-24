@@ -21,7 +21,7 @@ export const NAV_ITEMS = [
   },
   {
     label: "Контакты",
-    href: "#",
+    href: "/contacts",
     target: false,
   },
 ];
