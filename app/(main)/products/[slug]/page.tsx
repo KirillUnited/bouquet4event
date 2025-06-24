@@ -1,10 +1,12 @@
 import Breadcrumbs from "@/components/blocks/breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import SectionContainer from "@/components/layout/section-container";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { CTAButton } from "@/components/shared/buttons";
 import { ProductGallery } from "@/components/shared/product";
 import { FeaturedProductList } from "@/components/shared/product/FeaturedProduct";
 import { Button } from "@/components/ui/button";
+import { getProductJsonLd } from "@/lib/jsonLd";
 import { getProductBySlug, getRelatedProducts } from "@/sanity/queries/product";
 import Link from "next/link";
 
@@ -124,6 +126,7 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                     <FeaturedProductList products={relatedProducts as any} />
                 </SectionContainer>
             )}
+            <JsonLd data={getProductJsonLd(product.name, product.slug, product.seo?.metaDescription)} />
         </>
     )
 }
