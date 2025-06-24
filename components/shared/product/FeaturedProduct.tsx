@@ -22,7 +22,7 @@ export default function FeaturedProduct({ product }: { product: Product }) {
                         height={500}
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <Button variant="outline" className="bg-white text-gray-800 hover:bg-gray-100 !rounded-button whitespace-nowrap cursor-pointer">
+                        <Button variant="outline" size={'sm'}>
                             Просмотр
                         </Button>
                     </div>
@@ -40,9 +40,7 @@ export default function FeaturedProduct({ product }: { product: Product }) {
                         <span className="text-2xl font-semibold text-foreground/90 truncate">{price} ₽</span>
                     )}
                     {slug && (
-                        // <CTAButton className='p-0' title="Подробнее" href={`/products/${slug}`} buttonVariant='link' target={true} />
                         <Button
-                            // className='text-primary flex items-center gap-1 hover:text-primary/80 transition-colors'
                             size={'sm'}
                             variant={'secondary'}
                         >
