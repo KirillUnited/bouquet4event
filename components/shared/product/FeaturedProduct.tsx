@@ -2,34 +2,59 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Product } from '@/sanity/types/product'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
-import { CTAButton } from '../buttons'
+import Link from 'next/link'
+import { ArrowUpRightIcon } from 'lucide-react'
+import PortableTextRenderer from '@/components/portable-text-renderer'
 
 export default function FeaturedProduct({ product }: { product: Product }) {
+    const { name, description, gallery, price, slug } = product;
+
     return (
         <Card className="overflow-hidden h-full group">
-            <div className="relative h-64 overflow-hidden">
-                <Image
-                    src={product.gallery[0].url}
-                    alt={product.name}
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    width={500}
-                    height={500}
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <Button variant="outline" className="bg-white text-gray-800 hover:bg-gray-100 !rounded-button whitespace-nowrap cursor-pointer">
-                        Просмотр
-                    </Button>
+            {(gallery && gallery.length > 0) && (
+                <div className="relative h-64 overflow-hidden">
+                    <Image
+                        src={gallery[0].url}
+                        alt={name}
+                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        width={500}
+                        height={500}
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <Button variant="outline" className="bg-white text-gray-800 hover:bg-gray-100 !rounded-button whitespace-nowrap cursor-pointer">
+                            Просмотр
+                        </Button>
+                    </div>
                 </div>
-            </div>
-            <div className="p-6">
-                <h3 className="text-xl font-serif font-semibold text-gray-800 mb-2">{product.name}</h3>
-                <div className="flex flex-col md:flex-row justify-between gap-4">
-                    <span className="text-2xl font-semibold text-foreground/90 truncate">{product.price} ₽</span>
-                    <CTAButton title="Подробнее" href={`/products/${product.slug}`} buttonVariant='outline' target={true} />
-                </div>
-            </div>
+            )}
+            <Link className="flex flex-col group p-4"
+                href={`/products/${slug}`}
+                target={"_blank"}
+                rel={"noopener"}
+            >
+                <h3 className="text-xl font-serif font-semibold text-foreground/80 mb-2">{name}</h3>
+                <article className='truncate line-clamp-1 text-sm'><PortableTextRenderer value={description} /></article>
+                <p className="flex flex-col md:flex-row justify-between gap-4 mt-4">
+                    {price && (
+                        <span className="text-2xl font-semibold text-foreground/90 truncate">{price} ₽</span>
+                    )}
+                    {slug && (
+                        // <CTAButton className='p-0' title="Подробнее" href={`/products/${slug}`} buttonVariant='link' target={true} />
+                        <Button
+                            // className='text-primary flex items-center gap-1 hover:text-primary/80 transition-colors'
+                            size={'sm'}
+                            variant={'secondary'}
+                        >
+                            {"Подробнее"}
+                            <ArrowUpRightIcon
+                                className="group-hover:translate-x-1 transition-transform"
+                                size={16}
+                            />
+                        </Button>
+                    )}
+                </p>
+            </Link>
         </Card>
     )
 }
