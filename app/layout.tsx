@@ -36,7 +36,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = getLocalBusinessJsonLd({});
+  const jsonLd = getLocalBusinessJsonLd();
   return (
     <html lang="ru" suppressHydrationWarning>
       <body
