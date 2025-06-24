@@ -6,17 +6,29 @@ import React from 'react'
 import Link from 'next/link'
 import { ArrowUpRightIcon } from 'lucide-react'
 import PortableTextRenderer from '@/components/portable-text-renderer'
+import { ColorVariant, PAGE_QUERYResult } from '@/sanity.types'
 
-export default function FeaturedProduct({ product }: { product: Product }) {
+type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
+type GridRow = Extract<Block, { _type: "grid-row" }>;
+type GridColumn = NonNullable<NonNullable<GridRow["columns"]>>[number];
+type GridProduct = Extract<GridColumn, { _type: "grid-product" }>;
+
+interface GridProductProps extends Omit<NonNullable<GridProduct>, "_type" | "_key"> {
+    color?: ColorVariant;
+}
+
+export default function FeaturedProduct({ color, product }: GridProductProps) {
+    if (!product) return null;
+
     const { name, description, gallery, price, slug } = product;
-
+    
     return (
         <Card className="overflow-hidden h-full group">
             {(gallery && gallery.length > 0) && (
                 <div className="relative h-64 overflow-hidden">
                     <Image
-                        src={gallery[0].url}
-                        alt={name}
+                        src={gallery[0].url || ""}
+                        alt={name || ""}
                         className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         width={500}
                         height={500}
@@ -34,7 +46,9 @@ export default function FeaturedProduct({ product }: { product: Product }) {
                 rel={"noopener"}
             >
                 <h3 className="text-xl font-serif font-semibold text-foreground/80 mb-2">{name}</h3>
-                <article className='truncate line-clamp-1 text-sm'><PortableTextRenderer value={description} /></article>
+                {description && (
+                    <article className='truncate line-clamp-1 text-sm'><PortableTextRenderer value={description} /></article>
+                )}
                 <p className="flex flex-col md:flex-row justify-between gap-4 mt-4">
                     {price && (
                         <span className="text-2xl font-semibold text-foreground/90 truncate">{price} ₽</span>
@@ -57,11 +71,11 @@ export default function FeaturedProduct({ product }: { product: Product }) {
     )
 }
 
-export const FeaturedProductList = ({ products }: { products: Product[] }) => {
+export const FeaturedProductList = ({ products }: { products: GridProduct[] }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {products.map((product, index) => (
-                <FeaturedProduct key={index} product={product} />
+                <FeaturedProduct key={index} {...product} />
             ))}
         </div>
     )
