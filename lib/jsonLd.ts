@@ -1,5 +1,5 @@
 // src/lib/jsonLd.ts
-import { BreadcrumbList, LocalBusiness, WithContext } from "schema-dts";
+import { BreadcrumbList, LocalBusiness, Product, WithContext } from "schema-dts";
 
 export const getLocalBusinessJsonLd = () => {
     const localBusiness: WithContext<LocalBusiness> = {
@@ -65,7 +65,7 @@ export const getBreadcrumbListJsonLd = (name: any, slug: string) => {
 };
 
 export const getProductJsonLd = (name: any, slug: string, description: any) => {
-    const product: WithContext<LocalBusiness> = {
+    const product: WithContext<Product> = {
         "@context": "https://schema.org",
         "@type": "Product",
         "image": `${process.env.NEXT_PUBLIC_SITE_URL}/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.9b0ef703.png&w=96&q=75`,
