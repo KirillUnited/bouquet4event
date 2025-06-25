@@ -13,7 +13,7 @@ type Hero2Props = Extract<
 
 export default function Hero2({ tagLine, title, body, links, image }: Hero2Props) {
   return (
-    <section className="text-[#f9fafb] py-20 lg:pt-40 text-center relative">
+    <section className="text-[#f9fafb] py-20 text-center relative">
       {image && image.asset?._id && (
         <div className="absolute inset-0 z-0">
           <Image
