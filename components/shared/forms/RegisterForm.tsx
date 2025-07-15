@@ -1,12 +1,12 @@
 import React from 'react'
-import TextInput from './TextInput';
+import TextInput from './ui/TextInput';
 import PhoneInput from './PhoneInput';
 import RegionSelect from './RegionSelect';
 import { Button } from '@/components/ui/button';
 import { Loader2Icon } from 'lucide-react';
 import { RegisterFormContainerProps, RegisterFormProps } from './forms.type';
 import { cn } from '@/lib/utils';
-import CheckboxInput from './CheckboxInput';
+import CheckboxInput from './ui/CheckboxInput';
 
 export default function RegisterForm({ onSubmit, isSubmitting, formControl }: RegisterFormProps) {
     return (
