@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import FormRegisterSuccess from "@/components/shared/forms/FormRegisterSuccess";
 import { createUserAccount } from "@/lib/createUserAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
-import { RegisterForm, RegisterFormContainer } from "@/components/shared/forms";
+import {PaymentForm, RegisterForm, RegisterFormContainer} from "@/components/shared/forms";
 import { ColorVariant, PAGE_QUERYResult } from "@/sanity.types";
 import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
@@ -18,7 +18,7 @@ type FormRegisterProps = Extract<
     { _type: "form-register" }
 >;
 
-export default function Register({
+export default function PaymentBlock({
     padding,
     colorVariant,
     title,
@@ -27,16 +27,10 @@ export default function Register({
     successMessage,
     privacyPolicyText
 }: FormRegisterProps) {
-    const [formValues, setFormValues] = useState({});
     const formSchema = z.object({
-        name: z.string().min(1, { message: "Пожалуйста, введите ваше имя" }),
-        phone: z.string()
-            .min(1, { message: "Пожалуйста, введите ваш телефон" })
-            .regex(/^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/, {
-                message: "Телефон должен соответствовать формату +7 (XXX) XXX-XX-XX"
-            }),
-        region: z.string().min(1, { message: "Пожалуйста, выберите ваш регион" }),
-        privacyPolicy: z.boolean().refine(val => val === true, {
+        amount: z.number().min(1, { message: "Пожалуйста, введите сумму" }),
+        email: z.string().email({ message: "Пожалуйста, введите корректную электронную почту" }),
+        privacyPolicy: z.boolean().refine(val => val, {
             message: "Необходимо согласиться с политикой конфиденциальности"
         }),
     });
@@ -44,67 +38,60 @@ export default function Register({
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: '',
-            phone: '',
-            region: 'Москва',
+            amount: 4000,
+            email: '',
             privacyPolicy: false
         },
     });
 
     const { isSubmitting, isSubmitSuccessful } = form.formState;
 
-    const handleSend = useCallback(
-        async ({ name, phone, region, privacyPolicy }: { name: string; phone: string; region: string, privacyPolicy: boolean }) => {
-            try {
-                const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-
-                const result = await createUserAccount({
-                    userId,
-                    name,
-                    phone,
-                    region,
-                    totalAmount: 0, // Начальная сумма 0
-                    privacyPolicy
-                });
-
-                if (result) {
-                    toast.success('Ваш счёт успешно зарегистрирован!');
-                    setFormValues(result);
-                    form.reset();
-                } else {
-                    toast.error('Не удалось создать счёт. Пожалуйста, попробуйте позже.');
-                }
-            } catch (error: any) {
-                toast.error(error.message);
-                throw new Error(error.message);
-            }
-        },
-        [form]
-    );
+    // const handleSend = useCallback(
+    //     async ({ name, amount, privacyPolicy }: { name: string; amount: string; privacyPolicy: boolean }) => {
+    //         try {
+    //             const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+    //
+    //             const result = await createUserAccount({
+    //                 amount,
+    //                 name,
+    //                 privacyPolicy
+    //             });
+    //
+    //             if (result) {
+    //                 toast.success('Счёт успешно пополнен!');
+    //                 form.reset();
+    //             } else {
+    //                 toast.error('Не удалось пополнить счёт. Пожалуйста, попробуйте позже.');
+    //             }
+    //         } catch (error: any) {
+    //             toast.error(error.message);
+    //             throw new Error(error.message);
+    //         }
+    //     },
+    //     [form]
+    // );
 
     const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
-        await handleSend(values);
+        // await handleSend(values);
+        // TODO: Temporary solution
+        await toast.promise(
+            new Promise((resolve) => setTimeout(resolve, 2000)),
+            {
+                loading: 'Пожалуйста, подождите...',
+                success: <b>Счёт успешно пополнен!</b>,
+                error: <b>Не удалось пополнить счёт. Пожалуйста, попробуйте позже.</b>,
+            },
+        );
     });
 
     const color = stegaClean(colorVariant) as ColorVariant;
 
     return (
         <>
-            {isSubmitSuccessful && (
-                <FormRegisterSuccess values={formValues} />
-            )}
             <SectionContainer color={color} padding={padding}>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <RegisterFormContainer
-                        title={title || "Зарегистрировать цветочный счёт"}
-                        description={description || "Заполните форму, и мы свяжемся с вами в ближайшее время, чтобы обсудить все детали вашей цветочной подписки."}
-                    >
-                        <Form {...form}>
-                            <RegisterForm onSubmit={onSubmit} isSubmitting={isSubmitting} formControl={form.control} />
-                        </Form >
-                    </RegisterFormContainer>
-                    <RegisterDialogOverview />
-                </div >
+                <Form {...form}>
+                    <PaymentForm onSubmit={onSubmit} isSubmitting={isSubmitting} formControl={form.control} />
+                </Form >
             </SectionContainer>
         </>
     );

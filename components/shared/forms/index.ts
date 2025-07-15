@@ -1,8 +1,9 @@
 import PhoneInput from "./PhoneInput";
-import TextInput from "./TextInput";
+import TextInput from "./ui/TextInput";
 import RegionSelect from "./RegionSelect";
 import RegisterForm, { RegisterFormContainer } from "./RegisterForm";
-import CheckboxInput from "./CheckboxInput";
+import CheckboxInput from "./ui/CheckboxInput";
+import PaymentForm from "./PaymentForm";
 
 export {
     PhoneInput,
@@ -10,5 +11,6 @@ export {
     RegionSelect,
     RegisterForm,
     RegisterFormContainer,
-    CheckboxInput
+    CheckboxInput,
+    PaymentForm
 }
