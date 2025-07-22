@@ -29,13 +29,8 @@ export default function PaymentForm({onSubmit, isSubmitting, formControl}: Payme
     };
 
     return (
-        <form className="max-w-2xl mx-auto bg-background p-8 rounded-lg shadow-md" onSubmit={onSubmit}>
+        <form className="max-w-2xl mx-auto bg-background p-4 md:p-8 rounded-lg shadow-md" onSubmit={onSubmit}>
             <div className="text-center mb-8">
-                <img
-                    src="https://readdy.ai/api/search-image?query=elegant%20wedding%20couple%20portrait%2C%20romantic%20atmosphere%2C%20soft%20natural%20lighting%2C%20bride%20with%20bouquet%2C%20groom%20in%20suit%2C%20soft%20beige%20background%2C%20high%20quality%20professional%20photography&width=600&height=400&seq=6&orientation=landscape"
-                    alt="Свадебная пара"
-                    className="w-full h-64 object-cover object-top rounded-lg mb-6"
-                />
                 <div className="flex flex-col gap-2">
                     <h2 className="text-3xl">
                         Вы можете подарить цветы, которые останутся надолго
@@ -45,6 +40,11 @@ export default function PaymentForm({onSubmit, isSubmitting, formControl}: Payme
                         Ваш вклад поможет им получать свежие букеты каждую неделю после свадьбы.
                     </p>
                 </div>
+                <img
+                    src="https://readdy.ai/api/search-image?query=elegant%20wedding%20couple%20portrait%2C%20romantic%20atmosphere%2C%20soft%20natural%20lighting%2C%20bride%20with%20bouquet%2C%20groom%20in%20suit%2C%20soft%20beige%20background%2C%20high%20quality%20professional%20photography&width=600&height=400&seq=6&orientation=landscape"
+                    alt="Свадебная пара"
+                    className="w-full h-64 object-cover object-top rounded-lg mt-6"
+                />
             </div>
             <div className="mb-8 flex flex-col gap-6">
                 <h3 className="text-xl font-semibold">Выберите сумму</h3>
@@ -75,7 +75,7 @@ export default function PaymentForm({onSubmit, isSubmitting, formControl}: Payme
                     </div>
                 </div>
                 <div className='grid md:grid-cols-2 gap-4'>
-                    <DatePicker label="Дата планируемого мероприятия"/>
+                    <DatePicker label="Дата планируемого мероприятия" required control={formControl} />
                     <TextInput control={formControl} name={'email'} type='email' label="Email для чека"
                                placeholder="email@example.com" className="mt-1" required/>
                 </div>
