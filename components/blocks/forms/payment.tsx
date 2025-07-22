@@ -31,7 +31,7 @@ export default function PaymentBlock({
         date: z.date({
             required_error: "Пожалуйста, введите дату",
         }),
-        amount: z.number().min(1, { message: "Пожалуйста, введите сумму" }),
+        amount: z.number(),
         email: z.string().email({ message: "Пожалуйста, введите корректную электронную почту" }),
         privacyPolicy: z.boolean().refine(val => val, {
             message: "Необходимо согласиться с политикой конфиденциальности"
@@ -76,6 +76,7 @@ export default function PaymentBlock({
 
     const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
         // await handleSend(values);
+        console.log(values);
         // TODO: Temporary solution
         await toast.promise(
             new Promise((resolve) => setTimeout(resolve, 2000)),
