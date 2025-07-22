@@ -28,6 +28,9 @@ export default function PaymentBlock({
     privacyPolicyText
 }: FormRegisterProps) {
     const formSchema = z.object({
+        date: z.date({
+            required_error: "Пожалуйста, введите дату",
+        }),
         amount: z.number().min(1, { message: "Пожалуйста, введите сумму" }),
         email: z.string().email({ message: "Пожалуйста, введите корректную электронную почту" }),
         privacyPolicy: z.boolean().refine(val => val, {
