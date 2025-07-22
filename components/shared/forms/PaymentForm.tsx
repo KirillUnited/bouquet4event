@@ -5,6 +5,7 @@ import {Button} from "@/components/ui/button";
 import {Slider} from "@/components/ui/slider";
 import {Loader2Icon} from "lucide-react";
 import {CheckboxInput, TextInput} from "@/components/shared/forms/ui";
+import {DatePicker} from "@/components/shared/forms/ui/DatePicker";
 
 export interface PaymentFormProps {
     onSubmit: (data: any) => void;
@@ -73,8 +74,11 @@ export default function PaymentForm({onSubmit, isSubmitting, formControl}: Payme
                         <span>{donationAmount.toLocaleString()} ₽</span>
                     </div>
                 </div>
-                <TextInput control={formControl} name={'email'} type='email' label="Email для чека"
-                           placeholder="email@example.com" className="mt-1" required/>
+                <div className='grid md:grid-cols-2 gap-4'>
+                    <DatePicker label="Дата планируемого мероприятия"/>
+                    <TextInput control={formControl} name={'email'} type='email' label="Email для чека"
+                               placeholder="email@example.com" className="mt-1" required/>
+                </div>
                 <CheckboxInput
                     control={formControl}
                     name="privacyPolicy"
