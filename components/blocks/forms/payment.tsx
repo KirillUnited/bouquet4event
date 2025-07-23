@@ -10,6 +10,7 @@ import {PaymentForm} from "@/components/shared/forms";
 import {ColorVariant, PAGE_QUERYResult} from "@/sanity.types";
 import SectionContainer from "@/components/layout/section-container";
 import {stegaClean} from "next-sanity";
+import {sendDonate} from "@/lib/messenger";
 
 type FormRegisterProps = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -58,6 +59,7 @@ export default function PaymentBlock({
                 };
 
                 await updateUserAccount(user.userId, donation);
+                await sendDonate({userId: user.userId, ...donation});
 
                 return {success: true};
             } catch (error: any) {

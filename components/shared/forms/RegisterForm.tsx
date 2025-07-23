@@ -2,13 +2,14 @@ import React from 'react'
 import TextInput from './ui/TextInput';
 import PhoneInput from './PhoneInput';
 import RegionSelect from './RegionSelect';
-import { Button } from '@/components/ui/button';
-import { Loader2Icon } from 'lucide-react';
-import { RegisterFormContainerProps, RegisterFormProps } from './forms.type';
-import { cn } from '@/lib/utils';
+import {Button} from '@/components/ui/button';
+import {Loader2Icon} from 'lucide-react';
+import {RegisterFormContainerProps, RegisterFormProps} from './forms.type';
+import {cn} from '@/lib/utils';
 import CheckboxInput from './ui/CheckboxInput';
+import {DatePicker} from "@/components/shared/forms/ui/DatePicker";
 
-export default function RegisterForm({ onSubmit, isSubmitting, formControl }: RegisterFormProps) {
+export default function RegisterForm({onSubmit, isSubmitting, formControl}: RegisterFormProps) {
     return (
         <form onSubmit={onSubmit}>
             <div className="space-y-6">
@@ -32,17 +33,24 @@ export default function RegisterForm({ onSubmit, isSubmitting, formControl }: Re
                     required
                     className="mt-1"
                 />
+                <DatePicker
+                    control={formControl}
+                    label="Дата планируемого мероприятия"
+                    required
+                    className="mt-1"
+                />
                 <CheckboxInput
                     control={formControl}
                     name="privacyPolicy"
                     label={
-                        <span className="text-sm">Я согласен с <a href="/privacy" target="_blank" className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a> и на обработку персональных данных</span>
+                        <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
+                                                                  className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a> и на обработку персональных данных</span>
                     }
                     required
                     className="mt-1"
                 />
                 <Button type="submit" disabled={isSubmitting} className="w-full">
-                    {isSubmitting && <Loader2Icon className="w-6 h-6 mr-2 animate-spin" />}
+                    {isSubmitting && <Loader2Icon className="w-6 h-6 mr-2 animate-spin"/>}
                     Отправить заявку
                 </Button>
             </div>
@@ -50,7 +58,7 @@ export default function RegisterForm({ onSubmit, isSubmitting, formControl }: Re
     );
 }
 
-export function RegisterFormContainer({ className, title, description, children }: RegisterFormContainerProps) {
+export function RegisterFormContainer({className, title, description, children}: RegisterFormContainerProps) {
     return (
         <div className={cn("flex flex-col gap-8", className)}>
             {(title || description) && (
