@@ -6,6 +6,7 @@ import {Slider} from "@/components/ui/slider";
 import {Loader2Icon} from "lucide-react";
 import {CheckboxInput, TextInput} from "@/components/shared/forms/ui";
 import {DatePicker} from "@/components/shared/forms/ui/DatePicker";
+import {FormControl, FormField, FormItem} from "@/components/ui/form";
 
 export interface PaymentFormProps {
     onSubmit: (data: any) => void;
@@ -49,14 +50,27 @@ export default function PaymentForm({onSubmit, isSubmitting, formControl}: Payme
             <div className="mb-8 flex flex-col gap-6">
                 <h3 className="text-xl font-semibold">Выберите сумму</h3>
                 <div className="">
-                    <Slider
+                    <FormField
+                        control={formControl}
                         name="amount"
-                        defaultValue={[4000]}
-                        max={10000}
-                        min={4000}
-                        step={500}
-                        onValueChange={handleSliderChange}
-                        className="mb-2"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <Slider
+                                        defaultValue={[field.value ?? 4000]}
+                                        value={[field.value]}
+                                        max={10000}
+                                        min={4000}
+                                        step={500}
+                                        onValueChange={(value) => {
+                                            field.onChange(value[0])
+                                            handleSliderChange(value)
+                                        }}
+                                        className="mb-2"
+                                    />
+                                </FormControl>
+                            </FormItem>
+                        )}
                     />
                     <div className="flex justify-between">
                         <span>4 000 ₽</span>
@@ -75,9 +89,10 @@ export default function PaymentForm({onSubmit, isSubmitting, formControl}: Payme
                     </div>
                 </div>
                 <div className='grid md:grid-cols-2 gap-4'>
-                    <DatePicker label="Дата планируемого мероприятия" required control={formControl} />
+                    <DatePicker className='flex flex-col' label="Дата планируемого мероприятия" required
+                                control={formControl}/>
                     <TextInput control={formControl} name={'email'} type='email' label="Email для чека"
-                               placeholder="email@example.com" className="mt-1" required/>
+                               placeholder="email@example.com" required/>
                 </div>
                 <CheckboxInput
                     control={formControl}

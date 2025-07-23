@@ -4,7 +4,7 @@ import React from 'react'
 import { toast } from 'sonner';
 
 function FormRegisterSuccess({ values }: any) {
-    const userLink = `${process.env.NEXT_PUBLIC_SITE_URL}/account/${values.userId}`;
+    const userLink = `${process.env.NEXT_PUBLIC_SITE_URL}/payment/${values.userId}`;
 
     return (
         <Dialog defaultOpen>
