@@ -57,6 +57,36 @@ export default defineType({
             validation: (Rule) => Rule.required(),
             initialValue: () => new Date().toISOString(),
         }),
+        defineField({
+            name: "donations",
+            title: "Пожертвования",
+            type: "array",
+            description: "Пожертвования пользователя",
+            of: [{ 
+                type: "object",
+                name: "donation",
+                fields: [
+                    {
+                        name: "amount",
+                        title: "Сумма пожертвования",
+                        type: "number",
+                        description: "Сумма пожертвования пользователя",
+                    },
+                    {
+                        name: "date",
+                        title: "Дата пожертвования",
+                        type: "datetime",
+                        description: "Дата пожертвования пользователя",
+                    },
+                    {
+                        name: "email",
+                        title: "Email",
+                        type: "string",
+                        description: "Email пользователя",
+                    }
+                ]
+            }],
+        })
     ],
     preview: {
         select: {

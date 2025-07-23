@@ -12,6 +12,8 @@ import {
   POSTS_QUERYResult,
   POSTS_SLUGS_QUERYResult,
 } from "@/sanity.types";
+import {ALL_USERS_QUERY, USER_BY_ID_QUERY} from "@/sanity/queries/user";
+import {client} from "@/sanity/lib/client";
 
 export const fetchSanityPageBySlug = async ({
   slug,
@@ -68,3 +70,17 @@ export const fetchSanityPostsStaticParams =
 
     return data;
   };
+
+export const fetchSanityAllUsers = async (): Promise<any> => {
+  const data = await client.fetch(ALL_USERS_QUERY);
+
+  return data;
+}
+
+export const fetchSanityUserById = async ({ userId }: { userId: string }): Promise<any> => {
+  const data = await client.fetch(USER_BY_ID_QUERY,{
+    userId,
+  });
+
+  return data
+}

@@ -26,7 +26,7 @@ export interface UserAccountData {
  * @param userData - Данные пользователя для создания аккаунта
  * @returns Promise с созданным документом или ошибкой
  */
-export async function createUserAccount(userData: UserAccountData) {
+export async function userAccount(userData: UserAccountData) {
   try {
     // Проверка обязательных полей
     if (!userData.userId || !userData.name || !userData.phone || !userData.region || !userData.privacyPolicy) {
@@ -62,23 +62,23 @@ export async function createUserAccount(userData: UserAccountData) {
 
 /**
  * Обновляет аккаунт пользователя с новой информацией о пожертвовании
- * @param email - Email пользователя для поиска аккаунта
+ * @param userId - userId пользователя для поиска аккаунта
  * @param donation - Данные о пожертвовании
  * @returns Promise с обновленным документом или ошибкой
  */
-export async function updateUserDonation(email: string, donation: Donation) {
+export async function updateUserAccount(userId: string, donation: Donation) {
   try {
     // Находим пользователя по email
     const clientWithToken = client.withConfig({ token });
     
     // Ищем пользователя по email в массиве донатов
-    const query = `*[_type == "userAccount" && donations[].email match $email][0]`;
-    const params = { email };
+    const query = `*[_type == "userAccount" && userId match $userId][0]`;
+    const params = { userId };
     
     const user = await clientWithToken.fetch(query, params);
     
     if (!user) {
-      throw new Error("Пользователь с указанным email не найден");
+      throw new Error("Пользователь с указанным userId не найден");
     }
 
     // Обновляем общую сумму и добавляем новое пожертвование
