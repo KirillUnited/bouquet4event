@@ -92,7 +92,7 @@ export default function PaymentForm({onSubmit, isSubmitting, formControl}: Payme
                     <DatePicker className='flex flex-col' label="Дата планируемого мероприятия" required
                                 control={formControl}/>
                     <TextInput control={formControl} name={'email'} type='email' label="Email для чека"
-                               placeholder="email@example.com" className="mt-1" required/>
+                               placeholder="email@example.com" required/>
                 </div>
                 <CheckboxInput
                     control={formControl}

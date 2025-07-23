@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 import FormRegisterSuccess from "@/components/shared/forms/FormRegisterSuccess";
-import { createUserAccount } from "@/lib/createUserAccount";
+import { userAccount } from "@/lib/userAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
 import { RegisterForm, RegisterFormContainer } from "@/components/shared/forms";
 import { ColorVariant, PAGE_QUERYResult } from "@/sanity.types";
@@ -58,7 +58,7 @@ export default function Register({
             try {
                 const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 
-                const result = await createUserAccount({
+                const result = await userAccount({
                     userId,
                     name,
                     phone,
