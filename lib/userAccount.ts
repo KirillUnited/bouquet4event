@@ -5,6 +5,12 @@ import { token } from "../sanity/lib/token";
 /**
  * Интерфейс для данных аккаунта пользователя
  */
+export interface Donation {
+  amount: number;
+  date: string;
+  email: string;
+}
+
 export interface UserAccountData {
   userId: string;
   name: string;
@@ -12,6 +18,7 @@ export interface UserAccountData {
   region: string;
   totalAmount?: number;
   privacyPolicy?: boolean;
+  donations?: Donation[];
 }
 
 /**
@@ -49,6 +56,50 @@ export async function createUserAccount(userData: UserAccountData) {
     return userAccount;
   } catch (error) {
     console.error("Ошибка при создании аккаунта пользователя:", error);
+    throw error;
+  }
+}
+
+/**
+ * Обновляет аккаунт пользователя с новой информацией о пожертвовании
+ * @param email - Email пользователя для поиска аккаунта
+ * @param donation - Данные о пожертвовании
+ * @returns Promise с обновленным документом или ошибкой
+ */
+export async function updateUserDonation(email: string, donation: Donation) {
+  try {
+    // Находим пользователя по email
+    const clientWithToken = client.withConfig({ token });
+    
+    // Ищем пользователя по email в массиве донатов
+    const query = `*[_type == "userAccount" && donations[].email match $email][0]`;
+    const params = { email };
+    
+    const user = await clientWithToken.fetch(query, params);
+    
+    if (!user) {
+      throw new Error("Пользователь с указанным email не найден");
+    }
+
+    // Обновляем общую сумму и добавляем новое пожертвование
+    const currentDonations = user.donations || [];
+    const updatedTotal = (user.totalAmount || 0) + donation.amount;
+    
+    const updatedUser = await clientWithToken
+      .patch(user._id)
+      .set({
+        totalAmount: updatedTotal,
+        donations: [...currentDonations, {
+          ...donation,
+          _key: `donation_${Date.now()}`,
+          _type: 'donation'
+        }]
+      })
+      .commit();
+
+    return updatedUser;
+  } catch (error) {
+    console.error("Ошибка при обновлении данных пользователя:", error);
     throw error;
   }
 }
