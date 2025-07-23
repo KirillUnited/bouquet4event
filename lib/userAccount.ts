@@ -16,7 +16,7 @@ export interface UserAccountData {
   name: string;
   phone: string;
   region: string;
-  date?: string;
+  date?: Date;
   totalAmount?: number;
   privacyPolicy?: boolean;
   donations?: Donation[];

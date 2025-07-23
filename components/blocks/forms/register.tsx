@@ -58,7 +58,7 @@ export default function Register({
     const { isSubmitting, isSubmitSuccessful } = form.formState;
 
     const handleSend = useCallback(
-        async ({ name, phone, region, date, privacyPolicy }: { name: string; phone: string; region: string, privacyPolicy: boolean }) => {
+        async ({ name, phone, region, date, privacyPolicy }: { name: string; phone: string; region: string; date: Date; privacyPolicy: boolean }) => {
             try {
                 const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 

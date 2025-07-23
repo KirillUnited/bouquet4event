@@ -5,7 +5,7 @@ const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_CHAT_ID;
 const BASE_URL = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
 
-export async function openCheckout(data): Promise<any> {
+export async function openCheckout(data: any): Promise<any> {
     const {
         createdAt,
         name,
@@ -45,7 +45,7 @@ export async function openCheckout(data): Promise<any> {
         });
 }
 
-export async function sendDonate(data): Promise<any> {
+export async function sendDonate(data: any): Promise<any> {
     const {userId, amount, date, email} = data;
     const message = `
     💸 Новый донат для "${userId || '💬 Цветочный счёт'}":\n\n
