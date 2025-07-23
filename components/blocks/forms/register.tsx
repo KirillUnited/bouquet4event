@@ -6,12 +6,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 import FormRegisterSuccess from "@/components/shared/forms/FormRegisterSuccess";
-import { userAccount } from "@/lib/userAccount";
+import { createUserAccount } from "@/lib/userAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
 import { RegisterForm, RegisterFormContainer } from "@/components/shared/forms";
 import { ColorVariant, PAGE_QUERYResult } from "@/sanity.types";
 import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
+import {openCheckout} from "@/lib/messenger";
 
 type FormRegisterProps = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -58,7 +59,7 @@ export default function Register({
             try {
                 const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 
-                const result = await userAccount({
+                const result = await createUserAccount({
                     userId,
                     name,
                     phone,
@@ -68,6 +69,7 @@ export default function Register({
                 });
 
                 if (result) {
+                    await openCheckout(result);
                     toast.success('Ваш счёт успешно зарегистрирован!');
                     setFormValues(result);
                     form.reset();

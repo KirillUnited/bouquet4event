@@ -26,7 +26,7 @@ export interface UserAccountData {
  * @param userData - Данные пользователя для создания аккаунта
  * @returns Promise с созданным документом или ошибкой
  */
-export async function userAccount(userData: UserAccountData) {
+export async function createUserAccount(userData: UserAccountData) {
   try {
     // Проверка обязательных полей
     if (!userData.userId || !userData.name || !userData.phone || !userData.region || !userData.privacyPolicy) {
@@ -52,6 +52,8 @@ export async function userAccount(userData: UserAccountData) {
       totalAmount: userData.totalAmount || 0,
       createdAt: new Date().toISOString(),
     });
+
+    console.log("Новый аккаунт пользователя создан:", userAccount);
 
     return userAccount;
   } catch (error) {
