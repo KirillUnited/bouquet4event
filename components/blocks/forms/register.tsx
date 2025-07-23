@@ -37,6 +37,9 @@ export default function Register({
                 message: "Телефон должен соответствовать формату +7 (XXX) XXX-XX-XX"
             }),
         region: z.string().min(1, { message: "Пожалуйста, выберите ваш регион" }),
+        date: z.date({
+            required_error: "Пожалуйста, введите дату",
+        }),
         privacyPolicy: z.boolean().refine(val => val === true, {
             message: "Необходимо согласиться с политикой конфиденциальности"
         }),
@@ -55,7 +58,7 @@ export default function Register({
     const { isSubmitting, isSubmitSuccessful } = form.formState;
 
     const handleSend = useCallback(
-        async ({ name, phone, region, privacyPolicy }: { name: string; phone: string; region: string, privacyPolicy: boolean }) => {
+        async ({ name, phone, region, date, privacyPolicy }: { name: string; phone: string; region: string, privacyPolicy: boolean }) => {
             try {
                 const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 
@@ -64,6 +67,7 @@ export default function Register({
                     name,
                     phone,
                     region,
+                    date,
                     totalAmount: 0, // Начальная сумма 0
                     privacyPolicy
                 });

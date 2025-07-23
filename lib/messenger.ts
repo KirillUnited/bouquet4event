@@ -12,6 +12,7 @@ export async function openCheckout(data): Promise<any> {
         phone,
         privacyPolicy,
         region,
+        date,
         totalAmount,
         userId,
         _createdAt,
@@ -25,7 +26,8 @@ export async function openCheckout(data): Promise<any> {
     📅 Дата создания: ${createdAt}\n
     👤 Имя: ${name}\n
     📱 Телефон: ${phone}\n
-    💸 Регион: ${region}
+    💸 Регион: ${region}\n
+    📅 Дата мероприятия: ${date}
     `;
 
     return await axios
