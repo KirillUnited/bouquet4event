@@ -16,6 +16,7 @@ export interface UserAccountData {
   name: string;
   phone: string;
   region: string;
+  date?: Date;
   totalAmount?: number;
   privacyPolicy?: boolean;
   donations?: Donation[];
@@ -26,7 +27,7 @@ export interface UserAccountData {
  * @param userData - Данные пользователя для создания аккаунта
  * @returns Promise с созданным документом или ошибкой
  */
-export async function userAccount(userData: UserAccountData) {
+export async function createUserAccount(userData: UserAccountData) {
   try {
     // Проверка обязательных полей
     if (!userData.userId || !userData.name || !userData.phone || !userData.region || !userData.privacyPolicy) {
@@ -48,10 +49,13 @@ export async function userAccount(userData: UserAccountData) {
       name: userData.name,
       phone: userData.phone,
       region: userData.region,
+      date: userData.date,
       privacyPolicy: userData.privacyPolicy || false,
       totalAmount: userData.totalAmount || 0,
       createdAt: new Date().toISOString(),
     });
+
+    console.log("Новый аккаунт пользователя создан:", userAccount);
 
     return userAccount;
   } catch (error) {

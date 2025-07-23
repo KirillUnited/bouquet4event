@@ -30,6 +30,7 @@
     "@sanity/preview-url-secret": "^2.1.8",
     "@sanity/ui": "^2.15.13",
     "@sanity/vision": "^3.86.0",
+    "axios": "^1.11.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",

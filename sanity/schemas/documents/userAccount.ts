@@ -36,6 +36,12 @@ export default defineType({
             validation: (Rule) => Rule.required().warning("Регион обязателен"),
         }),
         defineField({
+            name: "date",
+            title: "Дата мероприятия",
+            type: "datetime",
+            description: "Дата планируемого мероприятия",
+        }),
+        defineField({
             name: "privacyPolicy",
             title: "Согласие на обработку персональных данных",
             type: "boolean",

@@ -6,12 +6,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 import FormRegisterSuccess from "@/components/shared/forms/FormRegisterSuccess";
-import { userAccount } from "@/lib/userAccount";
+import { createUserAccount } from "@/lib/userAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
 import { RegisterForm, RegisterFormContainer } from "@/components/shared/forms";
 import { ColorVariant, PAGE_QUERYResult } from "@/sanity.types";
 import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
+import {openCheckout} from "@/lib/messenger";
 
 type FormRegisterProps = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -36,6 +37,9 @@ export default function Register({
                 message: "Телефон должен соответствовать формату +7 (XXX) XXX-XX-XX"
             }),
         region: z.string().min(1, { message: "Пожалуйста, выберите ваш регион" }),
+        date: z.date({
+            required_error: "Пожалуйста, введите дату",
+        }),
         privacyPolicy: z.boolean().refine(val => val === true, {
             message: "Необходимо согласиться с политикой конфиденциальности"
         }),
@@ -54,20 +58,22 @@ export default function Register({
     const { isSubmitting, isSubmitSuccessful } = form.formState;
 
     const handleSend = useCallback(
-        async ({ name, phone, region, privacyPolicy }: { name: string; phone: string; region: string, privacyPolicy: boolean }) => {
+        async ({ name, phone, region, date, privacyPolicy }: { name: string; phone: string; region: string; date: Date; privacyPolicy: boolean }) => {
             try {
                 const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 
-                const result = await userAccount({
+                const result = await createUserAccount({
                     userId,
                     name,
                     phone,
                     region,
+                    date,
                     totalAmount: 0, // Начальная сумма 0
                     privacyPolicy
                 });
 
                 if (result) {
+                    await openCheckout(result);
                     toast.success('Ваш счёт успешно зарегистрирован!');
                     setFormValues(result);
                     form.reset();
