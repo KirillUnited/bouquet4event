@@ -12,7 +12,7 @@ import { RegisterForm, RegisterFormContainer } from "@/components/shared/forms";
 import { ColorVariant, PAGE_QUERYResult } from "@/sanity.types";
 import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
-import {openCheckout} from "@/lib/messenger";
+import { openCheckoutMessage } from "@/lib/messenger";
 
 type FormRegisterProps = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -73,10 +73,10 @@ export default function Register({
                 });
 
                 if (result) {
-                    await openCheckout(result);
                     toast.success('Ваш счёт успешно зарегистрирован!');
                     setFormValues(result);
                     form.reset();
+                    return result;
                 } else {
                     toast.error('Не удалось создать счёт. Пожалуйста, попробуйте позже.');
                 }
@@ -89,7 +89,8 @@ export default function Register({
     );
 
     const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
-        await handleSend(values);
+        const result = await handleSend(values);
+        await openCheckoutMessage(result);
     });
 
     const color = stegaClean(colorVariant) as ColorVariant;
