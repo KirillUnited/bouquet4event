@@ -10,7 +10,7 @@ import {PaymentForm} from "@/components/shared/forms";
 import {ColorVariant, PAGE_QUERYResult} from "@/sanity.types";
 import SectionContainer from "@/components/layout/section-container";
 import {stegaClean} from "next-sanity";
-import {sendDonate} from "@/lib/messenger";
+import {sendDonateMessage} from "@/lib/messenger";
 
 type FormRegisterProps = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -59,9 +59,8 @@ export default function PaymentBlock({
                 };
 
                 await updateUserAccount(user.userId, donation);
-                await sendDonate({userId: user.userId, ...donation});
 
-                return {success: true};
+                return {success: true, donation};
             } catch (error: any) {
                 console.error('Failed to process donation:', error);
                 toast.error(error.message || 'Не удалось обработать пожертвование. Пожалуйста, попробуйте снова.');
@@ -72,7 +71,8 @@ export default function PaymentBlock({
     );
 
     const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
-        await handleSend(values);
+        const {success, donation} = await handleSend(values);
+        await sendDonateMessage({userId: user.userId, ...donation});
         // TODO: Temporary solution
         await toast.promise(
             new Promise((resolve) => setTimeout(resolve, 2000)),
