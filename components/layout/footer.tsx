@@ -81,6 +81,14 @@ export default async function Footer() {
               </li>
               <li>
                 <Link
+                  href={"/soglasie-na-obrabotku-personalnykh-dannykh"}
+                  className="transition-colors"
+                >
+                  Согласие на обработку персональных данных
+                </Link>
+              </li>
+              <li>
+                <Link
                   href={"/dostavka-i-oplata"}
                   className="transition-colors"
                 >

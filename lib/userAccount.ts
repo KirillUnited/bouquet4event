@@ -19,6 +19,7 @@ export interface UserAccountData {
   date?: Date;
   totalAmount?: number;
   privacyPolicy?: boolean;
+  privacyPolicyData?: boolean;
   donations?: Donation[];
 }
 
@@ -51,6 +52,7 @@ export async function createUserAccount(userData: UserAccountData) {
       region: userData.region,
       date: userData.date,
       privacyPolicy: userData.privacyPolicy || false,
+      privacyPolicyData: userData.privacyPolicyData || false,
       totalAmount: userData.totalAmount || 0,
       createdAt: new Date().toISOString(),
     });
