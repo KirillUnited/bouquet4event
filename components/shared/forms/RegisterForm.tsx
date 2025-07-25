@@ -49,6 +49,16 @@ export default function RegisterForm({onSubmit, isSubmitting, formControl}: Regi
                     required
                     className="mt-1"
                 />
+                <CheckboxInput
+                    control={formControl}
+                    name="privacyPolicyData"
+                    label={
+                        <span className="text-sm">Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
+                                                                  className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
+                    }
+                    required
+                    className="mt-1"
+                />
                 <Button type="submit" disabled={isSubmitting} className="w-full">
                     {isSubmitting && <Loader2Icon className="w-6 h-6 mr-2 animate-spin"/>}
                     Отправить заявку

@@ -43,6 +43,9 @@ export default function Register({
         privacyPolicy: z.boolean().refine(val => val === true, {
             message: "Необходимо согласиться с политикой конфиденциальности"
         }),
+        privacyPolicyData: z.boolean().refine(val => val === true, {
+            message: "Необходимо согласиться с обработкой персональных данных"
+        }),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -51,14 +54,15 @@ export default function Register({
             name: '',
             phone: '',
             region: 'Москва',
-            privacyPolicy: false
+            privacyPolicy: false,
+            privacyPolicyData: false
         },
     });
 
     const { isSubmitting, isSubmitSuccessful } = form.formState;
 
     const handleSend = useCallback(
-        async ({ name, phone, region, date, privacyPolicy }: { name: string; phone: string; region: string; date: Date; privacyPolicy: boolean }) => {
+        async ({ name, phone, region, date, privacyPolicy, privacyPolicyData }: { name: string; phone: string; region: string; date: Date; privacyPolicy: boolean; privacyPolicyData: boolean }) => {
             try {
                 const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 
@@ -69,7 +73,8 @@ export default function Register({
                     region,
                     date,
                     totalAmount: 0, // Начальная сумма 0
-                    privacyPolicy
+                    privacyPolicy,
+                    privacyPolicyData
                 });
 
                 if (result) {
