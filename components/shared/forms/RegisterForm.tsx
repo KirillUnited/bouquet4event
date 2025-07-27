@@ -44,7 +44,7 @@ export default function RegisterForm({onSubmit, isSubmitting, formControl}: Regi
                     name="privacyPolicy"
                     label={
                         <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
-                                                                  className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a> и на обработку персональных данных</span>
+                                                                  className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a></span>
                     }
                     required
                     className="mt-1"
