@@ -49,6 +49,8 @@ export default async function PaymentPage({ params }: {
         notFound();
     }
 
+    console.log(user.name);
+
     return (
         <PaymentBlock
             _type={`form-register`}
@@ -60,8 +62,7 @@ export default async function PaymentPage({ params }: {
             }}
             colorVariant={`muted`}
             stackAlign={`center`}
-            title={`Вы можете подарить цветы, которые останутся надолго`} description={`Анна и Михаил решили создать цветочный счёт вместо традиционных букетов.
-                    Ваш вклад поможет им получать свежие букеты каждую неделю после свадьбы.`} privacyPolicyText={null}
+            title={`Вы можете подарить цветы, которые останутся надолго`} description={`${user.name} решил создать цветочный счёт вместо традиционных букетов. Ваш вклад поможет получать свежие букеты каждую неделю после мероприятия.`} privacyPolicyText={null}
             buttonText={`Пополнить счет`}
             successMessage={null}
             user={user}
