@@ -22,11 +22,11 @@ export async function openCheckoutMessage(data: any): Promise<any> {
         _updatedAt
     } = data;
     const message = `
-    📝 Новый счёт для "${userId || '💬 Цветочный счёт'}":\n\n
-    📅 Дата создания: ${createdAt}\n
-    👤 Имя: ${name}\n
-    📱 Телефон: ${phone}\n
-    💸 Регион: ${region}\n
+    📝 Новый счёт для "${userId || '💬 Цветочный счёт'}":\n
+    📅 Дата создания: ${createdAt}
+    👤 Имя: ${name}
+    📱 Телефон: ${phone}
+    💸 Регион: ${region}
     📅 Дата мероприятия: ${date}
     `;
 
@@ -48,9 +48,9 @@ export async function openCheckoutMessage(data: any): Promise<any> {
 export async function sendDonateMessage(data: any): Promise<any> {
     const {userId, amount, date, email} = data;
     const message = `
-    💸 Новый донат для "${userId || '💬 Цветочный счёт'}":\n\n
-    📅 Дата мероприятия: ${date}\n
-    👥 Email: ${email}\n
+    💸 Новый донат для "${userId || '💬 Цветочный счёт'}":\n
+    📅 Дата мероприятия: ${date}
+    👥 Email: ${email}
     💸 Сумма: ${amount}
     `;
 
