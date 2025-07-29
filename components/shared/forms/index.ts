@@ -12,5 +12,5 @@ export {
     RegisterForm,
     RegisterFormContainer,
     CheckboxInput,
-    PaymentForm
+    PaymentForm,
 }
