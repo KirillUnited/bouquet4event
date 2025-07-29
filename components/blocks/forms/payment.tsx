@@ -75,17 +75,49 @@ export default function PaymentBlock({
     );
 
     const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
-        const { success, donation } = await handleSend(values);
-        await sendDonateMessage({ userId: user.userId, ...donation });
-        // TODO: Temporary solution
-        await toast.promise(
-            new Promise((resolve) => setTimeout(resolve, 2000)),
-            {
-                loading: 'Пожалуйста, подождите...',
-                success: <b>Счёт успешно пополнен!</b>,
-                error: <b>Не удалось пополнить счёт. Пожалуйста, попробуйте позже.</b>,
-            },
-        );
+        try {
+            const donation = {
+                amount: values.amount*100,
+                date: values.date.toISOString(),
+                email: values.email
+            };
+            const orderNumber = `${user.userId}_${Math.floor(Math.random() * 1000)}`
+
+            // 🔥 Отправляем данные на сервер (API), чтобы получить ссылку оплаты
+            const res = await fetch('/api/gateway', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    orderNumber,
+                    amount: donation.amount,
+                    email: donation.email
+                }),
+            });
+
+            const data = await res.json();
+
+            if (data.formUrl) {
+                await updateUserAccount(user.userId, donation);
+                await sendDonateMessage({ userId: user.userId, ...donation });
+                window.location.href = data.formUrl;
+            } else {
+                toast.error(`Ошибка оплаты: ${data.errorMessage || 'Неизвестная ошибка'}`);
+            }
+
+        } catch (error: any) {
+            toast.error(error.message || 'Не удалось обработать платёж.');
+        }
+        // const { success, donation } = await handleSend(values);
+        // await sendDonateMessage({ userId: user.userId, ...donation });
+        // // TODO: Temporary solution
+        // await toast.promise(
+        //     new Promise((resolve) => setTimeout(resolve, 2000)),
+        //     {
+        //         loading: 'Пожалуйста, подождите...',
+        //         success: <b>Счёт успешно пополнен!</b>,
+        //         error: <b>Не удалось пополнить счёт. Пожалуйста, попробуйте позже.</b>,
+        //     },
+        // );
     });
 
     const color = stegaClean(colorVariant) as ColorVariant;
