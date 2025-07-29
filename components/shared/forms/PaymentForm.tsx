@@ -12,6 +12,8 @@ export interface PaymentFormProps {
     onSubmit: (data: any) => void;
     isSubmitting: boolean;
     formControl: any;
+    orderNumber?: string;
+    token?: string;
 }
 
 /**
@@ -23,7 +25,13 @@ export interface PaymentFormProps {
  * @param {object} props.formControl - An object to control form inputs.
  * @return {JSX.Element} The payment form component.
  */
-export default function PaymentForm({ onSubmit, isSubmitting, formControl }: PaymentFormProps) {
+export default function PaymentForm({ 
+    onSubmit, 
+    isSubmitting, 
+    formControl, 
+    orderNumber = `order`,
+    token = '' // Default test token, replace with your actual token
+}: PaymentFormProps) {
     const [donationAmount, setDonationAmount] = useState(4000);
     const handleSliderChange = (value: number[]) => {
         setDonationAmount(value[0]);
@@ -37,7 +45,7 @@ export default function PaymentForm({ onSubmit, isSubmitting, formControl }: Pay
                     <FormField
                         control={formControl}
                         name="amount"
-                        render={({ field }) => (
+                        render={({field}) => (
                             <FormItem>
                                 <FormControl>
                                     <Slider
@@ -74,16 +82,17 @@ export default function PaymentForm({ onSubmit, isSubmitting, formControl }: Pay
                 </div>
                 <div className='grid md:grid-cols-2 gap-4'>
                     <DatePicker className='flex flex-col' label="Дата планируемого мероприятия" required
-                        control={formControl} />
-                    <TextInput control={formControl} name={'email'} type='email' label="Email для чека"
-                        placeholder="email@example.com" required />
+                                control={formControl}/>
+                    <TextInput control={formControl} name={'email'} type='email'
+                               label="Email для чека"
+                               placeholder="email@example.com" required/>
                 </div>
                 <CheckboxInput
                     control={formControl}
                     name="privacyPolicy"
                     label={
                         <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
-                            className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a></span>
+                                                                  className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a></span>
                     }
                     required
                     className="mt-1"
@@ -92,15 +101,16 @@ export default function PaymentForm({ onSubmit, isSubmitting, formControl }: Pay
                     control={formControl}
                     name="privacyPolicyData"
                     label={
-                        <span className="text-sm">Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
-                            className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
+                        <span className="text-sm">Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh"
+                                                                  target="_blank"
+                                                                  className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
                     }
                     required
                     className="mt-1"
                 />
                 <Button type="submit" disabled={isSubmitting} className="w-full">
-                    {isSubmitting && <Loader2Icon className="w-6 h-6 mr-2 animate-spin" />}
-                    Отправить
+                    {isSubmitting && <Loader2Icon className="w-6 h-6 mr-2 animate-spin"/>}
+                    Перейти к оплате
                 </Button>
             </div>
         </form>
