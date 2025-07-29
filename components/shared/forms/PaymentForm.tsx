@@ -110,7 +110,7 @@ export default function PaymentForm({
                 />
                 <Button type="submit" disabled={isSubmitting} className="w-full">
                     {isSubmitting && <Loader2Icon className="w-6 h-6 mr-2 animate-spin"/>}
-                    Отправить
+                    Перейти к оплате
                 </Button>
             </div>
         </form>

@@ -7,9 +7,7 @@ const PASSWORD = process.env.PAYMENT_PASSWORD!
 const RETURN_URL = process.env.PAYMENT_RETURN_URL!
 
 export async function POST(req: Request) {
-    // const {orderNumber, amount} = await req.json()
-    const orderNumber = 'user_234TEST'
-    const amount = 59090
+    const {orderNumber, amount} = await req.json();
 
     const params = new URLSearchParams({
         userName: USERNAME,
