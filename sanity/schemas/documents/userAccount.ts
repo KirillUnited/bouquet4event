@@ -1,5 +1,5 @@
-import { defineField, defineType } from "sanity";
-import { User } from "lucide-react";
+import {defineField, defineType} from "sanity";
+import {User} from "lucide-react";
 
 export default defineType({
     name: "userAccount",
@@ -13,6 +13,12 @@ export default defineType({
             type: "string",
             description: "Уникальный идентификатор пользователя",
             validation: (Rule) => Rule.required().warning("ID пользователя обязателен"),
+        }),
+        defineField({
+            name: "userDonationLink",
+            title: "Ссылка на пополнение счета пользователя",
+            type: "string",
+            description: "Ссылка на пополнение счета пользователя",
         }),
         defineField({
             name: "name",
@@ -56,22 +62,25 @@ export default defineType({
             initialValue: 0,
         }),
         defineField({
-            name: "createdAt",
-            title: "Дата создания",
-            type: "datetime",
-            description: "Дата создания аккаунта пользователя",
-            validation: (Rule) => Rule.required(),
-            initialValue: () => new Date().toISOString(),
-        }),
-        defineField({
             name: "donations",
             title: "Пожертвования",
             type: "array",
             description: "Пожертвования пользователя",
-            of: [{ 
+            of: [{
                 type: "object",
                 name: "donation",
                 fields: [
+                    {
+                        name: "email",
+                        title: "Email",
+                        type: "string",
+                        description: "Email пользователя",
+                    },
+                    {
+                        name: "orderNumber",
+                        title: "Номер заказа",
+                        type: "string",
+                    },
                     {
                         name: "amount",
                         title: "Сумма пожертвования",
@@ -84,15 +93,17 @@ export default defineType({
                         type: "datetime",
                         description: "Дата пожертвования пользователя",
                     },
-                    {
-                        name: "email",
-                        title: "Email",
-                        type: "string",
-                        description: "Email пользователя",
-                    }
                 ]
             }],
-        })
+        }),
+        defineField({
+            name: "createdAt",
+            title: "Дата создания",
+            type: "datetime",
+            description: "Дата создания аккаунта пользователя",
+            validation: (Rule) => Rule.required(),
+            initialValue: () => new Date().toISOString(),
+        }),
     ],
     preview: {
         select: {
@@ -100,7 +111,7 @@ export default defineType({
             subtitle: "userId",
             description: "totalAmount",
         },
-        prepare({ title, subtitle, description }) {
+        prepare({title, subtitle, description}) {
             return {
                 title: title || "Без имени",
                 subtitle: `ID: ${subtitle} | Сумма: ${description} RUB`,
