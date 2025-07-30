@@ -12,14 +12,12 @@ export default function PaymentError({status}: { status: OrderStatusResponse }) 
         '4': 'Средства возвращены.',
         '5': 'Инициирована авторизация через банк.',
         '6': 'Авторизация отклонена.',
+        'ERROR': 'Ошибка при оплате.',
     }
     let icon: any;
 
     switch (status.OrderStatus) {
-        case 2:
-            icon = <CheckCircle2Icon className="text-green-500 h-8 w-8"/>
-            break
-        case 6:
+        case 'ERROR':
             icon = <XCircleIcon className="text-red-500 h-8 w-8"/>
             break
         default:

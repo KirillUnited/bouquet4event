@@ -30,10 +30,12 @@ export default async function SuccessPage({searchParams}: { searchParams: Promis
     let status: OrderStatusResponse;
 
     try {
-        status = await getOrderStatus(orderId);
+        const orderStatus = await getOrderStatus(orderId);
+        
+        status=orderStatus;
 
-        if (status.OrderStatus == '6') {
-            return <PaymentError status={status}/>
+        if (orderStatus.OrderStatus == '6') {
+            return <PaymentError status={orderStatus}/>
         }
     } catch {
         return <PaymentError status={{ErrorCode: 'ERROR', OrderStatus: 'ERROR', ErrorMessage: 'Failed to fetch order status'}}/>
