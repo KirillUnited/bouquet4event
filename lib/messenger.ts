@@ -23,11 +23,10 @@ export async function openCheckoutMessage(data: any): Promise<any> {
     } = data;
     const message = `
     📝 Новый счёт для "${userId || '💬 Цветочный счёт'}":\n
-    📅 Дата создания: ${createdAt}
     👤 Имя: ${name}
     📱 Телефон: ${phone}
     💸 Регион: ${region}
-    📅 Дата мероприятия: ${date}
+    📅 Дата мероприятия: ${date.split('T')[0]}
     `;
 
     return await axios
@@ -49,9 +48,8 @@ export async function sendDonateMessage(data: any): Promise<any> {
     const {userId, amount, date, email} = data;
     const message = `
     💸 Новый донат для "${userId || '💬 Цветочный счёт'}":\n
-    📅 Дата мероприятия: ${date}
     👥 Email: ${email}
-    💸 Сумма: ${amount}
+    💸 Сумма: ${amount/100}
     `;
 
 

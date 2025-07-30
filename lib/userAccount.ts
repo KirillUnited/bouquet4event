@@ -7,12 +7,12 @@ import { token } from "../sanity/lib/token";
  */
 export interface Donation {
   amount: number;
-  date: string;
   email: string;
 }
 
 export interface UserAccountData {
   userId: string;
+  userDonationLink: string;
   name: string;
   phone: string;
   region: string;
@@ -47,6 +47,7 @@ export async function createUserAccount(userData: UserAccountData) {
     const userAccount = await clientWithToken.create({
       _type: "userAccount",
       userId: userData.userId,
+      userDonationLink: userData.userDonationLink,
       name: userData.name,
       phone: userData.phone,
       region: userData.region,
@@ -89,21 +90,21 @@ export async function updateUserAccount(userId: string, donation: Donation) {
 
     // Обновляем общую сумму и добавляем новое пожертвование
     const currentDonations = user.donations || [];
-    const updatedTotal = (user.totalAmount || 0) + donation.amount;
+    // суммы пожертвования из копеек в рубли
+    const updatedTotal = (user.totalAmount || 0) + (donation.amount / 100);
     
-    const updatedUser = await clientWithToken
+    return await clientWithToken
       .patch(user._id)
       .set({
         totalAmount: updatedTotal,
         donations: [...currentDonations, {
           ...donation,
+          amount: donation.amount / 100,
           _key: `donation_${Date.now()}`,
           _type: 'donation'
         }]
       })
       .commit();
-
-    return updatedUser;
   } catch (error) {
     console.error("Ошибка при обновлении данных пользователя:", error);
     throw error;

@@ -26,8 +26,10 @@ export default function PaymentSuccess({orderId, amount, email}: PaymentSuccessP
             </div>
 
             <Button
+                className="mt-6"
                 onClick={() => router.push('/')}
             >
+                <i className="fas fa-home"></i>
                 На главную
             </Button>
         </div>
