@@ -1,15 +1,17 @@
 import {notFound} from 'next/navigation'
-import PaymentSuccess from "@/components/shared/payment/Success";
+import PaymentSuccess from "@/components/shared/payment/PaymentSuccess";
+import {PaymentError} from "@/components/shared/payment/ui";
 
-interface OrderStatusResponse {
+export interface OrderStatusResponse {
     ErrorCode: string
     OrderStatus: string
     Amount?: string
     Email?: string
+    ErrorMessage?: string
 }
 
 async function getOrderStatus(orderId: string): Promise<OrderStatusResponse> {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/gateway?orderId=${orderId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/gateway?orderId=${orderId}`, {
         cache: 'no-store',
     })
 
@@ -23,26 +25,22 @@ async function getOrderStatus(orderId: string): Promise<OrderStatusResponse> {
 export default async function SuccessPage({searchParams}: { searchParams: Promise<{ orderId?: string }> }) {
     const {orderId} = await searchParams;
 
-    if (!orderId) return notFound()
+    if (!orderId) return notFound();
 
-    // let status: OrderStatusResponse
-    // try {
-    //     status = await getOrderStatus(orderId)
-    // } catch {
-    //     return <div className="text-center py-10">Ошибка получения статуса заказа. Попробуйте позже.</div>
-    // }
+    let status: OrderStatusResponse;
 
-    const statusMap: Record<string, string> = {
-        '0': 'Заказ зарегистрирован, но не оплачен.',
-        '1': 'Сумма захолдирована (двухстадийный платёж).',
-        '2': 'Заказ успешно оплачен.',
-        '3': 'Авторизация отменена.',
-        '4': 'Средства возвращены.',
-        '5': 'Инициирована авторизация через банк.',
-        '6': 'Авторизация отклонена.',
+    try {
+        status = await getOrderStatus(orderId);
+        console.log(status)
+
+        if (status.OrderStatus == '6') {
+            return <PaymentError status={status}/>
+        }
+    } catch {
+        return <PaymentError status={status}/>
     }
 
     return (
-        <PaymentSuccess orderId={orderId}/>
+        <PaymentSuccess orderId={orderId || ''} amount={Number(status.Amount)} email={status.Email}/>
     )
 }

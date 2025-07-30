@@ -60,7 +60,6 @@ export default function Register({
     });
 
     const {isSubmitting, isSubmitSuccessful} = form.formState;
-
     const handleSend = useCallback(
         async ({name, phone, region, date, privacyPolicy, privacyPolicyData}: {
             name: string;

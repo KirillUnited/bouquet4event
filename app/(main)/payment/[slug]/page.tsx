@@ -49,7 +49,7 @@ export default async function PaymentPage({ params }: {
         notFound();
     }
 
-    console.log(user.name);
+    console.log('User Name:', user.name);
 
     return (
         <PaymentBlock
