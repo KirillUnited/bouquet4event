@@ -26,6 +26,7 @@ export default function PaymentSuccess({orderId, amount, email}: PaymentSuccessP
             </div>
 
             <Button
+                className="mt-6"
                 onClick={() => router.push('/')}
             >
                 На главную

@@ -28,9 +28,6 @@ export default function PaymentBlock({
     user
 }: { user: { userId: string } } & FormRegisterProps) {
     const formSchema = z.object({
-        date: z.date({
-            required_error: "Пожалуйста, введите дату",
-        }),
         amount: z.number(),
         email: z.string().email({ message: "Пожалуйста, введите корректную электронную почту" }),
         privacyPolicy: z.boolean().refine(val => val, {
@@ -52,36 +49,14 @@ export default function PaymentBlock({
     });
 
     const { isSubmitting, isSubmitSuccessful } = form.formState;
-
-    const handleSend = useCallback(
-        async (values: z.infer<typeof formSchema>) => {
-            try {
-                const donation = {
-                    amount: values.amount,
-                    date: values.date.toISOString(),
-                    email: values.email
-                };
-
-                await updateUserAccount(user.userId, donation);
-
-                return { success: true, donation };
-            } catch (error: any) {
-                console.error('Failed to process donation:', error);
-                toast.error(error.message || 'Не удалось обработать пожертвование. Пожалуйста, попробуйте снова.');
-                throw error;
-            }
-        },
-        []
-    );
-
     const onSubmit = form.handleSubmit(async (values: z.infer<typeof formSchema>) => {
         try {
+            const orderNumber = `${user.userId}_${Math.floor(Math.random() * 1000)}`;
             const donation = {
+                orderNumber,
                 amount: values.amount*100,
-                date: values.date.toISOString(),
                 email: values.email
             };
-            const orderNumber = `${user.userId}_${Math.floor(Math.random() * 1000)}`
 
             // 🔥 Отправляем данные на сервер (API), чтобы получить ссылку оплаты
             const res = await fetch('/api/gateway', {
@@ -107,17 +82,6 @@ export default function PaymentBlock({
         } catch (error: any) {
             toast.error(error.message || 'Не удалось обработать платёж.');
         }
-        // const { success, donation } = await handleSend(values);
-        // await sendDonateMessage({ userId: user.userId, ...donation });
-        // // TODO: Temporary solution
-        // await toast.promise(
-        //     new Promise((resolve) => setTimeout(resolve, 2000)),
-        //     {
-        //         loading: 'Пожалуйста, подождите...',
-        //         success: <b>Счёт успешно пополнен!</b>,
-        //         error: <b>Не удалось пополнить счёт. Пожалуйста, попробуйте позже.</b>,
-        //     },
-        // );
     });
 
     const color = stegaClean(colorVariant) as ColorVariant;
