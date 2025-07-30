@@ -31,13 +31,12 @@ export default async function SuccessPage({searchParams}: { searchParams: Promis
 
     try {
         status = await getOrderStatus(orderId);
-        console.log(status)
 
         if (status.OrderStatus == '6') {
             return <PaymentError status={status}/>
         }
     } catch {
-        return <PaymentError status={status}/>
+        return <PaymentError status={{ErrorCode: 'ERROR', OrderStatus: 'ERROR', ErrorMessage: 'Failed to fetch order status'}}/>
     }
 
     return (
