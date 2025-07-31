@@ -5,16 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Loader2Icon } from "lucide-react";
 import { CheckboxInput, TextInput } from "@/components/shared/forms/ui";
-import { DatePicker } from "@/components/shared/forms/ui/DatePicker";
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
-
-export interface PaymentFormProps {
-    onSubmit: (data: any) => void;
-    isSubmitting: boolean;
-    formControl: any;
-    orderNumber?: string;
-    token?: string;
-}
+import { PaymentSliderConfig } from "@/config";
+import { PaymentFormProps } from "./types";
 
 /**
  * A payment form component that allows users to select a donation amount and provide their email address.
@@ -49,11 +42,11 @@ export default function PaymentForm({
                             <FormItem>
                                 <FormControl>
                                     <Slider
-                                        defaultValue={[field.value ?? 4000]}
+                                        defaultValue={[field.value ?? PaymentSliderConfig.MIN]}
                                         value={[field.value]}
-                                        max={10000}
-                                        min={4000}
-                                        step={500}
+                                        max={PaymentSliderConfig.MAX}
+                                        min={PaymentSliderConfig.MIN}
+                                        step={PaymentSliderConfig.STEP}
                                         onValueChange={(value) => {
                                             field.onChange(value[0])
                                             handleSliderChange(value)
@@ -66,7 +59,7 @@ export default function PaymentForm({
                     />
                     <div className="flex justify-between">
                         <span>4 000 ₽</span>
-                        <span>10 000 ₽</span>
+                        <span>20 000 ₽</span>
                     </div>
                 </div>
                 <div className="bg-muted p-4 rounded-lg">

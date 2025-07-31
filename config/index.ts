@@ -47,3 +47,9 @@ export const SocialsFAClasses = {
     [Socials.YOUTUBE]: "fa-brands fa-youtube",
     [Socials.TWITTER]: "fa-brands fa-twitter",
 }
+
+export const PaymentSliderConfig = {
+  MIN: 4000,
+  MAX: 20000,
+  STEP: 500,
+} as const;
