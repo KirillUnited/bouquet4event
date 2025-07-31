@@ -9,3 +9,10 @@ export interface RegisterFormContainerProps {
     description?: string;
     children: React.ReactNode;
 }
+export interface PaymentFormProps {
+    onSubmit: (data: any) => void;
+    isSubmitting: boolean;
+    formControl: any;
+    orderNumber?: string;
+    token?: string;
+}

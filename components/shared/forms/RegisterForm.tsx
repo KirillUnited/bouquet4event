@@ -4,7 +4,7 @@ import PhoneInput from './PhoneInput';
 import RegionSelect from './RegionSelect';
 import {Button} from '@/components/ui/button';
 import {Loader2Icon} from 'lucide-react';
-import {RegisterFormContainerProps, RegisterFormProps} from './forms.type';
+import {RegisterFormContainerProps, RegisterFormProps} from './types';
 import {cn} from '@/lib/utils';
 import CheckboxInput from './ui/CheckboxInput';
 import {DatePicker} from "@/components/shared/forms/ui/DatePicker";
