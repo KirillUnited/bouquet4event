@@ -2,16 +2,18 @@ import {NextResponse} from 'next/server'
 import axios from 'axios'
 
 const GATEWAY_URL = process.env.NEXT_PUBLIC_GATEWAY_URL!
-const USERNAME = process.env.PAYMENT_USERNAME!
-const PASSWORD = process.env.PAYMENT_PASSWORD!
+// const USERNAME = process.env.PAYMENT_USERNAME!
+// const PASSWORD = process.env.PAYMENT_PASSWORD!
+const TOKEN = process.env.PAYMENT_TOKEN!
 const RETURN_URL = process.env.PAYMENT_RETURN_URL!
 
 export async function POST(req: Request) {
     const {orderNumber, amount} = await req.json();
 
     const params = new URLSearchParams({
-        userName: USERNAME,
-        password: PASSWORD,
+        // userName: USERNAME,
+        // password: PASSWORD,
+        token: TOKEN,
         orderNumber: encodeURIComponent(orderNumber),
         amount: encodeURIComponent(amount),
         returnUrl: RETURN_URL,
@@ -37,8 +39,9 @@ export async function GET(req: Request) {
     if (!orderId) return NextResponse.json({error: 'Missing orderId'}, {status: 400})
 
     const params = new URLSearchParams({
-        userName: USERNAME,
-        password: PASSWORD,
+        // userName: USERNAME,
+        // password: PASSWORD,
+        token: TOKEN,
         orderId: orderId,
     })
 
