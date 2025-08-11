@@ -24,8 +24,8 @@ async function getOrderStatus(orderId: string): Promise<OrderStatusResponse> {
 
     return res.json()
 }
-export default async function SuccessPage({searchParams}: { searchParams: { orderId?: string } }) {
-    const {orderId} = searchParams;
+export default async function SuccessPage({searchParams}: { searchParams: Promise<{ orderId?: string }> }) {
+    const {orderId} = await searchParams;
 
     if (!orderId) return notFound();
 
@@ -47,7 +47,11 @@ export default async function SuccessPage({searchParams}: { searchParams: { orde
             orderNumber: status.OrderNumber
         };
 
-        await updateUserAccount(status.clientId || '', donation as Donation);
+        await updateUserAccount(status.clientId || '', {
+            amount: Number(donation.amount),
+            email: donation.email,
+            orderNumber: donation.orderNumber
+        } as Donation);
         await sendDonateMessage({ userId: status.clientId, ...donation });
     } catch {
         return <PaymentError status={{ErrorCode: 'ERROR', OrderStatus: 'ERROR', ErrorMessage: 'Failed to fetch order status'}}/>
