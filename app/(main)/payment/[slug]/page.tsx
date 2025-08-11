@@ -1,8 +1,9 @@
 import PaymentBlock from "@/components/blocks/forms/payment";
 import {fetchSanityAllUsers, fetchSanityUserById} from "@/sanity/lib/fetch";
 import {notFound} from "next/navigation";
+import {PaymentEventExpired} from "@/components/shared/payment/ui";
 
-export async function generateMetadata({ params } : { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({params}: { params: Promise<{ slug: string }> }) {
     const url = `https://bouquet4event.ru`;
 
     return {
@@ -39,11 +40,19 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function PaymentPage({ params }: {
+export default async function PaymentPage({params}: {
     params: Promise<{ slug: string }>;
 }) {
     const {slug} = await params;
     const user = await fetchSanityUserById({userId: slug});
+
+    const now = new Date();
+    const expirationDate = new Date(user.date);
+    const hasExpired = now.getTime() > expirationDate.getTime();
+
+    if (hasExpired) {
+        return <PaymentEventExpired/>
+    }
 
     if (!user) {
         notFound();
@@ -62,7 +71,9 @@ export default async function PaymentPage({ params }: {
             }}
             colorVariant={`muted`}
             stackAlign={`center`}
-            title={`Вы можете подарить цветы, которые останутся надолго`} description={`${user.name} решил создать цветочный счёт вместо традиционных букетов. Ваш вклад поможет получать свежие букеты каждую неделю после мероприятия.`} privacyPolicyText={null}
+            title={`Вы можете подарить цветы, которые останутся надолго`}
+            description={`${user.name} решил создать цветочный счёт вместо традиционных букетов. Ваш вклад поможет получать свежие букеты каждую неделю после мероприятия.`}
+            privacyPolicyText={null}
             buttonText={`Пополнить счет`}
             successMessage={null}
             user={user}

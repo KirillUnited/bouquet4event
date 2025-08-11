@@ -8,14 +8,15 @@ const TOKEN = process.env.PAYMENT_TOKEN!
 const RETURN_URL = process.env.PAYMENT_RETURN_URL!
 
 export async function POST(req: Request) {
-    const {orderNumber, amount} = await req.json();
-
+    const {orderNumber, amount, userId, email} = await req.json();
     const params = new URLSearchParams({
         // userName: USERNAME,
         // password: PASSWORD,
         token: TOKEN,
+        clientId: encodeURIComponent(userId),
         orderNumber: encodeURIComponent(orderNumber),
         amount: encodeURIComponent(amount),
+        email: email,
         returnUrl: RETURN_URL,
     })
 
@@ -23,8 +24,6 @@ export async function POST(req: Request) {
         const {data} = await axios.post(`${GATEWAY_URL}register.do`, params.toString(), {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         })
-
-        console.log(data);
 
         return NextResponse.json(data)
     } catch (error: any) {

@@ -1,19 +1,22 @@
 import {notFound} from 'next/navigation'
 import PaymentSuccess from "@/components/shared/payment/PaymentSuccess";
 import {PaymentError} from "@/components/shared/payment/ui";
+import {Donation, updateUserAccount} from "@/lib/userAccount";
+import {sendDonateMessage} from "@/lib/messenger";
 
 export interface OrderStatusResponse {
     ErrorCode: string
     OrderStatus: string
     Amount?: string
     Email?: string
-    ErrorMessage?: string
+    email?: string
+    ErrorMessage?: string,
+    OrderNumber?: string,
+    clientId?: string
 }
 
 async function getOrderStatus(orderId: string): Promise<OrderStatusResponse> {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/gateway?orderId=${orderId}`, {
-        cache: 'no-store',
-    })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/gateway?orderId=${orderId}`)
 
     if (!res.ok) {
         throw new Error('Failed to fetch order status')
@@ -21,9 +24,8 @@ async function getOrderStatus(orderId: string): Promise<OrderStatusResponse> {
 
     return res.json()
 }
-
-export default async function SuccessPage({searchParams}: { searchParams: Promise<{ orderId?: string }> }) {
-    const {orderId} = await searchParams;
+export default async function SuccessPage({searchParams}: { searchParams: { orderId?: string } }) {
+    const {orderId} = searchParams;
 
     if (!orderId) return notFound();
 
@@ -37,6 +39,16 @@ export default async function SuccessPage({searchParams}: { searchParams: Promis
         if (orderStatus.OrderStatus == '6') {
             return <PaymentError status={orderStatus}/>
         }
+
+        console.log(status);
+        const donation = {
+            amount: status.Amount,
+            email: status.Email || status.email,
+            orderNumber: status.OrderNumber
+        };
+
+        await updateUserAccount(status.clientId || '', donation as Donation);
+        await sendDonateMessage({ userId: status.clientId, ...donation });
     } catch {
         return <PaymentError status={{ErrorCode: 'ERROR', OrderStatus: 'ERROR', ErrorMessage: 'Failed to fetch order status'}}/>
     }
