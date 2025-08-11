@@ -6,26 +6,29 @@ export default defineType({
     title: "Счет пользователя",
     type: "document",
     icon: User,
+    groups: [
+        {
+            name: "user",
+            title: "Пользователь",
+            default: true,
+        },
+        {
+            name: "donations",
+            title: "Пожертвования",
+        },
+        {
+            name: "meta",
+            title: "Мета данные",
+        },
+    ],
     fields: [
-        defineField({
-            name: "userId",
-            title: "ID пользователя",
-            type: "string",
-            description: "Уникальный идентификатор пользователя",
-            validation: (Rule) => Rule.required().warning("ID пользователя обязателен"),
-        }),
-        defineField({
-            name: "userDonationLink",
-            title: "Ссылка на пополнение счета пользователя",
-            type: "string",
-            description: "Ссылка на пополнение счета пользователя",
-        }),
         defineField({
             name: "name",
             title: "Имя пользователя",
             type: "string",
             description: "Полное имя пользователя",
             validation: (Rule) => Rule.required().warning("Имя пользователя обязательно"),
+            group: "user",
         }),
         defineField({
             name: "phone",
@@ -33,6 +36,29 @@ export default defineType({
             type: "string",
             description: "Номер телефона пользователя в международном формате (например, +7XXXXXXXXXX)",
             validation: (Rule) => Rule.required().warning("Телефон обязателен"),
+            group: "user",
+        }),
+        defineField({
+            name: "date",
+            title: "Дата мероприятия",
+            type: "datetime",
+            description: "Дата планируемого мероприятия",
+            group: "user",
+        }),
+        defineField({
+            name: "userDonationLink",
+            title: "Ссылка на пополнение счета пользователя",
+            type: "string",
+            description: "Ссылка на пополнение счета пользователя",
+            group: "user",
+        }),
+        defineField({
+            name: "userId",
+            title: "ID пользователя",
+            type: "string",
+            description: "Уникальный идентификатор пользователя",
+            validation: (Rule) => Rule.required().warning("ID пользователя обязателен"),
+            group: "meta",
         }),
         defineField({
             name: "region",
@@ -40,18 +66,14 @@ export default defineType({
             type: "string",
             description: "Регион пользователя (например, Москва, Санкт-Петербург)",
             validation: (Rule) => Rule.required().warning("Регион обязателен"),
-        }),
-        defineField({
-            name: "date",
-            title: "Дата мероприятия",
-            type: "datetime",
-            description: "Дата планируемого мероприятия",
+            group: "user",
         }),
         defineField({
             name: "privacyPolicy",
             title: "Согласие на обработку персональных данных",
             type: "boolean",
             description: "Согласие на обработку персональных данных пользователя",
+            group: "meta",
         }),
         defineField({
             name: "totalAmount",
@@ -60,6 +82,7 @@ export default defineType({
             description: "Сумма денег, перечисленных на этот счёт (RUB)",
             validation: (Rule) => Rule.required().precision(2),
             initialValue: 0,
+            group: "donations",
         }),
         defineField({
             name: "donations",
@@ -95,6 +118,7 @@ export default defineType({
                     },
                 ]
             }],
+            group: "donations",
         }),
         defineField({
             name: "createdAt",
@@ -103,6 +127,7 @@ export default defineType({
             description: "Дата создания аккаунта пользователя",
             validation: (Rule) => Rule.required(),
             initialValue: () => new Date().toISOString(),
+            group: "meta",
         }),
     ],
     preview: {
