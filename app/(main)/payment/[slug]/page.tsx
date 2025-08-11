@@ -1,11 +1,7 @@
 import PaymentBlock from "@/components/blocks/forms/payment";
 import {fetchSanityAllUsers, fetchSanityUserById} from "@/sanity/lib/fetch";
 import {notFound} from "next/navigation";
-import Link from "next/link";
-import SadFaceIcon from "@/components/ui/icons";
-import {Button} from "@/components/ui/button";
-import {CTAButton} from "@/components/shared/buttons";
-import React from "react";
+import {PaymentEventExpired} from "@/components/shared/payment/ui";
 
 export async function generateMetadata({params}: { params: Promise<{ slug: string }> }) {
     const url = `https://bouquet4event.ru`;
@@ -55,32 +51,7 @@ export default async function PaymentPage({params}: {
     const hasExpired = now.getTime() > expirationDate.getTime();
 
     if (hasExpired) {
-        return (
-            <div className="flex flex-col items-center gap-2 justify-center h-full py-16 container max-w-fit">
-                <SadFaceIcon size={120}/>
-
-                <h1 className="text-2xl font-bold mb-4">Мероприятие завершено</h1>
-                <Button asChild variant='link'>
-                    <Link href={'/'}>
-                        <i className="fas fa-home"></i>
-                        <span>На главную</span>
-                    </Link>
-                </Button>
-                <div className="flex items-center gap-3 self-stretch">
-                    <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700"/>
-                    <span className="text-gray-500">или</span>
-                    <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700"/>
-                </div>
-
-                <p>Создайте свой собственный цветочный счёт</p>
-                <CTAButton
-                    title={`Создайте счёт`}
-                    href={'#'}
-                    buttonVariant={'default'}
-                    className='mt-4'
-                />
-            </div>
-        )
+        return <PaymentEventExpired/>
     }
 
     if (!user) {
