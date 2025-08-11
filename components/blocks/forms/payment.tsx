@@ -60,6 +60,7 @@ export default function PaymentBlock({
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    userId: user.userId,
                     orderNumber,
                     amount: donation.amount,
                     email: donation.email
@@ -69,8 +70,8 @@ export default function PaymentBlock({
             const data = await res.json();
 
             if (data.formUrl) {
-                await updateUserAccount(user.userId, donation);
-                await sendDonateMessage({ userId: user.userId, ...donation });
+                // await updateUserAccount(user.userId, donation);
+                // await sendDonateMessage({ userId: user.userId, ...donation });
                 window.location.href = data.formUrl;
             } else {
                 toast.error(`Ошибка оплаты: ${data.errorMessage || 'Неизвестная ошибка'}`);
