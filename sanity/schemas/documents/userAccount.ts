@@ -1,5 +1,5 @@
-import {defineField, defineType} from "sanity";
-import {User} from "lucide-react";
+import { defineField, defineType } from "sanity";
+import { User } from "lucide-react";
 
 export default defineType({
     name: "userAccount",
@@ -50,7 +50,7 @@ export default defineType({
             title: "Ссылка на пополнение счета пользователя",
             type: "string",
             description: "Ссылка на пополнение счета пользователя",
-            group: "user",
+            group: "donations",
         }),
         defineField({
             name: "userId",
@@ -93,12 +93,12 @@ export default defineType({
                 type: "object",
                 name: "donation",
                 fields: [
-                    {
-                        name: "email",
-                        title: "Email",
-                        type: "string",
-                        description: "Email пользователя",
-                    },
+                    // {
+                    //     name: "email",
+                    //     title: "Email",
+                    //     type: "string",
+                    //     description: "Email пользователя",
+                    // },
                     {
                         name: "orderNumber",
                         title: "Номер заказа",
@@ -110,12 +110,14 @@ export default defineType({
                         type: "number",
                         description: "Сумма пожертвования пользователя",
                     },
-                    {
-                        name: "date",
-                        title: "Дата пожертвования",
+                    defineField({
+                        name: "createdAt",
+                        title: "Дата создания пожертвования",
                         type: "datetime",
-                        description: "Дата пожертвования пользователя",
-                    },
+                        description: "Дата создания пожертвования пользователя",
+                        validation: (Rule) => Rule.required(),
+                        initialValue: () => new Date().toISOString(),
+                    }),
                 ]
             }],
             group: "donations",
@@ -136,7 +138,7 @@ export default defineType({
             subtitle: "userId",
             description: "totalAmount",
         },
-        prepare({title, subtitle, description}) {
+        prepare({ title, subtitle, description }) {
             return {
                 title: title || "Без имени",
                 subtitle: `ID: ${subtitle} | Сумма: ${description} RUB`,

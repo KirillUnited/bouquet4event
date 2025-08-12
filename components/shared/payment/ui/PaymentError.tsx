@@ -18,10 +18,10 @@ export default function PaymentError({status}: { status: OrderStatusResponse }) 
 
     switch (status.OrderStatus) {
         case 'ERROR':
-            icon = <XCircleIcon className="text-red-500 h-8 w-8"/>
+            icon = <XCircleIcon className="text-red-500 h-16 w-16"/>
             break
         default:
-            icon = <FileQuestionIcon className="text-yellow-500 h-8 w-8"/>
+            icon = <FileQuestionIcon className="text-yellow-500 h-16 w-16"/>
     }
 
     return (
@@ -29,13 +29,15 @@ export default function PaymentError({status}: { status: OrderStatusResponse }) 
             <div className="flex items-center justify-center gap-2">
                 {icon}
             </div>
-            <p>
+            <p className="text-2xl font-bold">
                 Статус заказа: <span className='font-bold text-red-500'>{status.ErrorMessage}</span>.
+            </p>
+            <code>
                 {statusMap[status.OrderStatus]}
                 Попробуйте
                 позже.
-            </p>
-            <Button size="lg" asChild className="self-center">
+            </code>
+            <Button size="lg" asChild className="self-center mt-4">
                 <Link href="/">
                             <span className="flex items-center gap-2">
                                 <i className="fas fa-home"></i>

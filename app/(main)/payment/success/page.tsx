@@ -40,19 +40,24 @@ export default async function SuccessPage({searchParams}: { searchParams: Promis
             return <PaymentError status={orderStatus}/>
         }
 
-        console.log(status);
+        console.log('Order Status:', orderStatus);
+
+        // Create donation object from order status
         const donation = {
-            amount: status.Amount,
+            amount: Number(status.Amount),
             email: status.Email || status.email,
             orderNumber: status.OrderNumber
         };
 
-        await updateUserAccount(status.clientId || '', {
-            amount: Number(donation.amount),
-            email: donation.email,
-            orderNumber: donation.orderNumber
-        } as Donation);
-        await sendDonateMessage({ userId: status.clientId, ...donation });
+        // Update user account with donation information
+        // updateUserAccount will return { user, isNewDonation } where isNewDonation is true if a new donation was added
+        const { isNewDonation } = await updateUserAccount(status.clientId || '', donation as Donation);
+        
+        // Only send notification if this is a new donation (not a page refresh)
+        if (isNewDonation) {
+            // Send donation notification message only for new donations
+            await sendDonateMessage({ userId: status.clientId, ...donation });
+        }
     } catch {
         return <PaymentError status={{ErrorCode: 'ERROR', OrderStatus: 'ERROR', ErrorMessage: 'Failed to fetch order status'}}/>
     }

@@ -73,12 +73,12 @@ export default function PaymentForm({
                         <span>{donationAmount.toLocaleString()} ₽</span>
                     </div>
                 </div>
-                <div className='grid gap-4'>
-                    {/*<DatePicker className='flex flex-col' label="Дата планируемого мероприятия" required control={formControl}/>*/}
+                {/* <div className='grid gap-4'>
+                    <DatePicker className='flex flex-col' label="Дата планируемого мероприятия" required control={formControl}/>
                     <TextInput control={formControl} name={'email'} type='email'
                                label="Email для чека"
                                placeholder="email@example.com" required/>
-                </div>
+                </div> */}
                 <CheckboxInput
                     control={formControl}
                     name="privacyPolicy"
