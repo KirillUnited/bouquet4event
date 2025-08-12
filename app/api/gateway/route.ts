@@ -8,7 +8,7 @@ const TOKEN = process.env.PAYMENT_TOKEN!
 const RETURN_URL = process.env.PAYMENT_RETURN_URL!
 
 export async function POST(req: Request) {
-    const {orderNumber, amount, userId, email} = await req.json();
+    const {orderNumber, amount, userId} = await req.json();
     const params = new URLSearchParams({
         // userName: USERNAME,
         // password: PASSWORD,
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
         clientId: encodeURIComponent(userId),
         orderNumber: encodeURIComponent(orderNumber),
         amount: encodeURIComponent(amount),
-        email: email,
+        // email: email,
         returnUrl: RETURN_URL,
     })
 

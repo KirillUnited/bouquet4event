@@ -28,7 +28,7 @@ export default function PaymentBlock({
 }: { user: { userId: string } } & FormRegisterProps) {
     const formSchema = z.object({
         amount: z.number(),
-        email: z.string().email({ message: "Пожалуйста, введите корректную электронную почту" }),
+        // email: z.string().email({ message: "Пожалуйста, введите корректную электронную почту" }),
         privacyPolicy: z.boolean().refine(val => val, {
             message: "Необходимо согласиться с политикой конфиденциальности"
         }),
@@ -40,7 +40,7 @@ export default function PaymentBlock({
         resolver: zodResolver(formSchema),
         defaultValues: {
             amount: 4000,
-            email: '',
+            // email: '',
             privacyPolicy: false,
             privacyPolicyData: false
         },
@@ -52,7 +52,7 @@ export default function PaymentBlock({
             const donation = {
                 orderNumber,
                 amount: values.amount*100,
-                email: values.email
+                // email: values.email
             };
 
             // 🔥 Отправляем данные на сервер (API), чтобы получить ссылку оплаты
@@ -63,7 +63,7 @@ export default function PaymentBlock({
                     userId: user.userId,
                     orderNumber,
                     amount: donation.amount,
-                    email: donation.email
+                    // email: donation.email
                 }),
             });
 

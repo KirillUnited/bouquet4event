@@ -8,6 +8,7 @@ import { token } from "../sanity/lib/token";
 export interface Donation {
   amount: number;
   email: string;
+  orderNumber?: string;
 }
 
 export interface UserAccountData {
@@ -73,12 +74,12 @@ export async function createUserAccount(userData: UserAccountData) {
  * @param donation - Данные о пожертвовании
  * @returns Promise с обновленным документом или ошибкой
  */
-export async function updateUserAccount(userId: string, donation: Donation) {
+export async function updateUserAccount(userId: string, donation: Donation): Promise<{ user: any, isNewDonation: boolean }> {
   try {
-    // Находим пользователя по email
+    // Находим пользователя по userId
     const clientWithToken = client.withConfig({ token });
     
-    // Ищем пользователя по email в массиве донатов
+    // Ищем пользователя по userId
     const query = `*[_type == "userAccount" && userId match $userId][0]`;
     const params = { userId };
     
@@ -88,12 +89,23 @@ export async function updateUserAccount(userId: string, donation: Donation) {
       throw new Error("Пользователь с указанным userId не найден");
     }
 
-    // Обновляем общую сумму и добавляем новое пожертвование
+    // Проверяем, существует ли уже пожертвование с таким orderNumber
     const currentDonations = user.donations || [];
+    const donationExists = currentDonations.some(
+      (existingDonation: any) => existingDonation.orderNumber === donation.orderNumber
+    );
+
+    // Если пожертвование с таким orderNumber уже существует, не добавляем его снова
+    if (donationExists) {
+      console.log(`Пожертвование с orderNumber ${donation.orderNumber} уже обработано`);
+      return { user, isNewDonation: false };
+    }
+
+    // Обновляем общую сумму и добавляем новое пожертвование
     // суммы пожертвования из копеек в рубли
     const updatedTotal = (user.totalAmount || 0) + (donation.amount / 100);
     
-    return await clientWithToken
+    const updatedUser = await clientWithToken
       .patch(user._id)
       .set({
         totalAmount: updatedTotal,
@@ -105,6 +117,8 @@ export async function updateUserAccount(userId: string, donation: Donation) {
         }]
       })
       .commit();
+      
+    return { user: updatedUser, isNewDonation: true };
   } catch (error) {
     console.error("Ошибка при обновлении данных пользователя:", error);
     throw error;
