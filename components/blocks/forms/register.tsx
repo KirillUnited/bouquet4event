@@ -19,6 +19,8 @@ type FormRegisterProps = Extract<
     { _type: "form-register" }
 >;
 
+const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL!;
+
 export default function Register({
                                      padding,
                                      colorVariant,
@@ -71,7 +73,7 @@ export default function Register({
         }) => {
             try {
                 const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-                const userLink = `${process.env.NEXT_PUBLIC_SITE_URL}/payment/${userId}`;
+                const userLink = `${NEXT_PUBLIC_SITE_URL}/payment/${userId}`;
                 const result = await createUserAccount({
                     userId,
                     userDonationLink: userLink,

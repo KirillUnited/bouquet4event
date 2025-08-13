@@ -59,11 +59,8 @@ export async function createUserAccount(userData: UserAccountData) {
       createdAt: new Date().toISOString(),
     });
 
-    console.log("Новый аккаунт пользователя создан:", userAccount);
-
     return userAccount;
   } catch (error) {
-    console.error("Ошибка при создании аккаунта пользователя:", error);
     throw error;
   }
 }
