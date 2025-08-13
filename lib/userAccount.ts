@@ -31,19 +31,10 @@ export interface UserAccountData {
  */
 export async function createUserAccount(userData: UserAccountData) {
   try {
-    // Проверка обязательных полей
     if (!userData.userId || !userData.name || !userData.phone || !userData.region || !userData.privacyPolicy) {
       throw new Error("Все обязательные поля должны быть заполнены");
     }
 
-    // Валидация формата телефона (простая проверка на международный формат)
-    const phoneRegex = /^\+[0-9]{1,3}[0-9]{9,10}$/;
-    // TODO: добавить валидацию формата телефона
-    // if (!phoneRegex.test(userData.phone)) {
-    //   throw new Error("Номер телефона должен быть в международном формате (например, +7XXXXXXXXXX)");
-    // }
-
-    // Создание документа в Sanity
     const clientWithToken = client.withConfig({ token });
     const userAccount = await clientWithToken.create({
       _type: "userAccount",
@@ -59,11 +50,8 @@ export async function createUserAccount(userData: UserAccountData) {
       createdAt: new Date().toISOString(),
     });
 
-    console.log("Новый аккаунт пользователя создан:", userAccount);
-
     return userAccount;
   } catch (error) {
-    console.error("Ошибка при создании аккаунта пользователя:", error);
     throw error;
   }
 }
