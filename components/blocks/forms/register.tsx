@@ -29,8 +29,8 @@ export default function Register({
     buttonText,
     successMessage,
     privacyPolicyText,
-    goal='',
-    customGoal = 'schet2'
+    goal = '',
+    customGoal = ''
 }: FormRegisterProps & { customGoal?: string }) {
     const [formValues, setFormValues] = useState({});
     const formSchema = z.object({
@@ -53,7 +53,7 @@ export default function Register({
     });
 
     console.log('goal', (goal ? goal : customGoal));
-    
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -97,10 +97,14 @@ export default function Register({
 
                     // Yandex.Metrika target
                     if (typeof window !== "undefined" && typeof (window as any).ym === "function") {
-                        (window as any).ym(103963322, "reachGoal", (goal ? goal : customGoal));
-                        console.log("Yandex.Metrika: цель schet1 отправлена");
+                        const target = goal || customGoal;
+
+                        if (target) {
+                            (window as any).ym(103963322, "reachGoal", target);
+                            console.log(`Yandex.Metrika: цель ${target} отправлена`);
+                        }
                     }
-                    
+
                     return result;
                 } else {
                     toast.error('Не удалось создать счёт. Пожалуйста, попробуйте позже.');
