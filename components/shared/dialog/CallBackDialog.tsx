@@ -1,5 +1,5 @@
 'use client'
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import {Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger} from '@/components/ui/dialog'
 import React from 'react'
 import { CallBackForm } from '../forms'
 import { Button } from '@/components/ui/button'
@@ -19,6 +19,9 @@ export default function CallBackDialog() {
                 <DialogTitle>
                     Обратная связь
                 </DialogTitle>
+                <DialogDescription>
+                    Оставьте свои контакты, и мы свяжемся с вами в ближайшее время
+                </DialogDescription>
                 <CallBackForm />
             </DialogContent>
         </Dialog>
