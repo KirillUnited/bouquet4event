@@ -47,8 +47,6 @@ export default function FeaturedProduct({color, product}: GridProductProps) {
             )}
             <Link className="flex flex-col group p-4"
                   href={`/products/${slug}`}
-                  target={"_blank"}
-                  rel={"noopener"}
             >
                 <h3 className="text-xl font-serif font-semibold text-foreground/80 mb-2">{name}</h3>
                 {description && (

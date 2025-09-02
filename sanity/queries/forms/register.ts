@@ -13,6 +13,7 @@ export const formRegisterQuery = groq`
     privacyPolicyText,
     buttonText,
     successMessage,
+    goal
   }
 `;
 

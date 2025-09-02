@@ -11,9 +11,10 @@ type CTAButtonProps = {
     buttonVariant?: ButtonVariant;
     target?: boolean;
     className?: string;
+    customGoal?: string;
 };
 
-export function CTAButton({ title, href, buttonVariant = "default", target, className }: CTAButtonProps) {
+export function CTAButton({ title, href, buttonVariant = "default", target, className, customGoal='' }: CTAButtonProps) {
     const ButtonContent = (
         <Button
             variant={buttonVariant}
@@ -50,7 +51,7 @@ export function CTAButton({ title, href, buttonVariant = "default", target, clas
                     {ButtonContent}
                 </DialogTrigger>
                 <DialogTitle className="hidden">{title}</DialogTitle>
-                <DialogContent className="w-full max-w-full sm:max-w-5xl overflow-y-auto max-h-[100svh] py-8 rounded-none sm:rounded-lg">
+                <DialogContent className="w-full max-w-full sm:max-w-5xl overflow-y-auto max-h-[100svh] py-8 px-0 md:px-4 rounded-none sm:rounded-lg">
                     <Register
                         _key='register'
                         _type='form-register'
@@ -62,6 +63,8 @@ export function CTAButton({ title, href, buttonVariant = "default", target, clas
                         buttonText={null}
                         successMessage={null}
                         privacyPolicyText={null}
+                        goal={null}
+                        customGoal={customGoal}
                     />
                 </DialogContent>
             </Dialog>

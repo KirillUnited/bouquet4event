@@ -40,6 +40,7 @@ export const RegisterDialog: React.FC<RegisterDialogProps> = ({ title, buttonVar
                     buttonText={null}
                     successMessage={null}
                     privacyPolicyText={null}
+                    goal={null}
                 />
             </DialogContent>
         </Dialog>
