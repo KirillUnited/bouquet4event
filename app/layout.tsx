@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { fontSans, fontSerif } from "@/config/fonts";
 import JsonLd from "@/components/JsonLd";
 import { getLocalBusinessJsonLd } from "@/lib/jsonLd";
+import Script from "next/script";
 
 const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 
@@ -39,6 +40,30 @@ export default function RootLayout({
   const jsonLd = getLocalBusinessJsonLd();
   return (
     <html lang="ru" suppressHydrationWarning>
+      <head>
+        {/* Yandex.Metrika */}
+        <Script id="yandex-metrika" strategy="afterInteractive">
+          {`
+            (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j = 0; j < document.scripts.length; j++) {
+                  if (document.scripts[j].src === r) { return; }
+                }
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],
+                k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103963322', 'ym');
+
+            ym(103963322, 'init', {
+                webvisor:true,
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                ecommerce:"dataLayer"
+            });
+          `}
+        </Script>
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased overscroll-none flex flex-col",
@@ -56,6 +81,16 @@ export default function RootLayout({
         </ThemeProvider>
         <Toaster position="top-center" richColors />
         <JsonLd data={jsonLd} />
+        {/* Noscript fallback */}
+        <noscript>
+          <div>
+            <img
+              src="https://mc.yandex.ru/watch/103963322"
+              style={{ position: "absolute", left: "-9999px" }}
+              alt=""
+            />
+          </div>
+        </noscript>
       </body>
     </html>
   );
