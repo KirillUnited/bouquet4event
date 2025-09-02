@@ -77,6 +77,7 @@ export default async function PaymentPage({params}: {
             buttonText={`Пополнить счет`}
             successMessage={null}
             user={user}
+            goal={''}
         />
     )
 }

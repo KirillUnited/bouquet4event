@@ -11,10 +11,10 @@ type CTAButtonProps = {
     buttonVariant?: ButtonVariant;
     target?: boolean;
     className?: string;
-    metrikaTarget?: string;
+    customGoal?: string;
 };
 
-export function CTAButton({ title, href, buttonVariant = "default", target, className, metrikaTarget='' }: CTAButtonProps) {
+export function CTAButton({ title, href, buttonVariant = "default", target, className, customGoal='' }: CTAButtonProps) {
     const ButtonContent = (
         <Button
             variant={buttonVariant}
@@ -63,7 +63,8 @@ export function CTAButton({ title, href, buttonVariant = "default", target, clas
                         buttonText={null}
                         successMessage={null}
                         privacyPolicyText={null}
-                        metrikaTarget={metrikaTarget}
+                        goal={''}
+                        customGoal={customGoal}
                     />
                 </DialogContent>
             </Dialog>

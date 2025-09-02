@@ -108,7 +108,7 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                             <h2 className="text-2xl font-semibold mb-4">Создайте счет</h2>
                             <p className="text-gray-600 mb-6">Наш менеджер свяжется с вами в ближайшее время</p>
                             <div className="flex flex-col md:flex-row gap-4">
-                                <CTAButton title="Оставить заявку" href="" metrikaTarget="zakazbuket" />
+                                <CTAButton title="Оставить заявку" href="" customGoal="zakazbuket" />
                                 <Button asChild variant="outline" size="lg">
                                     <Link href="/request-call">
                                         <i className="fa fa-phone-volume mr-2"></i>
