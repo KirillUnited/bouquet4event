@@ -52,8 +52,6 @@ export default function Register({
         }),
     });
 
-    console.log('goal', (goal ? goal : customGoal));
-
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
