@@ -59,6 +59,11 @@ export default defineType({
             title: "Success Message",
             initialValue: "Ваш счёт успешно зарегистрирован!",
         }),
+        defineField({
+            name: "goal",
+            title: "Цель в Яндекс.Метрике",
+            type: "yandexGoal",
+        }),
     ],
     preview: {
         prepare() {

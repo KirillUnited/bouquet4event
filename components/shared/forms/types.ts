@@ -1,4 +1,5 @@
 export interface RegisterFormProps {
+    id: string;
     onSubmit: (event: React.FormEvent) => void;
     isSubmitting: boolean;
     formControl: any; // Adjust the type based on your form control type
