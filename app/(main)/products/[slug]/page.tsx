@@ -3,6 +3,7 @@ import JsonLd from "@/components/JsonLd";
 import SectionContainer from "@/components/layout/section-container";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { CTAButton } from "@/components/shared/buttons";
+import { CallBackDialog } from "@/components/shared/dialog";
 import { ProductGallery } from "@/components/shared/product";
 import { FeaturedProductList } from "@/components/shared/product/FeaturedProduct";
 import { Button } from "@/components/ui/button";
@@ -109,12 +110,7 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                             <p className="text-gray-600 mb-6">Наш менеджер свяжется с вами в ближайшее время</p>
                             <div className="flex flex-col md:flex-row gap-4">
                                 <CTAButton title="Оставить заявку" href="" customGoal="zakazbuket" />
-                                <Button asChild variant="outline" size="lg">
-                                    <Link href="/request-call">
-                                        <i className="fa fa-phone-volume mr-2"></i>
-                                        обратная связь
-                                    </Link>
-                                </Button>
+                                <CallBackDialog />
                             </div>
                         </div>
                     </div>

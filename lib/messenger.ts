@@ -21,12 +21,15 @@ export async function openCheckoutMessage(data: any): Promise<any> {
         _type,
         _updatedAt
     } = data;
+    const isConsultation = region === 'Обратный звонок';
+    const title = isConsultation ? 'Новая консультация' : `Новый счёт для "${userId || '💬 Цветочный счёт'}"`;
+    
     const message = `
-    📝 Новый счёт для "${userId || '💬 Цветочный счёт'}":\n
+    📝 ${title}:\n
     👤 Имя: ${name}
     📱 Телефон: ${phone}
-    💸 Регион: ${region}
-    📅 Дата мероприятия: ${date.split('T')[0]}
+    ${isConsultation ? '📞' : '🌍'} ${region}
+    ${!isConsultation ? `📅 Дата мероприятия: ${date.split('T')[0]}\n` : ''}
     `;
 
     return await axios

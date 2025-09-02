@@ -4,6 +4,7 @@ import RegionSelect from "./RegionSelect";
 import RegisterForm, { RegisterFormContainer } from "./RegisterForm";
 import CheckboxInput from "./ui/CheckboxInput";
 import PaymentForm from "./PaymentForm";
+import CallBackForm from "./CallBackForm";
 
 export {
     PhoneInput,
@@ -13,4 +14,5 @@ export {
     RegisterFormContainer,
     CheckboxInput,
     PaymentForm,
+    CallBackForm,
 }
