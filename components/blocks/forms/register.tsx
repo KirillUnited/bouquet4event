@@ -29,9 +29,9 @@ export default function Register({
     buttonText,
     successMessage,
     privacyPolicyText,
-    goal,
-    metrikaTarget = 'schet2'
-}: FormRegisterProps & { metrikaTarget?: string }) {
+    goal='',
+    customGoal = 'schet2'
+}: FormRegisterProps & { customGoal?: string }) {
     const [formValues, setFormValues] = useState({});
     const formSchema = z.object({
         name: z.string().min(1, { message: "Пожалуйста, введите ваше имя" }),
@@ -52,7 +52,7 @@ export default function Register({
         }),
     });
 
-    console.log('goal', (goal ? goal : metrikaTarget));
+    console.log('goal', (goal ? goal : customGoal));
     
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -97,7 +97,7 @@ export default function Register({
 
                     // Yandex.Metrika target
                     if (typeof window !== "undefined" && typeof (window as any).ym === "function") {
-                        (window as any).ym(103963322, "reachGoal", (goal ? goal : metrikaTarget));
+                        (window as any).ym(103963322, "reachGoal", (goal ? goal : customGoal));
                         console.log("Yandex.Metrika: цель schet1 отправлена");
                     }
                     

@@ -48,7 +48,7 @@ export default function Hero1({
                                         href={link.href as string}
                                         buttonVariant={stegaClean(link?.buttonVariant)}
                                         target={link.target}
-                                        metrikaTarget="schet1"
+                                        customGoal="schet1"
                                     />
                                 ))}
                             </div>
