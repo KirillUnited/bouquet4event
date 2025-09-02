@@ -44,6 +44,7 @@ import breadcrumbs from "./schemas/blocks/breadcrumbs";
 import registerType from "./schemas/blocks/forms/registerType";
 import productType from "./schemas/documents/productType";
 import gridProduct from "./schemas/blocks/grid/grid-product";
+import { yandexGoal } from "./schemas/blocks/yandexGoalType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -91,5 +92,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     registerType,
     allPosts,
     breadcrumbs,
+    yandexGoal,
   ],
 };

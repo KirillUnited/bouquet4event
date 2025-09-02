@@ -9,9 +9,9 @@ import {cn} from '@/lib/utils';
 import CheckboxInput from './ui/CheckboxInput';
 import {DatePicker} from "@/components/shared/forms/ui/DatePicker";
 
-export default function RegisterForm({onSubmit, isSubmitting, formControl}: RegisterFormProps) {
+export default function RegisterForm({id,onSubmit, isSubmitting, formControl}: RegisterFormProps) {
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} id={id}>
             <div className="space-y-6">
                 <TextInput
                     control={formControl}
