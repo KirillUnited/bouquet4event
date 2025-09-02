@@ -63,7 +63,7 @@ export function CTAButton({ title, href, buttonVariant = "default", target, clas
                         buttonText={null}
                         successMessage={null}
                         privacyPolicyText={null}
-                        goal={''}
+                        goal={null}
                         customGoal={customGoal}
                     />
                 </DialogContent>

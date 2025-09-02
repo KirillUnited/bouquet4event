@@ -29,8 +29,8 @@ export default function Register({
     buttonText,
     successMessage,
     privacyPolicyText,
-    goal = '',
-    customGoal = ''
+    goal,
+    customGoal
 }: FormRegisterProps & { customGoal?: string }) {
     const [formValues, setFormValues] = useState({});
     const formSchema = z.object({
