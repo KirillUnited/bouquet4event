@@ -5,7 +5,7 @@ import { CallBackForm } from '../forms'
 import { Button } from '@/components/ui/button'
 import {CTAButtonProps} from "@/components/shared/buttons/CTAButton";
 
-export default function CallBackDialog({ title, href, buttonVariant = "default", target, className, customGoal='' }: CTAButtonProps) {
+export default function CallBackDialog({ title, href='#', buttonVariant = "default", target, className, customGoal='' }: CTAButtonProps) {
     return (
         <Dialog>
             <DialogTrigger
