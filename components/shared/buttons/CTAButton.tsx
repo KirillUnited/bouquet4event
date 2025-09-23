@@ -5,7 +5,7 @@ import Link from "next/link";
 import Register from "@/components/blocks/forms/register";
 import { ButtonVariant } from "@/sanity.types";
 
-type CTAButtonProps = {
+export type CTAButtonProps = {
     title?: string;
     href: string;
     buttonVariant?: ButtonVariant;

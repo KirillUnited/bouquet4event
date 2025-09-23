@@ -15,7 +15,7 @@ export default function TagLine({
   return (
     <TagElement
       className={cn(
-        "inline-block leading-[0] text-base font-semibold",
+        "mb-3 self-start backdrop-blur-lg bg-background/30 leading-none animate-fade-up [animation-delay:100ms] opacity-0 border-primary rounded-sm text-pretty text-foreground/70 text-center px-3 py-1 text-sm/6 ring-1 ring-primary/50",
         className
       )}
     >

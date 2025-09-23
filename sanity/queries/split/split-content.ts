@@ -28,7 +28,26 @@ export const splitContentQuery = groq`
         }
       }
     },
+    footerBody[]{
+      ...,
+      _type == "image" => {
+        ...,
+        asset->{
+          _id,
+          url,
+          mimeType,
+          metadata {
+            lqip,
+            dimensions {
+              width,
+              height
+            }
+          }
+        }
+      }
+    },
     statistics,
+    infoList,
     link,
   }
 `;
