@@ -6,7 +6,7 @@ export default function TagLine({
   className,
 }: {
   title: string;
-  element?: "div" | "h1" | "h2" | "h3";
+  element?: "div" | "h1" | "h2" | "h3" | "span";
   className?: string;
   large?: boolean;
 }) {
