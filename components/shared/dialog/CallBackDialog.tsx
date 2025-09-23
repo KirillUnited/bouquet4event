@@ -3,16 +3,17 @@ import {Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger} fr
 import React from 'react'
 import { CallBackForm } from '../forms'
 import { Button } from '@/components/ui/button'
+import {CTAButtonProps} from "@/components/shared/buttons/CTAButton";
 
-export default function CallBackDialog() {
+export default function CallBackDialog({ title, href, buttonVariant = "default", target, className, customGoal='' }: CTAButtonProps) {
     return (
         <Dialog>
             <DialogTrigger
                 asChild
             >
-                <Button variant="outline" size="lg">
+                <Button variant={buttonVariant} size="lg">
                     <i className="fa fa-phone-volume mr-2"></i>
-                    обратная связь
+                    {title}
                 </Button>
             </DialogTrigger>
             <DialogContent>
