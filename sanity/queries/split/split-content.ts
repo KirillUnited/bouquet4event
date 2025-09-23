@@ -47,6 +47,7 @@ export const splitContentQuery = groq`
       }
     },
     statistics,
+    infoList,
     link,
   }
 `;

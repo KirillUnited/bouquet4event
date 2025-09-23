@@ -16,6 +16,10 @@ export default defineType({
       title: "Content",
       name: "content",
     },
+    {
+      title: "Info List",
+      name: "infoList",
+    }
   ],
   fields: [
     defineField({
@@ -83,7 +87,13 @@ export default defineType({
         }
       ],
       validation: Rule => Rule.max(4).warning('Maximum of 4 statistics recommended'),
-      group: "content",
+      group: "infoList",
+    }),
+    defineField({
+      name: "infoList",
+      type: "split-info-list",
+      title: "Info List",
+      group: "infoList",
     }),
     defineField({
       name: "footerBody",
