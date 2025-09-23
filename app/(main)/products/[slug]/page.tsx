@@ -110,7 +110,7 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                             <p className="text-gray-600 mb-6">Наш менеджер свяжется с вами в ближайшее время</p>
                             <div className="flex flex-col md:flex-row gap-4">
                                 <CTAButton title="Оставить заявку" href="" customGoal="zakazbuket" />
-                                <CallBackDialog />
+                                <CallBackDialog href="#" />
                             </div>
                         </div>
                     </div>

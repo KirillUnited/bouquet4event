@@ -23,7 +23,7 @@ export function CTAButton({ title, href, buttonVariant = "default", target, clas
             className={`w-full md:w-auto md:min-w-40 group ${className || ''}`}
         >
             <Link
-                href={href}
+                href={href || '#'}
                 target={target ? "_blank" : undefined}
                 rel={target ? "noopener" : undefined}
             >
