@@ -78,7 +78,7 @@ export default function SplitContent({
                                             <h4 className="text-xl font-semibold leading-none">
                                                 {item?.title}
                                             </h4>
-                                            <PortableTextRenderer value={item?.body}/>
+                                            {item?.body && <PortableTextRenderer value={item.body}/>}
                                         </div>
                                     </div>
                                 )
