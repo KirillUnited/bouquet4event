@@ -1,17 +1,17 @@
-import { type SchemaTypeDefinition } from "sanity";
+import {type SchemaTypeDefinition} from "sanity";
 // documents
 import page from "./schemas/documents/page";
 import post from "./schemas/documents/post";
 import category from "./schemas/documents/category";
 import faq from "./schemas/documents/faq";
 import testimonial from "./schemas/documents/testimonial";
-import userAccount from "./schemas/documents/userAccount"; 
+import userAccount from "./schemas/documents/userAccount";
 
 // shared objects
 import blockContent from "./schemas/blocks/shared/block-content";
 import link from "./schemas/blocks/shared/link";
-import { colorVariant } from "./schemas/blocks/shared/color-variant";
-import { buttonVariant } from "./schemas/blocks/shared/button-variant";
+import {colorVariant} from "./schemas/blocks/shared/color-variant";
+import {buttonVariant} from "./schemas/blocks/shared/button-variant";
 import sectionPadding from "./schemas/blocks/shared/section-padding";
 // objects
 import hero1 from "./schemas/blocks/hero/hero-1";
@@ -38,60 +38,62 @@ import faqs from "./schemas/blocks/faqs";
 import newsletter from "./schemas/blocks/forms/newsletter";
 import allPosts from "./schemas/blocks/all-posts";
 import author from "./schemas/documents/author";
-import { siteSettingsType } from "./schemas/documents/siteSettingsType";
-import { contactInfoType } from "./schemas/blocks/contactInfoType";
+import {siteSettingsType} from "./schemas/documents/siteSettingsType";
+import {contactInfoType} from "./schemas/blocks/contactInfoType";
 import breadcrumbs from "./schemas/blocks/breadcrumbs";
 import registerType from "./schemas/blocks/forms/registerType";
 import productType from "./schemas/documents/productType";
 import gridProduct from "./schemas/blocks/grid/grid-product";
-import { yandexGoal } from "./schemas/blocks/yandexGoalType";
+import {yandexGoal} from "./schemas/blocks/yandexGoalType";
+import statisticsType from "@/sanity/schemas/blocks/shared/statisticsType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [
-    // documents
-    siteSettingsType,
-    page,
-    post,
-    category,
-    author,
-    faq,
-    testimonial,
-    userAccount,
-    productType,
-    // shared objects
-    blockContent,
-    link,
-    colorVariant,
-    buttonVariant,
-    sectionPadding,
-    contactInfoType,
-    // blocks
-    hero1,
-    hero2,
-    sectionHeader,
-    splitRow,
-    splitContent,
-    splitCardsList,
-    splitCard,
-    splitImage,
-    splitInfoList,
-    splitInfo,
-    gridCard,
-    pricingCard,
-    gridPost,
-    gridProduct,
-    gridRow,
-    carousel1,
-    carousel2,
-    timelineRow,
-    timelinesOne,
-    cta1,
-    logoCloud1,
-    faqs,
-    newsletter,
-    registerType,
-    allPosts,
-    breadcrumbs,
-    yandexGoal,
-  ],
+    types: [
+        // documents
+        siteSettingsType,
+        page,
+        post,
+        category,
+        author,
+        faq,
+        testimonial,
+        userAccount,
+        productType,
+        // shared objects
+        blockContent,
+        link,
+        colorVariant,
+        buttonVariant,
+        sectionPadding,
+        contactInfoType,
+        statisticsType,
+        // blocks
+        hero1,
+        hero2,
+        sectionHeader,
+        splitRow,
+        splitContent,
+        splitCardsList,
+        splitCard,
+        splitImage,
+        splitInfoList,
+        splitInfo,
+        gridCard,
+        pricingCard,
+        gridPost,
+        gridProduct,
+        gridRow,
+        carousel1,
+        carousel2,
+        timelineRow,
+        timelinesOne,
+        cta1,
+        logoCloud1,
+        faqs,
+        newsletter,
+        registerType,
+        allPosts,
+        breadcrumbs,
+        yandexGoal,
+    ],
 };
