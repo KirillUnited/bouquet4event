@@ -52,7 +52,7 @@ export default function SplitContent({
                         createElement(
                             "h2",
                             {
-                                className: cn("my-2 font-semibold leading-none"),
+                                className: cn("text-3xl md:text-5xl my-2 font-semibold leading-none"),
                             },
                             title
                         )}

@@ -3,6 +3,7 @@ import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
 
 import { PAGE_QUERYResult } from "@/sanity.types";
+import TagLine from "@/components/ui/tag-line";
 
 type SectionHeaderProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -32,12 +33,16 @@ export default function SectionHeader({
         )}
       >
         <div
-          className={cn(color === "primary" ? "text-background" : undefined)}
+          className={cn('flex flex-col',
+              color === "primary" ? "text-background" : undefined,
+              align === "center" ? "items-center" : undefined,
+          )
+        }
         >
           {tagLine && (
-            <p className="leading-[0] mb-4">
-              <span className="backdrop-blur-lg bg-background/30 leading-none animate-fade-up [animation-delay:100ms] opacity-0 border-primary rounded-sm text-pretty text-foreground/70 text-center px-3 py-1 text-sm/6 ring-1 ring-primary/10 hover:ring-primary/20">{tagLine}</span>
-            </p>
+              <TagLine title={tagLine} element="span" className={cn('leading-none',
+                align === "center" ? "self-center" : "self-start",
+              )}/>
           )}
           <h2 className="text-3xl md:text-5xl mb-4">{title}</h2>
         </div>
