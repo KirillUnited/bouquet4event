@@ -42,5 +42,6 @@ export const hero1Query = groq`
       alt
     },
     links,
+    statistics
   }
 `;

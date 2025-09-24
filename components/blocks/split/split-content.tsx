@@ -6,7 +6,6 @@ import {stegaClean} from "next-sanity";
 import {PAGE_QUERYResult} from "@/sanity.types";
 import {CallBackDialog} from "@/components/shared/dialog";
 import {Card} from "@/components/ui/card";
-import SplitCardsItem from "./split-info-item";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type SplitRow = Extract<Block, { _type: "split-row" }>;
@@ -17,6 +16,7 @@ type SplitContent = Extract<
 
 interface SplitContentProps extends SplitContent {
     noGap?: boolean;
+    statistics?: {items: {value: string; label: string; highlight?: boolean}[]};
 }
 
 export default function SplitContent({
@@ -63,10 +63,10 @@ export default function SplitContent({
                 </article>
 
                 {infoList?.list && infoList?.list?.length > 0 && (
-                    <div className="flex flex-col gap-6">
-                        <h4 className="font-bold leading-none">Почему молодожёны выбирают подписку</h4>
+                    <div className="flex flex-col gap-8">
+                        <h3 className="font-bold leading-none">Преимущества свадебной цветочной подписки</h3>
                         <div className={cn(
-                            "grid grid-cols-1 gap-2",
+                            "grid md:grid-cols-2 gap-2",
                         )}>
                             {infoList?.list?.map((item, index) => {
                                 return (
@@ -75,7 +75,7 @@ export default function SplitContent({
                                             <i className={cn("text-3xl text-primary", item?.icon)}></i>
                                         </div>
                                         <div className="flex flex-col gap-2">
-                                            <h4 className="text-xl font-semibold leading-none">
+                                            <h4 className="text-xl font-semibold leading-none font-sans">
                                                 {item?.title}
                                             </h4>
                                             {item?.body && <PortableTextRenderer value={item.body}/>}
@@ -87,9 +87,9 @@ export default function SplitContent({
                     </div>
                 )}
 
-                {Array.isArray(statistics) && statistics.length > 0 && (
+                {statistics?.items?.length > 0 && (
                     <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        {statistics.map(({value, label}) => (
+                        {statistics?.items?.map(({value, label}) => (
                             <li key={label} className="text-center">
                                 <p className="text-3xl font-bold text-primary mb-2">{value}</p>
                                 <p className=" font-normal text-foreground/70">{label}</p>
@@ -99,7 +99,9 @@ export default function SplitContent({
                 )}
 
                 <footer className="flex flex-col">
-                    <Card className='px-4 pt-4'>{footerBody && <PortableTextRenderer value={footerBody}/>}</Card>
+                    {footerBody && (
+                        <Card className='px-4 pt-4'>{footerBody && <PortableTextRenderer value={footerBody}/>}</Card>
+                    )}
 
                     {link?.href && (
                         <div className="flex flex-col self-stretch md:self-start mt-8">
