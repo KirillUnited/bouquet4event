@@ -2,15 +2,19 @@ import Image from "next/image";
 import {urlFor} from "@/sanity/lib/image";
 import {stegaClean} from "next-sanity";
 import PortableTextRenderer from "@/components/portable-text-renderer";
-import {PAGE_QUERYResult} from "@/sanity.types";
+import {PAGE_QUERYResult, Statistics} from "@/sanity.types";
 import React from "react";
 import {CTAButton} from "@/components/shared/buttons";
 import {StatInfoList} from "@/components/shared/info-list";
 
-type Hero1Props = Extract<
+type Hero1 = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
     { _type: "hero-1" }
 >;
+
+interface Hero1Props extends Hero1 {
+    statistics: Statistics | null
+}
 
 export default function Hero1({
                                   tagLine,
@@ -61,11 +65,11 @@ export default function Hero1({
                                     </div>
                                 )}
                             </div>
-                            <footer className='mt-10'>
-                                {statistics?.items?.length > 0 && (
-                                    <StatInfoList items={statistics.items}/>
-                                )}
-                            </footer>
+                            {Array.isArray(statistics?.items) && statistics.items.length > 0 && (
+                                <footer className='mt-10'>
+                                    <StatInfoList items={statistics?.items} _type="statistics"/>
+                                </footer>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import TagLine from "@/components/ui/tag-line";
 import {createElement} from "react";
 import {stegaClean} from "next-sanity";
-import {PAGE_QUERYResult} from "@/sanity.types";
+import {PAGE_QUERYResult, Statistics} from "@/sanity.types";
 import {CallBackDialog} from "@/components/shared/dialog";
 import {Card} from "@/components/ui/card";
 
@@ -16,7 +16,7 @@ type SplitContent = Extract<
 
 interface SplitContentProps extends SplitContent {
     noGap?: boolean;
-    statistics?: {items: {value: string; label: string; highlight?: boolean}[]};
+    statistics: Statistics | null;
 }
 
 export default function SplitContent({
@@ -87,7 +87,7 @@ export default function SplitContent({
                     </div>
                 )}
 
-                {statistics?.items?.length > 0 && (
+                {Array.isArray(statistics?.items) && statistics.items.length > 0 && (
                     <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         {statistics?.items?.map(({value, label}) => (
                             <li key={label} className="text-center">
