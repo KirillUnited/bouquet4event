@@ -19,7 +19,7 @@ export default function FAQs({ padding, colorVariant, faqs }: FAQProps) {
   return (
     <SectionContainer color={color} padding={padding}>
       {faqs && faqs?.length > 0 && (
-        <Accordion className="space-y-4" type="multiple">
+        <Accordion className="max-w-4xl mx-auto space-y-4" type="single">
           {faqs.map((faq) => (
             <AccordionItem key={faq.title} value={`item-${faq._id}`}>
               <AccordionTrigger className="text-xl font-semibold mb-3 cursor-pointer">{faq.title}</AccordionTrigger>

@@ -53,6 +53,11 @@ export default defineType({
             validation: (rule) => rule.max(2),
             group: "content",
         }),
+        defineField({
+            name: "statistics",
+            type: "statistics",
+            group: "content",
+        }),
     ],
     preview: {
         select: {
