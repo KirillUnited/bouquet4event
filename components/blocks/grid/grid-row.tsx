@@ -5,7 +5,41 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import GridCard from "./grid-card";
 import PricingCard from "./pricing-card";
 import GridPost from "./grid-post";
-import FeaturedProduct from "@/components/shared/product/FeaturedProduct";
+import FeaturedProduct, {GridProductProps} from "@/components/shared/product/FeaturedProduct";
+import FeaturedProductCarousel from "@/components/shared/product/FeaturedProductCarousel";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+type ImageAsset = {
+  asset: {
+    _id: string;
+    url: string;
+    metadata: {
+      dimensions: {
+        width: number;
+        height: number;
+        aspectRatio: number;
+      };
+    };
+  };
+  alt?: string;
+};
+
+type Category = {
+  _id: string;
+  title: string;
+  slug: string;
+};
+
+export type Product = {
+  _id: string;
+  _type: string;
+  title: string;
+  slug: string;
+  price: number;
+  images: ImageAsset[];
+  categories: Category[];
+  description?: string;
+};
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type GridRow = Extract<Block, { _type: "grid-row" }>;
@@ -27,12 +61,21 @@ export default function GridRow({
   colorVariant,
   gridColumns,
   columns,
+  featuredProducts,
 }: GridRow) {
   const color = stegaClean(colorVariant);
+  const hasFeaturedProducts = Array.isArray(featuredProducts) && featuredProducts.length > 0;
+  const hasColumns = columns && columns.length > 0;
 
   return (
     <SectionContainer color={color} padding={padding}>
-      {columns && columns?.length > 0 && (
+      {hasFeaturedProducts && (
+        <div className="mb-12">
+          <FeaturedProductCarousel products={featuredProducts as GridProductProps[]} />
+        </div>
+      )}
+      
+      {!hasFeaturedProducts && hasColumns && (
         <div
           className={cn(
             `grid grid-cols-1 gap-6`,

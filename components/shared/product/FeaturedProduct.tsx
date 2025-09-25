@@ -1,10 +1,9 @@
 import {Button} from '@/components/ui/button'
 import {Card} from '@/components/ui/card'
-import {Product} from '@/sanity/types/product'
 import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
-import {ArrowUpRightIcon, SparklesIcon} from 'lucide-react'
+import {SparklesIcon} from 'lucide-react'
 import PortableTextRenderer from '@/components/portable-text-renderer'
 import {ColorVariant, PAGE_QUERYResult} from '@/sanity.types'
 
@@ -13,7 +12,7 @@ type GridRow = Extract<Block, { _type: "grid-row" }>;
 type GridColumn = NonNullable<NonNullable<GridRow["columns"]>>[number];
 type GridProduct = Extract<GridColumn, { _type: "grid-product" }>;
 
-interface GridProductProps extends Omit<NonNullable<GridProduct>, "_type" | "_key"> {
+export interface GridProductProps extends Omit<NonNullable<GridProduct>, "_type" | "_key"> {
     color?: ColorVariant;
 }
 
@@ -23,7 +22,7 @@ export default function FeaturedProduct({color, product}: GridProductProps) {
     const {name, description, gallery, price, slug, specifications} = product;
 
     return (
-        <Card className="flex flex-col overflow-hidden h-full group">
+        <Card className="flex flex-col overflow-hidden h-full flex-1 group">
             {(gallery && gallery.length > 0) && (
                 <div className="relative h-64 overflow-hidden">
                     {gallery[0].url && (
@@ -46,7 +45,7 @@ export default function FeaturedProduct({color, product}: GridProductProps) {
                 </div>
             )}
             <Link className="flex flex-col gap-4 group p-4 flex-1"
-                  href={`/products/${slug}`}
+                  href={`/products/${slug?.current || slug || ''}`}
             >
                 <div className='flex flex-col gap-2'>
                     <h3 className="text-xl font-serif font-semibold text-foreground/80">{name}</h3>
