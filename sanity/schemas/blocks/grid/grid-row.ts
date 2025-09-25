@@ -30,6 +30,13 @@ export default defineType({
     }),
     // add only the blocks you need
     defineField({
+      name: "featuredProducts",
+      title: "Featured Products Carousel",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "product" }] }],
+      description: "Select products to feature in a carousel",
+    }),
+    defineField({
       name: "columns",
       type: "array",
       of: [

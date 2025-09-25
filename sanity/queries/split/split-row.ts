@@ -18,5 +18,6 @@ export const splitRowQuery = groq`
       ${splitImageQuery},
       ${splitInfoListQuery},
     },
+    link
   }
 `;
