@@ -1,10 +1,9 @@
 import {Button} from '@/components/ui/button'
 import {Card} from '@/components/ui/card'
-import {Product} from '@/sanity/types/product'
 import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
-import {ArrowUpRightIcon} from 'lucide-react'
+import {SparklesIcon} from 'lucide-react'
 import PortableTextRenderer from '@/components/portable-text-renderer'
 import {ColorVariant, PAGE_QUERYResult} from '@/sanity.types'
 
@@ -13,17 +12,17 @@ type GridRow = Extract<Block, { _type: "grid-row" }>;
 type GridColumn = NonNullable<NonNullable<GridRow["columns"]>>[number];
 type GridProduct = Extract<GridColumn, { _type: "grid-product" }>;
 
-interface GridProductProps extends Omit<NonNullable<GridProduct>, "_type" | "_key"> {
+export interface GridProductProps extends Omit<NonNullable<GridProduct>, "_type" | "_key"> {
     color?: ColorVariant;
 }
 
 export default function FeaturedProduct({color, product}: GridProductProps) {
     if (!product) return null;
 
-    const {name, description, gallery, price, slug} = product;
+    const {name, description, gallery, price, slug, specifications} = product;
 
     return (
-        <Card className="overflow-hidden h-full group">
+        <Card className="flex flex-col overflow-hidden h-full flex-1 group">
             {(gallery && gallery.length > 0) && (
                 <div className="relative h-64 overflow-hidden">
                     {gallery[0].url && (
@@ -45,33 +44,45 @@ export default function FeaturedProduct({color, product}: GridProductProps) {
                     </div>
                 </div>
             )}
-            <Link className="flex flex-col group p-4"
-                  href={`/products/${slug}`}
+            <Link className="flex flex-col gap-4 group p-4 flex-1"
+                  href={`/products/${slug?.current || slug || ''}`}
             >
-                <h3 className="text-xl font-serif font-semibold text-foreground/80 mb-2">{name}</h3>
-                {description && (
-                    <article className='truncate line-clamp-1 text-sm'>
-                        <PortableTextRenderer value={description}/>
-                    </article>
-                )}
-                <p className="flex flex-col md:flex-row justify-between gap-4 mt-4">
-                    {price && (
-                        <span className="text-2xl font-semibold text-foreground/90 truncate">{price} ₽</span>
+                <div className='flex flex-col gap-2'>
+                    <h3 className="text-xl font-serif font-semibold text-foreground/80">{name}</h3>
+                    {description && (
+                        <article className='truncate line-clamp-1 text-sm'>
+                            <PortableTextRenderer value={description}/>
+                        </article>
                     )}
-                    {slug && (
-                        <Button
-                            size='sm'
-                            variant='secondary'
-                        >
-                            {"Подробнее"}
-                            <ArrowUpRightIcon
-                                className="group-hover:translate-x-1 transition-transform"
-                                size={16}
-                            />
-                        </Button>
-                    )}
-                </p>
+                </div>
+                {Array.isArray(specifications) && specifications.length > 0 && (
+                    <ul className="flex flex-col gap-1 text-foreground/70 font-light">
+                        {specifications.map((specification) => (
+                            <li key={specification.name} className="flex text-sm gap-2">
+                                <span>{specification.name}:</span>
+                                <span className="font-bold">{specification.value}</span>
+                            </li>
+                        ))}
+                    </ul>
+                )
+                }
             </Link>
+            <footer className="flex flex-col md:flex-row justify-between gap-4 mt-4 border-t-1 p-4">
+                {price && (
+                    <span className="text-2xl font-semibold text-foreground/90 truncate">{price} ₽</span>
+                )}
+                {slug && (
+                    <Button
+                        size='lg'
+                    >
+                        {"Хочу такой"}
+                        <SparklesIcon
+                            className="group-hover:scale-125 transition-transform"
+                            size={18}
+                        />
+                    </Button>
+                )}
+            </footer>
         </Card>
     )
 }

@@ -72,9 +72,9 @@ export function RegisterFormContainer({className, title, description, children}:
     return (
         <div className={cn("flex flex-col gap-8", className)}>
             {(title || description) && (
-                <div className='flex flex-col gap-4 text-center sm:text-left'>
+                <div className='flex flex-col gap-4'>
                     {title && (
-                        <h2 className="text-2xl sm:text-4xl text-balance">
+                        <h2 className="text-3xl md:text-5xl text-balance">
                             {title}
                         </h2>
                     )}
