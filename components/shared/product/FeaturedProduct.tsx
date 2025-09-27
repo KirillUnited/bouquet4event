@@ -38,6 +38,7 @@ export default function FeaturedProduct({ color, product }: GridProductProps) {
                             height={500}
                             blurDataURL={gallery[0].url || ""}
                             placeholder={gallery[0].url ? "blur" : undefined}
+                            quality={50}
                         />
                     )}
                     <div
