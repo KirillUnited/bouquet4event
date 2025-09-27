@@ -71,7 +71,7 @@ export default function GridRow({
     <SectionContainer color={color} padding={padding}>
       {hasFeaturedProducts && (
         <div className="mb-12">
-          <FeaturedProductCarousel products={featuredProducts as GridProductProps[]} />
+          <FeaturedProductCarousel products={featuredProducts as any[]} />
         </div>
       )}
       
