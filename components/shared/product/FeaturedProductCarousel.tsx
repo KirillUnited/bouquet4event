@@ -12,6 +12,8 @@ import 'swiper/css/free-mode';
 
 import { FeaturedProduct } from "@/components/shared/product";
 import {GridProductProps} from "@/components/shared/product/FeaturedProduct";
+// import { GridProduct } from '@/sanity.types';
+import { useEffect, useState } from 'react';
 
 interface FeaturedProductCarouselProps {
   products?: GridProductProps[] | null | undefined;
@@ -19,7 +21,17 @@ interface FeaturedProductCarouselProps {
 }
 
 export default function FeaturedProductCarousel({products, className}: FeaturedProductCarouselProps) {
-    console.log('FeaturedProductCarousel',products)
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        if (products && products.length > 0) {
+            setIsLoading(false);
+        }
+    }, [products]);
+
+    if (isLoading) {
+        return <div>Загрузка букетов...</div>;
+    }
 
     return (
         <div className={cn('relative w-full', className)}>
@@ -49,9 +61,9 @@ export default function FeaturedProductCarousel({products, className}: FeaturedP
                 }}
                 className="w-full"
             >
-                {Array.isArray(products) && products.length > 0 && products?.map((product: GridProduct) => (
-                    <SwiperSlide key={product._id || product._key} className="h-full flex flex-col">
-                        <FeaturedProduct product={product} />
+                {Array.isArray(products) && products.length > 0 && products?.map((product: GridProductProps) => (
+                    <SwiperSlide key={product._id} className="h-full flex flex-col">
+                        <FeaturedProduct product={product as any} color={product.color } _id={product._id} key={product._id} />
                     </SwiperSlide>
                 ))}
             </Swiper>
