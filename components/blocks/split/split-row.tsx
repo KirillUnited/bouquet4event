@@ -32,6 +32,8 @@ export default function SplitRow({
                                  }: SplitRow) {
     const color = stegaClean(colorVariant);
 
+    console.log(splitColumns)
+
     return (
         <SectionContainer color={color} padding={padding}>
             {splitColumns && splitColumns?.length > 0 && (
@@ -62,12 +64,12 @@ export default function SplitRow({
                     })}
                 </div>
             )}
-            <footer className="mt-10">
-                {link?.href && (
+            {link?.href && (
+                <footer className="mt-10">
                     <CTAButton href={link.href} title={link.title} buttonVariant={link.buttonVariant}/>
-                )
-                }
-            </footer>
+                </footer>
+            )
+            }
         </SectionContainer>
     );
 }

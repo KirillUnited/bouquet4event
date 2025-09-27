@@ -46,6 +46,7 @@ import productType from "./schemas/documents/productType";
 import gridProduct from "./schemas/blocks/grid/grid-product";
 import {yandexGoal} from "./schemas/blocks/yandexGoalType";
 import statisticsType from "@/sanity/schemas/blocks/shared/statisticsType";
+import media from "@/sanity/schemas/blocks/media/media";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -67,6 +68,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         sectionPadding,
         contactInfoType,
         statisticsType,
+        media,
         // blocks
         hero1,
         hero2,
