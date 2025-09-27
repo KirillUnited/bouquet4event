@@ -53,10 +53,12 @@ export default function FeaturedProductCarousel({products, className}: FeaturedP
                     640: {
                         slidesPerView: 1,
                         freeMode: false,
+                        navigation: true
                     },
                     768: {
                         slidesPerView: 3,
                         freeMode: false,
+                        navigation: true
                     },
                 }}
                 className="w-full"
