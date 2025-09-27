@@ -1,11 +1,11 @@
-import Image from "next/image";
-import {urlFor} from "@/sanity/lib/image";
-import {stegaClean} from "next-sanity";
+import { stegaClean } from "next-sanity";
 import PortableTextRenderer from "@/components/portable-text-renderer";
-import {PAGE_QUERYResult, Statistics} from "@/sanity.types";
+import { PAGE_QUERYResult, Statistics } from "@/sanity.types";
 import React from "react";
-import {CTAButton} from "@/components/shared/buttons";
-import {StatInfoList} from "@/components/shared/info-list";
+import { CTAButton } from "@/components/shared/buttons";
+import { StatInfoList } from "@/components/shared/info-list";
+import { MediaRenderer } from "@/components/shared/media-renderer";
+import type { Media } from "@/sanity/schemas/blocks/media/media";
 
 type Hero1 = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -14,6 +14,7 @@ type Hero1 = Extract<
 
 interface Hero1Props extends Hero1 {
     statistics: Statistics | null
+    media: Media | null
 }
 
 export default function Hero1({
@@ -23,6 +24,7 @@ export default function Hero1({
                                   image,
                                   links,
                                   statistics,
+                                  media
                               }: Hero1Props) {
     return (
         <section className="relative">
@@ -75,20 +77,16 @@ export default function Hero1({
                 </div>
             </div>
             <div className="absolute inset-0 z-0">
-                {image && image.asset?._id && (
-                    <Image
-                        className="animate-fade-up [animation-delay:500ms] opacity-0 h-full w-full object-cover"
-                        src={urlFor(image).url()}
-                        alt={image.alt || ""}
-                        width={image.asset?.metadata?.dimensions?.width || 800}
-                        height={image.asset?.metadata?.dimensions?.height || 800}
-                        placeholder={image?.asset?.metadata?.lqip ? "blur" : undefined}
-                        blurDataURL={image?.asset?.metadata?.lqip || ""}
-                        quality={100}
-                        priority
-                    />
+                {media && (
+                    <div className="h-full w-full">
+                        <MediaRenderer 
+                            media={media}
+                            className="animate-fade-up [animation-delay:500ms] opacity-0 h-full w-full"
+                            priority
+                        />
+                    </div>
                 )}
-                <div className="absolute inset-0 bg-background/70"></div>
+                <div className="absolute inset-0 bg-background/70" />
             </div>
         </section>
     );

@@ -25,22 +25,7 @@ export const hero1Query = groq`
         }
       }
     },
-    image{
-      ...,
-      asset->{
-        _id,
-        url,
-        mimeType,
-        metadata {
-          lqip,
-          dimensions {
-            width,
-            height
-          }
-        }
-      },
-      alt
-    },
+    media,
     links,
     statistics
   }
