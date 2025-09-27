@@ -1,11 +1,11 @@
-import {Button} from '@/components/ui/button'
-import {Card} from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
-import {SparklesIcon} from 'lucide-react'
+import { SparklesIcon } from 'lucide-react'
 import PortableTextRenderer from '@/components/portable-text-renderer'
-import {ColorVariant, PAGE_QUERYResult} from '@/sanity.types'
+import { ColorVariant, PAGE_QUERYResult } from '@/sanity.types'
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type GridRow = Extract<Block, { _type: "grid-row" }>;
@@ -14,12 +14,16 @@ type GridProduct = Extract<GridColumn, { _type: "grid-product" }>;
 
 export interface GridProductProps extends Omit<NonNullable<GridProduct>, "_type" | "_key"> {
     color?: ColorVariant;
+    slug?: {
+        current: any;
+    };
 }
 
-export default function FeaturedProduct({color, product}: GridProductProps) {
+export default function FeaturedProduct({ color, product }: GridProductProps) {
     if (!product) return null;
 
-    const {name, description, gallery, price, slug, specifications} = product;
+    const { name, description, gallery, price, slug, specifications } = product;
+    console.log(product)
 
     return (
         <Card className="flex flex-col overflow-hidden h-full flex-1 group">
@@ -45,13 +49,13 @@ export default function FeaturedProduct({color, product}: GridProductProps) {
                 </div>
             )}
             <Link className="flex flex-col gap-4 group p-4 flex-1"
-                  href={`/products/${slug?.current || slug || ''}`}
+                href={`/products/${slug as any || slug || ''}`}
             >
                 <div className='flex flex-col gap-2'>
                     <h3 className="text-xl font-serif font-semibold text-foreground/80">{name}</h3>
                     {description && (
                         <article className='truncate line-clamp-1 text-sm'>
-                            <PortableTextRenderer value={description}/>
+                            <PortableTextRenderer value={description} />
                         </article>
                     )}
                 </div>
@@ -75,11 +79,13 @@ export default function FeaturedProduct({color, product}: GridProductProps) {
                     <Button
                         size='lg'
                     >
-                        {"Хочу такой"}
-                        <SparklesIcon
-                            className="group-hover:scale-125 transition-transform"
-                            size={18}
-                        />
+                        <Link href={`/products/${slug as any || slug || ''}`} className='flex items-center gap-2'>
+                            {"Хочу такой"}
+                            <SparklesIcon
+                                className="group-hover:scale-125 transition-transform"
+                                size={18}
+                            />
+                        </Link>
                     </Button>
                 )}
             </footer>
@@ -87,11 +93,11 @@ export default function FeaturedProduct({color, product}: GridProductProps) {
     )
 }
 
-export const FeaturedProductList = ({products}: { products: GridProductProps[] }) => {
+export const FeaturedProductList = ({ products }: { products: GridProductProps[] }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {products.map((product: any, index: number) => (
-                <FeaturedProduct color={product.color} _id={product._id} key={product._id} product={product}/>
+                <FeaturedProduct color={product.color} _id={product._id} key={product._id} product={product} />
             ))}
         </div>
     )
