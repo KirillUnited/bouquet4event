@@ -23,7 +23,6 @@ export default function FeaturedProduct({ color, product }: GridProductProps) {
     if (!product) return null;
 
     const { name, description, gallery, price, slug, specifications } = product;
-    console.log(product)
 
     return (
         <Card className="flex flex-col overflow-hidden h-full flex-1 group">
