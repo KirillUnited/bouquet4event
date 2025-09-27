@@ -1,5 +1,6 @@
 import {defineField, defineType} from "sanity";
 import {LayoutTemplate} from "lucide-react";
+import {media} from "../media/media";
 
 export default defineType({
     name: "hero-1",
@@ -34,16 +35,9 @@ export default defineType({
             group: "content",
         }),
         defineField({
-            name: "image",
-            title: "Image",
-            type: "image",
-            fields: [
-                {
-                    name: "alt",
-                    type: "string",
-                    title: "Alternative Text",
-                },
-            ],
+            name: "media",
+            title: "Media",
+            type: "media",
             group: "media",
         }),
         defineField({
@@ -62,11 +56,13 @@ export default defineType({
     preview: {
         select: {
             title: "title",
+            media: "media.image"
         },
-        prepare({title}) {
+        prepare({title, media}) {
             return {
                 title: "Hero 1",
                 subtitle: title,
+                media,
             };
         },
     },
