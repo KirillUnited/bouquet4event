@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import {client} from "@/sanity/lib/client";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -56,3 +57,9 @@ export function count(
 export const getCurrentYear = () => {
   return new Date().getFullYear();
 };
+export async function getSanityFileUrl(ref: string): Promise<string | null> {
+    const asset = await client.fetch(`*[_type == "sanity.fileAsset" && _id == $id][0]`, {
+        id: ref,
+    });
+    return asset?.url || null;
+}

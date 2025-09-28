@@ -1,25 +1,17 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { cn } from "@/lib/utils";
-import { Media as MediaType } from "@/sanity/schemas/blocks/media/media";
-import { client } from "@/sanity/lib/client";
+import {cn, getSanityFileUrl} from "@/lib/utils";
+import {Media} from "@/sanity.types";
 
-// Helper function to get video URL from Sanity
-const getVideoUrl = (ref: string): string => {
-  const projectId = client.config().projectId;
-  const dataset = client.config().dataset;
-  return `https://cdn.sanity.io/files/${projectId}/${dataset}/${ref}`;
-};
-
-interface MediaRendererProps {
-  media: MediaType;
+export interface MediaRendererProps {
+  media: Media;
   className?: string;
   imageClassName?: string;
   videoClassName?: string;
   priority?: boolean;
 }
 
-export function MediaRenderer({
+export async function MediaRenderer({
   media,
   className = "",
   imageClassName = "",
@@ -27,8 +19,6 @@ export function MediaRenderer({
   priority = false,
 }: MediaRendererProps) {
   if (!media) return null;
-
-  console.log(media)
 
   if (media.mediaType === 'image' && media.image?.asset?._ref) {
     return (
@@ -49,7 +39,7 @@ export function MediaRenderer({
   }
 
   if (media.mediaType === 'video' && media.video?.asset?._ref) {
-    const videoUrl = getVideoUrl(media.video.asset._ref);
+    const videoUrl= await getSanityFileUrl(media.video?.asset?._ref || "");
     const posterUrl = media.video.poster?.asset?._ref 
       ? urlFor(media.video.poster).url() 
       : undefined;
