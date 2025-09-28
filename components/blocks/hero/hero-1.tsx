@@ -1,11 +1,10 @@
 import { stegaClean } from "next-sanity";
 import PortableTextRenderer from "@/components/portable-text-renderer";
-import { PAGE_QUERYResult, Statistics } from "@/sanity.types";
+import {Media, PAGE_QUERYResult, Statistics} from "@/sanity.types";
 import React from "react";
 import { CTAButton } from "@/components/shared/buttons";
 import { StatInfoList } from "@/components/shared/info-list";
 import { MediaRenderer } from "@/components/shared/media-renderer";
-import type { Media } from "@/sanity/schemas/blocks/media/media";
 
 type Hero1 = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -67,7 +66,7 @@ export default function Hero1({
                                     </div>
                                 )}
                             </div>
-                            {Array.isArray(statistics?.items) && statistics.items.length > 0 && (
+                            {Array.isArray(statistics?.items) && statistics?.items?.length > 0 && (
                                 <footer className='mt-10'>
                                     <StatInfoList items={statistics?.items} _type="statistics"/>
                                 </footer>
