@@ -1,0 +1,12 @@
+.wrapper {
+    align-items: stretch;
+    padding-bottom: 2rem;
+}
+.container {
+    --swiper-pagination-bullet-inactive-opacity: 0.8;
+    --swiper-pagination-bullet-inactive-color: var(--primary);
+    --swiper-pagination-color: var(--primary);
+}
+.swiperSlide {
+    height: auto;
+}
