@@ -20,7 +20,6 @@ export default function Hero1({
                                   tagLine,
                                   title,
                                   body,
-                                  image,
                                   links,
                                   statistics,
                                   media

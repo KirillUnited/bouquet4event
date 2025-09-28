@@ -32,8 +32,6 @@ export default function SplitRow({
                                  }: SplitRow) {
     const color = stegaClean(colorVariant);
 
-    console.log(splitColumns)
-
     return (
         <SectionContainer color={color} padding={padding}>
             {splitColumns && splitColumns?.length > 0 && (

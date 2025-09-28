@@ -1,6 +1,5 @@
 import {defineField, defineType} from "sanity";
 import {LayoutTemplate} from "lucide-react";
-import {media} from "../media/media";
 
 export default defineType({
     name: "hero-1",
