@@ -25,12 +25,12 @@ export async function MediaRenderer({
       <div className={cn("relative w-full h-full", className)}>
         <Image
           className={cn("w-full h-full object-cover", imageClassName)}
-          src={urlFor(media.image).url()}
+          src={urlFor(media.image).width(1920).height(1080).format("webp").crop("center").url()}
           alt={media.image.alt || ""}
-          width={media.image.asset?.metadata?.dimensions?.width || 1920}
-          height={media.image.asset?.metadata?.dimensions?.height || 1080}
-          placeholder={media.image.asset?.metadata?.lqip ? "blur" : undefined}
-          blurDataURL={media.image.asset?.metadata?.lqip || ""}
+          width={1920}
+          height={1080}
+          placeholder={"blur"}
+          blurDataURL={urlFor(media.image).width(1920).height(1080).format("webp").crop("center").url() || ""}
           priority={priority}
           quality={100}
         />
@@ -56,8 +56,8 @@ export async function MediaRenderer({
           poster={posterUrl}
         >
           <source 
-            src={videoUrl} 
-            type={media.video.asset?.mimeType || 'video/mp4'} 
+            src={videoUrl || ""} 
+            type={'video/mp4'} 
           />
           Your browser does not support the video tag.
         </video>

@@ -40,15 +40,11 @@ export default function FeaturedProductCarousel({products, className}: FeaturedP
                 spaceBetween={24}
                 slidesPerView={1}
                 autoHeight={true}
-                freeMode={{
-                    enabled: true,
-                    sticky: false,
-                    momentumBounce: false,
-                }}
                 pagination={{
                     clickable: true,
                     dynamicBullets: true,
                 }}
+                navigation={false}
                 breakpoints={{
                     640: {
                         slidesPerView: 1,
