@@ -28,12 +28,21 @@ export const generateMetadata = async ({ params }: { params: Promise<Props> }) =
         openGraph: {
             title: `${product?.seo?.metaTitle || product.name}`,
             description: `${product?.seo?.metaDescription}`,
+            images: [
+                {
+                    url: product?.seo?.ogImage?.url,
+                    alt: `${product?.seo?.metaTitle || product.name}`,
+                    width: product?.seo?.ogImage?.dimensions?.width || 1200,
+                    height: product?.seo?.ogImage?.dimensions?.height || 630,
+                }
+            ],
             type: 'website',
             locale: 'ru',
             siteName: 'Bouquet4Event',
             url: `https://bouquet4event.ru/products/${slug}`,
         },
         twitter: {
+            images: [product?.seo?.ogImage?.url],
             card: 'summary_large_image',
             title: `${product?.seo?.metaTitle || product.name}`,
             description: `${product?.seo?.metaDescription}`,
@@ -109,7 +118,7 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                             <p className="text-gray-600 mb-6">Наш менеджер свяжется с вами в ближайшее время</p>
                             <div className="flex flex-col md:flex-row gap-4">
                                 <CTAButton title="Оставить заявку" href="" customGoal="zakazbuket" />
-                                <CallBackDialog href="#" title='Получить консультацию' buttonVariant='secondary'/>
+                                <CallBackDialog href="#" title='Получить консультацию' buttonVariant='secondary' />
                             </div>
                         </div>
                     </div>
