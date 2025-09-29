@@ -166,7 +166,7 @@ export default function ProductGallery({
                 <div className={cn(
                   "w-full h-full rounded-md overflow-hidden border-2 transition-all duration-200",
                   activeIndex === index
-                    ? "border-blue-500 ring-2 ring-blue-200"
+                    ? "border-primary border-3"
                     : "border-gray-200 hover:border-gray-300"
                 )}>
                   <Image

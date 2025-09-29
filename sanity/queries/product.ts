@@ -37,7 +37,12 @@ export const productFields = `
   seo {
     metaTitle,
     metaDescription,
-    keywords
+    keywords,
+    ogImage {
+      "url": asset->url,
+      "alt": alt,
+      "dimensions": asset->metadata.dimensions
+    }
   },
   categories[]-> {
     _id,

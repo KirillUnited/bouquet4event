@@ -4,8 +4,7 @@ import SectionContainer from "@/components/layout/section-container";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { CTAButton } from "@/components/shared/buttons";
 import { CallBackDialog } from "@/components/shared/dialog";
-import { ProductGallery } from "@/components/shared/product";
-import { FeaturedProductList } from "@/components/shared/product/FeaturedProduct";
+import { FeaturedProductCarousel, ProductGallery } from "@/components/shared/product";
 import { Button } from "@/components/ui/button";
 import { getProductJsonLd } from "@/lib/jsonLd";
 import { getProductBySlug, getRelatedProducts } from "@/sanity/queries/product";
@@ -29,12 +28,21 @@ export const generateMetadata = async ({ params }: { params: Promise<Props> }) =
         openGraph: {
             title: `${product?.seo?.metaTitle || product.name}`,
             description: `${product?.seo?.metaDescription}`,
+            images: [
+                {
+                    url: product?.seo?.ogImage?.url,
+                    alt: `${product?.seo?.metaTitle || product.name}`,
+                    width: product?.seo?.ogImage?.dimensions?.width || 1200,
+                    height: product?.seo?.ogImage?.dimensions?.height || 630,
+                }
+            ],
             type: 'website',
             locale: 'ru',
             siteName: 'Bouquet4Event',
             url: `https://bouquet4event.ru/products/${slug}`,
         },
         twitter: {
+            images: [product?.seo?.ogImage?.url],
             card: 'summary_large_image',
             title: `${product?.seo?.metaTitle || product.name}`,
             description: `${product?.seo?.metaDescription}`,
@@ -110,7 +118,7 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
                             <p className="text-gray-600 mb-6">Наш менеджер свяжется с вами в ближайшее время</p>
                             <div className="flex flex-col md:flex-row gap-4">
                                 <CTAButton title="Оставить заявку" href="" customGoal="zakazbuket" />
-                                <CallBackDialog href="#" title='Получить консультацию' buttonVariant='secondary'/>
+                                <CallBackDialog href="#" title='Получить консультацию' buttonVariant='secondary' />
                             </div>
                         </div>
                     </div>
@@ -119,7 +127,7 @@ export default async function ProductPage({ params }: { params: Promise<Props> }
             {relatedProducts.length > 0 && (
                 <SectionContainer className="py-16">
                     <h3 className="font-semibold mb-4">Еще букеты</h3>
-                    <FeaturedProductList products={relatedProducts as any} />
+                    <FeaturedProductCarousel products={relatedProducts as any[]} />
                 </SectionContainer>
             )}
             <JsonLd data={getProductJsonLd(product.name, product.slug, product.seo?.metaDescription)} />

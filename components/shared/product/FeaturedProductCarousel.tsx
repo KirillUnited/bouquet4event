@@ -1,7 +1,7 @@
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, FreeMode } from 'swiper/modules';
+import { Navigation, Pagination, FreeMode, Autoplay } from 'swiper/modules';
 import { cn } from '@/lib/utils';
 
 // Import Swiper styles
@@ -9,6 +9,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
+import 'swiper/css/autoplay';
 
 import { FeaturedProduct } from "@/components/shared/product";
 import {GridProductProps} from "@/components/shared/product/FeaturedProduct";
@@ -24,23 +25,12 @@ interface FeaturedProductCarouselProps {
 
 export default function FeaturedProductCarousel({products, className, mobileBreakpoint=768}: FeaturedProductCarouselProps) {
     const [isLoading, setIsLoading] = useState(true);
-	// const [isMounted, setIsMounted] = useState(false);
-	// const [isMobile, setIsMobile] = useState(false);
-	// const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
 
     useEffect(() => {
         if (products && products.length > 0) {
             setIsLoading(false);
         }
-        // setIsMounted(true);
-		// const handleResize = () => {
-		// 	setIsMobile(window.innerWidth < mobileBreakpoint);
-		// };
-
-		// handleResize();
-		// window.addEventListener('resize', handleResize);
-		// return () => window.removeEventListener('resize', handleResize);
     }, [products]);
 
     if (isLoading) {
@@ -49,6 +39,7 @@ export default function FeaturedProductCarousel({products, className, mobileBrea
 
     return (
         <div className={cn('relative w-full', styles.container, className)}>
+            {/* TODO: Implement native carousel */}
             {/* {isMobile && (
 				<div className={styles.nativeCarousel}>
 					<div className={styles.carouselTrack}>
@@ -63,7 +54,7 @@ export default function FeaturedProductCarousel({products, className, mobileBrea
             <Swiper
                 className="w-full"
                 wrapperClass={styles.wrapper}
-                modules={[Navigation, Pagination, FreeMode]}
+                modules={[Navigation, Pagination, FreeMode, Autoplay]}
                 spaceBetween={16}
                 slidesPerView={1}
                 pagination={{
@@ -71,6 +62,11 @@ export default function FeaturedProductCarousel({products, className, mobileBrea
                     dynamicBullets: true,
                 }}
                 navigation={false}
+                autoplay={{
+                    delay: 5000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: true,
+                }}
                 breakpoints={{
                     320: {
                         slidesPerView: 1,

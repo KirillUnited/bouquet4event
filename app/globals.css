@@ -68,6 +68,10 @@
   --chart-4: hsl(43 74% 66%);
   --chart-5: hsl(27 87% 67%);
   --radius: 0.5rem;
+  /* Custom Swiper.js */
+    --swiper-pagination-bullet-inactive-opacity: 0.8;
+    --swiper-pagination-bullet-inactive-color: var(--primary);
+    --swiper-pagination-color: var(--primary);
 }
 .dark {
   --background: hsl(224 71.4% 4.1%);
@@ -197,5 +201,17 @@
     @media (width >= theme(--breakpoint-md)) {
       font-size: 1rem;
     }
+  }
+}
+@layer utilities {
+  .swiper-button-next,
+  .swiper-button-prev {
+    --swiper-navigation-color: var(--primary-foreground);
+    --swiper-navigation-size: 16px;
+    width: 40px !important;
+    height: 40px !important;
+    background-color: var(--primary);
+    /* padding: 8px 16px; */
+    border-radius: 100%;
   }
 }
