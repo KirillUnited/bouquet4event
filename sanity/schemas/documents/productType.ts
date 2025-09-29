@@ -203,6 +203,12 @@ export default {
           description: 'Ключевые слова для SEO',
           of: [{ type: 'string' }],
         },
+        {
+          name: 'ogImage',
+          title: 'OG изображение',
+          type: 'image',
+          description: 'Изображение для OG тегов',
+        }
       ],
     },
     orderRankField({ type: "product" }),
