@@ -7,7 +7,7 @@ import { ButtonVariant } from "@/sanity.types";
 
 export type CTAButtonProps = {
     title?: string;
-    href: string;
+    href?: string;
     buttonVariant?: ButtonVariant;
     target?: boolean;
     className?: string;
