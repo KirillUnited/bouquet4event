@@ -15,6 +15,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import TextInput from './ui/TextInput';
 import PhoneInput from './PhoneInput';
 import { Card, CardContent } from '@/components/ui/card';
+import { CheckboxInput } from './ui';
 
 // Schema for form validation
 const subscriptionSchema = z.object({
@@ -25,6 +26,12 @@ const subscriptionSchema = z.object({
   name: z.string().min(2, 'Имя должно содержать хотя бы 2 символа'),
   phone: z.string().min(10, 'Введите корректный номер телефона'),
   email: z.string().email('Введите корректный email'),
+  privacyPolicy: z.boolean().refine(val => val === true, {
+    message: "Необходимо согласиться с политикой конфиденциальности"
+  }),
+  privacyPolicyData: z.boolean().refine(val => val === true, {
+    message: "Необходимо согласиться с обработкой персональных данных"
+  }),
 });
 
 type SubscriptionFormData = z.infer<typeof subscriptionSchema>;
@@ -87,10 +94,10 @@ const EventTypeStep: React.FC<StepProps> = ({ onNext, control }) => {
   );
 };
 
-const EventDateStep: React.FC<StepProps & { onDateUndefined: (isUndefined: boolean) => void }> = ({ 
-  onNext, 
-  control, 
-  onDateUndefined 
+const EventDateStep: React.FC<StepProps & { onDateUndefined: (isUndefined: boolean) => void }> = ({
+  onNext,
+  control,
+  onDateUndefined
 }) => {
   return (
     <Card className="p-6">
@@ -134,7 +141,7 @@ const EventDateStep: React.FC<StepProps & { onDateUndefined: (isUndefined: boole
             </FormItem>
           )}
         />
-        
+
         <div className="flex items-center space-x-2">
           <input
             type="checkbox"
@@ -148,7 +155,7 @@ const EventDateStep: React.FC<StepProps & { onDateUndefined: (isUndefined: boole
             Дата пока не определена
           </label>
         </div>
-        
+
         <div className="flex justify-end pt-4">
           <Button type="button" onClick={onNext}>
             Далее
@@ -253,12 +260,12 @@ const DurationStep: React.FC<StepProps> = ({ onNext, control }) => {
   );
 };
 
-const ContactStep: React.FC<{ onBack: () => void; onSubmit: (data: SubscriptionFormData) => void }> = ({ 
-  onBack, 
-  onSubmit 
+const ContactStep: React.FC<{ onBack: () => void; onSubmit: (data: SubscriptionFormData) => void }> = ({
+  onBack,
+  onSubmit
 }) => {
   const form = useFormContext<SubscriptionFormData>();
-  
+
   return (
     <Card className="p-6">
       <div className="text-center mb-8">
@@ -278,13 +285,13 @@ const ContactStep: React.FC<{ onBack: () => void; onSubmit: (data: SubscriptionF
           placeholder="Введите ваше имя"
           required
         />
-        
+
         <PhoneInput
           control={form.control}
           name="phone"
           required
         />
-        
+
         <TextInput
           control={form.control}
           name="email"
@@ -293,7 +300,29 @@ const ContactStep: React.FC<{ onBack: () => void; onSubmit: (data: SubscriptionF
           placeholder="email@example.com"
           required
         />
-        
+
+        <CheckboxInput
+          control={form.control}
+          name="privacyPolicy"
+          label={
+            <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
+              className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a></span>
+          }
+          required
+          className="mt-1"
+        />
+
+        <CheckboxInput
+          control={form.control}
+          name="privacyPolicyData"
+          label={
+            <span className="text-sm">Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
+              className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
+          }
+          required
+          className="mt-1"
+        />
+
         <div className="flex justify-between pt-2">
           <Button type="button" variant="outline" onClick={onBack}>
             Назад
@@ -338,7 +367,7 @@ const ProgressBar: React.FC<{ currentStep: number; totalSteps: number }> = ({ cu
 const FlowerSubscriptionWizard = () => {
   const [step, setStep] = React.useState(1);
   const [isDateUndefined, setIsDateUndefined] = React.useState(false);
-  
+
   const form = useForm<SubscriptionFormData>({
     resolver: zodResolver(subscriptionSchema),
     defaultValues: {
@@ -350,35 +379,35 @@ const FlowerSubscriptionWizard = () => {
       email: '',
     },
   });
-  
+
   const { handleSubmit, watch, setValue } = form;
-  
+
   const handleDateUndefined = (isUndefined: boolean) => {
     setIsDateUndefined(isUndefined);
     if (isUndefined) {
       setValue('eventDate', undefined);
     }
   };
-  
+
   const onSubmit = (data: SubscriptionFormData) => {
     console.log('Form submitted:', data);
     // Handle form submission
   };
-  
+
   const nextStep = () => setStep((prev) => Math.min(prev + 1, 5));
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl mx-auto">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         <ProgressBar currentStep={step} totalSteps={5} />
-        
+
         <div className="mb-8">
           {step === 1 && <EventTypeStep onNext={nextStep} control={form.control} />}
           {step === 2 && (
-            <EventDateStep 
-              onNext={nextStep} 
-              control={form.control} 
+            <EventDateStep
+              onNext={nextStep}
+              control={form.control}
               onDateUndefined={handleDateUndefined}
             />
           )}

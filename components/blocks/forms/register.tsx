@@ -133,14 +133,12 @@ export default function Register({
                         title={title || "Зарегистрировать цветочный счёт"}
                         description={description || "Заполните форму, и мы свяжемся с вами в ближайшее время, чтобы обсудить все детали вашей цветочной подписки."}
                     >
-                        <Form {...form}>
+                        {/* <Form {...form}>
                             <RegisterForm id="register-section-form" onSubmit={onSubmit} isSubmitting={isSubmitting} formControl={form.control} />
-                        </Form>
+                        </Form> */}
+                        <FlowerSubscriptionWizard />
                     </RegisterFormContainer>
                     <RegisterDialogOverview />
-                </div>
-                <div className="mt-20">
-                    <FlowerSubscriptionWizard />
                 </div>
             </SectionContainer>
         </>
