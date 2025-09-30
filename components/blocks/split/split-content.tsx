@@ -70,7 +70,7 @@ export default function SplitContent({
                         )}>
                             {infoList?.list?.map((item, index) => {
                                 return (
-                                    <div key={index} className="flex gap-4">
+                                    <div key={index} className="flex flex-col gap-4">
                                         <div className="shrink-0 w-10 h-10 flex items-center justify-center">
                                             <i className={cn("text-3xl text-primary", item?.icon)}></i>
                                         </div>
