@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import FormRegisterSuccess from "@/components/shared/forms/FormRegisterSuccess";
 import { createUserAccount } from "@/lib/userAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
-import {FlowerSubscriptionWizard, RegisterForm, RegisterFormContainer} from "@/components/shared/forms";
+import { FlowerSubscriptionWizard, RegisterForm, RegisterFormContainer } from "@/components/shared/forms";
 import { ColorVariant, PAGE_QUERYResult } from "@/sanity.types";
 import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
@@ -139,7 +139,9 @@ export default function Register({
                     </RegisterFormContainer>
                     <RegisterDialogOverview />
                 </div>
-                <FlowerSubscriptionWizard />
+                <div className="mt-20">
+                    <FlowerSubscriptionWizard />
+                </div>
             </SectionContainer>
         </>
     );
