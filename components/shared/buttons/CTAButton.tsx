@@ -7,14 +7,14 @@ import { ButtonVariant } from "@/sanity.types";
 
 export type CTAButtonProps = {
     title?: string;
-    href: string;
+    href?: string;
     buttonVariant?: ButtonVariant;
     target?: boolean;
     className?: string;
     customGoal?: string;
 };
 
-export function CTAButton({ title, href, buttonVariant = "default", target, className, customGoal='' }: CTAButtonProps) {
+export function CTAButton({ title="Открыть счёт", href='#', buttonVariant = "default", target, className, customGoal='' }: CTAButtonProps) {
     const ButtonContent = (
         <Button
             variant={buttonVariant}
@@ -23,7 +23,7 @@ export function CTAButton({ title, href, buttonVariant = "default", target, clas
             className={`w-full md:w-auto md:min-w-40 group ${className || ''}`}
         >
             <Link
-                href={href || '#'}
+                href={href}
                 target={target ? "_blank" : undefined}
                 rel={target ? "noopener" : undefined}
             >

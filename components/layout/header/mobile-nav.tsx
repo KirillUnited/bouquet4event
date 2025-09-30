@@ -15,6 +15,7 @@ import { useState } from "react";
 import { AlignRight } from "lucide-react";
 import { SocialsList } from "@/components/shared/socials";
 import { SocialsListProps } from "@/components/shared/socials/SocialsList";
+import {CTAButton} from "@/components/shared/buttons";
 
 export default function MobileNav({ navItems, socials }: { navItems: NavItem[], socials: SocialsListProps["items"] }) {
   const [open, setOpen] = useState(false);
@@ -55,14 +56,8 @@ export default function MobileNav({ navItems, socials }: { navItems: NavItem[], 
               ))}
             </ul>
 
-            <Button
-              asChild
-              className="w-full"
-            >
-              <Link href="#register">
-                Регистрация
-              </Link>
-            </Button>
+            <CTAButton />
+
             <SocialsList items={socials} />
           </div>
         </div>
