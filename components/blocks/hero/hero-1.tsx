@@ -28,7 +28,7 @@ export default function Hero1({
         <section className="relative">
             <div className="container">
                 <div className="">
-                    <div className="max-w-4xl flex flex-col py-20 min-h-[80svh]">
+                    <div className="max-w-4xl flex flex-col py-20 sm:min-h-[80svh]">
                         <div
                             className="flex-1 flex flex-col justify-center md:items-start text-left z-10">
                             {tagLine && (
@@ -66,7 +66,7 @@ export default function Hero1({
                                 )}
                             </div>
                             {Array.isArray(statistics?.items) && statistics?.items?.length > 0 && (
-                                <footer className='mt-10'>
+                                <footer className='mt-10 hidden sm:block'>
                                     <StatInfoList items={statistics?.items} _type="statistics"/>
                                 </footer>
                             )}
