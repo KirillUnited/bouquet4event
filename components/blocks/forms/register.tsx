@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import FormRegisterSuccess from "@/components/shared/forms/FormRegisterSuccess";
 import { createUserAccount } from "@/lib/userAccount";
 import { RegisterDialogOverview } from "@/components/shared/dialog";
-import {FlowerSubscriptionWizard, RegisterForm, RegisterFormContainer} from "@/components/shared/forms";
+import { FlowerSubscriptionWizard, RegisterForm, RegisterFormContainer } from "@/components/shared/forms";
 import { ColorVariant, PAGE_QUERYResult } from "@/sanity.types";
 import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
@@ -133,13 +133,13 @@ export default function Register({
                         title={title || "Зарегистрировать цветочный счёт"}
                         description={description || "Заполните форму, и мы свяжемся с вами в ближайшее время, чтобы обсудить все детали вашей цветочной подписки."}
                     >
-                        <Form {...form}>
+                        {/* <Form {...form}>
                             <RegisterForm id="register-section-form" onSubmit={onSubmit} isSubmitting={isSubmitting} formControl={form.control} />
-                        </Form>
+                        </Form> */}
+                        <FlowerSubscriptionWizard />
                     </RegisterFormContainer>
                     <RegisterDialogOverview />
                 </div>
-                <FlowerSubscriptionWizard />
             </SectionContainer>
         </>
     );
