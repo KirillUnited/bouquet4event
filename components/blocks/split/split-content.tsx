@@ -1,11 +1,11 @@
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import TagLine from "@/components/ui/tag-line";
-import {createElement} from "react";
-import {stegaClean} from "next-sanity";
-import {PAGE_QUERYResult, Statistics} from "@/sanity.types";
-import {CallBackDialog} from "@/components/shared/dialog";
-import {Card} from "@/components/ui/card";
+import { createElement } from "react";
+import { stegaClean } from "next-sanity";
+import { PAGE_QUERYResult, Statistics } from "@/sanity.types";
+import { CallBackDialog } from "@/components/shared/dialog";
+import { Card, CardContent } from "@/components/ui/card";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type SplitRow = Extract<Block, { _type: "split-row" }>;
@@ -17,20 +17,22 @@ type SplitContent = Extract<
 interface SplitContentProps extends SplitContent {
     noGap?: boolean;
     statistics: Statistics | null;
+    benefits?: any;
 }
 
 export default function SplitContent({
-                                         sticky,
-                                         padding,
-                                         noGap,
-                                         tagLine,
-                                         title,
-                                         body,
-                                         statistics,
-                                         infoList,
-                                         footerBody,
-                                         link,
-                                     }: SplitContentProps) {
+    sticky,
+    padding,
+    noGap,
+    tagLine,
+    title,
+    body,
+    statistics,
+    benefits,
+    infoList,
+    footerBody,
+    link,
+}: SplitContentProps) {
     return (
         <div
             className={cn(
@@ -47,7 +49,7 @@ export default function SplitContent({
                 )}
             >
                 <header>
-                    {tagLine && <TagLine title={tagLine} element="span" className='leading-none'/>}
+                    {tagLine && <TagLine title={tagLine} element="span" className='leading-none' />}
                     {title &&
                         createElement(
                             "h2",
@@ -59,8 +61,34 @@ export default function SplitContent({
                 </header>
 
                 <article>
-                    {body && <PortableTextRenderer value={body}/>}
+                    {body && <PortableTextRenderer value={body} />}
                 </article>
+
+                {Array.isArray(benefits) && benefits.length > 0 && (
+                    <div className="flex flex-col gap-8">
+                        <div className={cn(
+                            "grid md:grid-cols-2 gap-2",
+                        )}>
+                            {benefits?.map((item, index) => {
+                                return (
+                                    <Card key={index} className="hover:shadow-2xl">
+                                        <CardContent className="flex flex-col gap-4 pt-6">
+                                            <div className="shrink-0 w-10 h-10 flex items-center justify-center">
+                                                <i className={cn("text-3xl text-primary", item?.icon)}></i>
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <h3 className="text-xl font-semibold leading-none font-sans">
+                                                    {item?.title}
+                                                </h3>
+                                                {item?.description && <p className="text-sm md:text-base font-light text-foreground/75">{item.description}</p>}
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                )
+                            })}
+                        </div>
+                    </div>
+                )}
 
                 {infoList?.list && infoList?.list?.length > 0 && (
                     <div className="flex flex-col gap-8">
@@ -78,7 +106,7 @@ export default function SplitContent({
                                             <h4 className="text-xl font-semibold leading-none font-sans">
                                                 {item?.title}
                                             </h4>
-                                            {item?.body && <PortableTextRenderer value={item.body}/>}
+                                            {item?.body && <PortableTextRenderer value={item.body} />}
                                         </div>
                                     </div>
                                 )
@@ -89,7 +117,7 @@ export default function SplitContent({
 
                 {Array.isArray(statistics?.items) && statistics.items.length > 0 && (
                     <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        {statistics?.items?.map(({value, label}) => (
+                        {statistics?.items?.map(({ value, label }) => (
                             <li key={label} className="text-center">
                                 <p className="text-3xl font-bold text-primary mb-2">{value}</p>
                                 <p className=" font-normal text-foreground/70">{label}</p>
@@ -100,13 +128,13 @@ export default function SplitContent({
 
                 <footer className="flex flex-col">
                     {footerBody && (
-                        <Card className='px-4 pt-4'>{footerBody && <PortableTextRenderer value={footerBody}/>}</Card>
+                        <Card className='px-4 pt-4'>{footerBody && <PortableTextRenderer value={footerBody} />}</Card>
                     )}
 
                     {link?.href && (
                         <div className="flex flex-col self-stretch md:self-start mt-8">
                             <CallBackDialog title={link.title} href={link.href}
-                                            buttonVariant={stegaClean(link.buttonVariant)} target={link.target}/>
+                                buttonVariant={stegaClean(link.buttonVariant)} target={link.target} />
                         </div>
                     )}
                 </footer>
