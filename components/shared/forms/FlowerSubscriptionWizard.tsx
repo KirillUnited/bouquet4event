@@ -125,7 +125,7 @@ const FlowerSubscriptionWizard: React.FC<FlowerSubscriptionWizardProps> = ({
           {step === 4 && <DurationStep onNext={nextStep} control={control} />}
           {step === 5 && (
             <Card className="p-6">
-              <div className="text-center mb-8">
+              <div className="mb-8">
                 <h3 className="text-2xl font-semibold mb-2">
                   Мы подготовим для вас персональное предложение по цветочной подписке 🌸
                 </h3>
