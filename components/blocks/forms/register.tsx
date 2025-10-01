@@ -1,5 +1,4 @@
 'use client';
-import { Form } from "@/components/ui/form";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,6 +12,7 @@ import { ColorVariant, PAGE_QUERYResult } from "@/sanity.types";
 import SectionContainer from "@/components/layout/section-container";
 import { stegaClean } from "next-sanity";
 import { openCheckoutMessage } from "@/lib/messenger";
+import {formSchema} from "@/components/shared/forms/lib/validation";
 
 type FormRegisterProps = Extract<
     NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -33,24 +33,6 @@ export default function Register({
     customGoal
 }: FormRegisterProps & { customGoal?: string }) {
     const [formValues, setFormValues] = useState({});
-    const formSchema = z.object({
-        name: z.string().min(1, { message: "Пожалуйста, введите ваше имя" }),
-        phone: z.string()
-            .min(1, { message: "Пожалуйста, введите ваш телефон" })
-            .regex(/^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/, {
-                message: "Телефон должен соответствовать формату +7 (XXX) XXX-XX-XX"
-            }),
-        region: z.string().min(1, { message: "Пожалуйста, выберите ваш регион" }),
-        date: z.date({
-            required_error: "Пожалуйста, введите дату",
-        }),
-        privacyPolicy: z.boolean().refine(val => val === true, {
-            message: "Необходимо согласиться с политикой конфиденциальности"
-        }),
-        privacyPolicyData: z.boolean().refine(val => val === true, {
-            message: "Необходимо согласиться с обработкой персональных данных"
-        }),
-    });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
