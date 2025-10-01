@@ -1,3 +1,6 @@
+import * as z from "zod";
+import {subscriptionSchema} from "@/components/shared/forms/lib/validation";
+
 export interface RegisterFormProps {
     id: string;
     onSubmit: (event: React.FormEvent) => void;
@@ -17,3 +20,16 @@ export interface PaymentFormProps {
     orderNumber?: string;
     token?: string;
 }
+export interface OptionType {
+    value: string;
+    label: string;
+    emoji?: string;
+    description?: string;
+}
+
+export interface StepProps {
+    onNext: () => void;
+    onBack?: () => void;
+    control: any;
+}
+export type SubscriptionFormData = z.infer<typeof subscriptionSchema>;
