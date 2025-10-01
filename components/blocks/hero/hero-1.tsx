@@ -84,7 +84,7 @@ export default function Hero1({
                         />
                     </div>
                 )}
-                <div className="absolute inset-0 bg-background/70" />
+                <div className="absolute inset-0 dark:bg-background/70 bg-background/35" />
             </div>
         </section>
     );
