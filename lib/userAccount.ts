@@ -22,6 +22,10 @@ export interface UserAccountData {
   privacyPolicy?: boolean;
   privacyPolicyData?: boolean;
   donations?: Donation[];
+  eventType?: string;
+  style?: string;
+  duration?: string;
+  email?: string;
 }
 
 /**
