@@ -118,7 +118,7 @@ export default function Register({
                         {/* <Form {...form}>
                             <RegisterForm id="register-section-form" onSubmit={onSubmit} isSubmitting={isSubmitting} formControl={form.control} />
                         </Form> */}
-                        <FlowerSubscriptionWizard />
+                        <FlowerSubscriptionWizard goal={goal || customGoal} />
                     </RegisterFormContainer>
                     <RegisterDialogOverview />
                 </div>
