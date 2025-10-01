@@ -67,6 +67,12 @@ export default defineType({
       group: "infoList",
     }),
     defineField({
+      name: "benefits",
+      type: "benefitsType",
+      title: "Преимущества",
+      group: "infoList",
+    }),
+    defineField({
       name: "footerBody",
       type: "block-content",
       group: "content",
