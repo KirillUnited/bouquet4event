@@ -19,13 +19,14 @@ export default function SectionHeader({
   tagLine,
   title,
   description,
-}: SectionHeaderProps) {
+  className
+}: SectionHeaderProps & {className?: string}) {
   const isNarrow = stegaClean(sectionWidth) === "narrow";
   const align = stegaClean(stackAlign);
   const color = stegaClean(colorVariant);
 
   return (
-    <SectionContainer color={color} padding={padding} sectionID={sectionID || undefined}>
+    <SectionContainer color={color} padding={padding} sectionID={sectionID || undefined} className={cn(className)}>
       <div
         className={cn(
           align === "center" ? "max-w-[48rem] text-center mx-auto" : undefined,
