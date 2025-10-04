@@ -6,9 +6,17 @@ export type NavItem = {
 
 export type NavigationMenuItem = {
   label: string;
-  href: string;
-  target: boolean;
+  linkType: "page" | "external";
+  href?: string;
+  target?: boolean;
   description?: string;
+  pageReference?: {
+    _id: string;
+    title: string;
+    slug: {
+      current: string;
+    };
+  };
 };
 
 export type NavigationMenu = {

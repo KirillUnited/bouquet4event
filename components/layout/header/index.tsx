@@ -9,14 +9,18 @@ import { SocialsList } from "@/components/shared/socials";
 import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
 import { stegaClean } from "next-sanity";
+import { transformNavigationItems } from "@/lib/navigation";
 
 export default async function Header() {
   const {data: siteSettings} = await sanityFetch({query: SITE_SETTINGS_QUERY});
   
   // Use navigation from Sanity or fallback to config
   const mainNavigation = stegaClean(siteSettings?.mainNavigation);
-  const navItems = mainNavigation?.menuItems || NAV_ITEMS;
-  console.log(mainNavigation);
+  
+  // Transform Sanity navigation items to match the expected format
+  const navItems = mainNavigation?.menuItems 
+    ? transformNavigationItems(mainNavigation.menuItems)
+    : NAV_ITEMS;
 
   return (
     <header className={cn(

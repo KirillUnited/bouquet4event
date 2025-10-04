@@ -7,12 +7,22 @@ export const SITE_SETTINGS_QUERY = groq`*[_type == "siteSettings"][0]{
     ...,
     menuItems[]{
       ...,
+      pageReference->{
+        _id,
+        title,
+        "slug": slug.current
+      }
     }
   },
   footerNavigation[]{
     ...,
     menuItems[]{
       ...,
+      pageReference->{
+        _id,
+        title,
+        "slug": slug.current
+      }
     }
   }
 }`;
