@@ -6,6 +6,7 @@ import { stegaClean } from "next-sanity";
 import { PAGE_QUERYResult, Statistics } from "@/sanity.types";
 import { CallBackDialog } from "@/components/shared/dialog";
 import { Card, CardContent } from "@/components/ui/card";
+import { StatInfoList2 } from "@/components/shared/info-list";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type SplitRow = Extract<Block, { _type: "split-row" }>;
@@ -67,7 +68,7 @@ export default function SplitContent({
                 {Array.isArray(benefits) && benefits.length > 0 && (
                     <div className="flex flex-col gap-8">
                         <div className={cn(
-                            "grid md:grid-cols-2 gap-2",
+                            "grid md:grid-cols-2 gap-4",
                         )}>
                             {benefits?.map((item, index) => {
                                 return (
@@ -116,28 +117,23 @@ export default function SplitContent({
                 )}
 
                 {Array.isArray(statistics?.items) && statistics.items.length > 0 && (
-                    <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        {statistics?.items?.map(({ value, label }) => (
-                            <li key={label} className="text-center">
-                                <p className="text-3xl font-bold text-primary mb-2">{value}</p>
-                                <p className=" font-normal text-foreground/70">{label}</p>
-                            </li>
-                        ))}
-                    </ul>
+                    <StatInfoList2 items={statistics?.items} _type="statistics"/>
                 )}
 
-                <footer className="flex flex-col">
-                    {footerBody && (
-                        <Card className='px-4 pt-4'>{footerBody && <PortableTextRenderer value={footerBody} />}</Card>
-                    )}
+                {(footerBody || link?.href) && (
+                    <footer className="flex flex-col">
+                        {footerBody && (
+                            <Card className='px-4 pt-4'>{footerBody && <PortableTextRenderer value={footerBody} />}</Card>
+                        )}
 
-                    {link?.href && (
-                        <div className="flex flex-col self-stretch md:self-start mt-8">
-                            <CallBackDialog title={link.title} href={link.href}
-                                buttonVariant={stegaClean(link.buttonVariant)} target={link.target} />
-                        </div>
-                    )}
-                </footer>
+                        {link?.href && (
+                            <div className="flex flex-col self-stretch md:self-start mt-8">
+                                <CallBackDialog title={link.title} href={link.href}
+                                    buttonVariant={stegaClean(link.buttonVariant)} target={link.target} />
+                            </div>
+                        )}
+                    </footer>)}
+
             </div>
         </div>
     );
