@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { ControlsIcon } from "@sanity/icons";
-import { CreditCardIcon } from "lucide-react";
+import { CreditCardIcon, Navigation } from "lucide-react";
 
 export const siteSettingsType = defineType({
     name: "siteSettings",
@@ -15,6 +15,11 @@ export const siteSettingsType = defineType({
         {
             name: "siteContact",
             title: "Контактная информация",
+        },
+        {
+            name: "navigation",
+            title: "Навигация",
+            icon: Navigation,
         },
     ],
     fields: [
@@ -87,11 +92,27 @@ export const siteSettingsType = defineType({
             }],
             group: "siteInfo",
         }),
+        defineField({
+            name: "mainNavigation",
+            title: "Главная навигация",
+            type: "navigation-menu",
+            group: "navigation",
+            description: "Главная навигация для сайта",
+        }),
+        defineField({
+            name: "footerNavigation",
+            title: "Нижняя навигация",
+            type: "array",
+            of: [{ type: "navigation-menu" }],
+            group: "navigation",
+            description: "Нижняя навигация для сайта",
+            validation: (rule) => rule.max(3).error("Максимум 3 нижние навигации"),
+        }),
     ],
     preview: {
         prepare() {
             return {
-                title: "Site Settings",
+                title: "Настройки сайта",
             };
         },
     },
