@@ -6,6 +6,8 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
 import { PaymentContainer } from "@/components/shared/site";
 import { getCurrentYear } from "@/lib/utils";
+import { stegaClean } from "next-sanity";
+import { transformNavigationItems } from "@/lib/navigation";
 
 export default async function Footer() {
   const { data: siteSettings } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
@@ -19,6 +21,17 @@ export default async function Footer() {
     address,
     workingHours
   };
+  // Use navigation from Sanity or fallback to config
+  const mainNavigation = stegaClean(siteSettings?.mainNavigation);
+  const footerNavigation = stegaClean(siteSettings?.footerNavigation);
+
+  // Transform Sanity navigation items to match the expected format
+  const navItems = mainNavigation[0]?.menuItems
+    ? transformNavigationItems(mainNavigation[0].menuItems)
+    : NAV_ITEMS;
+  const footerNavItems = footerNavigation[0]?.menuItems
+    ? transformNavigationItems(footerNavigation[0].menuItems)
+    : [];
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -37,65 +50,37 @@ export default async function Footer() {
             <h3 className="text-xl font-semibold mb-4">Контакты</h3>
             <ContactList items={{ _type: "contactInfo", ...contacts }} />
           </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Карта сайта</h3>
-            <ul className="space-y-2">
-              {NAV_ITEMS.map((navItem) => (
-                <li key={navItem.label}>
-                  <Link
-                    href={navItem.href}
-                    className="transition-colors"
-                  >
-                    {navItem.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Информация</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href={"/privacy"}
-                  className="transition-colors"
-                >
-                  Политика конфиденциальности
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/agreement"}
-                  className="transition-colors"
-                >
-                  Пользовательское соглашение
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/publichnaya-oferta"}
-                  className="transition-colors"
-                >
-                  Публичная оферта
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/soglasie-na-obrabotku-personalnykh-dannykh"}
-                  className="transition-colors"
-                >
-                  Согласие на обработку персональных данных
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/dostavka-i-oplata"}
-                  className="transition-colors"
-                >
-                  Доставка и оплата
-                </Link>
-              </li>
-            </ul>
+          <div className="flex flex-wrap gap-4">
+            <nav className="flex-1">
+              <h3 className="text-xl font-semibold mb-4">Карта сайта</h3>
+              <ul className="space-y-2">
+                {navItems.map((navItem) => (
+                  <li key={navItem.label}>
+                    <Link
+                      href={navItem.href}
+                      className="transition-colors leading-tight"
+                    >
+                      {navItem.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <nav className="flex-1">
+              <h3 className="text-xl font-semibold mb-4">Информация</h3>
+              <ul className="space-y-2">
+                {footerNavItems.map((navItem) => (
+                  <li key={navItem.label}>
+                    <Link
+                      href={navItem.href}
+                      className="transition-colors leading-tight"
+                    >
+                      {navItem.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
           <PaymentContainer paymentMethods={siteSettings?.paymentMethod} />
         </div>

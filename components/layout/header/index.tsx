@@ -8,9 +8,19 @@ import { cn } from "@/lib/utils";
 import { SocialsList } from "@/components/shared/socials";
 import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
+import { stegaClean } from "next-sanity";
+import { transformNavigationItems } from "@/lib/navigation";
 
 export default async function Header() {
   const {data: siteSettings} = await sanityFetch({query: SITE_SETTINGS_QUERY});
+  
+  // Use navigation from Sanity or fallback to config
+  const mainNavigation = stegaClean(siteSettings?.mainNavigation);
+  
+  // Transform Sanity navigation items to match the expected format
+  const navItems = mainNavigation?.menuItems 
+    ? transformNavigationItems(mainNavigation.menuItems)
+    : NAV_ITEMS;
 
   return (
     <header className={cn(
@@ -22,13 +32,13 @@ export default async function Header() {
           <LogoMobile className="xl:hidden w-16" />
         </Link>
         <div className="hidden xl:flex self-center">
-          <DesktopNav navItems={NAV_ITEMS} />
+          <DesktopNav navItems={navItems} />
         </div>
         <div className="flex items-center">
           <SocialsList className="hidden xl:flex mr-4" items={siteSettings?.siteContactInfo?.socialLinks}/>
           <ModeToggle />
           <div className="xl:hidden">
-            <MobileNav navItems={NAV_ITEMS} socials={siteSettings?.siteContactInfo?.socialLinks} />
+            <MobileNav navItems={navItems} socials={siteSettings?.siteContactInfo?.socialLinks} />
           </div>
         </div>
       </div>

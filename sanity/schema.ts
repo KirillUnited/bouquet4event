@@ -48,6 +48,7 @@ import {yandexGoal} from "./schemas/blocks/yandexGoalType";
 import statisticsType from "@/sanity/schemas/blocks/shared/statisticsType";
 import media from "@/sanity/schemas/blocks/media/media";
 import { benefitsType } from "./schemas/blocks/shared/benefitsType";
+import navigationMenu from "./schemas/blocks/shared/navigation-menu";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -71,6 +72,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         statisticsType,
         media,
         benefitsType,
+        navigationMenu,
         // blocks
         hero1,
         hero2,
