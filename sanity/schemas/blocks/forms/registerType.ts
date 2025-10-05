@@ -5,8 +5,8 @@ import { STACK_ALIGN } from "../shared/layout-variants";
 export default defineType({
     name: "form-register",
     type: "object",
-    title: "Form: Register",
-    description: "A registration form for creating flower subscription accounts.",
+    title: "Форма для оформления подписки",
+    description: "Регистрация для оформления подписки",
     icon: UserPlus,
     groups: [
         {
@@ -16,6 +16,10 @@ export default defineType({
         {
             name: "content",
             title: "Content",
+        },
+        {
+          name: "form",
+          title: "Form",
         },
         {
             name: "SEM",
@@ -61,25 +65,31 @@ export default defineType({
             group: "content",
         }),
         defineField({
+           name: 'form',
+           title: 'Форма регистрации',
+           type: 'wizardForm',
+           group: 'form'
+        }),
+        defineField({
             name: "privacyPolicyText",
             type: "text",
             title: "Privacy Policy Text",
             initialValue: "Я согласен с политикой конфиденциальности",
-            group: "content",
+            group: "form",
         }),
         defineField({
             name: "buttonText",
             type: "string",
             title: "Submit Button Text",
             initialValue: "Зарегистрироваться",
-            group: "content",
+            group: "form",
         }), 
         defineField({
             name: "successMessage",
             type: "text",
             title: "Success Message",
             initialValue: "Ваш счёт успешно зарегистрирован!",
-            group: "content",
+            group: "form",
         }),
         defineField({
             name: "goal",
@@ -89,9 +99,13 @@ export default defineType({
         }),
     ],
     preview: {
-        prepare() {
+        select: {
+            title: 'title'
+        },
+        prepare({title}) {
             return {
-                title: "Registration Form",
+                title: "Forms",
+                subtitle: title
             };
         },
     },

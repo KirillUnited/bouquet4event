@@ -10,6 +10,23 @@ export const formRegisterQuery = groq`
     stackAlign,
     title,
     description,
+    steps[] {
+        title,
+        description,
+        fields[] {
+          fieldType,
+          name,
+          label,
+          isRequired,
+          defaultValue,
+          options[] {
+            title,
+            value,
+            emoji,
+            description
+          }
+        }
+      }
     privacyPolicyText,
     buttonText,
     successMessage,

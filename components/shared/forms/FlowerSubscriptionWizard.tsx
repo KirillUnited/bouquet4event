@@ -176,7 +176,6 @@ function FlowerSubscriptionWizard({
                   required
                 />
 
-
                 <CheckboxInput
                     control={control}
                     name="privacyPolicy"
@@ -185,7 +184,6 @@ function FlowerSubscriptionWizard({
                                                                 className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a></span>
                     }
                     required
-                    className="mt-1"
                 />
                 <CheckboxInput
                     control={control}
@@ -195,7 +193,6 @@ function FlowerSubscriptionWizard({
                                                                 className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
                     }
                     required
-                    className="mt-1"
                 />
 
                 <div className="flex justify-between pt-2">
