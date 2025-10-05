@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import {useState, useCallback, JSX} from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -25,10 +25,10 @@ interface FlowerSubscriptionWizardProps {
 
 const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL!;
 
-const FlowerSubscriptionWizard: React.FC<FlowerSubscriptionWizardProps> = ({
+function FlowerSubscriptionWizard({
   onSubmitSuccess,
   goal = 'schet2'
-}) => {
+}: FlowerSubscriptionWizardProps): JSX.Element {
   const [step, setStep] = useState(1);
   const [isDateUndefined, setIsDateUndefined] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
