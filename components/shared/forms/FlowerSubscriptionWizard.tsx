@@ -1,6 +1,6 @@
 'use client';
 
-import {useState, useCallback, JSX} from 'react';
+import React, {useState, useCallback, JSX} from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -15,6 +15,7 @@ import TextInput from './ui/TextInput';
 import PhoneInput from './PhoneInput';
 import { subscriptionSchema } from './lib/validation/subscriptionSchema';
 import FormRegisterSuccess from './FormRegisterSuccess';
+import RegionSelect from "@/components/shared/forms/RegionSelect";
 
 type SubscriptionFormData = z.infer<typeof subscriptionSchema>;
 
@@ -93,6 +94,7 @@ function FlowerSubscriptionWizard({
 
         await openCheckoutMessage(result);
         onSubmitSuccess?.(result);
+
         return result;
       } else {
         throw new Error('Не удалось отправить заявку. Пожалуйста, попробуйте позже.');
@@ -155,6 +157,13 @@ function FlowerSubscriptionWizard({
                   control={control}
                   name="phone"
                   required
+                />
+
+                <RegionSelect
+                    control={control}
+                    name="region"
+                    required
+                    className="mt-1"
                 />
 
                 <TextInput
