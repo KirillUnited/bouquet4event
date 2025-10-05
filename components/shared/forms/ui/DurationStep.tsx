@@ -7,6 +7,7 @@ import {cn} from "@/lib/utils";
 
 export const DurationStep: React.FC<StepProps> = ({ onNext, control }) => {
     const durations: OptionType[] = [
+        { label: '1 месяц', value: '1' },
         { label: '3 месяца', value: '3' },
         { label: '6 месяцев', value: '6' },
         { label: '12 месяцев', value: '12' },

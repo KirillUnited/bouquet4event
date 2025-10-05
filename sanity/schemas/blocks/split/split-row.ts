@@ -1,5 +1,5 @@
-import {defineType, defineField} from "sanity";
-import {SquareSplitHorizontal} from "lucide-react";
+import { defineType, defineField } from "sanity";
+import { SquareSplitHorizontal } from "lucide-react";
 
 export default defineType({
     name: "split-row",
@@ -9,6 +9,12 @@ export default defineType({
         "Split Row: Customizable split row with multiple columns variants",
     icon: SquareSplitHorizontal,
     fields: [
+        defineField({
+            name: "sectionID",
+            type: "string",
+            title: "Section ID",
+            description: "Section ID for anchor links",
+        }),
         defineField({
             name: "padding",
             type: "section-padding",
@@ -28,10 +34,10 @@ export default defineType({
             name: "splitColumns",
             type: "array",
             of: [
-                {type: "split-content"},
-                {type: "split-cards-list"},
-                {type: "split-image"},
-                {type: "split-info-list"},
+                { type: "split-content" },
+                { type: "split-cards-list" },
+                { type: "split-image" },
+                { type: "split-info-list" },
             ],
             validation: (rule) => rule.max(2),
             options: {
@@ -41,7 +47,7 @@ export default defineType({
                             name: "grid",
                             previewImageUrl: (block) => `/sanity/preview/${block}.jpg`,
                         },
-                        {name: "list"},
+                        { name: "list" },
                     ],
                 },
             },
@@ -56,7 +62,7 @@ export default defineType({
             title0: "splitColumns.0.title",
             title1: "splitColumns.1.title",
         },
-        prepare({title0, title1}) {
+        prepare({ title0, title1 }) {
             return {
                 title: "Split Row",
                 subtitle: title0 || title1 || "No Title",
