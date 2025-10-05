@@ -16,6 +16,7 @@ import PhoneInput from './PhoneInput';
 import { subscriptionSchema } from './lib/validation/subscriptionSchema';
 import FormRegisterSuccess from './FormRegisterSuccess';
 import RegionSelect from "@/components/shared/forms/RegionSelect";
+import CheckboxInput from "./ui/CheckboxInput";
 
 type SubscriptionFormData = z.infer<typeof subscriptionSchema>;
 
@@ -175,37 +176,27 @@ function FlowerSubscriptionWizard({
                   required
                 />
 
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="privacyPolicy"
-                    {...form.register('privacyPolicy')}
-                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                  />
-                  <label htmlFor="privacyPolicy" className="text-sm">
-                    Я согласен с <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">политикой конфиденциальности</a>
-                  </label>
-                </div>
 
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="privacyPolicyData"
-                    {...form.register('privacyPolicyData')}
-                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                  />
-                  <label htmlFor="privacyPolicyData" className="text-sm">
-                    Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">обработкой персональных данных</a>
-                  </label>
-                </div>
-
-                {formState.errors.privacyPolicy && (
-                  <p className="text-sm text-red-500">{formState.errors.privacyPolicy.message}</p>
-                )}
-
-                {formState.errors.privacyPolicyData && (
-                  <p className="text-sm text-red-500">{formState.errors.privacyPolicyData.message}</p>
-                )}
+                <CheckboxInput
+                    control={control}
+                    name="privacyPolicy"
+                    label={
+                      <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
+                                                                className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a></span>
+                    }
+                    required
+                    className="mt-1"
+                />
+                <CheckboxInput
+                    control={control}
+                    name="privacyPolicyData"
+                    label={
+                      <span className="text-sm">Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
+                                                                className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
+                    }
+                    required
+                    className="mt-1"
+                />
 
                 <div className="flex justify-between pt-2">
                   <Button
