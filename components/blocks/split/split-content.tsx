@@ -3,7 +3,7 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import TagLine from "@/components/ui/tag-line";
 import { createElement } from "react";
 import { stegaClean } from "next-sanity";
-import { PAGE_QUERYResult, Statistics } from "@/sanity.types";
+import { BenefitsType, PAGE_QUERYResult, Statistics } from "@/sanity.types";
 import { CallBackDialog } from "@/components/shared/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { StatInfoList2 } from "@/components/shared/info-list";
@@ -18,7 +18,7 @@ type SplitContent = Extract<
 interface SplitContentProps extends SplitContent {
     noGap?: boolean;
     statistics: Statistics | null;
-    benefits?: any;
+    benefits: BenefitsType | null;
 }
 
 export default function SplitContent({
