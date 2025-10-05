@@ -49,22 +49,24 @@ export default function SplitContent({
                     noGap ? "px-10" : undefined
                 )}
             >
-                <header>
-                    {tagLine && <TagLine title={tagLine} element="span" className='leading-none' />}
-                    {title &&
-                        createElement(
-                            "h2",
-                            {
-                                className: cn("text-3xl md:text-5xl my-2 font-semibold leading-none"),
-                            },
-                            title
-                        )}
-                </header>
-
-                <article>
-                    {body && <PortableTextRenderer value={body} />}
-                </article>
-
+                {title && (
+                    <header>
+                        {tagLine && <TagLine title={tagLine} element="span" className='leading-none' />}
+                        {title &&
+                            createElement(
+                                "h2",
+                                {
+                                    className: cn("text-3xl md:text-5xl my-2 font-semibold leading-none"),
+                                },
+                                title
+                            )}
+                    </header>
+                )}
+                {body && (
+                    <article>
+                        {body && <PortableTextRenderer value={body} />}
+                    </article>
+                )}
                 {Array.isArray(benefits) && benefits.length > 0 && (
                     <div className="flex flex-col gap-8">
                         <div className={cn(
@@ -117,7 +119,7 @@ export default function SplitContent({
                 )}
 
                 {Array.isArray(statistics?.items) && statistics.items.length > 0 && (
-                    <StatInfoList2 items={statistics?.items} _type="statistics"/>
+                    <StatInfoList2 items={statistics?.items} _type="statistics" />
                 )}
 
                 {(footerBody || link?.href) && (

@@ -6,7 +6,7 @@ interface SectionContainerProps {
   padding?: SectionPadding | null;
   children: React.ReactNode;
   className?: string;
-  sectionID?: string;
+  sectionID?: string | null;
 }
 
 export default function SectionContainer({
