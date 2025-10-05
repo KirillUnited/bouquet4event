@@ -1,12 +1,12 @@
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import SectionContainer from "@/components/layout/section-container";
-import {stegaClean} from "next-sanity";
-import {PAGE_QUERYResult} from "@/sanity.types";
+import { stegaClean } from "next-sanity";
+import { PAGE_QUERYResult } from "@/sanity.types";
 import SplitContent from "./split-content";
 import SplitCardsList from "./split-cards-list";
 import SplitImage from "./split-image";
 import SplitInfoList from "./split-info-list";
-import {CTAButton} from "@/components/shared/buttons";
+import { CTAButton } from "@/components/shared/buttons";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type SplitRow = Extract<Block, { _type: "split-row" }>;
@@ -24,16 +24,17 @@ const componentMap: {
 };
 
 export default function SplitRow({
-                                     padding,
-                                     colorVariant,
-                                     noGap,
-                                     splitColumns,
-                                     link
-                                 }: SplitRow) {
+    sectionID,
+    padding,
+    colorVariant,
+    noGap,
+    splitColumns,
+    link
+}: SplitRow) {
     const color = stegaClean(colorVariant);
 
     return (
-        <SectionContainer color={color} padding={padding}>
+        <SectionContainer color={color} padding={padding} sectionID={sectionID}>
             {splitColumns && splitColumns?.length > 0 && (
                 <div
                     className={cn(
@@ -49,7 +50,7 @@ export default function SplitRow({
                             console.warn(
                                 `No component implemented for split column type: ${column._type}`
                             );
-                            return <div data-type={column._type} key={column._key}/>;
+                            return <div data-type={column._type} key={column._key} />;
                         }
                         return (
                             <Component
@@ -64,7 +65,7 @@ export default function SplitRow({
             )}
             {link?.href && (
                 <footer className="mt-10">
-                    <CTAButton href={link.href} title={link.title} buttonVariant={link.buttonVariant}/>
+                    <CTAButton href={link.href} title={link.title} buttonVariant={link.buttonVariant} />
                 </footer>
             )
             }
