@@ -38,7 +38,7 @@ export function DatePicker({control, label, className, required = false}: DatePi
     return (
         <FormField
             control={control}
-            name="date"
+            name="eventDate"
             render={({field}) => (
                 <FormItem className={clsx("", className)}>
                     {label && (

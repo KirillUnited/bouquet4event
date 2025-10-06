@@ -7,7 +7,12 @@ export const subscriptionSchema = z.object({
     style: z.string().min(1, 'Пожалуйста, выберите стиль букета'),
     duration: z.string().min(1, 'Пожалуйста, выберите длительность подписки'),
     name: z.string().min(2, 'Имя должно содержать хотя бы 2 символа'),
-    phone: z.string().min(10, 'Введите корректный номер телефона'),
+    phone: z.string()
+        .min(1, { message: "Пожалуйста, введите ваш телефон" })
+        .regex(/^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/, {
+            message: "Телефон должен соответствовать формату +7 (XXX) XXX-XX-XX"
+        }),
+    region: z.string().min(1, { message: "Пожалуйста, выберите ваш регион" }),
     email: z.string().email('Введите корректный email'),
     privacyPolicy: z.boolean().refine(val => val === true, {
         message: "Необходимо согласиться с политикой конфиденциальности"
