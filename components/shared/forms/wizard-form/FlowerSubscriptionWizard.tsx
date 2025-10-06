@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import React, {useState, useCallback, JSX} from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -10,11 +10,14 @@ import { Loader2Icon } from 'lucide-react';
 import { toast } from 'sonner';
 import { createUserAccount } from '@/lib/userAccount';
 import { openCheckoutMessage } from '@/lib/messenger';
-import { ProgressBar, EventTypeStep, EventDateStep, StyleStep, DurationStep } from './ui';
-import TextInput from './ui/TextInput';
-import PhoneInput from './PhoneInput';
-import { subscriptionSchema } from './lib/validation/subscriptionSchema';
-import FormRegisterSuccess from './FormRegisterSuccess';
+import { EventTypeStep, EventDateStep, StyleStep, DurationStep } from '@/components/shared/forms/wizard-form/ui';
+import TextInput from '../ui/TextInput';
+import PhoneInput from '../PhoneInput';
+import { subscriptionSchema } from '../lib/validation/subscriptionSchema';
+import FormRegisterSuccess from '../FormRegisterSuccess';
+import RegionSelect from "@/components/shared/forms/RegionSelect";
+import CheckboxInput from "../ui/CheckboxInput";
+import {ProgressBar} from "@/components/shared/forms/ui";
 
 type SubscriptionFormData = z.infer<typeof subscriptionSchema>;
 
@@ -25,10 +28,10 @@ interface FlowerSubscriptionWizardProps {
 
 const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL!;
 
-const FlowerSubscriptionWizard: React.FC<FlowerSubscriptionWizardProps> = ({
+function FlowerSubscriptionWizard({
   onSubmitSuccess,
   goal = 'schet2'
-}) => {
+}: FlowerSubscriptionWizardProps): JSX.Element {
   const [step, setStep] = useState(1);
   const [isDateUndefined, setIsDateUndefined] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -93,6 +96,7 @@ const FlowerSubscriptionWizard: React.FC<FlowerSubscriptionWizardProps> = ({
 
         await openCheckoutMessage(result);
         onSubmitSuccess?.(result);
+
         return result;
       } else {
         throw new Error('Не удалось отправить заявку. Пожалуйста, попробуйте позже.');
@@ -157,6 +161,13 @@ const FlowerSubscriptionWizard: React.FC<FlowerSubscriptionWizardProps> = ({
                   required
                 />
 
+                <RegionSelect
+                    control={control}
+                    name="region"
+                    required
+                    className="mt-1"
+                />
+
                 <TextInput
                   control={control}
                   name="email"
@@ -166,37 +177,24 @@ const FlowerSubscriptionWizard: React.FC<FlowerSubscriptionWizardProps> = ({
                   required
                 />
 
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="privacyPolicy"
-                    {...form.register('privacyPolicy')}
-                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                  />
-                  <label htmlFor="privacyPolicy" className="text-sm">
-                    Я согласен с <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">политикой конфиденциальности</a>
-                  </label>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="privacyPolicyData"
-                    {...form.register('privacyPolicyData')}
-                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                  />
-                  <label htmlFor="privacyPolicyData" className="text-sm">
-                    Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">обработкой персональных данных</a>
-                  </label>
-                </div>
-
-                {formState.errors.privacyPolicy && (
-                  <p className="text-sm text-red-500">{formState.errors.privacyPolicy.message}</p>
-                )}
-
-                {formState.errors.privacyPolicyData && (
-                  <p className="text-sm text-red-500">{formState.errors.privacyPolicyData.message}</p>
-                )}
+                <CheckboxInput
+                    control={control}
+                    name="privacyPolicy"
+                    label={
+                      <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
+                                                                className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a></span>
+                    }
+                    required
+                />
+                <CheckboxInput
+                    control={control}
+                    name="privacyPolicyData"
+                    label={
+                      <span className="text-sm">Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
+                                                                className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
+                    }
+                    required
+                />
 
                 <div className="flex justify-between pt-2">
                   <Button
