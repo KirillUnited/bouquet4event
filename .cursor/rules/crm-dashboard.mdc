@@ -1,0 +1,8 @@
+---
+description: Project rules for crm/dashboard integration
+globs:
+alwaysApply: false
+---
+
+Base requirements description - @docs/crm-dashboard/REQUIREMENTS.md
+Base arch rules - @docs/crm-dashboard/ARCH_RULES.md
