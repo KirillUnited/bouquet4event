@@ -10,13 +10,14 @@ import { Loader2Icon } from 'lucide-react';
 import { toast } from 'sonner';
 import { createUserAccount } from '@/lib/userAccount';
 import { openCheckoutMessage } from '@/lib/messenger';
-import { ProgressBar, EventTypeStep, EventDateStep, StyleStep, DurationStep } from './ui';
-import TextInput from './ui/TextInput';
-import PhoneInput from './PhoneInput';
-import { subscriptionSchema } from './lib/validation/subscriptionSchema';
-import FormRegisterSuccess from './FormRegisterSuccess';
+import { EventTypeStep, EventDateStep, StyleStep, DurationStep } from '@/components/shared/forms/wizard-form/ui';
+import TextInput from '../ui/TextInput';
+import PhoneInput from '../PhoneInput';
+import { subscriptionSchema } from '../lib/validation/subscriptionSchema';
+import FormRegisterSuccess from '../FormRegisterSuccess';
 import RegionSelect from "@/components/shared/forms/RegionSelect";
-import CheckboxInput from "./ui/CheckboxInput";
+import CheckboxInput from "../ui/CheckboxInput";
+import {ProgressBar} from "@/components/shared/forms/ui";
 
 type SubscriptionFormData = z.infer<typeof subscriptionSchema>;
 
