@@ -1,9 +1,9 @@
 import React from "react";
 import {useFormContext} from "react-hook-form";
 import {Card} from "@/components/ui/card";
-import TextInput from "./TextInput";
-import PhoneInput from "../PhoneInput";
-import {CheckboxInput} from "@/components/shared/forms/ui/index";
+import TextInput from "../../ui/TextInput";
+import PhoneInput from "../../PhoneInput";
+import {CheckboxInput} from "@/components/shared/forms/ui";
 import {Button} from "@/components/ui/button";
 import {SubscriptionFormData} from "@/components/shared/forms/types";
 

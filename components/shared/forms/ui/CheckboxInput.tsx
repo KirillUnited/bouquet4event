@@ -6,14 +6,17 @@ import { cn } from "@/lib/utils";
 
 interface CheckboxInputProps {
     control: Control<any>;
+    id?: string;
     name: string;
     label: React.ReactNode;
     className?: string;
     required?: boolean;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CheckboxInput: React.FC<CheckboxInputProps> = ({
     control,
+    id,
     name,
     label,
     className,

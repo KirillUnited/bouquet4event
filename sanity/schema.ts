@@ -49,6 +49,7 @@ import statisticsType from "@/sanity/schemas/blocks/shared/statisticsType";
 import media from "@/sanity/schemas/blocks/media/media";
 import { benefitsType } from "./schemas/blocks/shared/benefitsType";
 import navigationMenu from "./schemas/blocks/shared/navigation-menu";
+import wizardForm, {customFieldType, optionType} from "./schemas/blocks/forms/wizardType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -73,6 +74,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         media,
         benefitsType,
         navigationMenu,
+        optionType,
+        customFieldType,
         // blocks
         hero1,
         hero2,
@@ -101,5 +104,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         allPosts,
         breadcrumbs,
         yandexGoal,
+        wizardForm,
     ],
 };

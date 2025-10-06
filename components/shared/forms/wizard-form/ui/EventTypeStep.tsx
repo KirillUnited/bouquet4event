@@ -1,16 +1,17 @@
 import React from "react";
-import {Card} from "@/components/ui/card";
-import {FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
-import {cn} from "@/lib/utils";
-import {OptionType, StepProps} from "@/components/shared/forms/types";
+import { Card } from "@/components/ui/card";
+import { FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { cn } from "@/lib/utils";
+import { OptionType, StepProps } from "@/components/shared/forms/types";
+
+const eventTypes: OptionType[] = [
+    { emoji: '💍', label: 'Свадьба', value: 'wedding' },
+    { emoji: '🎂', label: 'День рождения', value: 'birthday' },
+    { emoji: '🎉', label: 'Юбилей', value: 'anniversary' },
+    { emoji: '🎁', label: 'Просто подарок', value: 'gift' },
+];
 
 export const EventTypeStep: React.FC<StepProps> = ({ onNext, control }) => {
-    const eventTypes: OptionType[] = [
-        { emoji: '💍', label: 'Свадьба', value: 'wedding' },
-        { emoji: '🎂', label: 'День рождения', value: 'birthday' },
-        { emoji: '🎉', label: 'Юбилей', value: 'anniversary' },
-        { emoji: '🎁', label: 'Просто подарок', value: 'gift' },
-    ];
 
     return (
         <Card className="p-6">
