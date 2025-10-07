@@ -365,7 +365,6 @@
 - [ ] **Environment configuration**
   - [ ] Production environment variables
   - [ ] Database migrations
-  - [ ] SSL certificate setup
 
 - [ ] **Deployment checklist**
   - [ ] AmoCRM OAuth app configuration

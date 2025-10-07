@@ -26,7 +26,7 @@ Key principles:
 
 ---SOFT---
 11. STYLE: TypeScript strict mode. Prefer functional components, small hooks. Use tailwind/shadcn styles if present.
-12. DOCS: Update /docs/architecture.md when making architecture changes. Update rules if new conventions are chosen.
+12. DOCS: Update /docs/crm-dashboard/architecture.md when making architecture changes. Update rules if new conventions are chosen.
 13. RFC_FLOW: For major changes (schema, migration, new persistent services), generate an RFC draft (summary, motivation, rollback).
 14. UX: For registration flow, ensure referral link generation is idempotent and added to user profile before creating AmoCRM lead.
 
