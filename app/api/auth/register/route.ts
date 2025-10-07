@@ -66,11 +66,51 @@ export async function POST(request: Request) {
       createdAt: new Date().toISOString(),
     });
 
-    // TODO: create AmoCRM lead via internal route and store amoLeadId
+    // Create AmoCRM lead
+    let amoLeadId: number | undefined;
+    try {
+      const amoResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/amo/create-lead`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          name: parsed.data.name,
+          phone: parsed.data.phone,
+          bouquetCategory: parsed.data.bouquetCategory,
+          deliveryAddress: parsed.data.deliveryAddress,
+          deliveryDate: parsed.data.deliveryDate,
+          deliveryInterval: parsed.data.deliveryInterval,
+          bouquetWishes: parsed.data.bouquetWishes,
+          accountSum: parsed.data.accountSum ?? 5000,
+          referralLink,
+        }),
+      });
+
+      if (amoResponse.ok) {
+        const amoData = await amoResponse.json();
+        amoLeadId = amoData.leadId;
+        
+        // Update user with AmoCRM lead ID
+        await clientWithToken.patch(created._id).set({ amoLeadId }).commit();
+      } else {
+        console.error("Failed to create AmoCRM lead:", await amoResponse.text());
+        // Don't fail registration if AmoCRM fails, just log the error
+      }
+    } catch (amoError) {
+      console.error("AmoCRM integration error:", amoError);
+      // Don't fail registration if AmoCRM fails, just log the error
+    }
 
     const tokenJwt = await signJwtAsync({ sub: userId, email }, "7d");
 
-    return NextResponse.json({ userId: created._id, token: tokenJwt }, { status: 201 });
+    return NextResponse.json({ 
+      userId: created._id, 
+      token: tokenJwt,
+      amoLeadId,
+      referralLink 
+    }, { status: 201 });
   } catch (err: any) {
     return NextResponse.json({ error: "Registration failed", message: err?.message }, { status: 500 });
   }
