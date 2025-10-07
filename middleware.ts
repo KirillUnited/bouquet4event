@@ -4,7 +4,7 @@ import { verifyJwt } from "./lib/auth";
 
 const PROTECTED_PATHS = ["/app/(dashboard)", "/app/(main)/payment", "/app/(main)/products"];
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isProtected = PROTECTED_PATHS.some((p) => pathname.startsWith(p));
@@ -19,7 +19,6 @@ export function middleware(request: NextRequest) {
   // Note: Next middleware cannot be async-per-path without returning a Promise
   // We convert to a Response by awaiting verification
   const verification = verifyJwt(token);
-  // @ts-expect-error - top-level await allowed in middleware context
   const payload = await verification;
   if (!payload) {
     return NextResponse.redirect(new URL("/", request.url));
