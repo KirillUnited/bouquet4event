@@ -10,6 +10,8 @@ export default async function AccountPage() {
   const token = cookieStore.get("auth_token")?.value;
   const user = token ? await verifyJwt(token) : null;
 
+  console.log(user)
+
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-semibold">My Account</h1>

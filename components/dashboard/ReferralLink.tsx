@@ -9,7 +9,7 @@ export default function ReferralLink({ referralLink }: Props) {
 
   return (
     <div className="rounded-lg border p-4">
-      <h2 className="text-xl font-medium">Referral</h2>
+      <h2 className="text-xl font-medium">Реферальная ссылка</h2>
       <div className="mt-3 flex items-center gap-3">
         <input
           className="w-full rounded border px-3 py-2"

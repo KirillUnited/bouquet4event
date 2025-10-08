@@ -16,18 +16,29 @@ export default function LoginPage() {
 
   const onSubmit = async (data: FormValues) => {
     setError(null);
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    const json = await res.json();
-    if (!res.ok) {
-      setError(json.error || "Login failed");
-      return;
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        credentials: 'same-origin' // Important for cookies
+      });
+      
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || "Login failed");
+      }
+      
+      const { token } = await res.json();
+      
+      // Set the auth token as a secure, httpOnly cookie
+      document.cookie = `auth_token=${token}; path=/; max-age=604800; SameSite=Lax; Secure`;
+      
+      // Redirect to dashboard after successful login
+      window.location.href = "/account";
+    } catch (err: any) {
+      setError(err.message || "An error occurred during login");
     }
-    // In a real app, store token in httpOnly cookie via route
-    window.location.href = "/";
   };
 
   return (
