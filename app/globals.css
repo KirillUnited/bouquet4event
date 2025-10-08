@@ -5,233 +5,251 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: var(--font-sans);
+    --font-sans: var(--font-sans);
 
-  /* Custom animations */
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-fade-up: fade-up 0.7s ease-out forwards;
+    /* Custom animations */
+    --animate-accordion-down: accordion-down 0.2s ease-out;
+    --animate-accordion-up: accordion-up 0.2s ease-out;
+    --animate-fade-up: fade-up 0.7s ease-out forwards;
 }
 
 @keyframes accordion-down {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
+    from {
+        height: 0;
+    }
+    to {
+        height: var(--radix-accordion-content-height);
+    }
 }
 
 @keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
-  }
+    from {
+        height: var(--radix-accordion-content-height);
+    }
+    to {
+        height: 0;
+    }
 }
 
 @keyframes fade-up {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(224 71.4% 4.1%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(224 71.4% 4.1%);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(224 71.4% 4.1%);
-  --primary: hsl(141, 39%, 25%);
-  --primary-foreground: hsl(44, 16%, 82%);
-  --secondary: hsl(220 14.3% 95.9%);
-  --secondary-foreground: hsl(220.9 39.3% 11%);
-  --muted: hsl(220 14.3% 95.9%);
-  --muted-foreground: hsl(220 8.9% 46.1%);
-  --accent: hsl(220 14.3% 95.9%);
-  --accent-foreground: hsl(220.9 39.3% 11%);
-  --destructive: hsl(0 84.2% 60.2%);
-  --destructive-foreground: hsl(210 20% 98%);
-  --border: hsl(220 13% 91%);
-  --input: hsl(220 13% 91%);
-  --ring: hsl(224 71.4% 4.1%);
-  --chart-1: hsl(12 76% 61%);
-  --chart-2: hsl(173 58% 39%);
-  --chart-3: hsl(197 37% 24%);
-  --chart-4: hsl(43 74% 66%);
-  --chart-5: hsl(27 87% 67%);
-  --radius: 0.5rem;
-  /* Custom Swiper.js */
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(224 71.4% 4.1%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(224 71.4% 4.1%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(224 71.4% 4.1%);
+    --primary: hsl(141, 39%, 25%);
+    --primary-foreground: hsl(44, 16%, 82%);
+    --secondary: hsl(220 14.3% 95.9%);
+    --secondary-foreground: hsl(220.9 39.3% 11%);
+    --muted: hsl(220 14.3% 95.9%);
+    --muted-foreground: hsl(220 8.9% 46.1%);
+    --accent: hsl(220 14.3% 95.9%);
+    --accent-foreground: hsl(220.9 39.3% 11%);
+    --destructive: hsl(0 84.2% 60.2%);
+    --destructive-foreground: hsl(210 20% 98%);
+    --border: hsl(220 13% 91%);
+    --input: hsl(220 13% 91%);
+    --ring: hsl(224 71.4% 4.1%);
+    --chart-1: hsl(12 76% 61%);
+    --chart-2: hsl(173 58% 39%);
+    --chart-3: hsl(197 37% 24%);
+    --chart-4: hsl(43 74% 66%);
+    --chart-5: hsl(27 87% 67%);
+    --radius: 0.5rem;
+    /* Custom Swiper.js */
     --swiper-pagination-bullet-inactive-opacity: 0.8;
     --swiper-pagination-bullet-inactive-color: var(--primary);
     --swiper-pagination-color: var(--primary);
 }
+
 .dark {
-  --background: hsl(224 71.4% 4.1%);
-  --foreground: hsl(210 20% 98%);
-  --card: hsl(224 71.4% 4.1%);
-  --card-foreground: hsl(210 20% 98%);
-  --popover: hsl(224 71.4% 4.1%);
-  --popover-foreground: hsl(210 20% 98%);
-  --primary: hsl(141, 39%, 25%);
-  --primary-foreground: hsl(44, 16%, 82%);
-  --secondary: hsl(215 27.9% 16.9%);
-  --secondary-foreground: hsl(210 20% 98%);
-  --muted: hsl(215 27.9% 16.9%);
-  --muted-foreground: hsl(217.9 10.6% 64.9%);
-  --accent: hsl(215 27.9% 16.9%);
-  --accent-foreground: hsl(210 20% 98%);
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(210 20% 98%);
-  --border: hsl(215 27.9% 16.9%);
-  --input: hsl(215 27.9% 16.9%);
-  --ring: hsl(216 12.2% 83.9%);
-  --chart-1: hsl(220 70% 50%);
-  --chart-2: hsl(160 60% 45%);
-  --chart-3: hsl(30 80% 55%);
-  --chart-4: hsl(280 65% 60%);
-  --chart-5: hsl(340 75% 55%);
+    --background: hsl(224 71.4% 4.1%);
+    --foreground: hsl(210 20% 98%);
+    --card: hsl(224 71.4% 4.1%);
+    --card-foreground: hsl(210 20% 98%);
+    --popover: hsl(224 71.4% 4.1%);
+    --popover-foreground: hsl(210 20% 98%);
+    --primary: hsl(141, 39%, 25%);
+    --primary-foreground: hsl(44, 16%, 82%);
+    --secondary: hsl(215 27.9% 16.9%);
+    --secondary-foreground: hsl(210 20% 98%);
+    --muted: hsl(215 27.9% 16.9%);
+    --muted-foreground: hsl(217.9 10.6% 64.9%);
+    --accent: hsl(215 27.9% 16.9%);
+    --accent-foreground: hsl(210 20% 98%);
+    --destructive: hsl(0 62.8% 30.6%);
+    --destructive-foreground: hsl(210 20% 98%);
+    --border: hsl(215 27.9% 16.9%);
+    --input: hsl(215 27.9% 16.9%);
+    --ring: hsl(216 12.2% 83.9%);
+    --chart-1: hsl(220 70% 50%);
+    --chart-2: hsl(160 60% 45%);
+    --chart-3: hsl(30 80% 55%);
+    --chart-4: hsl(280 65% 60%);
+    --chart-5: hsl(340 75% 55%);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
 }
 
 @utility container {
-  margin-inline: auto;
-  padding-inline: 1rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 100px;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  h1 {
-    font-family: var(--font-serif);
-    font-size: 2.5rem;
-    line-height: 1.2;
-    font-weight: bold;
-    @media (width >= theme(--breakpoint-md)) {
-      font-size: 3.5rem;
+    * {
+        @apply border-border outline-ring/50;
     }
-  }
 
-  h2 {
-    font-family: var(--font-serif);
-    font-size: 2rem;
-    line-height: 1.2;
-    font-weight: bold;
-    @media (width >= theme(--breakpoint-md)) {
-      font-size: 2.5rem;
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
     }
-  }
 
-  h3 {
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    line-height: 1.2;
-    @media (width >= theme(--breakpoint-md)) {
-      font-size: 2rem;
+    body {
+        @apply bg-background text-foreground;
     }
-  }
 
-  h4 {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    line-height: 1.3;
-    @media (width >= theme(--breakpoint-md)) {
-      font-size: 1.5rem;
+    h1 {
+        font-family: var(--font-serif);
+        font-size: 2.5rem;
+        line-height: 1.2;
+        font-weight: bold;
+        @media (width >=
+    theme(--breakpoint-md)) {
+        font-size: 3.5rem;
     }
-  }
+    }
 
-  h5 {
-    font-family: var(--font-serif);
-    font-size: 1.125rem;
-    line-height: 1.4;
-    @media (width >= theme(--breakpoint-md)) {
-      font-size: 1.25rem;
+    h2 {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        line-height: 1.2;
+        font-weight: bold;
+        @media (width >=
+    theme(--breakpoint-md)) {
+        font-size: 2.5rem;
     }
-  }
+    }
 
-  h6 {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    line-height: 1.4;
-    @media (width >= theme(--breakpoint-md)) {
-      font-size: 1rem;
+    h3 {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        line-height: 1.2;
+        @media (width >=
+    theme(--breakpoint-md)) {
+        font-size: 2rem;
     }
-  }
+    }
+
+    h4 {
+        font-family: var(--font-serif);
+        font-size: 1.25rem;
+        line-height: 1.3;
+        @media (width >=
+    theme(--breakpoint-md)) {
+        font-size: 1.5rem;
+    }
+    }
+
+    h5 {
+        font-family: var(--font-serif);
+        font-size: 1.125rem;
+        line-height: 1.4;
+        @media (width >=
+    theme(--breakpoint-md)) {
+        font-size: 1.25rem;
+    }
+    }
+
+    h6 {
+        font-family: var(--font-serif);
+        font-size: 1rem;
+        line-height: 1.4;
+        @media (width >=
+    theme(--breakpoint-md)) {
+        font-size: 1rem;
+    }
+    }
 }
+
 @layer utilities {
-  .swiper-button-next,
-  .swiper-button-prev {
-    --swiper-navigation-color: var(--primary-foreground);
-    --swiper-navigation-size: 16px;
-    width: 40px !important;
-    height: 40px !important;
-    background-color: var(--primary);
-    /* padding: 8px 16px; */
-    border-radius: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  }
-  .swiper:hover {
     .swiper-button-next,
     .swiper-button-prev {
-      opacity: 1;
-      visibility: visible;
+        --swiper-navigation-color: var(--primary-foreground);
+        --swiper-navigation-size: 16px;
+        width: 40px !important;
+        height: 40px !important;
+        background-color: var(--primary);
+        /* padding: 8px 16px; */
+        border-radius: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     }
-  }
-  
-  .products-section {    
-              background-image: 
-                  linear-gradient(135deg, rgba(255, 154, 158, 0.7) 0%, rgba(254, 207, 239, 0.7) 50%, rgba(254, 207, 239, 0.7) 100%),
-                  url('/images/CTASection.png');
-              background-size: cover;
-              background-position: center;
-              background-repeat: no-repeat;
-              color: #000;
-  }
+
+    .swiper:hover {
+        .swiper-button-next,
+        .swiper-button-prev {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .products-section {
+        position: relative;
+        background-image: url('/images/CTASection.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .products-section:after {
+        @apply bg-background/50;
+        display: block;
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
 }
