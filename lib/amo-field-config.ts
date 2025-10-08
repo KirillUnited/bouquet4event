@@ -28,13 +28,13 @@ export const AMO_FIELD_CONFIG: Record<string, AmoCRMFieldConfig> = {
     options: ["Romantic", "Seasonal", "Luxe", "Classic", "Modern"],
   },
   DELIVERY_ADDRESS: {
-    fieldId: 0, // TODO: Replace with actual field ID from AmoCRM
+    fieldId: 1035511,
     fieldName: "Delivery Address",
     fieldType: "text",
     required: false,
   },
   DELIVERY_DATE: {
-    fieldId: 0, // TODO: Replace with actual field ID from AmoCRM
+    fieldId: 1035503,
     fieldName: "Delivery Date",
     fieldType: "date",
     required: false,
@@ -47,7 +47,7 @@ export const AMO_FIELD_CONFIG: Record<string, AmoCRMFieldConfig> = {
     options: ["Weekly", "Bi-weekly", "Monthly", "One-time"],
   },
   BOUQUET_WISHES: {
-    fieldId: 0, // TODO: Replace with actual field ID from AmoCRM
+    fieldId: 1035507,
     fieldName: "Bouquet Wishes",
     fieldType: "textarea",
     required: false,
@@ -59,7 +59,7 @@ export const AMO_FIELD_CONFIG: Record<string, AmoCRMFieldConfig> = {
     required: true,
   },
   REFERRAL_LINK: {
-    fieldId: 0, // TODO: Replace with actual field ID from AmoCRM
+    fieldId: 1036423,
     fieldName: "Referral Link",
     fieldType: "text",
     required: false,
