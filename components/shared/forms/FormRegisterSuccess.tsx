@@ -2,8 +2,13 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle } from '@/components/ui/dialog';
 import React from 'react'
 import { toast } from 'sonner';
+import {RegisterFormValues} from "@/hooks/useRegisterForm";
 
-function FormRegisterSuccess({ values }: any) {
+export interface FormRegisterSuccessProps extends RegisterFormValues {
+    userId: string;
+}
+
+function FormRegisterSuccess({ values }: { values: FormRegisterSuccessProps }) {
     const userLink = `${process.env.NEXT_PUBLIC_SITE_URL}/payment/${values.userId}`;
 
     return (
