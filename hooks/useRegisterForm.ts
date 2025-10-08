@@ -27,7 +27,7 @@ export const formSchema = z.object({
 
 export type RegisterFormValues = z.infer<typeof formSchema>;
 
-interface UseRegisterFormProps {
+export interface UseRegisterFormProps {
   onSuccess?: (data: any) => void;
   goal?: string;
   customGoal?: string;

@@ -1,120 +1,60 @@
 'use client';
 
-import React, {useState, useCallback, JSX} from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import React, { JSX } from 'react';
+import { FormProvider } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Loader2Icon } from 'lucide-react';
-import { toast } from 'sonner';
-import { createUserAccount } from '@/lib/userAccount';
-import { openCheckoutMessage } from '@/lib/messenger';
 import { EventTypeStep, EventDateStep, StyleStep, DurationStep } from '@/components/shared/forms/wizard-form/ui';
 import TextInput from '../ui/TextInput';
 import PhoneInput from '../PhoneInput';
-import { subscriptionSchema } from '../lib/validation/subscriptionSchema';
 import FormRegisterSuccess from '../FormRegisterSuccess';
 import RegionSelect from "@/components/shared/forms/RegionSelect";
 import CheckboxInput from "../ui/CheckboxInput";
-import {ProgressBar} from "@/components/shared/forms/ui";
-
-type SubscriptionFormData = z.infer<typeof subscriptionSchema>;
+import { ProgressBar } from "@/components/shared/forms/ui";
+import useRegisterForm, { formSchema, type RegisterFormValues } from '@/hooks/useRegisterForm';
 
 interface FlowerSubscriptionWizardProps {
   onSubmitSuccess?: (data: any) => void;
   goal?: string;
 }
 
-const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL!;
-
 function FlowerSubscriptionWizard({
   onSubmitSuccess,
   goal = 'schet2'
 }: FlowerSubscriptionWizardProps): JSX.Element {
-  const [step, setStep] = useState(1);
-  const [isDateUndefined, setIsDateUndefined] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formValues, setFormValues] = useState({});
-
-  const form = useForm<SubscriptionFormData>({
-    resolver: zodResolver(subscriptionSchema),
-    defaultValues: {
-      eventType: '',
-      eventDate: undefined,
-      style: '',
-      duration: '',
-      name: '',
-      phone: '',
-      email: '',
-      privacyPolicy: false,
-      privacyPolicyData: false
-    },
+  const [step, setStep] = React.useState(1);
+  const [isDateUndefined, setIsDateUndefined] = React.useState(false);
+  
+  const { 
+    form, 
+    formValues, 
+    isSubmitting, 
+    onSubmit,
+    handleSend 
+  } = useRegisterForm({
+    goal,
+    onSuccess: (result) => {
+      setStep(1);
+      onSubmitSuccess?.(result);
+    }
   });
 
   const { handleSubmit, setValue, control, formState } = form;
 
   const handleDateUndefined = (isUndefined: boolean) => {
     setIsDateUndefined(isUndefined);
-    if (isDateUndefined) {
+    if (isUndefined) {
       setValue('eventDate', undefined);
     }
   };
 
-  const handleSend = useCallback(async (values: SubscriptionFormData) => {
-    try {
-      setIsSubmitting(true);
-      const userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-      const userLink = `${NEXT_PUBLIC_SITE_URL}/payment/${userId}`;
-
-      const result = await createUserAccount({
-        userId,
-        userDonationLink: userLink,
-        name: values.name,
-        phone: values.phone,
-        region: 'Москва',
-        date: values.eventDate || new Date(),
-        totalAmount: 0,
-        privacyPolicy: values.privacyPolicy,
-        privacyPolicyData: values.privacyPolicyData,
-        eventType: values.eventType,
-        style: values.style,
-        duration: values.duration,
-        email: values.email
-      });
-
-      if (result) {
-        toast.success('Ваша заявка успешно отправлена!');
-        setFormValues(result);
-        form.reset();
-        setStep(1);
-
-        if (typeof window !== "undefined" && typeof (window as any).ym === "function" && goal) {
-          (window as any).ym(103963322, "reachGoal", goal);
-          console.log(`Yandex.Metrika: цель ${goal} отправлена`);
-        }
-
-        await openCheckoutMessage(result);
-        onSubmitSuccess?.(result);
-
-        return result;
-      } else {
-        throw new Error('Не удалось отправить заявку. Пожалуйста, попробуйте позже.');
-      }
-    } catch (error: any) {
-      toast.error(error.message);
-      throw error;
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [goal, onSubmitSuccess]);
-
-  const onSubmit = handleSubmit(async (values) => {
-    await handleSend(values);
-  });
-
   const nextStep = () => setStep((prev) => Math.min(prev + 1, 5));
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
+
+  const handleWizardSubmit = handleSubmit((values) => {
+    return handleSend(values as RegisterFormValues);
+  });
 
   return (
     <FormProvider {...form}>
