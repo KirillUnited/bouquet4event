@@ -58,8 +58,6 @@ export default async function PaymentPage({params}: {
         notFound();
     }
 
-    console.log('User Name:', user.name);
-
     return (
         <PaymentBlock
             _type={`form-register`}

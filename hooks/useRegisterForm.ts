@@ -11,7 +11,7 @@ import { openCheckoutMessage } from '@/lib/messenger';
 export const formSchema = z.object({
   name: z.string().min(2, { message: 'Имя должно содержать минимум 2 символа' }),
   phone: z.string().min(10, { message: 'Введите корректный номер телефона' }),
-  region: z.string().default('Москва'),
+  region: z.string(),
   privacyPolicy: z.boolean().refine(val => val === true, {
     message: 'Необходимо принять политику конфиденциальности',
   }),
