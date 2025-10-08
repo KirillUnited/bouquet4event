@@ -28,7 +28,7 @@ export default function Hero1({
         <section className="relative">
             <div className="container">
                 <div className="">
-                    <div className="max-w-4xl flex flex-col py-20 sm:min-h-[80svh]">
+                    <div className="max-w-4xl flex items-center py-20 sm:min-h-[80svh]">
                         <div
                             className="flex-1 flex flex-col justify-center md:items-start text-left z-10">
                             {tagLine && (

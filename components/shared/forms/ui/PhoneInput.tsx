@@ -2,6 +2,7 @@ import * as React from "react";
 import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { cn } from "@/lib/utils";
 
 interface PhoneInputProps {
     control: Control<any>;
@@ -10,6 +11,7 @@ interface PhoneInputProps {
     placeholder?: string;
     className?: string;
     required?: boolean;
+    icon?: React.ReactNode;
 }
 
 const PhoneInput: React.FC<PhoneInputProps> = ({
@@ -19,6 +21,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
     placeholder = "+7 (___) ___-__-__",
     className,
     required = false,
+    icon,
 }) => {
     return (
         <FormField
@@ -41,19 +44,26 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
                 return (
                     <FormItem>
                         <FormLabel>{label}{required && <span className="text-destructive ml-1">*</span>}</FormLabel>
-                        <FormControl>
-                            <Input
-                                {...field}
-                                ref={inputRef}
-                                placeholder={placeholder}
-                                className={className}
-                                type="tel"
-                                inputMode="numeric"
-                                onChange={(e) => {
-                                    field.onChange(e.target.value);
-                                }}
-                            />
-                        </FormControl>
+                        <div className="relative w-full">
+                            {icon && (
+                                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-muted-foreground">
+                                    {icon}
+                                </div>
+                            )}
+                            <FormControl className={cn(icon && "pl-9")}>
+                                <Input
+                                    {...field}
+                                    ref={inputRef}
+                                    placeholder={placeholder}
+                                    className={className}
+                                    type="tel"
+                                    inputMode="numeric"
+                                    onChange={(e) => {
+                                        field.onChange(e.target.value);
+                                    }}
+                                />
+                            </FormControl>
+                        </div>
                         <FormMessage />
                     </FormItem>
                 );

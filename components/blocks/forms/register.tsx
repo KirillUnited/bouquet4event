@@ -11,8 +11,6 @@ type FormRegisterProps = Extract<
     { _type: "form-register" }
 >;
 
-const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL!;
-
 export default function Register({
     padding,
     colorVariant,
