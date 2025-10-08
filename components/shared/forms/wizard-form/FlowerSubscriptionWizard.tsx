@@ -52,10 +52,6 @@ function FlowerSubscriptionWizard({
   const nextStep = () => setStep((prev) => Math.min(prev + 1, 5));
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
-  const handleWizardSubmit = handleSubmit((values) => {
-    return handleSend(values as RegisterFormValues);
-  });
-
   return (
     <FormProvider {...form}>
       <form onSubmit={onSubmit} className="w-full max-w-2xl mx-auto">

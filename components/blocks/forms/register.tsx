@@ -26,7 +26,7 @@ export default function Register({
     goal,
     customGoal
 }: FormRegisterProps & { customGoal?: string }) {
-    const { form, formValues, isSubmitting, isSubmitSuccessful, onSubmit } = useRegisterForm({
+    const { formValues, onSubmit } = useRegisterForm({
         goal: goal || customGoal,
     });
 
@@ -34,7 +34,7 @@ export default function Register({
 
     return (
         <>
-            {isSubmitSuccessful && (
+            {formValues && (
                 <FormRegisterSuccess values={formValues} />
             )}
             <SectionContainer color={color} padding={padding}>
