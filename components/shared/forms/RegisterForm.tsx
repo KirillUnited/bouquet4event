@@ -1,66 +1,73 @@
 import React from 'react'
 import TextInput from './ui/TextInput';
-import PhoneInput from './PhoneInput';
-import RegionSelect from './RegionSelect';
-import {Button} from '@/components/ui/button';
-import {Loader2Icon} from 'lucide-react';
-import {RegisterFormContainerProps, RegisterFormProps} from './types';
-import {cn} from '@/lib/utils';
+import PhoneInput from './ui/PhoneInput';
+import RegionSelect from './ui/RegionSelect';
+import { Button } from '@/components/ui/button';
+import { Loader2Icon, MailIcon, PhoneIcon, UserIcon } from 'lucide-react';
+import { RegisterFormContainerProps, RegisterFormProps } from './types';
+import { cn } from '@/lib/utils';
 import CheckboxInput from './ui/CheckboxInput';
-import {DatePicker} from "@/components/shared/forms/ui/DatePicker";
+import { DatePicker } from "@/components/shared/forms/ui/DatePicker";
 
-export default function RegisterForm({id,onSubmit, isSubmitting, formControl}: RegisterFormProps) {
+export const RegisterFormFieldset = ({ formControl }: { formControl: any }) => {
     return (
-        <form onSubmit={onSubmit} id={id}>
-            <div className="space-y-6">
-                <TextInput
-                    control={formControl}
-                    name="name"
-                    label="Имя"
-                    placeholder="Введите ваше имя"
-                    className="mt-1"
-                    required
-                />
-                <PhoneInput
-                    control={formControl}
-                    name="phone"
-                    required
-                    className="mt-1"
-                />
-                <RegionSelect
-                    control={formControl}
-                    name="region"
-                    required
-                    className="mt-1"
-                />
-                <DatePicker
-                    control={formControl}
-                    label="Дата планируемого мероприятия"
-                    required
-                    className="mt-1"
-                />
+        <fieldset className="space-y-6">
+            <TextInput
+                control={formControl}
+                name="name"
+                label="Имя"
+                placeholder="Введите ваше имя"
+                required
+                icon={<UserIcon size={16} />}
+            />
+            <PhoneInput
+                control={formControl}
+                name="phone"
+                required
+                icon={<PhoneIcon size={16} />}
+            />
+
+            <TextInput
+                control={formControl}
+                name="email"
+                type="email"
+                label="Email"
+                placeholder="email@example.com"
+                required
+                icon={<MailIcon size={16} />}
+            />
+            <RegionSelect
+                control={formControl}
+                name="region"
+                required
+            />
+            <DatePicker
+                control={formControl}
+                label="Дата планируемого мероприятия"
+            />
+            <div className="flex flex-col gap-2">
                 <CheckboxInput
                     control={formControl}
                     name="privacyPolicy"
                     label={
                         <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
-                                                                  className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a></span>
+                            className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a> и с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
+                            className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
                     }
                     required
-                    className="mt-1"
                 />
-                <CheckboxInput
-                    control={formControl}
-                    name="privacyPolicyData"
-                    label={
-                        <span className="text-sm">Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
-                                                                  className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
-                    }
-                    required
-                    className="mt-1"
-                />
+            </div>
+        </fieldset>
+    )
+}
+
+export default function RegisterForm({ id, onSubmit, isSubmitting, formControl }: RegisterFormProps) {
+    return (
+        <form onSubmit={onSubmit} id={id}>
+            <div className="space-y-6">
+                <RegisterFormFieldset formControl={formControl} />
                 <Button type="submit" disabled={isSubmitting} className="w-full">
-                    {isSubmitting && <Loader2Icon className="w-6 h-6 mr-2 animate-spin"/>}
+                    {isSubmitting && <Loader2Icon className="w-6 h-6 mr-2 animate-spin" />}
                     Отправить заявку
                 </Button>
             </div>
@@ -68,7 +75,7 @@ export default function RegisterForm({id,onSubmit, isSubmitting, formControl}: R
     );
 }
 
-export function RegisterFormContainer({className, title, description, children}: RegisterFormContainerProps) {
+export function RegisterFormContainer({ className, title, description, children }: RegisterFormContainerProps) {
     return (
         <div className={cn("flex flex-col gap-8", className)}>
             {(title || description) && (

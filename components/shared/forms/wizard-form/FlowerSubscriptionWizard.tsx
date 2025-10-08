@@ -6,13 +6,10 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Loader2Icon } from 'lucide-react';
 import { EventTypeStep, EventDateStep, StyleStep, DurationStep } from '@/components/shared/forms/wizard-form/ui';
-import TextInput from '../ui/TextInput';
-import PhoneInput from '../PhoneInput';
 import FormRegisterSuccess from '../FormRegisterSuccess';
-import RegionSelect from "@/components/shared/forms/RegionSelect";
-import CheckboxInput from "../ui/CheckboxInput";
 import { ProgressBar } from "@/components/shared/forms/ui";
-import useRegisterForm, { formSchema, type RegisterFormValues } from '@/hooks/useRegisterForm';
+import useRegisterForm from '@/hooks/useRegisterForm';
+import { RegisterFormFieldset } from '@/components/shared/forms';
 
 interface FlowerSubscriptionWizardProps {
   onSubmitSuccess?: (data: any) => void;
@@ -25,13 +22,13 @@ function FlowerSubscriptionWizard({
 }: FlowerSubscriptionWizardProps): JSX.Element {
   const [step, setStep] = React.useState(1);
   const [isDateUndefined, setIsDateUndefined] = React.useState(false);
-  
-  const { 
-    form, 
-    formValues, 
-    isSubmitting, 
+
+  const {
+    form,
+    formValues,
+    isSubmitting,
     onSubmit,
-    handleSend 
+    handleSend
   } = useRegisterForm({
     goal,
     onSuccess: (result) => {
@@ -83,56 +80,10 @@ function FlowerSubscriptionWizard({
               </div>
 
               <div className="space-y-6">
-                <TextInput
-                  control={control}
-                  name="name"
-                  label="Ваше имя"
-                  placeholder="Введите ваше имя"
-                  required
-                />
+                
+                <RegisterFormFieldset formControl={control} />
 
-                <PhoneInput
-                  control={control}
-                  name="phone"
-                  required
-                />
-
-                <RegionSelect
-                    control={control}
-                    name="region"
-                    required
-                    className="mt-1"
-                />
-
-                <TextInput
-                  control={control}
-                  name="email"
-                  type="email"
-                  label="Email"
-                  placeholder="email@example.com"
-                  required
-                />
-
-                <CheckboxInput
-                    control={control}
-                    name="privacyPolicy"
-                    label={
-                      <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
-                                                                className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a></span>
-                    }
-                    required
-                />
-                <CheckboxInput
-                    control={control}
-                    name="privacyPolicyData"
-                    label={
-                      <span className="text-sm">Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
-                                                                className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
-                    }
-                    required
-                />
-
-                <div className="flex justify-between pt-2">
+                <div className="flex justify-between pt-6 border-t border-border">
                   <Button
                     type="button"
                     variant="outline"

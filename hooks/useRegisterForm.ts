@@ -7,25 +7,9 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 import { createUserAccount } from '@/lib/userAccount';
 import { openCheckoutMessage } from '@/lib/messenger';
+import { subscriptionSchema } from '@/components/shared/forms/lib/validation';
 
-export const formSchema = z.object({
-  name: z.string().min(2, { message: 'Имя должно содержать минимум 2 символа' }),
-  phone: z.string().min(10, { message: 'Введите корректный номер телефона' }),
-  region: z.string(),
-  privacyPolicy: z.boolean().refine(val => val === true, {
-    message: 'Необходимо принять политику конфиденциальности',
-  }),
-  privacyPolicyData: z.boolean().refine(val => val === true, {
-    message: 'Необходимо дать согласие на обработку персональных данных',
-  }),
-  eventDate: z.date().optional(),
-  eventType: z.string().optional(),
-  style: z.string().optional(),
-  duration: z.string().optional(),
-  email: z.string().email('Введите корректный email').optional(),
-});
-
-export type RegisterFormValues = z.infer<typeof formSchema>;
+export type RegisterFormValues = z.infer<typeof subscriptionSchema>;
 
 export interface UseRegisterFormProps {
   onSuccess?: (data: any) => void;
@@ -38,13 +22,12 @@ export const useRegisterForm = ({ onSuccess, goal, customGoal }: UseRegisterForm
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<RegisterFormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(subscriptionSchema),
     defaultValues: {
       name: '',
       phone: '',
       region: 'Москва',
       privacyPolicy: false,
-      privacyPolicyData: false,
       eventDate: undefined,
       eventType: '',
       style: '',
@@ -66,10 +49,9 @@ export const useRegisterForm = ({ onSuccess, goal, customGoal }: UseRegisterForm
           name: values.name,
           phone: values.phone,
           region: values.region,
-          date: values.eventDate || new Date(),
+          date: values.eventDate,
           totalAmount: 0,
           privacyPolicy: values.privacyPolicy,
-          privacyPolicyData: values.privacyPolicyData,
           eventType: values.eventType,
           style: values.style,
           duration: values.duration,
@@ -92,6 +74,7 @@ export const useRegisterForm = ({ onSuccess, goal, customGoal }: UseRegisterForm
 
           await openCheckoutMessage(result);
           onSuccess?.(result);
+          
           return result;
         } else {
           throw new Error('Не удалось отправить заявку. Пожалуйста, попробуйте позже.');
