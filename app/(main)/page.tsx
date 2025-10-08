@@ -11,7 +11,6 @@ export async function generateMetadata() {
 
 export default async function IndexPage() {
   const page = await fetchSanityPageBySlug({ slug: "index" });
-  console.log(page);
 
   if (!page) {
     return MissingSanityPage({ document: "page", slug: "index" });

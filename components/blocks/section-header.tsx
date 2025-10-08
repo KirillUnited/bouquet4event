@@ -29,6 +29,7 @@ export default function SectionHeader({
     <SectionContainer color={color} padding={padding} sectionID={sectionID || undefined} className={cn(className)}>
       <div
         className={cn(
+            'relative z-10',
           align === "center" ? "max-w-[48rem] text-center mx-auto" : undefined,
           isNarrow ? "max-w-[48rem] mx-auto" : undefined
         )}
