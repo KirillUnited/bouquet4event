@@ -5,7 +5,8 @@ import RegisterForm, { RegisterFormContainer } from "./RegisterForm";
 import CheckboxInput from "./ui/CheckboxInput";
 import PaymentForm from "./PaymentForm";
 import CallBackForm from "./CallBackForm";
-import {FlowerSubscriptionWizard} from "./wizard-form";
+import { FlowerSubscriptionWizard } from "./wizard-form";
+import {RegisterFormFieldset} from "./RegisterForm";
 
 export {
     PhoneInput,
@@ -17,4 +18,5 @@ export {
     PaymentForm,
     CallBackForm,
     FlowerSubscriptionWizard,
+    RegisterFormFieldset
 }
