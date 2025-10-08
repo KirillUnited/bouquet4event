@@ -1,6 +1,6 @@
-import PhoneInput from "./PhoneInput";
+import PhoneInput from "./ui/PhoneInput";
 import TextInput from "./ui/TextInput";
-import RegionSelect from "./RegionSelect";
+import RegionSelect from "./ui/RegionSelect";
 import RegisterForm, { RegisterFormContainer } from "./RegisterForm";
 import CheckboxInput from "./ui/CheckboxInput";
 import PaymentForm from "./PaymentForm";

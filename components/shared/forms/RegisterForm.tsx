@@ -1,7 +1,7 @@
 import React from 'react'
 import TextInput from './ui/TextInput';
-import PhoneInput from './PhoneInput';
-import RegionSelect from './RegionSelect';
+import PhoneInput from './ui/PhoneInput';
+import RegionSelect from './ui/RegionSelect';
 import { Button } from '@/components/ui/button';
 import { Loader2Icon, MailIcon, PhoneIcon, UserIcon } from 'lucide-react';
 import { RegisterFormContainerProps, RegisterFormProps } from './types';
