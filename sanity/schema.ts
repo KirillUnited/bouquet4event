@@ -6,6 +6,7 @@ import category from "./schemas/documents/category";
 import faq from "./schemas/documents/faq";
 import testimonial from "./schemas/documents/testimonial";
 import userAccount from "./schemas/documents/userAccount";
+import passwordResetToken from "./schemas/documents/passwordResetToken";
 
 // shared objects
 import blockContent from "./schemas/blocks/shared/block-content";
@@ -62,6 +63,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         faq,
         testimonial,
         userAccount,
+        passwordResetToken,
         productType,
         // shared objects
         blockContent,
