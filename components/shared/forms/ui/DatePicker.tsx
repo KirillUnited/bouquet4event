@@ -43,7 +43,7 @@ export function DatePicker({control, label, className, required = false}: DatePi
                 <FormItem className={clsx("", className)}>
                     {label && (
                         <FormLabel>
-                            {label}{required && <span className="text-destructive ml-1">*</span>}
+                            {label}{required ? <span className="text-destructive ml-1">*</span> : <span className="text-foreground/90 text-sm font-light"> (Необязательно)</span>}
                         </FormLabel>
                     )}
                     <Popover open={open} onOpenChange={setOpen}>
@@ -52,10 +52,10 @@ export function DatePicker({control, label, className, required = false}: DatePi
                                 <Button
                                     variant="outline"
                                     id="date"
-                                    className="w-full justify-between font-normal normal-case"
+                                    className="w-full font-normal normal-case justify-start"
                                 >
+                                    <CalendarIcon className="h-4 w-4 opacity-50" />
                                     {field.value ? field.value.toLocaleDateString() : "Выберите дату"}
-                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                                 </Button>
                             </FormControl>
                         </PopoverTrigger>

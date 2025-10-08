@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { openCheckoutMessage } from '@/lib/messenger';
 import TextInput from "./ui/TextInput";
-import PhoneInput from "@/components/shared/forms/PhoneInput";
+import PhoneInput from "@/components/shared/forms/ui/PhoneInput";
 import React from "react";
 
 const formSchema = z.object({

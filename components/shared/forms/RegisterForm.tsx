@@ -1,9 +1,9 @@
 import React from 'react'
 import TextInput from './ui/TextInput';
-import PhoneInput from './PhoneInput';
-import RegionSelect from './RegionSelect';
+import PhoneInput from './ui/PhoneInput';
+import RegionSelect from './ui/RegionSelect';
 import { Button } from '@/components/ui/button';
-import { Loader2Icon } from 'lucide-react';
+import { Loader2Icon, MailIcon, PhoneIcon, UserIcon } from 'lucide-react';
 import { RegisterFormContainerProps, RegisterFormProps } from './types';
 import { cn } from '@/lib/utils';
 import CheckboxInput from './ui/CheckboxInput';
@@ -17,47 +17,46 @@ export const RegisterFormFieldset = ({ formControl }: { formControl: any }) => {
                 name="name"
                 label="Имя"
                 placeholder="Введите ваше имя"
-                className="mt-1"
                 required
+                icon={<UserIcon size={16} />}
             />
             <PhoneInput
                 control={formControl}
                 name="phone"
                 required
-                className="mt-1"
+                icon={<PhoneIcon size={16} />}
+            />
+
+            <TextInput
+                control={formControl}
+                name="email"
+                type="email"
+                label="Email"
+                placeholder="email@example.com"
+                required
+                icon={<MailIcon size={16} />}
             />
             <RegionSelect
                 control={formControl}
                 name="region"
                 required
-                className="mt-1"
             />
             <DatePicker
                 control={formControl}
                 label="Дата планируемого мероприятия"
-                required
-                className="mt-1"
             />
-            <CheckboxInput
-                control={formControl}
-                name="privacyPolicy"
-                label={
-                    <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
-                        className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a></span>
-                }
-                required
-                className="mt-1"
-            />
-            <CheckboxInput
-                control={formControl}
-                name="privacyPolicyData"
-                label={
-                    <span className="text-sm">Я согласен с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
-                        className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
-                }
-                required
-                className="mt-1"
-            />
+            <div className="flex flex-col gap-2">
+                <CheckboxInput
+                    control={formControl}
+                    name="privacyPolicy"
+                    label={
+                        <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
+                            className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a> и с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
+                            className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
+                    }
+                    required
+                />
+            </div>
         </fieldset>
     )
 }
