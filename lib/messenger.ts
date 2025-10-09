@@ -29,7 +29,7 @@ export async function openCheckoutMessage(data: any): Promise<any> {
     👤 Имя: ${name}
     📱 Телефон: ${phone}
     ${isConsultation ? '📞' : '🌍'} ${region}
-    ${!isConsultation ? `📅 Дата мероприятия: ${date.split('T')[0]}\n` : ''}
+    ${!isConsultation ? `📅 Дата мероприятия: ${date ? date?.split('T')[0] : 'Не указана'}\n` : ''}
     `;
 
     return await axios

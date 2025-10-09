@@ -29,7 +29,7 @@ export default function SplitCardsItem({
 
   return (
     <Card
-      className={cn("relative overflow-hidden hover:shadow-lg transition-shadow",
+      className={cn("relative overflow-hidden hover:shadow-lg transition-shadow group",
         hasImage && "after:absolute after:inset-0 after:bg-slate-900/75 text-white",
       )}
     >
@@ -70,9 +70,9 @@ export default function SplitCardsItem({
       </CardContent>
 
       {hasImage && (
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
             src={urlFor(image).url()}
             alt={image.alt || ""}
             placeholder={
