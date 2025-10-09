@@ -56,6 +56,7 @@ export interface UserRegistrationData {
   bouquetCategory?: string;
   deliveryAddress?: string;
   deliveryDate?: string;
+  deliveryInterval?: string;
   eventDate?: string;
   region?: string;
   bouquetWishes?: string;
@@ -71,6 +72,7 @@ export interface UserUpdateData {
   bouquetCategory?: string;
   deliveryAddress?: string;
   deliveryDate?: string;
+  deliveryInterval?: string;
   eventDate?: string;
   region?: string;
   bouquetWishes?: string;
