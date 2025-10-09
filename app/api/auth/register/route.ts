@@ -61,7 +61,7 @@ export async function POST(request: Request) {
       deliveryDate: parsed.data.deliveryDate,
       deliveryInterval: parsed.data.deliveryInterval,
       bouquetWishes: parsed.data.bouquetWishes,
-      accountSum: parsed.data.accountSum ?? 5000,
+      accountSum: parsed.data.accountSum,
       privacyPolicy: true,
       createdAt: new Date().toISOString(),
     });

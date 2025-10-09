@@ -14,63 +14,75 @@ export interface AmoCRMFieldConfig {
 }
 
 export const AMO_FIELD_CONFIG: Record<string, AmoCRMFieldConfig> = {
-  ACCOUNT_SUM: {
-    fieldId: 0, // TODO: Replace with actual field ID from AmoCRM
-    fieldName: "Account Sum",
-    fieldType: "numeric",
+  // Contact fields
+  CONTACT_NAME: {
+    fieldId: 0, // Will be set from AMO_FIELD_IDS
+    fieldName: "Имя контакта",
+    fieldType: "text",
     required: true,
   },
-  BOUQUET_CATEGORY: {
-    fieldId: 0, // TODO: Replace with actual field ID from AmoCRM
-    fieldName: "Bouquet Category",
-    fieldType: "select",
-    required: false,
-    options: ["Romantic", "Seasonal", "Luxe", "Classic", "Modern"],
-  },
-  DELIVERY_ADDRESS: {
-    fieldId: 1035511,
-    fieldName: "Delivery Address",
+  PHONE: {
+    fieldId: 0, // Will be set from AMO_FIELD_IDS
+    fieldName: "Телефон",
     fieldType: "text",
-    required: false,
-  },
-  DELIVERY_DATE: {
-    fieldId: 1035503,
-    fieldName: "Delivery Date",
-    fieldType: "date",
-    required: false,
-  },
-  DELIVERY_INTERVAL: {
-    fieldId: 0, // TODO: Replace with actual field ID from AmoCRM
-    fieldName: "Delivery Interval",
-    fieldType: "select",
-    required: false,
-    options: ["Weekly", "Bi-weekly", "Monthly", "One-time"],
-  },
-  BOUQUET_WISHES: {
-    fieldId: 1035507,
-    fieldName: "Bouquet Wishes",
-    fieldType: "textarea",
-    required: false,
+    required: true,
   },
   EMAIL: {
-    fieldId: 0, // TODO: Replace with actual field ID from AmoCRM
+    fieldId: 0, // Will be set from AMO_FIELD_IDS
     fieldName: "Email",
     fieldType: "email",
     required: true,
   },
-  REFERRAL_LINK: {
-    fieldId: 1036423,
-    fieldName: "Referral Link",
+  POSITION: {
+    fieldId: 0, // Will be set from AMO_FIELD_IDS
+    fieldName: "Должность",
     fieldType: "text",
     required: false,
   },
-  ACCOUNT_STATUS: {
-    fieldId: 0, // TODO: Replace with actual field ID from AmoCRM
-    fieldName: "Account Status",
-    fieldType: "select",
-    required: true,
-    options: ["Active", "Inactive", "Suspended", "Cancelled"],
+  
+  // Lead fields
+  DELIVERY_ADDRESS: {
+    fieldId: 1035511, // Will be set from AMO_FIELD_IDS
+    fieldName: "Адрес доставки",
+    fieldType: "text",
+    required: false,
   },
+  DELIVERY_DATE: {
+    fieldId: 0, // Will be set from AMO_FIELD_IDS
+    fieldName: "Дата первой доставки",
+    fieldType: "date",
+    required: false,
+  },
+  BOUQUET_WISHES: {
+    fieldId: 0, // Will be set from AMO_FIELD_IDS
+    fieldName: "Особые пожелания",
+    fieldType: "textarea",
+    required: false,
+  },
+  BOUQUET_CATEGORY: {
+    fieldId: 0, // Will be set from AMO_FIELD_IDS
+    fieldName: "Выбранная категория букета",
+    fieldType: "select",
+    required: false,
+  },
+  EVENT_DATE: {
+    fieldId: 0, // Will be set from AMO_FIELD_IDS
+    fieldName: "Дата мероприятия",
+    fieldType: "date",
+    required: false,
+  },
+  REGION: {
+    fieldId: 0, // Will be set from AMO_FIELD_IDS
+    fieldName: "Регион",
+    fieldType: "select",
+    required: false,
+  },
+  REFERRAL_LINK: {
+    fieldId: 0, // Will be set from AMO_FIELD_IDS
+    fieldName: "Реферальная ссылка",
+    fieldType: "text",
+    required: false,
+  }
 };
 
 /**

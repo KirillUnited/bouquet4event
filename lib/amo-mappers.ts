@@ -2,26 +2,62 @@ import { AmoCRMLeadData, AmoCRMContactData } from "./amo-client";
 
 // AmoCRM Field IDs - These need to be configured in your AmoCRM account
 // TODO: Replace with actual field IDs from your AmoCRM configuration
+// Field IDs from AmoCRM - update these with your actual field IDs
 export const AMO_FIELD_IDS = {
-  ACCOUNT_SUM: "account_sum_field_id", // Replace with actual field ID
-  BOUQUET_CATEGORY: "bouquet_category_field_id", // Replace with actual field ID
-  DELIVERY_ADDRESS: "delivery_address_field_id", // Replace with actual field ID
-  DELIVERY_DATE: "delivery_date_field_id", // Replace with actual field ID
-  DELIVERY_INTERVAL: "delivery_interval_field_id", // Replace with actual field ID
-  BOUQUET_WISHES: "bouquet_wishes_field_id", // Replace with actual field ID
-  EMAIL: "email_field_id", // Replace with actual field ID
-  REFERRAL_LINK: "referral_link_field_id", // Replace with actual field ID
-  ACCOUNT_STATUS: "account_status_field_id", // Replace with actual field ID
+  // Contact fields (Поля контакта)
+  CONTACT_NAME: "name",                 // "Имя контакта" (standard field, no custom ID needed)
+  PHONE: "phone",                       // "Телефон" (standard field, no custom ID needed)
+  EMAIL: "email",                       // "Email" (standard field, no custom ID needed)
+  POSITION: "position",                 // "Должность" (standard field, no custom ID needed)
+  
+  // Lead fields (Поля сделки) - these need your actual custom field IDs
+  // TODO: Replace these with your actual custom field IDs from AmoCRM
+  DELIVERY_ADDRESS: 1035511,          // "Адрес доставки"
+  BOUQUET_WISHES: 1035507,            // "Особые пожелания"
+  BOUQUET_CATEGORY: 1035509,          // "Выбранная категория букета"
+  DELIVERY_DATE: 1035503,             // "Дата первой доставки"
+  EVENT_DATE: 1035513,                // "Дата мероприятия"
+  REGION: 1035515,                    // "Регион"
+  REFERRAL_LINK: 1036423,             // "Реферальная ссылка"
+  BUDGET: "budget"                    // Standard AmoCRM budget field
 } as const;
+
+// Helper function to get field ID with type safety and better error reporting
+function getFieldId(fieldName: keyof typeof AMO_FIELD_IDS): number | undefined {
+  const fieldValue = AMO_FIELD_IDS[fieldName];
+  
+  // For standard fields, we don't need a field_id
+  if (typeof fieldValue === 'string' && ['name', 'phone', 'email', 'position'].includes(fieldValue)) {
+    return undefined;
+  }
+  
+  // If it's already a number, return it directly
+  if (typeof fieldValue === 'number') {
+    return fieldValue;
+  }
+  
+  // Try to parse as number if it's a string
+  if (typeof fieldValue === 'string') {
+    const fieldId = parseInt(fieldValue, 10);
+    if (!isNaN(fieldId)) {
+      return fieldId;
+    }
+  }
+  
+  console.error(`⚠️ Invalid field ID for ${fieldName}: "${fieldValue}". Please update AMO_FIELD_IDS with the correct field ID from AmoCRM.`);
+  return undefined;
+}
 
 export interface UserRegistrationData {
   email: string;
   name?: string;
   phone?: string;
+  position?: string;
   bouquetCategory?: string;
   deliveryAddress?: string;
   deliveryDate?: string;
-  deliveryInterval?: string;
+  eventDate?: string;
+  region?: string;
   bouquetWishes?: string;
   accountSum?: number;
   referralLink?: string;
@@ -31,10 +67,12 @@ export interface UserUpdateData {
   email?: string;
   name?: string;
   phone?: string;
+  position?: string;
   bouquetCategory?: string;
   deliveryAddress?: string;
   deliveryDate?: string;
-  deliveryInterval?: string;
+  eventDate?: string;
+  region?: string;
   bouquetWishes?: string;
   accountSum?: number;
   referralLink?: string;
@@ -46,79 +84,40 @@ export interface UserUpdateData {
 export function mapUserToAmoCRMLead(userData: UserRegistrationData): AmoCRMLeadData {
   const customFields = [];
 
-  // Account Sum
-  if (userData.accountSum !== undefined) {
-    customFields.push({
-      field_name: "Account Sum",
-      values: [{ value: userData.accountSum.toString() }],
-    });
+  // Add lead fields with proper field IDs
+  const fields = [
+    { key: 'deliveryAddress', fieldId: 'DELIVERY_ADDRESS' },
+    { key: 'deliveryDate', fieldId: 'DELIVERY_DATE' },
+    { key: 'eventDate', fieldId: 'EVENT_DATE' },
+    { key: 'region', fieldId: 'REGION' },
+    { key: 'bouquetCategory', fieldId: 'BOUQUET_CATEGORY' },
+    { key: 'bouquetWishes', fieldId: 'BOUQUET_WISHES' },
+    { key: 'referralLink', fieldId: 'REFERRAL_LINK' },
+  ];
+
+  // Process each field
+  for (const { key, fieldId } of fields) {
+    const value = userData[key as keyof UserRegistrationData];
+    if (value !== undefined && value !== '') {
+      customFields.push({
+        field_id: getFieldId(fieldId as keyof typeof AMO_FIELD_IDS),
+        values: [{ value: String(value) }],
+      });
+    }
   }
 
-  // Bouquet Category
-  if (userData.bouquetCategory) {
-    customFields.push({
-      field_name: "Bouquet Category",
-      values: [{ value: userData.bouquetCategory }],
-    });
-  }
-
-  // Delivery Address
-  if (userData.deliveryAddress) {
-    customFields.push({
-      field_name: "Delivery Address",
-      values: [{ value: userData.deliveryAddress }],
-    });
-  }
-
-  // Delivery Date
-  if (userData.deliveryDate) {
-    customFields.push({
-      field_name: "Delivery Date",
-      values: [{ value: userData.deliveryDate }],
-    });
-  }
-
-  // Delivery Interval
-  if (userData.deliveryInterval) {
-    customFields.push({
-      field_name: "Delivery Interval",
-      values: [{ value: userData.deliveryInterval }],
-    });
-  }
-
-  // Bouquet Wishes
-  if (userData.bouquetWishes) {
-    customFields.push({
-      field_name: "Bouquet Wishes",
-      values: [{ value: userData.bouquetWishes }],
-    });
-  }
-
-  // Email
-  customFields.push({
-    field_name: "Email",
-    values: [{ value: userData.email }],
-  });
-
-  // Referral Link
-  if (userData.referralLink) {
-    customFields.push({
-      field_name: "Referral Link",
-      values: [{ value: userData.referralLink }],
-    });
-  }
-
-  // Account Status (default to "Active")
-  customFields.push({
-    field_name: "Account Status",
-    values: [{ value: "Active" }],
-  });
-
-  return {
+  const leadData: AmoCRMLeadData = {
     name: `Flower Account - ${userData.email}`,
-    price: userData.accountSum || 5000, // Default account sum
+    price: 5000, // Default price if not provided
     custom_fields_values: customFields,
   };
+
+  // Set budget if provided (using standard AmoCRM price field)
+  if (userData.accountSum !== undefined) {
+    leadData.price = userData.accountSum;
+  }
+  
+  return leadData;
 }
 
 /**
@@ -127,64 +126,43 @@ export function mapUserToAmoCRMLead(userData: UserRegistrationData): AmoCRMLeadD
 export function mapUserToAmoCRMContact(userData: UserRegistrationData): AmoCRMContactData {
   const customFields = [];
 
-  // Phone
-  if (userData.phone) {
-    customFields.push({
-      field_name: "Phone",
-      values: [{ value: userData.phone }],
-    });
+  // Add contact fields with proper field IDs
+  const fields = [
+    { key: 'phone', fieldId: 'PHONE' },
+    { key: 'email', fieldId: 'EMAIL' },
+    { key: 'position', fieldId: 'POSITION' },
+  ];
+
+  // Process each field
+  for (const { key, fieldId } of fields) {
+    const value = userData[key as keyof UserRegistrationData];
+    if (value !== undefined && value !== '') {
+      customFields.push({
+        field_id: getFieldId(fieldId as keyof typeof AMO_FIELD_IDS),
+        values: [{ value: String(value) }],
+      });
+    }
   }
 
-  // Email
-  customFields.push({
-    field_name: "Email",
-    values: [{ value: userData.email }],
-  });
-
-  // Bouquet Category
-  if (userData.bouquetCategory) {
+  // Add contact-specific fields
+  if (userData.region) {
     customFields.push({
-      field_name: "Bouquet Category",
-      values: [{ value: userData.bouquetCategory }],
+      field_id: getFieldId('REGION'),
+      values: [{ value: userData.region }],
     });
   }
-
-  // Delivery Address
-  if (userData.deliveryAddress) {
+  
+  if (userData.eventDate) {
     customFields.push({
-      field_name: "Delivery Address",
-      values: [{ value: userData.deliveryAddress }],
-    });
-  }
-
-  // Delivery Date
-  if (userData.deliveryDate) {
-    customFields.push({
-      field_name: "Delivery Date",
-      values: [{ value: userData.deliveryDate }],
-    });
-  }
-
-  // Delivery Interval
-  if (userData.deliveryInterval) {
-    customFields.push({
-      field_name: "Delivery Interval",
-      values: [{ value: userData.deliveryInterval }],
-    });
-  }
-
-  // Bouquet Wishes
-  if (userData.bouquetWishes) {
-    customFields.push({
-      field_name: "Bouquet Wishes",
-      values: [{ value: userData.bouquetWishes }],
+      field_id: getFieldId('EVENT_DATE'),
+      values: [{ value: userData.eventDate }],
     });
   }
 
   // Referral Link
   if (userData.referralLink) {
     customFields.push({
-      field_name: "Referral Link",
+      field_id: getFieldId('REFERRAL_LINK'),
       values: [{ value: userData.referralLink }],
     });
   }
