@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import {useRouter} from "next/navigation";
 
 const Schema = z.object({
   name: z.string().min(1),
@@ -17,7 +18,7 @@ type FormValues = z.infer<typeof Schema>;
 export default function SignupPage() {
   const [error, setError] = useState<string | null>(null);
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormValues>({ resolver: zodResolver(Schema) });
-
+  const router = useRouter();
   const onSubmit = async (data: FormValues) => {
     setError(null);
     try {
@@ -43,7 +44,7 @@ export default function SignupPage() {
       document.cookie = `auth_token=${token}; path=/; max-age=604800; SameSite=Lax; Secure`;
       
       // Redirect to dashboard after successful registration
-      window.location.href = "/account";
+      router.push("/account");
     } catch (err: any) {
       setError(err.message || "An error occurred during registration");
     }

@@ -72,24 +72,30 @@ export interface AmoCRMConfig {
   clientSecret: string;
 }
 
+export interface AmoCustomFieldValue {
+  field_id?: number;
+  field_code?: string;
+  field_name?: string;
+  field_type?: string;
+  values: Array<{ 
+    value: string | number | boolean;
+    enum_id?: number;
+    enum_code?: string;
+  }>;
+}
+
 export interface AmoCRMLeadData {
   name: string;
   price?: number;
   responsible_user_id?: number;
-  custom_fields_values: Array<{
-    field_name: string;
-    values: Array<{ value: string | number }>;
-  }>;
+  custom_fields_values?: AmoCustomFieldValue[];
 }
 
 export interface AmoCRMContactData {
   name: string;
   first_name?: string;
   last_name?: string;
-  custom_fields_values: Array<{
-    field_name: string;
-    values: Array<{ value: string | number }>;
-  }>;
+  custom_fields_values?: AmoCustomFieldValue[];
 }
 
 export class AmoCRMClient {
