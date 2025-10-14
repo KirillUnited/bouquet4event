@@ -38,9 +38,9 @@ export default async function Header() {
           <Logo className="hidden xl:block w-40" />
           <LogoMobile className="xl:hidden w-16" />
         </Link>
-        <div className="hidden xl:flex self-center">
+        <nav className="hidden xl:flex self-center">
           <DesktopNav navItems={navItems} />
-        </div>
+        </nav>
         <div className="flex items-center gap-4">
           <SocialsList className="hidden xl:flex" items={siteSettings?.siteContactInfo?.socialLinks} />
           <ModeToggle />
