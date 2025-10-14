@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const parsed = RegisterSchema.safeParse(body);
     if (!parsed.success) {
-      return NextResponse.json({ error: "Invalid input", details: parsed.error.format() }, { status: 400 });
+      return NextResponse.json({ error: "Неверный формат данных", details: parsed.error.format() }, { status: 400 });
     }
 
     const { email, password } = parsed.data;
