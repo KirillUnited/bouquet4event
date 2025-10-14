@@ -14,10 +14,12 @@ const Schema = z.object({
 type FormValues = z.infer<typeof Schema>;
 
 export default function LoginPage() {
+  const [error, setError] = useState<string | null>(null);
   const form = useForm<FormValues>({ resolver: zodResolver(Schema) });
   const { register, handleSubmit, formState: { errors, isSubmitting }, control } = form;
 
   const onSubmit = async (data: FormValues) => {
+    setError(null);
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -39,7 +41,7 @@ export default function LoginPage() {
       // Redirect to dashboard after successful login
       window.location.href = "/account";
     } catch (err: any) {
-      console.error(err.message || "An error occurred during login");
+      setError(err.message || "An error occurred during login");
     }
   };
 
@@ -47,6 +49,7 @@ export default function LoginPage() {
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <h1 className="text-2xl font-semibold">Вход в аккаунт</h1>
+        {error && <p className="text-red-500">{error}</p>}
         <TextInput control={control} name="email" label="Email" placeholder="Email" required icon={<MailIcon size={16} />} />
         <TextInput control={control} name="password" label="Password" placeholder="Password" type="password" required icon={<LockIcon size={16} />} />
         <Button disabled={isSubmitting}>{isSubmitting ? "Авторизация..." : "Войти в аккаунт"}</Button>
