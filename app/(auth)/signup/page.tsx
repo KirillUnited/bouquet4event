@@ -6,14 +6,17 @@ import {useRouter} from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { RegisterFormFieldset } from "@/components/shared/forms";
 import { FormSchema } from "@/components/shared/forms/lib/validation";
+import { useState } from "react";
 
 type FormValues = z.infer<typeof FormSchema>;
 
 export default function SignupPage() {
+  const [error, setError] = useState<string | null>(null);
   const form = useForm<FormValues>({ resolver: zodResolver(FormSchema) });
   const { control, handleSubmit, formState: { isSubmitting } } = form;
   const router = useRouter();
   const onSubmit = async (data: FormValues) => {
+    setError(null);
     try {
       const res = await fetch("/api/auth/register", {
         method: "POST",
@@ -39,7 +42,7 @@ export default function SignupPage() {
       // Redirect to dashboard after successful registration
       router.push("/account");
     } catch (err: any) {
-      console.error(err.message || "An error occurred during registration");
+      setError(err.message || "An error occurred during registration");
     }
   };
 
@@ -47,6 +50,7 @@ export default function SignupPage() {
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <h1 className="text-2xl font-semibold">Регистрация</h1>
+        {error && <p className="text-red-500">{error}</p>}
         <RegisterFormFieldset formControl={control} />
         <Button disabled={isSubmitting}>{isSubmitting ? "Отправка данных..." : "Создать аккаунт"}</Button>
       </form>

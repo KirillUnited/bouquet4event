@@ -37,7 +37,7 @@ export async function POST(request: Request) {
       { email }
     );
     if (existing) {
-      return NextResponse.json({ error: "Email already registered" }, { status: 409 });
+      return NextResponse.json({ error: "Email уже зарегистрирован" }, { status: 409 });
     }
 
     const userId = uuidv4();
