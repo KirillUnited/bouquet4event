@@ -1,8 +1,11 @@
 "use client";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { TextInput } from "@/components/shared/forms";
+import { Button } from "@/components/ui/button";
+import { LockIcon, MailIcon } from "lucide-react";
 
 const Schema = z.object({
   email: z.string().email(),
@@ -11,11 +14,10 @@ const Schema = z.object({
 type FormValues = z.infer<typeof Schema>;
 
 export default function LoginPage() {
-  const [error, setError] = useState<string | null>(null);
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormValues>({ resolver: zodResolver(Schema) });
+  const form = useForm<FormValues>({ resolver: zodResolver(Schema) });
+  const { register, handleSubmit, formState: { errors, isSubmitting }, control } = form;
 
   const onSubmit = async (data: FormValues) => {
-    setError(null);
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -37,20 +39,20 @@ export default function LoginPage() {
       // Redirect to dashboard after successful login
       window.location.href = "/account";
     } catch (err: any) {
-      setError(err.message || "An error occurred during login");
+      console.error(err.message || "An error occurred during login");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h1 className="text-2xl font-semibold">Вход в аккаунт</h1>
-      {error && <p className="text-red-600 text-sm">{error}</p>}
-      <input placeholder="Email" className="w-full border p-2" {...register("email")} />
-      {errors.email && <span className="text-xs text-red-600">{errors.email.message}</span>}
-      <input placeholder="Password" type="password" className="w-full border p-2" {...register("password")} />
-      {errors.password && <span className="text-xs text-red-600">{errors.password.message}</span>}
-      <button disabled={isSubmitting} className="w-full bg-black text-white py-2">{isSubmitting ? "Авторизация..." : "Войти в аккаунт"}</button>
-    </form>
+    <FormProvider {...form}>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <h1 className="text-2xl font-semibold">Вход в аккаунт</h1>
+        <TextInput control={control} name="email" label="Email" placeholder="Email" required icon={<MailIcon size={16} />} />
+        <TextInput control={control} name="password" label="Password" placeholder="Password" type="password" required icon={<LockIcon size={16} />} />
+        <Button disabled={isSubmitting}>{isSubmitting ? "Авторизация..." : "Войти в аккаунт"}</Button>
+        <p className="text-sm">Нет аккаунта? <a href="/signup" className="text-blue-600 hover:underline">Зарегистрируйтесь</a></p>
+      </form>
+    </FormProvider>
   );
 }
 
