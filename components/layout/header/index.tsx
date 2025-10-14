@@ -10,8 +10,6 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
 import { stegaClean } from "next-sanity";
 import { transformNavigationItems } from "@/lib/navigation";
-import {cookies} from "next/headers";
-import {verifyJwt} from "@/lib/auth";
 import AuthButtons from "@/components/dashboard/ui/AuthButtons";
 import {fetchAccountData} from "@/lib/api/account";
 
