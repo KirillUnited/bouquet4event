@@ -52,7 +52,7 @@ export default function SignupPage() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h1 className="text-2xl font-semibold">Sign up</h1>
+      <h1 className="text-2xl font-semibold">Регистрация</h1>
       {error && <p className="text-red-600 text-sm">{error}</p>}
       <input placeholder="Name" className="w-full border p-2" {...register("name")} />
       {errors.name && <span className="text-xs text-red-600">{errors.name.message}</span>}
@@ -64,7 +64,7 @@ export default function SignupPage() {
       {errors.email && <span className="text-xs text-red-600">{errors.email.message}</span>}
       <input placeholder="Password" type="password" className="w-full border p-2" {...register("password")} />
       {errors.password && <span className="text-xs text-red-600">{errors.password.message}</span>}
-      <button disabled={isSubmitting} className="w-full bg-black text-white py-2">{isSubmitting ? "Submitting..." : "Create account"}</button>
+      <button disabled={isSubmitting} className="w-full bg-black text-white py-2">{isSubmitting ? "Отправка данных..." : "Создать аккаунт"}</button>
     </form>
   );
 }

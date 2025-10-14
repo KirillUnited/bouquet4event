@@ -43,13 +43,13 @@ export default function LoginPage() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h1 className="text-2xl font-semibold">Log in</h1>
+      <h1 className="text-2xl font-semibold">Вход в аккаунт</h1>
       {error && <p className="text-red-600 text-sm">{error}</p>}
       <input placeholder="Email" className="w-full border p-2" {...register("email")} />
       {errors.email && <span className="text-xs text-red-600">{errors.email.message}</span>}
       <input placeholder="Password" type="password" className="w-full border p-2" {...register("password")} />
       {errors.password && <span className="text-xs text-red-600">{errors.password.message}</span>}
-      <button disabled={isSubmitting} className="w-full bg-black text-white py-2">{isSubmitting ? "Signing in..." : "Sign in"}</button>
+      <button disabled={isSubmitting} className="w-full bg-black text-white py-2">{isSubmitting ? "Авторизация..." : "Войти в аккаунт"}</button>
     </form>
   );
 }
