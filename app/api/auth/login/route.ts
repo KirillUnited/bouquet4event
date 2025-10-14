@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const parsed = LoginSchema.safeParse(body);
     if (!parsed.success) {
-      return NextResponse.json({ error: "Invalid input", details: parsed.error.format() }, { status: 400 });
+      return NextResponse.json({ error: "Неверный формат данных", details: parsed.error.format() }, { status: 400 });
     }
 
     const clientWithToken = client.withConfig({ token });
@@ -25,12 +25,12 @@ export async function POST(request: Request) {
       { email: parsed.data.email }
     );
     if (!user?.password) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+      return NextResponse.json({ error: "Неверный пароль или логин" }, { status: 401 });
     }
 
     const isValid = await bcrypt.compare(parsed.data.password, user.password);
     if (!isValid) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+      return NextResponse.json({ error: "Неверный пароль или логин" }, { status: 401 });
     }
 
     // update lastLoginAt
