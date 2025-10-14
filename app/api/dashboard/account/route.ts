@@ -21,7 +21,7 @@ export async function GET() {
 
     const clientWithToken = client.withConfig({ token });
     const account = await clientWithToken.fetch(
-      groq`*[_type == "userAccount" && email == $email][0]{
+      groq`*[_type == "userAccount" && email == $email][0] {
         _id,
         userId,
         email,
