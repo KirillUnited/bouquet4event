@@ -10,18 +10,24 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
 import { stegaClean } from "next-sanity";
 import { transformNavigationItems } from "@/lib/navigation";
+import {cookies} from "next/headers";
+import {verifyJwt} from "@/lib/auth";
 import AuthButtons from "@/components/dashboard/ui/AuthButtons";
 
 export default async function Header() {
-  const {data: siteSettings} = await sanityFetch({query: SITE_SETTINGS_QUERY});
-  
+  const { data: siteSettings } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
+
   // Use navigation from Sanity or fallback to config
   const mainNavigation = stegaClean(siteSettings?.mainNavigation);
-  
+
   // Transform Sanity navigation items to match the expected format
-  const navItems = mainNavigation?.menuItems 
+  const navItems = mainNavigation?.menuItems
     ? transformNavigationItems(mainNavigation.menuItems)
     : NAV_ITEMS;
+  // User authorization
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  const user = token ? await verifyJwt(token) : null;
 
   return (
     <header className={cn(
@@ -36,12 +42,11 @@ export default async function Header() {
           <DesktopNav navItems={navItems} />
         </div>
         <div className="flex items-center gap-4">
-          <SocialsList className="hidden xl:flex" items={siteSettings?.siteContactInfo?.socialLinks}/>
+          <SocialsList className="hidden xl:flex" items={siteSettings?.siteContactInfo?.socialLinks} />
           <ModeToggle />
-          <AuthButtons />
+          <AuthButtons user={user} className="hidden xl:flex" />
           <div className="xl:hidden">
-            <MobileNav navItems={navItems} socials={siteSettings?.siteContactInfo?.socialLinks} />
-            <AuthButtons />
+            <MobileNav navItems={navItems} socials={siteSettings?.siteContactInfo?.socialLinks} user={user} />
           </div>
         </div>
       </div>
