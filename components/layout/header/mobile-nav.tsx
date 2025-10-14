@@ -16,8 +16,9 @@ import { AlignRight } from "lucide-react";
 import { SocialsList } from "@/components/shared/socials";
 import { SocialsListProps } from "@/components/shared/socials/SocialsList";
 import {CTAButton} from "@/components/shared/buttons";
+import AuthButtons from "@/components/dashboard/ui/AuthButtons";
 
-export default function MobileNav({ navItems, socials }: { navItems: NavItem[], socials: SocialsListProps["items"] }) {
+export default function MobileNav({ navItems, socials, user }: { navItems: NavItem[], socials: SocialsListProps["items"], user: { email: string } | null }) {
   const [open, setOpen] = useState(false);
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -56,9 +57,11 @@ export default function MobileNav({ navItems, socials }: { navItems: NavItem[], 
               ))}
             </ul>
 
-            <CTAButton />
+            {/* <CTAButton /> */}
 
             <SocialsList items={socials} />
+            
+            <AuthButtons user={user} />
           </div>
         </div>
       </SheetContent>
