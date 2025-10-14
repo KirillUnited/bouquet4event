@@ -41,9 +41,11 @@ export const RegisterFormFieldset = ({ formControl }: { formControl: any }) => {
                 name="region"
                 required
             />
+            <TextInput control={formControl} name="password" label="Пароль" placeholder="Введите ваш пароль" type="password" required />
             <DatePicker
                 control={formControl}
                 label="Дата планируемого мероприятия"
+                required={false}
             />
             <div className="flex flex-col gap-2">
                 <CheckboxInput
@@ -52,7 +54,7 @@ export const RegisterFormFieldset = ({ formControl }: { formControl: any }) => {
                     label={
                         <span className="text-sm">Я согласен с <a href="/privacy" target="_blank"
                             className="text-primary-500 hover:text-primary-600 underline">политикой конфиденциальности</a> и с <a href="/soglasie-na-obrabotku-personalnykh-dannykh" target="_blank"
-                            className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
+                                className="text-primary-500 hover:text-primary-600 underline">обработкой персональных данных</a></span>
                     }
                     required
                 />

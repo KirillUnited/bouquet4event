@@ -12,7 +12,7 @@ const RegisterSchema = z.object({
   phone: z.string().min(5),
   region: z.string().min(1),
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z.string().min(6),
   bouquetCategory: z.string().optional(),
   deliveryAddress: z.string().optional(),
   deliveryDate: z.string().optional(),
