@@ -10,6 +10,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
 import { stegaClean } from "next-sanity";
 import { transformNavigationItems } from "@/lib/navigation";
+import AuthButtons from "@/components/dashboard/ui/AuthButtons";
 
 export default async function Header() {
   const {data: siteSettings} = await sanityFetch({query: SITE_SETTINGS_QUERY});
@@ -34,11 +35,13 @@ export default async function Header() {
         <div className="hidden xl:flex self-center">
           <DesktopNav navItems={navItems} />
         </div>
-        <div className="flex items-center">
-          <SocialsList className="hidden xl:flex mr-4" items={siteSettings?.siteContactInfo?.socialLinks}/>
+        <div className="flex items-center gap-4">
+          <SocialsList className="hidden xl:flex" items={siteSettings?.siteContactInfo?.socialLinks}/>
           <ModeToggle />
+          <AuthButtons />
           <div className="xl:hidden">
             <MobileNav navItems={navItems} socials={siteSettings?.siteContactInfo?.socialLinks} />
+            <AuthButtons />
           </div>
         </div>
       </div>

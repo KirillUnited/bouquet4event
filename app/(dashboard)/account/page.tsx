@@ -14,9 +14,9 @@ export default async function AccountPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-semibold">My Account</h1>
+      <h1 className="text-3xl font-semibold">Мой аккаунт</h1>
       {!user && (
-        <p className="text-muted-foreground">You are not logged in.</p>
+        <p className="text-muted-foreground">Вы не авторизованы</p>
       )}
       {user && (
         <div className="grid grid-cols-1 gap-6">
