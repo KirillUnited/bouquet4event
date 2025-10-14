@@ -18,11 +18,12 @@ import {SocialsListProps} from "@/components/shared/socials/SocialsList";
 import {CTAButton} from "@/components/shared/buttons";
 import AuthButtons from "@/components/dashboard/ui/AuthButtons";
 import {getNavItemIcon} from "@/lib/navigation";
+import { AccountData } from "@/lib/api/account";
 
 export default function MobileNav({navItems, socials, user}: {
     navItems: NavItem[],
     socials: SocialsListProps["items"],
-    user: { email: string } | null
+    user: AccountData | null
 }) {
     const [open, setOpen] = useState(false);
     return (
