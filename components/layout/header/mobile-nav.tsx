@@ -15,7 +15,6 @@ import {useState} from "react";
 import {AlignRight} from "lucide-react";
 import {SocialsList} from "@/components/shared/socials";
 import {SocialsListProps} from "@/components/shared/socials/SocialsList";
-import {CTAButton} from "@/components/shared/buttons";
 import AuthButtons from "@/components/dashboard/ui/AuthButtons";
 import {getNavItemIcon} from "@/lib/navigation";
 import { AccountData } from "@/lib/api/account";
@@ -70,7 +69,7 @@ export default function MobileNav({navItems, socials, user}: {
 
                         {/* <CTAButton /> */}
 
-                        <AuthButtons user={user} className={`border`}/>
+                        <AuthButtons user={user} className={`border lg:border-none`}/>
 
                         <SocialsList items={socials}/>
                     </nav>

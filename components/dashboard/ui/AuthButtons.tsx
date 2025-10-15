@@ -62,7 +62,7 @@ export default function AuthButtons({user, className}: AuthButtonsProps) {
                 </DropdownMenuContent>
             </DropdownMenu>
         ) : (
-            <div className={cn("flex flex-col lg:flex-row lg:items-center gap-4", className)}>
+            <div className={cn("flex flex-col lg:flex-row lg:items-center rounded-lg gap-4 p-2 lg:p-0", className)}>
                 <Button asChild variant="link">
                     <div className="flex items-center gap-2">
                         <LoginIcon className="w-5 h-5 text-muted-foreground"/>
