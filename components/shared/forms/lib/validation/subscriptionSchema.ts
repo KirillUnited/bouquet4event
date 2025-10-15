@@ -1,7 +1,7 @@
 import * as z from 'zod';
 
 // Schema for form validation
-export const subscriptionSchema = z.object({
+export const SubscriptionSchema = z.object({
     eventType: z.string().min(1, 'Пожалуйста, выберите тип события'),
     eventDate: z.date().optional(),
     style: z.string().min(1, 'Пожалуйста, выберите стиль букета'),
@@ -17,4 +17,5 @@ export const subscriptionSchema = z.object({
     privacyPolicy: z.boolean().refine(val => val === true, {
         message: "Необходимо согласиться с политикой конфиденциальности"
     }),
+    password: z.string().min(6, { message: "Пароль должен быть не менее 6 символов" }),
 });

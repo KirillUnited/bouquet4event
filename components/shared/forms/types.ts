@@ -1,5 +1,5 @@
 import * as z from "zod";
-import {subscriptionSchema} from "@/components/shared/forms/lib/validation";
+import {SubscriptionSchema} from "@/components/shared/forms/lib/validation";
 
 export interface RegisterFormProps {
     id: string;
@@ -32,4 +32,4 @@ export interface StepProps {
     onBack?: () => void;
     control: any;
 }
-export type SubscriptionFormData = z.infer<typeof subscriptionSchema>;
+export type SubscriptionFormData = z.infer<typeof SubscriptionSchema>;

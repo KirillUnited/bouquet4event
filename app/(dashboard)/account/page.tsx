@@ -11,6 +11,7 @@ export default async function AccountPage() {
     if (error) {
         console.error('Error in AccountPage:', error);
         // You might want to show an error message to the user here
+        return <p className="text-red-500">Ошибка загрузки данных аккаунта.</p>
     }
 
     return (
