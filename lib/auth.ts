@@ -17,7 +17,10 @@ export function signJwt(payload: JwtPayload, expiresIn: string = "7d"): string {
   throw new Error("signJwt must be used as an async function");
 }
 
-export async function signJwtAsync(payload: JwtPayload, expiresIn: string = "7d"): Promise<string> {
+export async function signJwtAsync(
+  payload: JwtPayload,
+  expiresIn: string = "7d",
+): Promise<string> {
   const secret = process.env.JWT_SECRET;
   if (!secret) throw new Error("JWT_SECRET is not set");
   const key = new TextEncoder().encode(secret);
@@ -40,4 +43,8 @@ export async function verifyJwt(token: string): Promise<JwtPayload | null> {
   }
 }
 
-
+export function logout() {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("auth_token"); // если токен хранится в localStorage
+  }
+}
