@@ -1,5 +1,8 @@
 import * as z from "zod";
 
+/**
+ * Deprecated form schema, use SubscriptionSchema instead
+ */
 export const FormSchema = z.object({
     name: z.string().min(1, { message: "Пожалуйста, введите ваше имя" }),
     phone: z.string()

@@ -6,14 +6,14 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="min-h-[60vh] py-8">
-        <div className="container mx-auto px-4">
+      <main className="flex-1 py-8">
+        <div className="container">
           {children}
         </div>
       </main>
-    </>
+    </div>
   );
 }
 
