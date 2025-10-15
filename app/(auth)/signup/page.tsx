@@ -7,6 +7,7 @@ import {RegisterFormFieldset} from "@/components/shared/forms";
 import {SubscriptionSchema} from "@/components/shared/forms/lib/validation";
 import {useState} from "react";
 import useRegisterForm from "@/hooks/useRegisterForm";
+import { Logo } from "@/components/ui/logo";
 
 type FormValues = z.infer<typeof SubscriptionSchema>;
 
@@ -48,12 +49,18 @@ export default function SignupPage() {
 
     return (
         <FormProvider {...form}>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-                <h1 className="text-2xl font-semibold">Регистрация</h1>
-                {error && <p className="text-red-500">{error}</p>}
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+                <div className="flex flex-col gap-2 text-center mb-1">
+                    <Logo className="w-40 mx-auto" />
+                    <h1 className="text-2xl font-semibold">Создание цветочной подписки</h1>
+                    <p className="text-sm text-center text-muted-foreground">
+                        Заполните форму, чтобы создать аккаунт для цветочной подписки.
+                    </p>
+                </div>
+                {error && <p className="text-red-500 text-center">{error}</p>}
                 <RegisterFormFieldset formControl={control}/>
                 <Button disabled={isSubmitting}>{isSubmitting ? "Отправка данных..." : "Создать аккаунт"}</Button>
-                <p className="text-sm">Есть аккаунт? <a href="/login"
+                <p className="text-sm text-center">Есть аккаунт? <a href="/login"
                                                         className="text-primary hover:underline">Авторизуйтесь</a>
                 </p>
             </form>

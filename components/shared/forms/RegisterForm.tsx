@@ -11,7 +11,7 @@ import { DatePicker } from "@/components/shared/forms/ui/DatePicker";
 
 export const RegisterFormFieldset = ({ formControl }: { formControl: any }) => {
     return (
-        <fieldset className="space-y-6">
+        <fieldset className="flex flex-col gap-6">
             <TextInput
                 control={formControl}
                 name="name"
