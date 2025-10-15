@@ -86,7 +86,7 @@ export default function AuthButtons({ user, className }: AuthButtonsProps) {
   ) : (
     <div
       className={cn(
-        "flex flex-col lg:flex-row lg:items-center rounded-lg gap-4 p-2 lg:p-0",
+        "flex flex-col xl:flex-row xl:items-center rounded-lg gap-4 p-2 xl:p-0",
         className,
       )}
     >

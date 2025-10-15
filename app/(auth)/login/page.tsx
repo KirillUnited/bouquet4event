@@ -6,6 +6,7 @@ import {z} from "zod";
 import {TextInput} from "@/components/shared/forms";
 import {Button} from "@/components/ui/button";
 import {LockIcon, MailIcon} from "lucide-react";
+import { Logo } from "@/components/ui/logo";
 
 const Schema = z.object({
     email: z.string().email('Введите корректный email'),
@@ -53,15 +54,21 @@ export default function LoginPage() {
 
     return (
         <FormProvider {...form}>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-                <h1 className="text-2xl font-semibold">Вход в аккаунт</h1>
-                {error && <p className="text-red-500">{error}</p>}
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+                <div className="flex flex-col gap-2 text-center mb-1">
+                    <Logo className="w-40 mx-auto" />
+                    <h1 className="text-2xl font-semibold">Вход в аккаунт</h1>
+                    <p className="text-sm text-center text-muted-foreground">
+                        Войдите в свой цветочный аккаунт, используя email и пароль.
+                    </p>
+                </div>
+                {error && <p className="text-red-500 text-center">{error}</p>}
                 <TextInput control={control} name="email" label="Email" placeholder="email@domain.com" required
                            icon={<MailIcon size={16}/>}/>
                 <TextInput control={control} name="password" label="Пароль" placeholder="Введите пароль" type="password"
                            required icon={<LockIcon size={16}/>}/>
                 <Button disabled={isSubmitting}>{isSubmitting ? "Авторизация..." : "Войти в аккаунт"}</Button>
-                <p className="text-sm">Нет аккаунта? <a href="/signup"
+                <p className="text-sm text-center">Нет аккаунта? <a href="/signup"
                                                         className="text-primary hover:underline">Зарегистрируйтесь</a>
                 </p>
             </form>

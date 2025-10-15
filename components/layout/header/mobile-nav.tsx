@@ -69,7 +69,7 @@ export default function MobileNav({navItems, socials, user}: {
 
                         {/* <CTAButton /> */}
 
-                        <AuthButtons user={user} className={`border lg:border-none`}/>
+                        <AuthButtons user={user} className={`border xl:border-none`}/>
 
                         <SocialsList items={socials}/>
                     </nav>
