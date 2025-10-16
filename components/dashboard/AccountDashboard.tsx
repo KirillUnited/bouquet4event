@@ -40,7 +40,7 @@ export default function AccountDashboard({ userData }: { userData: any }) {
     deliveryInterval: "Weekly",
     bouquetWishes: "Розовые и белые цветы, без сильного запаха",
     email: "anna.ivanova@email.com",
-    referralLink: "https://bloombox.ru/ref/anna_ivanova",
+    referralLink: "https://bouquet4event.ru/ref/anna_ivanova",
     accountStatus: "Active",
   });
 
@@ -168,7 +168,7 @@ export default function AccountDashboard({ userData }: { userData: any }) {
           <Button
             variant="default"
             iconName="Plus"
-            className="bg-conversion text-conversion-foreground hover:bg-conversion/90"
+            size="sm"
           >
             Добавить подарочную подписку
           </Button>

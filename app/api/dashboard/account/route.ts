@@ -33,6 +33,7 @@ export async function GET() {
         bouquetCategory,
         deliveryAddress,
         deliveryInterval,
+        createdAt,
         lastLoginAt,
         amoLeadId,
         amoContactId

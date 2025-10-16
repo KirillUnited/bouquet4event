@@ -244,7 +244,7 @@ const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
             <Input
               label="Реферальная ссылка"
               type="text"
-              placeholder="https://bloombox.ru/ref/..."
+              placeholder="https://bouquet4event.ru/ref/..."
               value={localPreferences?.referralLink || ""}
               onChange={(e) =>
                 updatePreference("referralLink", e?.target?.value)

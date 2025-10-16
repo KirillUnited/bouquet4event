@@ -16,7 +16,7 @@ type AccountProps = {
 interface Props {
   user: AccountProps & {
     avatar: string;
-    joinDate: Date | string | undefined;
+    createdAt: Date | string | undefined;
     referralLink: string;
     accountStatus: string;
     bouquetCategory?: string;
@@ -39,6 +39,7 @@ interface Props {
 }
 
 export default function AccountOverview({ user, stats }: Props) {
+  console.log("User Data:", user.createdAt);
   const formatDate = (dateString) => {
     return new Date(dateString)?.toLocaleDateString("ru-RU", {
       month: "long",
@@ -56,7 +57,7 @@ export default function AccountOverview({ user, stats }: Props) {
 
   const membershipBadge = () => {
     const monthsActive = Math.floor(
-      (new Date() - new Date(user?.joinDate)) / (1000 * 60 * 60 * 24 * 30),
+      (new Date() - new Date(user?.createdAt)) / (1000 * 60 * 60 * 24 * 30),
     );
 
     if (monthsActive >= 12)
@@ -124,7 +125,7 @@ export default function AccountOverview({ user, stats }: Props) {
           </div>
           <p className="text-muted-foreground mb-1">{user?.email}</p>
           <p className="text-sm text-muted-foreground">
-            Участник с {formatDate(user?.joinDate)}
+            Участник с {formatDate(user?.createdAt)}
           </p>
         </div>
       </div>
