@@ -1,65 +1,70 @@
+"use client";
+
 import { useState } from "react";
 import Icon from "@/components/ui/AppIcon";
 import Button from "@/components/dashboard/ui/Button";
 
-const NotificationCenter = ({
+type NotificationType = "delivery" | "reminder" | "promotion" | "update" | "default";
+
+export interface NotificationItem {
+  id: string;
+  title: string;
+  message: string;
+  type?: NotificationType;
+  createdAt: string;
+  read?: boolean;
+  actionUrl?: string;
+  actionText?: string;
+}
+
+interface NotificationCenterProps {
+  notifications: NotificationItem[];
+  onMarkAsRead: (id: string) => void;
+  onMarkAllAsRead: () => void;
+}
+
+const NotificationCenter: React.FC<NotificationCenterProps> = ({
   notifications,
   onMarkAsRead,
   onMarkAllAsRead,
 }) => {
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
 
-  const getNotificationIcon = (type) => {
+  const getNotificationIcon = (type?: NotificationType) => {
     switch (type) {
       case "delivery":
-        return {
-          name: "Package",
-          color: "text-blue-600",
-          bgColor: "bg-blue-100",
-        };
+        return { name: "Package", color: "text-blue-600", bgColor: "bg-blue-100" };
       case "reminder":
-        return {
-          name: "Bell",
-          color: "text-yellow-600",
-          bgColor: "bg-yellow-100",
-        };
+        return { name: "Bell", color: "text-yellow-600", bgColor: "bg-yellow-100" };
       case "promotion":
-        return {
-          name: "Tag",
-          color: "text-green-600",
-          bgColor: "bg-green-100",
-        };
+        return { name: "Tag", color: "text-green-600", bgColor: "bg-green-100" };
       case "update":
-        return {
-          name: "Info",
-          color: "text-purple-600",
-          bgColor: "bg-purple-100",
-        };
+        return { name: "Info", color: "text-purple-600", bgColor: "bg-purple-100" };
       default:
         return { name: "Bell", color: "text-gray-600", bgColor: "bg-gray-100" };
     }
   };
 
   const filteredNotifications = notifications?.filter((notification) => {
-    if (filter === "unread") return !notification?.read;
-    if (filter === "read") return notification?.read;
+    if (filter === "unread") return !notification.read;
+    if (filter === "read") return notification.read;
     return true;
   });
 
-  const unreadCount = notifications?.filter((n) => !n?.read)?.length;
+  const unreadCount = notifications?.filter((n) => !n.read)?.length || 0;
 
-  const formatTimeAgo = (dateString) => {
+  const formatTimeAgo = (dateString: string): string => {
     const now = new Date();
     const date = new Date(dateString);
-    const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
 
-    if (diffInHours < 1) return "Just now";
-    if (diffInHours < 24) return `${diffInHours}h ago`;
+    if (diffInHours < 1) return "Только что";
+    if (diffInHours < 24) return `${diffInHours} ч. назад`;
 
     const diffInDays = Math.floor(diffInHours / 24);
-    if (diffInDays < 7) return `${diffInDays}d ago`;
+    if (diffInDays < 7) return `${diffInDays} дн. назад`;
 
-    return date?.toLocaleDateString("en-US", {
+    return date.toLocaleDateString("ru-RU", {
       month: "short",
       day: "numeric",
     });
@@ -70,7 +75,7 @@ const NotificationCenter = ({
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
           <h3 className="font-playfair text-lg font-semibold text-foreground">
-            Notifications
+            Уведомления
           </h3>
           {unreadCount > 0 && (
             <span className="px-2 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
@@ -82,12 +87,12 @@ const NotificationCenter = ({
         <div className="flex items-center space-x-2">
           <select
             value={filter}
-            onChange={(e) => setFilter(e?.target?.value)}
+            onChange={(e) => setFilter(e.target.value as "all" | "unread" | "read")}
             className="px-3 py-1 border border-border rounded-md text-sm bg-background text-foreground"
           >
-            <option value="all">All</option>
-            <option value="unread">Unread</option>
-            <option value="read">Read</option>
+            <option value="all">Все</option>
+            <option value="unread">Непрочитанные</option>
+            <option value="read">Прочитанные</option>
           </select>
 
           {unreadCount > 0 && (
@@ -97,13 +102,14 @@ const NotificationCenter = ({
               iconName="CheckCheck"
               onClick={onMarkAllAsRead}
             >
-              Mark All Read
+              Отметить всё как прочитанное
             </Button>
           )}
         </div>
       </div>
+
       <div className="space-y-3 max-h-96 overflow-y-auto">
-        {filteredNotifications?.length === 0 ? (
+        {filteredNotifications.length === 0 ? (
           <div className="text-center py-8">
             <Icon
               name="Bell"
@@ -112,78 +118,74 @@ const NotificationCenter = ({
             />
             <p className="text-muted-foreground">
               {filter === "unread"
-                ? "No unread notifications"
-                : "No notifications found"}
+                ? "Нет непрочитанных уведомлений"
+                : "Уведомления отсутствуют"}
             </p>
           </div>
         ) : (
-          filteredNotifications?.map((notification) => {
-            const icon = getNotificationIcon(notification?.type);
+          filteredNotifications.map((notification) => {
+            const icon = getNotificationIcon(notification.type);
 
             return (
               <div
-                key={notification?.id}
-                className={`
-                  p-4 rounded-lg border transition-natural cursor-pointer
+                key={notification.id}
+                className={`p-4 rounded-lg border transition-natural cursor-pointer
                   ${
-                    notification?.read
+                    notification.read
                       ? "border-border bg-background"
                       : "border-primary/20 bg-primary/5"
-                  }
-                  hover:shadow-natural
-                `}
+                  } hover:shadow-natural`}
                 onClick={() =>
-                  !notification?.read && onMarkAsRead(notification?.id)
+                  !notification.read && onMarkAsRead(notification.id)
                 }
               >
                 <div className="flex items-start space-x-3">
                   <div
-                    className={`
-                    flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0
-                    ${icon?.bgColor}
-                  `}
+                    className={`flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0 ${icon.bgColor}`}
                   >
-                    <Icon name={icon?.name} size={20} className={icon?.color} />
+                    <Icon name={icon.name} size={20} className={icon.color} />
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <h4
-                          className={`
-                          font-medium mb-1
-                          ${notification?.read ? "text-muted-foreground" : "text-foreground"}
-                        `}
+                          className={`font-medium mb-1 ${
+                            notification.read
+                              ? "text-muted-foreground"
+                              : "text-foreground"
+                          }`}
                         >
-                          {notification?.title}
+                          {notification.title}
                         </h4>
                         <p
-                          className={`
-                          text-sm
-                          ${notification?.read ? "text-muted-foreground" : "text-foreground"}
-                        `}
+                          className={`text-sm ${
+                            notification.read
+                              ? "text-muted-foreground"
+                              : "text-foreground"
+                          }`}
                         >
-                          {notification?.message}
+                          {notification.message}
                         </p>
                       </div>
 
                       <div className="flex items-center space-x-2 ml-4">
                         <span className="text-xs text-muted-foreground">
-                          {formatTimeAgo(notification?.createdAt)}
+                          {formatTimeAgo(notification.createdAt)}
                         </span>
-                        {!notification?.read && (
+                        {!notification.read && (
                           <div className="w-2 h-2 bg-primary rounded-full" />
                         )}
                       </div>
                     </div>
 
-                    {notification?.actionUrl && (
+                    {notification.actionUrl && (
                       <Button
                         variant="ghost"
                         size="sm"
                         className="mt-2 p-0 h-auto text-primary hover:text-primary/80"
                       >
-                        {notification?.actionText || "View Details"}
+                        {notification.actionText || "Посмотреть"}
                       </Button>
                     )}
                   </div>
