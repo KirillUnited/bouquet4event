@@ -9,11 +9,11 @@ const userData = {
   phone: "+7 (912) 345-67-89",
   deliveryAddress: "ул. Тверская, 15, кв. 42, Москва, 125009",
   deliveryDate: "2024-10-15",
-  deliveryInterval: "Weekly",
-  bouquetCategory: "Romantic",
+  deliveryInterval: "Еженедельно",
+  bouquetCategory: "Романтические",
   bouquetWishes: "Розовые и белые цветы, без сильного запаха",
   referralLink: "https://bloombox.ru/ref/anna_ivanova",
-  accountStatus: "Active",
+  accountStatus: "Активен",
 };
 
 // Mock user stats - Russian translations with Account Sum
@@ -30,7 +30,7 @@ const userStats = {
     },
     {
       type: "rating",
-      description: 'Оценен букет "Сезонное великолепие" - 5 звезд',
+      description: 'Оценен букет "Сезонное великолепие" — 5 звёзд',
       date: "2024-10-06",
     },
     {
@@ -60,25 +60,25 @@ const deliveryData = [
     id: 1,
     date: "2024-10-15",
     bouquetName: "Осенняя гармония",
-    status: "scheduled",
+    status: "Запланирована",
   },
   {
     id: 2,
     date: "2024-10-29",
     bouquetName: "Хеллоуинские специи",
-    status: "scheduled",
+    status: "Запланирована",
   },
   {
     id: 3,
     date: "2024-10-08",
     bouquetName: "Осенний урожай",
-    status: "delivered",
+    status: "Доставлен",
   },
   {
     id: 4,
     date: "2024-09-24",
     bouquetName: "Сезонное великолепие",
-    status: "delivered",
+    status: "Доставлен",
   },
 ];
 
@@ -91,8 +91,8 @@ const deliveryHistory = [
     bouquetImage:
       "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop",
     description:
-      "Теплая коллекция сезонных цветов с подсолнухами, оранжевыми розами и осенней листвой.",
-    status: "delivered",
+      "Тёплая коллекция сезонных цветов с подсолнухами, оранжевыми розами и осенней листвой.",
+    status: "Доставлен",
     rating: 5,
     feedback: "Абсолютно потрясающе! Цвета были идеальными для осени.",
     flowersIncluded: [
@@ -110,8 +110,8 @@ const deliveryHistory = [
     bouquetImage:
       "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=300&h=300&fit=crop",
     description:
-      "Элегантная смесь поздних летних и ранних осенних цветов в богатых, теплых тонах.",
-    status: "delivered",
+      "Элегантная смесь поздних летних и ранних осенних цветов в богатых, тёплых тонах.",
+    status: "Доставлен",
     rating: 4,
     feedback: "Красивая композиция, продержалась больше недели!",
     flowersIncluded: ["Георгины", "Хризантемы", "Эвкалипт"],
@@ -124,7 +124,7 @@ const deliveryHistory = [
     bouquetImage:
       "https://images.unsplash.com/photo-1574684891174-df6b02ab38d7?w=300&h=300&fit=crop",
     description: "Свежие садовые цветы с естественным, органичным ощущением.",
-    status: "delivered",
+    status: "Доставлен",
     rating: 5,
     flowersIncluded: ["Смешанные полевые цветы", "Гипсофила", "Зелень"],
     careInstructions: true,
@@ -136,11 +136,12 @@ const deliveryHistory = [
     bouquetImage:
       "https://images.unsplash.com/photo-1520763185298-1b434c919102?w=300&h=300&fit=crop",
     description: "Яркие летние цвета, напоминающие красивый закат.",
-    status: "skipped",
+    status: "Пропущен",
     flowersIncluded: [],
     careInstructions: false,
   },
 ];
+
 const tabs = [
   { id: "overview", name: "Обзор", icon: "Home" },
   { id: "calendar", name: "Календарь", icon: "Calendar" },

@@ -1,13 +1,6 @@
 import { Card } from "@/components/ui/card";
 import Icon from "@/components/ui/AppIcon";
 import Image from "next/image";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import Input from "@/components/dashboard/ui/Input";
 import StudioSelect from "@/components/dashboard/ui/StudioSelect";
 
@@ -175,81 +168,6 @@ export default function AccountOverview({ user, stats }: Props) {
             {stats?.referrals}
           </p>
           <p className="text-sm text-muted-foreground">Приглашенные друзья</p>
-        </div>
-      </div>
-
-      {/* New Information Fields */}
-      <div className="mt-6 pt-6 border-t border-border">
-        <h4 className="font-medium text-foreground mb-4">
-          Дополнительная информация
-        </h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <StudioSelect
-            options={bouquetCategoryOptions}
-            label="Категория букета"
-            placeholder="Выберите категорию"
-            defaultValue={user?.bouquetCategory}
-            disabled
-          />
-
-          <Input
-            label="Адрес доставки"
-            type="text"
-            value={user?.deliveryAddress || ""}
-            placeholder="Введите адрес доставки"
-            disabled
-          />
-
-          <Input
-            label="Дата доставки"
-            type="date"
-            value={user?.deliveryDate || ""}
-            disabled
-          />
-
-          <Select
-            label="Интервал доставки"
-            options={deliveryIntervalOptions}
-            value={user?.deliveryInterval}
-            placeholder="Выберите интервал"
-            disabled
-          />
-
-          <div className="md:col-span-2">
-            <label className="text-sm font-medium text-foreground mb-2 block">
-              Пожелания к букету
-            </label>
-            <textarea
-              className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              value={user?.bouquetWishes || ""}
-              placeholder="Опишите ваши пожелания к букету"
-              disabled
-            />
-          </div>
-
-          <Input
-            label="Email"
-            type="email"
-            value={user?.email || ""}
-            placeholder="email@example.com"
-            disabled
-          />
-
-          <Input
-            label="Реферальная ссылка"
-            type="text"
-            value={user?.referralLink || ""}
-            placeholder="https://bloombox.ru/ref/..."
-            disabled
-          />
-
-          <Select
-            label="Статус аккаунта"
-            options={accountStatusOptions}
-            value={user?.accountStatus}
-            placeholder="Статус аккаунта"
-            disabled
-          />
         </div>
       </div>
 

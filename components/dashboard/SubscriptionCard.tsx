@@ -16,7 +16,7 @@ const SubscriptionCard = ({ subscription, onManage, onPause, onUpgrade }) => {
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString)?.toLocaleDateString("en-US", {
+    return new Date(dateString)?.toLocaleDateString("ru-RU", {
       month: "short",
       day: "numeric",
       year: "numeric",
@@ -38,7 +38,7 @@ const SubscriptionCard = ({ subscription, onManage, onPause, onUpgrade }) => {
                 subscription?.status?.slice(1)}
             </span>
             <span className="text-sm text-muted-foreground">
-              ${subscription?.price}/month
+              ${subscription?.price}/в месяц
             </span>
           </div>
         </div>
@@ -49,7 +49,7 @@ const SubscriptionCard = ({ subscription, onManage, onPause, onUpgrade }) => {
             iconName="Settings"
             onClick={() => onManage(subscription?.id)}
           >
-            Manage
+            Управлять
           </Button>
           {subscription?.status === "active" && (
             <Button
@@ -58,7 +58,7 @@ const SubscriptionCard = ({ subscription, onManage, onPause, onUpgrade }) => {
               iconName="Pause"
               onClick={() => onPause(subscription?.id)}
             >
-              Pause
+              Пауза
             </Button>
           )}
         </div>
@@ -83,11 +83,11 @@ const SubscriptionCard = ({ subscription, onManage, onPause, onUpgrade }) => {
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <Icon name="Calendar" size={16} />
-            <span>Started {formatDate(subscription?.startDate)}</span>
+            <span>доставки с {formatDate(subscription?.startDate)}</span>
           </div>
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <Icon name="Package" size={16} />
-            <span>{subscription?.deliveriesCount} deliveries</span>
+            <span>{subscription?.deliveriesCount} доставок</span>
           </div>
         </div>
         {subscription?.canUpgrade && (
@@ -98,7 +98,7 @@ const SubscriptionCard = ({ subscription, onManage, onPause, onUpgrade }) => {
             onClick={() => onUpgrade(subscription?.id)}
             className="text-conversion border-conversion hover:bg-conversion hover:text-conversion-foreground"
           >
-            Upgrade
+            Улучшить план
           </Button>
         )}
       </div>

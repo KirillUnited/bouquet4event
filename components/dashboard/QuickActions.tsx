@@ -5,48 +5,48 @@ const QuickActions = ({ onAction }) => {
   const actions = [
     {
       id: "pause-subscription",
-      title: "Pause Subscription",
-      description: "Temporarily pause your deliveries",
+      title: "На паузу",
+      description: "Временно приостановите доставку букетов",
       icon: "Pause",
       color: "text-yellow-600",
       bgColor: "bg-yellow-50 hover:bg-yellow-100",
     },
     {
       id: "skip-next",
-      title: "Skip Next Delivery",
-      description: "Skip your upcoming delivery",
+      title: "Пропустить следующую доставку",
+      description: "Пропустите ближайшую доставку",
       icon: "SkipForward",
       color: "text-blue-600",
       bgColor: "bg-blue-50 hover:bg-blue-100",
     },
     {
       id: "change-address",
-      title: "Update Address",
-      description: "Change your delivery address",
+      title: "Обновить адрес",
+      description: "Измените адрес доставки",
       icon: "MapPin",
       color: "text-green-600",
       bgColor: "bg-green-50 hover:bg-green-100",
     },
     {
       id: "gift-subscription",
-      title: "Gift a Subscription",
-      description: "Send flowers to someone special",
+      title: "Подарить подписку",
+      description: "Отправьте цветы особенному человеку",
       icon: "Gift",
       color: "text-purple-600",
       bgColor: "bg-purple-50 hover:bg-purple-100",
     },
     {
       id: "upgrade-plan",
-      title: "Upgrade Plan",
-      description: "Get more flowers or premium options",
+      title: "Обновить план",
+      description: "Получайте больше цветов или премиум-варианты",
       icon: "ArrowUp",
       color: "text-conversion",
       bgColor: "bg-conversion/10 hover:bg-conversion/20",
     },
     {
       id: "contact-support",
-      title: "Contact Support",
-      description: "Get help with your subscription",
+      title: "Связаться с поддержкой",
+      description: "Получите помощь по вашей подписке",
       icon: "MessageCircle",
       color: "text-gray-600",
       bgColor: "bg-gray-50 hover:bg-gray-100",
@@ -64,9 +64,10 @@ const QuickActions = ({ onAction }) => {
             key={action?.id}
             onClick={() => onAction(action?.id)}
             className={`
+            flex
               p-4 rounded-lg border border-border text-left transition-natural
               ${action?.bgColor}
-              hover:shadow-natural
+              hover:shadow-natural hover:cursor-pointer
             `}
           >
             <div className="flex items-start space-x-3">
@@ -79,7 +80,7 @@ const QuickActions = ({ onAction }) => {
                 <Icon name={action?.icon} size={20} className={action?.color} />
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="font-medium text-foreground mb-1">
+                <h4 className="text-base font-medium text-foreground mb-1">
                   {action?.title}
                 </h4>
                 <p className="text-sm text-muted-foreground">

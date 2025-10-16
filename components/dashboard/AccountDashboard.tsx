@@ -22,6 +22,8 @@ export default function AccountDashboard({ userData }: { userData: any }) {
   const [activeTab, setActiveTab] = useState("overview");
   const [notifications, setNotifications] = useState([]);
 
+  console.log("User Data:", userData);
+
   // Mock preferences data - Russian translations
   const [preferences, setPreferences] = useState({
     colorPalette: "warm",
@@ -209,7 +211,7 @@ export default function AccountDashboard({ userData }: { userData: any }) {
           <>
             <AccountOverview user={userData} stats={userStats} />
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
               <SubscriptionCard
                 subscription={subscriptionData}
                 onManage={handleSubscriptionManage}
