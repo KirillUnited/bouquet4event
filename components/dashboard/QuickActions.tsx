@@ -1,58 +1,8 @@
 import React from "react";
 import Icon from "@/components/ui/AppIcon";
+import { actions } from "@/components/dashboard/mock-data";
 
 const QuickActions = ({ onAction }) => {
-  const actions = [
-    {
-      id: "pause-subscription",
-      title: "На паузу",
-      description: "Временно приостановите доставку букетов",
-      icon: "Pause",
-      color: "text-yellow-600",
-      bgColor: "bg-yellow-50 hover:bg-yellow-100",
-    },
-    {
-      id: "skip-next",
-      title: "Пропустить следующую доставку",
-      description: "Пропустите ближайшую доставку",
-      icon: "SkipForward",
-      color: "text-blue-600",
-      bgColor: "bg-blue-50 hover:bg-blue-100",
-    },
-    {
-      id: "change-address",
-      title: "Обновить адрес",
-      description: "Измените адрес доставки",
-      icon: "MapPin",
-      color: "text-green-600",
-      bgColor: "bg-green-50 hover:bg-green-100",
-    },
-    {
-      id: "gift-subscription",
-      title: "Подарить подписку",
-      description: "Отправьте цветы особенному человеку",
-      icon: "Gift",
-      color: "text-purple-600",
-      bgColor: "bg-purple-50 hover:bg-purple-100",
-    },
-    {
-      id: "upgrade-plan",
-      title: "Обновить план",
-      description: "Получайте больше цветов или премиум-варианты",
-      icon: "ArrowUp",
-      color: "text-conversion",
-      bgColor: "bg-conversion/10 hover:bg-conversion/20",
-    },
-    {
-      id: "contact-support",
-      title: "Связаться с поддержкой",
-      description: "Получите помощь по вашей подписке",
-      icon: "MessageCircle",
-      color: "text-gray-600",
-      bgColor: "bg-gray-50 hover:bg-gray-100",
-    },
-  ];
-
   return (
     <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
       <h3 className="font-playfair text-lg font-semibold text-foreground mb-4">

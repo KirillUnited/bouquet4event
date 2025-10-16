@@ -1,8 +1,6 @@
 import { Card } from "@/components/ui/card";
 import Icon from "@/components/ui/AppIcon";
 import Image from "next/image";
-import Input from "@/components/dashboard/ui/Input";
-import StudioSelect from "@/components/dashboard/ui/StudioSelect";
 
 type AccountProps = {
   email: string;
@@ -39,7 +37,6 @@ interface Props {
 }
 
 export default function AccountOverview({ user, stats }: Props) {
-  console.log("User Data:", user.createdAt);
   const formatDate = (dateString) => {
     return new Date(dateString)?.toLocaleDateString("ru-RU", {
       month: "long",
@@ -72,28 +69,6 @@ export default function AccountOverview({ user, stats }: Props) {
       color: "bg-accent text-accent-foreground",
     };
   };
-
-  const bouquetCategoryOptions = [
-    { value: "Romantic", label: "Романтический" },
-    { value: "Seasonal", label: "Сезонный" },
-    { value: "Luxe", label: "Люкс" },
-    { value: "Classic", label: "Классический" },
-    { value: "Modern", label: "Современный" },
-  ];
-
-  const deliveryIntervalOptions = [
-    { value: "Weekly", label: "Еженедельно" },
-    { value: "Bi-weekly", label: "Раз в две недели" },
-    { value: "Monthly", label: "Ежемесячно" },
-    { value: "One-time", label: "Разовая доставка" },
-  ];
-
-  const accountStatusOptions = [
-    { value: "Active", label: "Активен" },
-    { value: "Inactive", label: "Неактивен" },
-    { value: "Suspended", label: "Заблокирован" },
-    { value: "Cancelled", label: "Отменен" },
-  ];
 
   const badge = membershipBadge();
 

@@ -4,68 +4,17 @@ import Button from "@/components/dashboard/ui/Button";
 import Input from "@/components/dashboard/ui/Input";
 import Select from "@/components/dashboard/ui/Select";
 import { Checkbox } from "@/components/dashboard/ui/Checkbox";
+import {
+  accountStatusOptions,
+  bouquetCategoryOptions,
+  colorOptions,
+  deliveryIntervalOptions,
+  flowerTypes,
+} from "@/components/dashboard/mock-data";
 
 const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
   const [localPreferences, setLocalPreferences] = useState(preferences);
   const [isEditing, setIsEditing] = useState(false);
-
-  const colorOptions = [
-    {
-      id: "warm",
-      name: "Теплые тона",
-      colors: ["#FF6B35", "#D4A574", "#C4A484"],
-    },
-    {
-      id: "cool",
-      name: "Холодные тона",
-      colors: ["#7A8471", "#6B8CAE", "#8B7FB8"],
-    },
-    {
-      id: "neutral",
-      name: "Нейтральные тона",
-      colors: ["#E8DDD4", "#F5F2EE", "#C8C3BE"],
-    },
-    {
-      id: "vibrant",
-      name: "Яркие цвета",
-      colors: ["#FF6B35", "#D4AF37", "#B85C57"],
-    },
-  ];
-
-  const flowerTypes = [
-    "Розы",
-    "Пионы",
-    "Тюльпаны",
-    "Лилии",
-    "Подсолнухи",
-    "Гортензии",
-    "Эвкалипт",
-    "Гипсофила",
-    "Хризантемы",
-    "Нарциссы",
-  ];
-
-  const bouquetCategoryOptions = [
-    { value: "Romantic", label: "Романтический" },
-    { value: "Seasonal", label: "Сезонный" },
-    { value: "Luxe", label: "Люкс" },
-    { value: "Classic", label: "Классический" },
-    { value: "Modern", label: "Современный" },
-  ];
-
-  const deliveryIntervalOptions = [
-    { value: "Weekly", label: "Еженедельно" },
-    { value: "Bi-weekly", label: "Раз в две недели" },
-    { value: "Monthly", label: "Ежемесячно" },
-    { value: "One-time", label: "Разовая доставка" },
-  ];
-
-  const accountStatusOptions = [
-    { value: "Active", label: "Активен" },
-    { value: "Inactive", label: "Неактивен" },
-    { value: "Suspended", label: "Заблокирован" },
-    { value: "Cancelled", label: "Отменен" },
-  ];
 
   const handleSave = () => {
     onUpdatePreferences(localPreferences);

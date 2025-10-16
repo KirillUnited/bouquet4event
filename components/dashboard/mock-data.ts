@@ -150,6 +150,114 @@ const tabs = [
   { id: "notifications", name: "Уведомления", icon: "Bell" },
 ];
 
+const colorOptions = [
+  {
+    id: "warm",
+    name: "Теплые тона",
+    colors: ["#FF6B35", "#D4A574", "#C4A484"],
+  },
+  {
+    id: "cool",
+    name: "Холодные тона",
+    colors: ["#7A8471", "#6B8CAE", "#8B7FB8"],
+  },
+  {
+    id: "neutral",
+    name: "Нейтральные тона",
+    colors: ["#E8DDD4", "#F5F2EE", "#C8C3BE"],
+  },
+  {
+    id: "vibrant",
+    name: "Яркие цвета",
+    colors: ["#FF6B35", "#D4AF37", "#B85C57"],
+  },
+];
+
+const flowerTypes = [
+  "Розы",
+  "Пионы",
+  "Тюльпаны",
+  "Лилии",
+  "Подсолнухи",
+  "Гортензии",
+  "Эвкалипт",
+  "Гипсофила",
+  "Хризантемы",
+  "Нарциссы",
+];
+
+const bouquetCategoryOptions = [
+  { value: "Romantic", label: "Романтический" },
+  { value: "Seasonal", label: "Сезонный" },
+  { value: "Luxe", label: "Люкс" },
+  { value: "Classic", label: "Классический" },
+  { value: "Modern", label: "Современный" },
+];
+
+const deliveryIntervalOptions = [
+  { value: "Weekly", label: "Еженедельно" },
+  { value: "Bi-weekly", label: "Раз в две недели" },
+  { value: "Monthly", label: "Ежемесячно" },
+  { value: "One-time", label: "Разовая доставка" },
+];
+
+const accountStatusOptions = [
+  { value: "Active", label: "Активен" },
+  { value: "Inactive", label: "Неактивен" },
+  { value: "Suspended", label: "Заблокирован" },
+  { value: "Cancelled", label: "Отменен" },
+];
+const actions = [
+  {
+    id: "pause-subscription",
+    title: "На паузу",
+    description: "Временно приостановите доставку букетов",
+    icon: "Pause",
+    color: "text-yellow-600",
+    bgColor: "bg-yellow-50 hover:bg-yellow-100",
+  },
+  {
+    id: "skip-next",
+    title: "Пропустить следующую доставку",
+    description: "Пропустите ближайшую доставку",
+    icon: "SkipForward",
+    color: "text-blue-600",
+    bgColor: "bg-blue-50 hover:bg-blue-100",
+  },
+  {
+    id: "change-address",
+    title: "Обновить адрес",
+    description: "Измените адрес доставки",
+    icon: "MapPin",
+    color: "text-green-600",
+    bgColor: "bg-green-50 hover:bg-green-100",
+  },
+  {
+    id: "gift-subscription",
+    title: "Подарить подписку",
+    description: "Отправьте цветы особенному человеку",
+    icon: "Gift",
+    color: "text-purple-600",
+    bgColor: "bg-purple-50 hover:bg-purple-100",
+  },
+  {
+    id: "upgrade-plan",
+    title: "Обновить план",
+    description: "Получайте больше цветов или премиум-варианты",
+    icon: "ArrowUp",
+    color: "text-conversion",
+    bgColor: "bg-conversion/10 hover:bg-conversion/20",
+  },
+  {
+    id: "contact-support",
+    title: "Связаться с поддержкой",
+    description: "Получите помощь по вашей подписке",
+    icon: "MessageCircle",
+    color: "text-gray-600",
+    bgColor: "bg-gray-50 hover:bg-gray-100",
+  },
+];
+
 export {
   userData,
   userStats,
@@ -157,4 +265,10 @@ export {
   deliveryData,
   deliveryHistory,
   tabs,
+  colorOptions,
+  flowerTypes,
+  bouquetCategoryOptions,
+  deliveryIntervalOptions,
+  accountStatusOptions,
+  actions,
 };
