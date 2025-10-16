@@ -92,7 +92,7 @@ const deliveryHistory = [
       "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop",
     description:
       "Тёплая коллекция сезонных цветов с подсолнухами, оранжевыми розами и осенней листвой.",
-    status: "Доставлен",
+    status: "delivered",
     rating: 5,
     feedback: "Абсолютно потрясающе! Цвета были идеальными для осени.",
     flowersIncluded: [
@@ -111,7 +111,7 @@ const deliveryHistory = [
       "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=300&h=300&fit=crop",
     description:
       "Элегантная смесь поздних летних и ранних осенних цветов в богатых, тёплых тонах.",
-    status: "Доставлен",
+    status: "delivered",
     rating: 4,
     feedback: "Красивая композиция, продержалась больше недели!",
     flowersIncluded: ["Георгины", "Хризантемы", "Эвкалипт"],
@@ -124,7 +124,7 @@ const deliveryHistory = [
     bouquetImage:
       "https://images.unsplash.com/photo-1574684891174-df6b02ab38d7?w=300&h=300&fit=crop",
     description: "Свежие садовые цветы с естественным, органичным ощущением.",
-    status: "Доставлен",
+    status: "delivered",
     rating: 5,
     flowersIncluded: ["Смешанные полевые цветы", "Гипсофила", "Зелень"],
     careInstructions: true,
@@ -136,7 +136,7 @@ const deliveryHistory = [
     bouquetImage:
       "https://images.unsplash.com/photo-1520763185298-1b434c919102?w=300&h=300&fit=crop",
     description: "Яркие летние цвета, напоминающие красивый закат.",
-    status: "Пропущен",
+    status: "skipped",
     flowersIncluded: [],
     careInstructions: false,
   },
