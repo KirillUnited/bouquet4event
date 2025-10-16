@@ -1,0 +1,263 @@
+import { useState } from "react";
+import Icon from "@/components/ui/AppIcon";
+import Button from "@/components/dashboard/ui/Button";
+import Image from "next/image";
+
+const DeliveryHistory = ({ deliveries, onReorder, onRate, onSharePhoto }) => {
+  const [selectedDelivery, setSelectedDelivery] = useState(null);
+  const [filter, setFilter] = useState("all");
+
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case "delivered":
+        return { name: "CheckCircle", color: "text-green-600" };
+      case "skipped":
+        return { name: "Clock", color: "text-yellow-600" };
+      case "cancelled":
+        return { name: "XCircle", color: "text-red-600" };
+      default:
+        return { name: "Package", color: "text-gray-600" };
+    }
+  };
+
+  const filteredDeliveries = deliveries?.filter((delivery) => {
+    if (filter === "all") return true;
+    return delivery?.status === filter;
+  });
+
+  const formatDate = (dateString) => {
+    return new Date(dateString)?.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  return (
+    <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="font-playfair text-lg font-semibold text-foreground">
+          Delivery History
+        </h3>
+        <div className="flex items-center space-x-2">
+          <select
+            value={filter}
+            onChange={(e) => setFilter(e?.target?.value)}
+            className="px-3 py-1 border border-border rounded-md text-sm bg-background text-foreground"
+          >
+            <option value="all">All Deliveries</option>
+            <option value="delivered">Delivered</option>
+            <option value="skipped">Skipped</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+      </div>
+      <div className="space-y-4 max-h-96 overflow-y-auto">
+        {filteredDeliveries?.map((delivery) => {
+          const statusIcon = getStatusIcon(delivery?.status);
+
+          return (
+            <div
+              key={delivery?.id}
+              className="border border-border rounded-lg p-4 hover:shadow-natural transition-natural"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <Image
+                    src={delivery?.bouquetImage}
+                    width={300}
+                    height={300}
+                    alt={delivery?.bouquetName}
+                    className="w-16 h-16 rounded-lg object-cover"
+                  />
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h4 className="font-medium text-foreground mb-1">
+                        {delivery?.bouquetName}
+                      </h4>
+                      <p className="text-sm text-muted-foreground mb-2">
+                        {formatDate(delivery?.date)}
+                      </p>
+                      <div className="flex items-center space-x-2">
+                        <Icon
+                          name={statusIcon?.name}
+                          size={16}
+                          className={statusIcon?.color}
+                        />
+                        <span
+                          className={`text-sm font-medium ${statusIcon?.color}`}
+                        >
+                          {delivery?.status?.charAt(0)?.toUpperCase() +
+                            delivery?.status?.slice(1)}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      {delivery?.status === "delivered" && (
+                        <>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            iconName="RotateCcw"
+                            onClick={() => onReorder(delivery)}
+                          >
+                            Reorder
+                          </Button>
+                          {!delivery?.rated && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              iconName="Star"
+                              onClick={() => onRate(delivery?.id)}
+                            >
+                              Rate
+                            </Button>
+                          )}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            iconName="Camera"
+                            onClick={() => onSharePhoto(delivery?.id)}
+                          >
+                            Share Photo
+                          </Button>
+                        </>
+                      )}
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        iconName="Eye"
+                        onClick={() => setSelectedDelivery(delivery)}
+                      >
+                        View Details
+                      </Button>
+                    </div>
+                  </div>
+
+                  {delivery?.rating && (
+                    <div className="flex items-center space-x-1 mt-2">
+                      {[1, 2, 3, 4, 5]?.map((star) => (
+                        <Icon
+                          key={star}
+                          name="Star"
+                          size={14}
+                          className={
+                            star <= delivery?.rating
+                              ? "text-yellow-400 fill-current"
+                              : "text-gray-300"
+                          }
+                        />
+                      ))}
+                      <span className="text-sm text-muted-foreground ml-2">
+                        Rated {delivery?.rating}/5
+                      </span>
+                    </div>
+                  )}
+
+                  {delivery?.feedback && (
+                    <p className="text-sm text-muted-foreground mt-2 italic">
+                      "{delivery?.feedback}"
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {filteredDeliveries?.length === 0 && (
+        <div className="text-center py-8">
+          <Icon
+            name="Package"
+            size={48}
+            className="text-muted-foreground mx-auto mb-4"
+          />
+          <p className="text-muted-foreground">
+            No deliveries found for the selected filter.
+          </p>
+        </div>
+      )}
+      {/* Delivery Detail Modal */}
+      {selectedDelivery && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-card rounded-lg border border-border p-6 max-w-md w-full max-h-[80vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-playfair text-lg font-semibold text-foreground">
+                Delivery Details
+              </h3>
+              <Button
+                variant="ghost"
+                size="sm"
+                iconName="X"
+                onClick={() => setSelectedDelivery(null)}
+              />
+            </div>
+
+            <div className="space-y-4">
+              <Image
+                src={selectedDelivery?.bouquetImage}
+                width={400}
+                height={400}
+                alt={selectedDelivery?.bouquetName}
+                className="w-full h-48 rounded-lg object-cover"
+              />
+
+              <div>
+                <h4 className="font-medium text-foreground mb-2">
+                  {selectedDelivery?.bouquetName}
+                </h4>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {selectedDelivery?.description}
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-muted-foreground">
+                      Delivery Date:
+                    </span>
+                    <p className="font-medium text-foreground">
+                      {formatDate(selectedDelivery?.date)}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Status:</span>
+                    <p className="font-medium text-foreground">
+                      {selectedDelivery?.status?.charAt(0)?.toUpperCase() +
+                        selectedDelivery?.status?.slice(1)}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">
+                      Flowers Included:
+                    </span>
+                    <p className="font-medium text-foreground">
+                      {selectedDelivery?.flowersIncluded?.join(", ") ||
+                        "Not specified"}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">
+                      Care Instructions:
+                    </span>
+                    <p className="font-medium text-foreground">
+                      {selectedDelivery?.careInstructions
+                        ? "Included"
+                        : "Not included"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default DeliveryHistory;

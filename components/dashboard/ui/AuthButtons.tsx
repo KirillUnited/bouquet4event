@@ -90,7 +90,7 @@ export default function AuthButtons({ user, className }: AuthButtonsProps) {
         className,
       )}
     >
-      <Button asChild variant="link">
+      <Button asChild variant="outline">
         <div className="flex items-center gap-2">
           <LoginIcon className="w-5 h-5 text-muted-foreground" />
           <Link href="/login">Войти</Link>
