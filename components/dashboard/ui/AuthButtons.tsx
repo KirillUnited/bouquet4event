@@ -42,7 +42,10 @@ export default function AuthButtons({ user, className }: AuthButtonsProps) {
   return user ? (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className={`flex items-center gap-2 rounded-lg p-2 hover:cursor-pointer ${className}`}
+        className={cn(
+          `flex items-center gap-2 rounded-lg p-2 hover:cursor-pointer border border-border xl:border-none`,
+          className,
+        )}
       >
         <Avatar>
           <AvatarImage
@@ -90,7 +93,7 @@ export default function AuthButtons({ user, className }: AuthButtonsProps) {
         className,
       )}
     >
-      <Button asChild variant="link">
+      <Button asChild variant="outline">
         <div className="flex items-center gap-2">
           <LoginIcon className="w-5 h-5 text-muted-foreground" />
           <Link href="/login">Войти</Link>
