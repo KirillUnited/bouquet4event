@@ -43,11 +43,13 @@ const StudioSelect = ({
         <SelectContent>
           <SelectGroup>
             <SelectLabel>{placeholder}</SelectLabel>
-            <SelectItem value="apple">Apple</SelectItem>
-            <SelectItem value="banana">Banana</SelectItem>
-            <SelectItem value="blueberry">Blueberry</SelectItem>
-            <SelectItem value="grapes">Grapes</SelectItem>
-            <SelectItem value="pineapple">Pineapple</SelectItem>
+            {
+              options?.map((option) => (
+                <SelectItem key={option?.value} value={option?.value}>
+                  {option?.label}
+                </SelectItem>
+              ))
+            }
           </SelectGroup>
         </SelectContent>
       </Select>

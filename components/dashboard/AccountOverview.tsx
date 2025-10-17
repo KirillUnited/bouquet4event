@@ -13,10 +13,10 @@ type AccountProps = {
 
 interface Props {
   user: AccountProps & {
-    avatar: string;
-    createdAt: Date | string | undefined;
-    referralLink: string;
-    accountStatus: string;
+    avatar?: string;
+    createdAt?: string | undefined;
+    referralLink?: string;
+    accountStatus?: string;
     bouquetCategory?: string;
     deliveryAddress?: string;
     deliveryDate?: string;
@@ -37,24 +37,24 @@ interface Props {
 }
 
 export default function AccountOverview({ user, stats }: Props) {
-  const formatDate = (dateString) => {
-    return new Date(dateString)?.toLocaleDateString("ru-RU", {
+  const formatDate = (dateString?: string) => {
+    return new Date(dateString || "")?.toLocaleDateString("ru-RU", {
       month: "long",
       day: "numeric",
       year: "numeric",
     });
   };
 
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount?: number) => {
     return new Intl.NumberFormat("ru-RU", {
       style: "currency",
       currency: "RUB",
-    })?.format(amount);
+    })?.format(amount || 0);
   };
 
   const membershipBadge = () => {
     const monthsActive = Math.floor(
-      (new Date() - new Date(user?.createdAt)) / (1000 * 60 * 60 * 24 * 30),
+      (new Date().getTime() - (user?.createdAt ? new Date(user.createdAt).getTime() : 0)) / (1000 * 60 * 60 * 24 * 30)
     );
 
     if (monthsActive >= 12)

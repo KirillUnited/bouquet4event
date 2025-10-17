@@ -1,15 +1,24 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import AccountOverview from "@/components/dashboard/AccountOverview";
-import { useState, useEffect } from "react";
-import Button from "@/components/dashboard/ui/Button";
-import Icon from "@/components/ui/AppIcon";
+import { Button } from "@/components/ui/button";
+import Icon, { AppIconProps } from "@/components/ui/AppIcon";
 import SubscriptionCard from "@/components/dashboard/SubscriptionCard";
 import QuickActions from "@/components/dashboard/QuickActions";
 import DeliveryCalendar from "@/components/dashboard/DeliveryCalendar";
 import PreferenceManager from "@/components/dashboard/PreferenceManager";
 import DeliveryHistory from "@/components/dashboard/DeliveryHistory";
 import NotificationCenter from "@/components/dashboard/NotificationCenter";
+import type {
+  UserData,
+  UserPreferences,
+  Notification,
+  SubscriptionData,
+  DeliveryData,
+  UserStats,
+  TabItem,
+} from "@/types/dashboard";
 import {
   deliveryData,
   deliveryHistory,
@@ -17,15 +26,20 @@ import {
   tabs,
   userStats,
 } from "@/components/dashboard/mock-data";
+import { AccountData } from "@/lib/api/account";
 
-export default function AccountDashboard({ userData }: { userData: any }) {
-  const [activeTab, setActiveTab] = useState("overview");
-  const [notifications, setNotifications] = useState([]);
+interface AccountDashboardProps {
+  userData: AccountData;
+}
+
+export default function AccountDashboard({ userData }: AccountDashboardProps) {
+  const [activeTab, setActiveTab] = useState<string>("overview");
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   console.log("User Data:", userData);
 
   // Mock preferences data - Russian translations
-  const [preferences, setPreferences] = useState({
+  const [preferences, setPreferences] = useState<UserPreferences>({
     colorPalette: "warm",
     favoriteFlowers: ["Розы", "Пионы", "Подсолнухи"],
     deliveryTime: "10:00",
@@ -94,69 +108,81 @@ export default function AccountDashboard({ userData }: { userData: any }) {
     ]);
   }, []);
 
-  const handleSubscriptionManage = (subscriptionId) => {
-    console.log("Managing subscription:", subscriptionId);
-  };
+  const handleSubscriptionManage = useCallback(
+    (subscriptionId: string): void => {
+      console.log("Managing subscription:", subscriptionId);
+    },
+    [],
+  );
 
-  const handleSubscriptionPause = (subscriptionId) => {
-    console.log("Pausing subscription:", subscriptionId);
-  };
+  const handleSubscriptionPause = useCallback(
+    (subscriptionId: string): void => {
+      console.log("Pausing subscription:", subscriptionId);
+    },
+    [],
+  );
 
-  const handleSubscriptionUpgrade = (subscriptionId) => {
-    console.log("Upgrading subscription:", subscriptionId);
-  };
+  const handleSubscriptionUpgrade = useCallback(
+    (subscriptionId: string): void => {
+      console.log("Upgrading subscription:", subscriptionId);
+    },
+    [],
+  );
 
-  const handleSkipDelivery = (deliveryId) => {
+  const handleSkipDelivery = useCallback((deliveryId: string): void => {
     console.log("Skipping delivery:", deliveryId);
-  };
+  }, []);
 
-  const handleRescheduleDelivery = (deliveryId) => {
+  const handleRescheduleDelivery = useCallback((deliveryId: string): void => {
     console.log("Rescheduling delivery:", deliveryId);
-  };
+  }, []);
 
-  const handleUpdatePreferences = (newPreferences) => {
-    setPreferences(newPreferences);
-    console.log("Preferences updated:", newPreferences);
-  };
+  const handleUpdatePreferences = useCallback(
+    (newPreferences: UserPreferences): void => {
+      setPreferences(newPreferences);
+      console.log("Preferences updated:", newPreferences);
+    },
+    [],
+  );
 
-  const handleReorder = (delivery) => {
+  const handleReorder = useCallback((delivery: DeliveryData): void => {
     console.log("Reordering:", delivery);
-  };
+  }, []);
 
-  const handleRateDelivery = (deliveryId) => {
+  const handleRateDelivery = useCallback((deliveryId: string): void => {
     console.log("Rating delivery:", deliveryId);
-  };
+  }, []);
 
-  const handleSharePhoto = (deliveryId) => {
+  const handleSharePhoto = useCallback((deliveryId: string): void => {
     console.log("Sharing photo for delivery:", deliveryId);
-  };
+  }, []);
 
-  const handleQuickAction = (actionId) => {
+  const handleQuickAction = useCallback((actionId: string): void => {
     console.log("Quick action:", actionId);
-  };
+  }, []);
 
-  const handleMarkAsRead = (notificationId) => {
+  const handleMarkAsRead = useCallback((notificationId: number): void => {
     setNotifications((prev) =>
-      prev?.map((notification) =>
-        notification?.id === notificationId
+      prev.map((notification) =>
+        notification.id === notificationId
           ? { ...notification, read: true }
           : notification,
       ),
     );
-  };
+  }, []);
 
-  const handleMarkAllAsRead = () => {
+  const handleMarkAllAsRead = useCallback((): void => {
     setNotifications((prev) =>
-      prev?.map((notification) => ({ ...notification, read: true })),
+      prev.map((notification) => ({ ...notification, read: true })),
     );
-  };
+  }, []);
 
-  const unreadNotifications = notifications?.filter((n) => !n?.read)?.length;
+  const unreadNotifications = notifications.filter((n) => !n.read).length;
   return (
     <div className="">
       {/* Page Header */}
       <div className="mb-8">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap gap-6 items-center justify-between">
           <div>
             <h1 className="font-playfair text-3xl font-semibold text-foreground mb-2">
               Личный кабинет
@@ -165,12 +191,11 @@ export default function AccountDashboard({ userData }: { userData: any }) {
               Управляйте подпиской, настройками и историей доставок
             </p>
           </div>
-          <Button
-            variant="default"
-            iconName="Plus"
-            size="sm"
-          >
-            Добавить подарочную подписку
+          <Button variant="default" size="sm">
+            <div className="flex items-center gap-2">
+              <Icon name="Plus" size={16} />
+              Добавить подарочную подписку
+            </div>
           </Button>
         </div>
       </div>
@@ -179,20 +204,19 @@ export default function AccountDashboard({ userData }: { userData: any }) {
       <div className="mb-8">
         <div className="border-b border-border">
           <nav className="flex space-x-8 overflow-x-auto">
-            {tabs?.map((tab) => (
+            {tabs.map((tab: TabItem) => (
               <button
                 key={tab?.id}
                 onClick={() => setActiveTab(tab?.id)}
                 className={`
-                      flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap
-                      ${
-                        activeTab === tab?.id
-                          ? "border-primary text-primary"
-                          : "border-transparent text-muted-foreground hover:text-foreground hover:border-gray-300"
-                      }
+                      flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap hover:cursor-pointer
+                      ${activeTab === tab?.id
+                    ? "border-primary text-primary"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-gray-300"
+                  }
                     `}
               >
-                <Icon name={tab?.icon} size={16} />
+                <Icon name={tab?.icon as AppIconProps["name"]} size={16} />
                 <span>{tab?.name}</span>
                 {tab?.id === "notifications" && unreadNotifications > 0 && (
                   <span className="bg-primary text-primary-foreground text-xs font-medium px-2 py-1 rounded-full">
@@ -209,7 +233,7 @@ export default function AccountDashboard({ userData }: { userData: any }) {
       <div className="space-y-8">
         {activeTab === "overview" && (
           <>
-            <AccountOverview user={userData} stats={userStats} />
+            <AccountOverview user={userData} stats={userStats as any} />
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
               <SubscriptionCard
@@ -225,7 +249,7 @@ export default function AccountDashboard({ userData }: { userData: any }) {
 
         {activeTab === "calendar" && (
           <DeliveryCalendar
-            deliveries={deliveryData}
+            deliveries={deliveryData as any}
             onSkipDelivery={handleSkipDelivery}
             onReschedule={handleRescheduleDelivery}
           />
@@ -240,8 +264,8 @@ export default function AccountDashboard({ userData }: { userData: any }) {
 
         {activeTab === "history" && (
           <DeliveryHistory
-            deliveries={deliveryHistory}
-            onReorder={handleReorder}
+            deliveries={deliveryHistory as any}
+            onReorder={handleReorder as any}
             onRate={handleRateDelivery}
             onSharePhoto={handleSharePhoto}
           />
@@ -249,9 +273,9 @@ export default function AccountDashboard({ userData }: { userData: any }) {
 
         {activeTab === "notifications" && (
           <NotificationCenter
-            notifications={notifications}
-            onMarkAsRead={handleMarkAsRead}
-            onMarkAllAsRead={handleMarkAllAsRead}
+            notifications={notifications as any}
+            onMarkAsRead={handleMarkAsRead as any}
+            onMarkAllAsRead={handleMarkAllAsRead as any}
           />
         )}
       </div>

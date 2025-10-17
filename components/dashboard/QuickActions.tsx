@@ -2,7 +2,7 @@ import React from "react";
 import Icon from "@/components/ui/AppIcon";
 import { actions } from "@/components/dashboard/mock-data";
 
-const QuickActions = ({ onAction }) => {
+const QuickActions = ({ onAction }: { onAction: (id: string) => void }) => {
   return (
     <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
       <h3 className="font-playfair text-lg font-semibold text-foreground mb-4">
@@ -27,10 +27,10 @@ const QuickActions = ({ onAction }) => {
                 ${action?.bgColor?.replace("hover:", "")?.replace("bg-", "bg-")?.replace("/10", "/20")?.replace("/20", "/30")}
               `}
               >
-                <Icon name={action?.icon} size={20} className={action?.color} />
+                <Icon name={action?.icon as any} size={20} className={action?.color} />
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-base font-medium text-foreground mb-1">
+                <h4 className="text-base font-medium mb-1 text-slate-900">
                   {action?.title}
                 </h4>
                 <p className="text-sm text-muted-foreground">

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Button from "@/components/dashboard/ui/Button";
+import {Button} from "@/components/ui/button";
+import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon, XIcon } from "lucide-react";
 
 type DeliveryStatus = "scheduled" | "delivered" | "skipped" | "cancelled";
 
@@ -113,18 +114,20 @@ const DeliveryCalendar: React.FC<DeliveryCalendarProps> = ({
           <Button
             variant="ghost"
             size="sm"
-            iconName="ChevronLeft"
             onClick={() => navigateMonth(-1)}
-          />
+          >
+            <ChevronLeftIcon size={16} />
+          </Button>
           <span className="font-medium text-foreground min-w-[140px] text-center">
             {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
           </span>
           <Button
             variant="ghost"
             size="sm"
-            iconName="ChevronRight"
             onClick={() => navigateMonth(1)}
-          />
+          >
+            <ChevronRightIcon size={16} />
+          </Button>
         </div>
       </div>
 
@@ -213,17 +216,17 @@ const DeliveryCalendar: React.FC<DeliveryCalendarProps> = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  iconName="Calendar"
                   onClick={() => onReschedule(delivery.id)}
                 >
+                  <CalendarIcon size={16} />
                   Перенести
                 </Button>
                 <Button
                   variant="ghost"
                   size="sm"
-                  iconName="X"
                   onClick={() => onSkipDelivery(delivery.id)}
                 >
+                  <XIcon size={16} />
                   Пропустить
                 </Button>
               </div>

@@ -2,7 +2,6 @@ import * as React from "react";
 import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { MailIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface TextInputProps {

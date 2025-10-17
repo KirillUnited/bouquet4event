@@ -42,7 +42,10 @@ export default function AuthButtons({ user, className }: AuthButtonsProps) {
   return user ? (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className={`flex items-center gap-2 rounded-lg p-2 hover:cursor-pointer ${className}`}
+        className={cn(
+          `flex items-center gap-2 rounded-lg p-2 hover:cursor-pointer border border-border xl:border-none`,
+          className,
+        )}
       >
         <Avatar>
           <AvatarImage

@@ -2,13 +2,17 @@ import React from "react";
 import * as LucideIcons from "lucide-react";
 import { HelpCircle, LucideProps } from "lucide-react";
 
-interface AppIconProps extends Omit<LucideProps, 'name'> {
+export interface AppIconProps extends Omit<LucideProps, 'name'> {
   name: keyof typeof LucideIcons;
   size?: number;
   color?: string;
   className?: string;
   strokeWidth?: number;
 }
+
+type LucideIconsType = {
+  [K in keyof typeof LucideIcons]: LucideIcons.LucideProps;
+};
 
 function Icon({
   name,
@@ -18,7 +22,7 @@ function Icon({
   strokeWidth = 2,
   ...props
 }: AppIconProps) {
-  const IconComponent = LucideIcons?.[name];
+  const IconComponent = LucideIcons?.[name] as LucideIconsType[typeof name];
 
   if (!IconComponent) {
     return (

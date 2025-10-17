@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, ChangeEvent } from "react";
 import Icon from "@/components/ui/AppIcon";
-import Button from "@/components/dashboard/ui/Button";
+import {Button} from "@/components/ui/button";
 import Input from "@/components/dashboard/ui/Input";
-import Select from "@/components/dashboard/ui/Select";
-import { Checkbox } from "@/components/dashboard/ui/Checkbox";
+import CheckboxLabel from "@/components/dashboard/ui/Checkbox";
+import type { PreferenceManagerProps, UserPreferences } from "@/types/dashboard";
 import {
   accountStatusOptions,
   bouquetCategoryOptions,
@@ -11,36 +11,51 @@ import {
   deliveryIntervalOptions,
   flowerTypes,
 } from "@/components/dashboard/mock-data";
+import { CheckIcon, EditIcon } from "lucide-react";
+import StudioSelect from "./ui/StudioSelect";
+import InputLabel from "@/components/dashboard/ui/Input";
 
-const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
-  const [localPreferences, setLocalPreferences] = useState(preferences);
-  const [isEditing, setIsEditing] = useState(false);
+const PreferenceManager: React.FC<PreferenceManagerProps> = ({
+  preferences,
+  onUpdatePreferences,
+}) => {
+  const [localPreferences, setLocalPreferences] = useState<UserPreferences>(preferences);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const handleSave = () => {
+  const handleSave = useCallback((): void => {
     onUpdatePreferences(localPreferences);
     setIsEditing(false);
-  };
+  }, [localPreferences, onUpdatePreferences]);
 
-  const handleCancel = () => {
+  const handleCancel = useCallback((): void => {
     setLocalPreferences(preferences);
     setIsEditing(false);
-  };
+  }, [preferences]);
 
-  const updatePreference = (key, value) => {
-    setLocalPreferences((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
+  const updatePreference = useCallback(
+    <K extends keyof UserPreferences>(
+      key: K,
+      value: UserPreferences[K]
+    ): void => {
+      setLocalPreferences((prev) => ({
+        ...prev,
+        [key]: value,
+      }));
+    },
+    []
+  );
 
-  const toggleFlowerType = (flowerType) => {
-    const currentTypes = localPreferences?.favoriteFlowers || [];
-    const updatedTypes = currentTypes?.includes(flowerType)
-      ? currentTypes?.filter((type) => type !== flowerType)
-      : [...currentTypes, flowerType];
+  const toggleFlowerType = useCallback(
+    (flowerType: string): void => {
+      const currentTypes = localPreferences.favoriteFlowers;
+      const updatedTypes = currentTypes.includes(flowerType)
+        ? currentTypes.filter((type) => type !== flowerType)
+        : [...currentTypes, flowerType];
 
-    updatePreference("favoriteFlowers", updatedTypes);
-  };
+      updatePreference("favoriteFlowers", updatedTypes);
+    },
+    [localPreferences.favoriteFlowers, updatePreference]
+  );
 
   return (
     <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
@@ -52,10 +67,12 @@ const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
           <Button
             variant="outline"
             size="sm"
-            iconName="Edit"
             onClick={() => setIsEditing(true)}
           >
-            Редактировать настройки
+            <div className="flex items-center gap-2">
+              <EditIcon size={16} />
+              Редактировать настройки
+            </div>
           </Button>
         ) : (
           <div className="flex items-center space-x-2">
@@ -65,10 +82,12 @@ const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
             <Button
               variant="default"
               size="sm"
-              iconName="Check"
               onClick={handleSave}
             >
-              Сохранить изменения
+              <div className="flex items-center gap-2">
+                <CheckIcon size={16} />
+                Сохранить изменения
+              </div>
             </Button>
           </div>
         )}
@@ -82,25 +101,32 @@ const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {colorOptions?.map((option) => (
               <div
-                key={option?.id}
+                key={option.id}
                 className={`
                   p-3 rounded-lg border cursor-pointer transition-natural
                   ${
-                    localPreferences?.colorPalette === option?.id
+                    localPreferences.colorPalette === option.id
                       ? "border-primary bg-primary/5"
                       : "border-border hover:border-primary/50"
                   }
                   ${!isEditing ? "cursor-default" : ""}
                 `}
                 onClick={() =>
-                  isEditing && updatePreference("colorPalette", option?.id)
+                  isEditing && updatePreference("colorPalette", option.id)
                 }
+                role="button"
+                tabIndex={isEditing ? 0 : -1}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && isEditing) {
+                    updatePreference("colorPalette", option.id);
+                  }
+                }}
               >
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-medium text-foreground">
-                    {option?.name}
+                    {option.name}
                   </span>
-                  {localPreferences?.colorPalette === option?.id && (
+                  {localPreferences.colorPalette === option.id && (
                     <Icon name="Check" size={16} className="text-primary" />
                   )}
                 </div>
@@ -124,15 +150,14 @@ const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
             Любимые типы цветов
           </h4>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {flowerTypes?.map((flower) => (
-              <Checkbox
+            {flowerTypes?.map((flower: string) => (
+              <CheckboxLabel
                 key={flower}
-                label={flower}
-                checked={(localPreferences?.favoriteFlowers || [])?.includes(
-                  flower,
-                )}
+                label={flower as any}
+                checked={localPreferences.favoriteFlowers.includes(flower)}
                 onChange={() => isEditing && toggleFlowerType(flower)}
                 disabled={!isEditing}
+                id={`flower-${flower.toLowerCase().replace(/\s+/g, '-')}`}
               />
             ))}
           </div>
@@ -144,58 +169,59 @@ const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
             Информация о букете
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Select
+            <StudioSelect
               label="Категория букета"
               options={bouquetCategoryOptions}
               value={localPreferences?.bouquetCategory || ""}
-              onChange={(value) => updatePreference("bouquetCategory", value)}
+              onValueChange={(value) => updatePreference("bouquetCategory", value)}
               placeholder="Выберите категорию"
               disabled={!isEditing}
             />
 
-            <Select
+            <StudioSelect
               label="Интервал доставки"
               options={deliveryIntervalOptions}
               value={localPreferences?.deliveryInterval || ""}
-              onChange={(value) => updatePreference("deliveryInterval", value)}
+              onValueChange={(value) => updatePreference("deliveryInterval", value)}
               placeholder="Выберите интервал"
               disabled={!isEditing}
             />
 
-            <Input
+            <InputLabel
               label="Дата доставки"
               type="date"
               value={localPreferences?.deliveryDate || ""}
-              onChange={(e) =>
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 updatePreference("deliveryDate", e?.target?.value)
               }
               disabled={!isEditing}
             />
+            
 
-            <Select
+            <StudioSelect
               label="Статус аккаунта"
               options={accountStatusOptions}
               value={localPreferences?.accountStatus || ""}
-              onChange={(value) => updatePreference("accountStatus", value)}
+              onValueChange={(value) => updatePreference("accountStatus", value)}
               placeholder="Выберите статус"
               disabled={!isEditing}
             />
 
-            <Input
+            <InputLabel
               label="Email"
               type="email"
               placeholder="your.email@example.com"
               value={localPreferences?.email || ""}
-              onChange={(e) => updatePreference("email", e?.target?.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => updatePreference("email", e?.target?.value)}
               disabled={!isEditing}
             />
 
-            <Input
+            <InputLabel
               label="Реферальная ссылка"
               type="text"
               placeholder="https://bouquet4event.ru/ref/..."
               value={localPreferences?.referralLink || ""}
-              onChange={(e) =>
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 updatePreference("referralLink", e?.target?.value)
               }
               disabled={!isEditing}
@@ -203,12 +229,12 @@ const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
           </div>
 
           <div className="mt-4">
-            <Input
+            <InputLabel
               label="Адрес доставки"
               type="text"
               placeholder="Улица, дом, квартира, город, индекс"
               value={localPreferences?.deliveryAddress || ""}
-              onChange={(e) =>
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 updatePreference("deliveryAddress", e?.target?.value)
               }
               disabled={!isEditing}
@@ -260,18 +286,18 @@ const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
             </div>
 
             <div className="space-y-3">
-              <Checkbox
+              <CheckboxLabel
                 label="Отправлять уведомления о доставке по SMS"
                 checked={localPreferences?.smsNotifications || false}
-                onChange={(e) =>
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   updatePreference("smsNotifications", e?.target?.checked)
                 }
                 disabled={!isEditing}
               />
-              <Checkbox
+              <CheckboxLabel
                 label="Включать инструкции по уходу с каждой доставкой"
                 checked={localPreferences?.includeCareInstructions || false}
-                onChange={(e) =>
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   updatePreference(
                     "includeCareInstructions",
                     e?.target?.checked,
@@ -279,10 +305,10 @@ const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
                 }
                 disabled={!isEditing}
               />
-              <Checkbox
+              <CheckboxLabel
                 label="Удивлять меня сезонными сортами"
                 checked={localPreferences?.seasonalSurprises || false}
-                onChange={(e) =>
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   updatePreference("seasonalSurprises", e?.target?.checked)
                 }
                 disabled={!isEditing}
@@ -296,7 +322,7 @@ const PreferenceManager = ({ preferences, onUpdatePreferences }) => {
           <h4 className="font-medium text-foreground mb-3">
             Аллергии и ограничения
           </h4>
-          <Input
+          <InputLabel
             label="Аллергия на цветы"
             type="text"
             placeholder="Перечислите цветы, которых следует избегать"

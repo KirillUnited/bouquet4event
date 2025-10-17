@@ -245,8 +245,8 @@ const actions = [
     title: "Обновить план",
     description: "Получайте больше цветов или премиум-варианты",
     icon: "ArrowUp",
-    color: "text-conversion",
-    bgColor: "bg-conversion/10 hover:bg-conversion/20",
+    color: "text-primary",
+    bgColor: "bg-primary/10 hover:bg-primary/20",
   },
   {
     id: "contact-support",
