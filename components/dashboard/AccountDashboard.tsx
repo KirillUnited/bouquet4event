@@ -237,7 +237,7 @@ export default function AccountDashboard({ userData }: AccountDashboardProps) {
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
               <SubscriptionCard
-                subscription={subscriptionData}
+                subscription={subscriptionData as any}
                 onManage={handleSubscriptionManage}
                 onPause={handleSubscriptionPause}
                 onUpgrade={handleSubscriptionUpgrade}

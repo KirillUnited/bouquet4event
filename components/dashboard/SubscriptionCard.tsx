@@ -1,8 +1,20 @@
 import Icon from "@/components/ui/AppIcon";
-import Button from "@/components/dashboard/ui/Button";
+import {Button} from "@/components/ui/button";
+import { SubscriptionData } from "@/types/dashboard";
+import { ArrowUpIcon, PauseIcon, SettingsIcon } from "lucide-react";
 
-const SubscriptionCard = ({ subscription, onManage, onPause, onUpgrade }) => {
-  const getStatusColor = (status) => {
+const SubscriptionCard = ({
+  subscription,
+  onManage,
+  onPause,
+  onUpgrade,
+}: {
+  subscription: SubscriptionData;
+  onManage: (id: string) => void;
+  onPause: (id: string) => void;
+  onUpgrade: (id: string) => void;
+}) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case "active":
         return "text-green-600 bg-green-50";
@@ -15,7 +27,7 @@ const SubscriptionCard = ({ subscription, onManage, onPause, onUpgrade }) => {
     }
   };
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string) => {
     return new Date(dateString)?.toLocaleDateString("ru-RU", {
       month: "short",
       day: "numeric",
@@ -46,19 +58,23 @@ const SubscriptionCard = ({ subscription, onManage, onPause, onUpgrade }) => {
           <Button
             variant="outline"
             size="sm"
-            iconName="Settings"
             onClick={() => onManage(subscription?.id)}
           >
-            Управлять
+            <div className="flex items-center gap-2">
+              <SettingsIcon size={16} />
+              Управлять
+            </div>
           </Button>
           {subscription?.status === "active" && (
             <Button
               variant="ghost"
               size="sm"
-              iconName="Pause"
               onClick={() => onPause(subscription?.id)}
             >
-              Пауза
+              <div className="flex items-center gap-2">
+                <PauseIcon size={16} />
+                Пауза
+              </div>
             </Button>
           )}
         </div>
@@ -94,11 +110,13 @@ const SubscriptionCard = ({ subscription, onManage, onPause, onUpgrade }) => {
           <Button
             variant="outline"
             size="sm"
-            iconName="ArrowUp"
             onClick={() => onUpgrade(subscription?.id)}
             className="text-conversion border-conversion hover:bg-conversion hover:text-conversion-foreground"
           >
-            Улучшить план
+            <div className="flex items-center gap-2">
+              <ArrowUpIcon size={16} />
+              Улучшить план
+            </div>
           </Button>
         )}
       </div>

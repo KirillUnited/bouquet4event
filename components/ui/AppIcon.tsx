@@ -22,7 +22,7 @@ function Icon({
   strokeWidth = 2,
   ...props
 }: AppIconProps) {
-  const IconComponent = LucideIcons?.[name] as LucideIconsType[typeof name];
+  const IconComponent = LucideIcons?.[name] as React.ComponentType<any>;
 
   if (!IconComponent) {
     return (

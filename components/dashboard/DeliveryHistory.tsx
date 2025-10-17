@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Icon from "@/components/ui/AppIcon";
-import Button from "@/components/dashboard/ui/Button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { CameraIcon, EyeIcon, RotateCwIcon, Share2Icon, StarIcon, XIcon } from "lucide-react";
 
 type DeliveryStatus = "delivered" | "skipped" | "cancelled" | "scheduled";
 
@@ -14,7 +15,7 @@ interface Delivery {
   bouquetImage: string;
   description?: string;
   status: DeliveryStatus;
-  rating?: number;
+  rating: number;
   rated?: boolean;
   feedback?: string;
   flowersIncluded?: string[];
@@ -96,7 +97,7 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
 
       {/* Список доставок */}
       <div className="space-y-4 max-h-96 overflow-y-auto">
-        {filteredDeliveries?.map((delivery) => {
+        {filteredDeliveries?.map((delivery: Delivery) => {
           const statusIcon = getStatusIcon(delivery.status);
 
           return (
@@ -127,7 +128,7 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
                       </p>
                       <div className="flex items-center space-x-2">
                         <Icon
-                          name={statusIcon.name}
+                          name={statusIcon.name as any}
                           size={16}
                           className={statusIcon.color}
                         />
@@ -137,10 +138,10 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
                           {delivery.status === "delivered"
                             ? "Доставлено"
                             : delivery.status === "skipped"
-                            ? "Пропущено"
-                            : delivery.status === "cancelled"
-                            ? "Отменено"
-                            : "Запланировано"}
+                              ? "Пропущено"
+                              : delivery.status === "cancelled"
+                                ? "Отменено"
+                                : "Запланировано"}
                         </span>
                       </div>
                     </div>
@@ -152,38 +153,60 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
                           <Button
                             variant="ghost"
                             size="sm"
-                            iconName="RotateCcw"
                             onClick={() => onReorder(delivery)}
                           >
-                            Повторить заказ
+                            <div className="flex items-center gap-2">
+                              <RotateCwIcon size={16} />
+                              Повторить заказ
+                            </div>
                           </Button>
                           {!delivery.rated && (
                             <Button
                               variant="ghost"
                               size="sm"
-                              iconName="Star"
                               onClick={() => onRate(delivery.id)}
                             >
-                              Оценить
+                              <div className="flex items-center gap-2">
+                                <StarIcon size={16} />
+                                Оценить
+                              </div>
                             </Button>
                           )}
                           <Button
                             variant="ghost"
                             size="sm"
-                            iconName="Camera"
                             onClick={() => onSharePhoto(delivery.id)}
                           >
-                            Поделиться фото
+                            <div className="flex items-center gap-2">
+                              <Share2Icon size={16} />
+                              Поделиться фото
+                            </div>
+                          </Button>
+                        </>
+                      )}
+                      {delivery.status === "skipped" && (
+                        <>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => onSharePhoto(delivery.id)}
+                          >
+                            <div className="flex items-center gap-2">
+                              <CameraIcon size={16} />
+                              Поделиться фото
+                            </div>
                           </Button>
                         </>
                       )}
                       <Button
                         variant="ghost"
                         size="sm"
-                        iconName="Eye"
                         onClick={() => setSelectedDelivery(delivery)}
                       >
-                        Подробнее
+                        <div className="flex items-center gap-2">
+                          <EyeIcon size={16} />
+                          Подробнее
+                        </div>
                       </Button>
                     </div>
                   </div>
@@ -247,9 +270,10 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
               <Button
                 variant="ghost"
                 size="sm"
-                iconName="X"
                 onClick={() => setSelectedDelivery(null)}
-              />
+              >
+                <XIcon size={16} />
+              </Button>
             </div>
 
             <div className="space-y-4">
@@ -282,10 +306,10 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
                       {selectedDelivery.status === "delivered"
                         ? "Доставлено"
                         : selectedDelivery.status === "skipped"
-                        ? "Пропущено"
-                        : selectedDelivery.status === "cancelled"
-                        ? "Отменено"
-                        : "Запланировано"}
+                          ? "Пропущено"
+                          : selectedDelivery.status === "cancelled"
+                            ? "Отменено"
+                            : "Запланировано"}
                     </p>
                   </div>
                   <div>

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Icon from "@/components/ui/AppIcon";
-import Button from "@/components/dashboard/ui/Button";
+import {Button} from "@/components/ui/button";
+import { CheckCheckIcon } from "lucide-react";
 
 type NotificationType = "delivery" | "reminder" | "promotion" | "update" | "default";
 
@@ -99,10 +100,12 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
             <Button
               variant="ghost"
               size="sm"
-              iconName="CheckCheck"
               onClick={onMarkAllAsRead}
             >
-              Отметить всё как прочитанное
+              <div className="flex items-center gap-2">
+                <CheckCheckIcon size={16} />
+                Отметить всё как прочитанное
+              </div>
             </Button>
           )}
         </div>
@@ -143,7 +146,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
                   <div
                     className={`flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0 ${icon.bgColor}`}
                   >
-                    <Icon name={icon.name} size={20} className={icon.color} />
+                    <Icon name={icon.name as "Package" | "Bell" | "Tag" | "Info"} size={20} className={icon.color} />
                   </div>
 
                   <div className="flex-1 min-w-0">

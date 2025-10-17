@@ -42,6 +42,11 @@ export interface SubscriptionData {
   status: 'active' | 'paused' | 'cancelled';
   nextDelivery: string;
   price: number;
+  planName: string;
+  frequency: string;
+  startDate: string;
+  deliveriesCount: number;
+  canUpgrade: boolean;
   // Add other subscription properties as needed
 }
 

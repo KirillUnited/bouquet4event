@@ -43,6 +43,7 @@ const userStats = {
 
 // Mock subscription data - Russian translations
 const subscriptionData = {
+  name: "Премиум Сезонный",
   id: 1,
   planName: "Премиум Сезонный",
   price: 4999.99,
