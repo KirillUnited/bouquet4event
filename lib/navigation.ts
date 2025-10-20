@@ -94,6 +94,6 @@ const navItemIcons: Record<NavItemLabel, LucideIcon> = {
  * return <Icon className="w-5 h-5 text-muted-foreground" />;
  * ```
  */
-export function getNavItemIcon(label: string): LucideIcon {
-    return (navItemIcons as Record<string, LucideIcon>)[label] || CircleHelp;
+export function getNavItemIcon(label: NavItemLabel): LucideIcon {
+    return navItemIcons[label] || CircleHelp;
 }

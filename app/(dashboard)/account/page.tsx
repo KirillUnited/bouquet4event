@@ -1,5 +1,6 @@
 import { fetchAccountData } from "@/lib/api/account";
 import AccountDashboard from "@/components/dashboard/AccountDashboard";
+import AuthButtons from "@/components/dashboard/ui/AuthButtons";
 
 export default async function AccountPage() {
   // Fetch account data using our new utility function
@@ -17,6 +18,7 @@ export default async function AccountPage() {
         <>
           <h1 className="text-3xl font-semibold">Мой аккаунт</h1>
           <p className="text-muted-foreground">Вы не авторизованы</p>
+          <AuthButtons />
         </>
       ) : (
         <AccountDashboard userData={account} />

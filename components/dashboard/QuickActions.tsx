@@ -8,7 +8,7 @@ const QuickActions = ({ onAction }: { onAction: (id: string) => void }) => {
       <h3 className="font-playfair text-lg font-semibold text-foreground mb-4">
         Быстрые действия
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {actions?.map((action) => (
           <button
             key={action?.id}
@@ -27,7 +27,11 @@ const QuickActions = ({ onAction }: { onAction: (id: string) => void }) => {
                 ${action?.bgColor?.replace("hover:", "")?.replace("bg-", "bg-")?.replace("/10", "/20")?.replace("/20", "/30")}
               `}
               >
-                <Icon name={action?.icon as any} size={20} className={action?.color} />
+                <Icon
+                  name={action?.icon as any}
+                  size={20}
+                  className={action?.color}
+                />
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="text-base font-medium mb-1 text-slate-900">
