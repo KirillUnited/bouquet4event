@@ -26,10 +26,10 @@ import {
   tabs,
   userStats,
 } from "@/components/dashboard/mock-data";
-import { AccountData } from "@/lib/api/account";
+import { AccountDataProps } from "@/lib/api/account";
 
 interface AccountDashboardProps {
-  userData: AccountData;
+  userData: AccountDataProps;
 }
 
 export default function AccountDashboard({ userData }: AccountDashboardProps) {
@@ -210,10 +210,11 @@ export default function AccountDashboard({ userData }: AccountDashboardProps) {
                 onClick={() => setActiveTab(tab?.id)}
                 className={`
                       flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap hover:cursor-pointer
-                      ${activeTab === tab?.id
-                    ? "border-primary text-primary"
-                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-gray-300"
-                  }
+                      ${
+                        activeTab === tab?.id
+                          ? "border-primary text-primary"
+                          : "border-transparent text-muted-foreground hover:text-foreground hover:border-gray-300"
+                      }
                     `}
               >
                 <Icon name={tab?.icon as AppIconProps["name"]} size={16} />

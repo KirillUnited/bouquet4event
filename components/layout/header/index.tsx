@@ -11,12 +11,11 @@ import { SITE_SETTINGS_QUERY } from "@/sanity/queries/site";
 import { stegaClean } from "next-sanity";
 import { transformNavigationItems } from "@/lib/navigation";
 import AuthButtons from "@/components/dashboard/ui/AuthButtons";
-import {fetchAccountData} from "@/lib/api/account";
 
 export default async function Header() {
-  const { data: siteSettings } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
-  // User authorization
-  const { account, error } = await fetchAccountData();
+  const { data: siteSettings } = await sanityFetch({
+    query: SITE_SETTINGS_QUERY,
+  });
 
   // Use navigation from Sanity or fallback to config
   const mainNavigation = stegaClean(siteSettings?.mainNavigation);
@@ -27,9 +26,11 @@ export default async function Header() {
     : NAV_ITEMS;
 
   return (
-    <header className={cn(
-      "sticky top-0 w-full border-border/40 bg-background/70 backdrop-blur-lg z-50"
-    )}>
+    <header
+      className={cn(
+        "sticky top-0 w-full border-border/40 bg-background/70 backdrop-blur-lg z-50",
+      )}
+    >
       <div className="container flex items-center justify-between min-h-14 py-2">
         <Link href="/" aria-label="Home page" className="flex items-center">
           <Logo className="hidden xl:block w-40" />
@@ -39,11 +40,17 @@ export default async function Header() {
           <DesktopNav navItems={navItems} />
         </nav>
         <div className="flex items-center gap-4">
-          <SocialsList className="hidden xl:flex" items={siteSettings?.siteContactInfo?.socialLinks} />
+          <SocialsList
+            className="hidden xl:flex"
+            items={siteSettings?.siteContactInfo?.socialLinks}
+          />
           <ModeToggle />
-          <AuthButtons user={account} className="hidden xl:flex" />
+          <AuthButtons className="hidden xl:flex" />
           <div className="xl:hidden">
-            <MobileNav navItems={navItems} socials={siteSettings?.siteContactInfo?.socialLinks} user={account} />
+            <MobileNav
+              navItems={navItems}
+              socials={siteSettings?.siteContactInfo?.socialLinks}
+            />
           </div>
         </div>
       </div>
