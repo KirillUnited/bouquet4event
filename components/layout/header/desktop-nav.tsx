@@ -1,12 +1,12 @@
 import Link from "next/link";
 import {NavItem} from "@/types";
-import {getNavItemIcon} from "@/lib/navigation";
+import {getNavItemIcon, NavItemLabel} from "@/lib/navigation";
 
 export default function DesktopNav({navItems}: { navItems: NavItem[] }) {
     return (
         <ul className="hidden xl:flex items-center gap-7 text-primary">
             {navItems.map((navItem) => {
-                const Icon = getNavItemIcon(navItem.label);
+                const Icon = getNavItemIcon(navItem.label as NavItemLabel);
 
                 return (
                     <li key={navItem.label}>
