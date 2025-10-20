@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -8,6 +8,7 @@ import { fontSans, fontSerif } from "@/config/fonts";
 import JsonLd from "@/components/JsonLd";
 import { getLocalBusinessJsonLd } from "@/lib/jsonLd";
 import Script from "next/script";
+import { AuthProvider } from "@/store/AuthContext";
 
 const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 
@@ -71,14 +72,16 @@ export default function RootLayout({
           fontSerif.variable,
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </AuthProvider>
         <Toaster position="top-center" richColors />
         <JsonLd data={jsonLd} />
         {/* Noscript fallback */}

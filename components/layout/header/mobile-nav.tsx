@@ -16,17 +16,15 @@ import { AlignRight } from "lucide-react";
 import { SocialsList } from "@/components/shared/socials";
 import { SocialsListProps } from "@/components/shared/socials/SocialsList";
 import AuthButtons from "@/components/dashboard/ui/AuthButtons";
-import { getNavItemIcon } from "@/lib/navigation";
-import { AccountData } from "@/lib/api/account";
+import { getNavItemIcon, NavItemLabel } from "@/lib/navigation";
+import { AccountDataProps } from "@/lib/api/account";
 
 export default function MobileNav({
   navItems,
   socials,
-  user,
 }: {
   navItems: NavItem[];
   socials: SocialsListProps["items"];
-  user: AccountData | null;
 }) {
   const [open, setOpen] = useState(false);
   return (
@@ -52,7 +50,7 @@ export default function MobileNav({
           <nav className="container flex flex-col gap-6">
             <ul className="space-y-3">
               {navItems.map((navItem) => {
-                const Icon = getNavItemIcon(navItem.label);
+                const Icon = getNavItemIcon(navItem.label as NavItemLabel);
 
                 return (
                   <li key={navItem.label}>
@@ -73,7 +71,7 @@ export default function MobileNav({
 
             {/* <CTAButton /> */}
 
-            <AuthButtons user={user} />
+            <AuthButtons />
 
             <SocialsList items={socials} />
           </nav>
