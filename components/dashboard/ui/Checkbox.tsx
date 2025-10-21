@@ -1,24 +1,38 @@
-import { useId } from 'react'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { CheckboxProps, CheckedState } from "@radix-ui/react-checkbox";
+
+type CheckboxOnChange = (checked: CheckedState) => void; 
 
 export interface CheckboxLabelProps {
   id?: string;
   label?: string;
-  disabled?: boolean;
-  checked?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: CheckboxOnChange;
 }
 
-const CheckboxLabel = ({ id: customId, label, disabled, checked, onChange }: CheckboxLabelProps) => {
-  const id = customId || useId()
+const CheckboxLabel = ({
+  id,
+  label,
+  disabled = false,
+  checked = false,
+  onChange,
+  ...props
+}: CheckboxLabelProps & CheckboxProps) => {
+  const checkBoxId =
+    id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
 
   return (
-    <div className='flex items-center gap-2'>
-      <Checkbox id={id} disabled={disabled} checked={checked} onChange={(e) => onChange?.(e as any)} />
-      {label && <Label htmlFor={id}>{label}</Label>}
+    <div className="flex items-center gap-2">
+      <Checkbox
+        id={checkBoxId}
+        disabled={disabled}
+        checked={checked}
+        onCheckedChange={onChange}
+        {...props}
+      />
+      {label && <Label htmlFor={checkBoxId}>{label}</Label>}
     </div>
-  )
-}
+  );
+};
 
-export default CheckboxLabel
+export default CheckboxLabel;

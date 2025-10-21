@@ -2,6 +2,7 @@ import Icon from "@/components/ui/AppIcon";
 import {Button} from "@/components/ui/button";
 import { SubscriptionData } from "@/types/dashboard";
 import { ArrowUpIcon, PauseIcon, SettingsIcon } from "lucide-react";
+import { Card } from "../ui/card";
 
 const SubscriptionCard = ({
   subscription,
@@ -36,8 +37,8 @@ const SubscriptionCard = ({
   };
 
   return (
-    <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
-      <div className="flex items-start justify-between mb-4">
+    <Card className="p-4 md:p-6 shadow-natural">
+      <div className="flex items-start flex-wrap gap-4 justify-between mb-4">
         <div>
           <h3 className="font-playfair text-lg font-semibold text-foreground mb-1">
             {subscription?.planName}
@@ -62,7 +63,7 @@ const SubscriptionCard = ({
           >
             <div className="flex items-center gap-2">
               <SettingsIcon size={16} />
-              Управлять
+              <span className="max-md:sr-only">Управлять</span>
             </div>
           </Button>
           {subscription?.status === "active" && (
@@ -73,7 +74,7 @@ const SubscriptionCard = ({
             >
               <div className="flex items-center gap-2">
                 <PauseIcon size={16} />
-                Пауза
+                <span className="max-md:sr-only">Пауза</span>
               </div>
             </Button>
           )}
@@ -95,7 +96,7 @@ const SubscriptionCard = ({
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-between pt-4 border-t border-border">
+      <div className="flex items-center flex-wrap gap-4 justify-between pt-4 border-t border-border">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <Icon name="Calendar" size={16} />
@@ -120,7 +121,7 @@ const SubscriptionCard = ({
           </Button>
         )}
       </div>
-    </div>
+    </Card>
   );
 };
 
