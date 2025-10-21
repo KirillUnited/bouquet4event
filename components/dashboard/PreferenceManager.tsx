@@ -1,9 +1,12 @@
 import React, { useState, useCallback, ChangeEvent } from "react";
 import Icon from "@/components/ui/AppIcon";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Input from "@/components/dashboard/ui/Input";
 import CheckboxLabel from "@/components/dashboard/ui/Checkbox";
-import type { PreferenceManagerProps, UserPreferences } from "@/types/dashboard";
+import type {
+  PreferenceManagerProps,
+  UserPreferences,
+} from "@/types/dashboard";
 import {
   accountStatusOptions,
   bouquetCategoryOptions,
@@ -14,12 +17,16 @@ import {
 import { CheckIcon, EditIcon } from "lucide-react";
 import StudioSelect from "./ui/StudioSelect";
 import InputLabel from "@/components/dashboard/ui/Input";
+import { Card } from "../ui/card";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 const PreferenceManager: React.FC<PreferenceManagerProps> = ({
   preferences,
   onUpdatePreferences,
 }) => {
-  const [localPreferences, setLocalPreferences] = useState<UserPreferences>(preferences);
+  const [localPreferences, setLocalPreferences] =
+    useState<UserPreferences>(preferences);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const handleSave = useCallback((): void => {
@@ -35,34 +42,32 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
   const updatePreference = useCallback(
     <K extends keyof UserPreferences>(
       key: K,
-      value: UserPreferences[K]
+      value: UserPreferences[K],
     ): void => {
       setLocalPreferences((prev) => ({
         ...prev,
         [key]: value,
       }));
     },
-    []
+    [],
   );
 
   const toggleFlowerType = useCallback(
     (flowerType: string): void => {
-      const currentTypes = localPreferences.favoriteFlowers;
-      const updatedTypes = currentTypes.includes(flowerType)
+      const currentTypes = localPreferences?.favoriteFlowers || [];
+      const updatedTypes = currentTypes?.includes(flowerType)
         ? currentTypes.filter((type) => type !== flowerType)
         : [...currentTypes, flowerType];
 
       updatePreference("favoriteFlowers", updatedTypes);
     },
-    [localPreferences.favoriteFlowers, updatePreference]
+    [localPreferences.favoriteFlowers, updatePreference],
   );
 
   return (
-    <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="font-playfair text-lg font-semibold text-foreground">
-          Настройки цветов
-        </h3>
+    <Card className="p-4 md:p-6 shadow-natural">
+      <div className="flex items-center gap-2 flex-wrap justify-between mb-6">
+        <h3 className="font-semibold text-foreground">Настройки аккаунта</h3>
         {!isEditing ? (
           <Button
             variant="outline"
@@ -79,11 +84,7 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
             <Button variant="ghost" size="sm" onClick={handleCancel}>
               Отмена
             </Button>
-            <Button
-              variant="default"
-              size="sm"
-              onClick={handleSave}
-            >
+            <Button variant="default" size="sm" onClick={handleSave}>
               <div className="flex items-center gap-2">
                 <CheckIcon size={16} />
                 Сохранить изменения
@@ -102,22 +103,22 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
             {colorOptions?.map((option) => (
               <div
                 key={option.id}
-                className={`
-                  p-3 rounded-lg border cursor-pointer transition-natural
-                  ${
-                    localPreferences.colorPalette === option.id
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-primary/50"
-                  }
-                  ${!isEditing ? "cursor-default" : ""}
-                `}
+                className={cn(
+                  "p-3 rounded-lg border transition-natural",
+                  localPreferences.colorPalette === option.id
+                    ? "border-primary bg-primary/5"
+                    : "border-border hover:border-primary/50",
+                  !isEditing
+                    ? "cursor-not-allowed opacity-50"
+                    : "cursor-pointer",
+                )}
                 onClick={() =>
                   isEditing && updatePreference("colorPalette", option.id)
                 }
                 role="button"
                 tabIndex={isEditing ? 0 : -1}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' && isEditing) {
+                  if (e.key === "Enter" && isEditing) {
                     updatePreference("colorPalette", option.id);
                   }
                 }}
@@ -144,24 +145,34 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
           </div>
         </div>
 
+        <Separator className="my-4" />
+
         {/* Flower Types */}
         <div>
           <h4 className="font-medium text-foreground mb-3">
             Любимые типы цветов
           </h4>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {flowerTypes?.map((flower: string) => (
-              <CheckboxLabel
-                key={flower}
-                label={flower as any}
-                checked={localPreferences.favoriteFlowers.includes(flower)}
-                onChange={() => isEditing && toggleFlowerType(flower)}
-                disabled={!isEditing}
-                id={`flower-${flower.toLowerCase().replace(/\s+/g, '-')}`}
-              />
-            ))}
+            {flowerTypes?.map((flower: string) => {
+              const id = `flower-${flower.toLowerCase().replace(/\s+/g, "-")}`;
+
+              return (
+                <CheckboxLabel
+                  id={id}
+                  key={flower}
+                  label={flower as any}
+                  checked={localPreferences.favoriteFlowers.includes(flower)}
+                  onChange={() => {
+                    isEditing && toggleFlowerType(flower);
+                  }}
+                  disabled={!isEditing}
+                />
+              );
+            })}
           </div>
         </div>
+
+        <Separator className="my-4" />
 
         {/* Bouquet Information */}
         <div>
@@ -173,7 +184,9 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
               label="Категория букета"
               options={bouquetCategoryOptions}
               value={localPreferences?.bouquetCategory || ""}
-              onValueChange={(value) => updatePreference("bouquetCategory", value)}
+              onValueChange={(value) =>
+                updatePreference("bouquetCategory", value)
+              }
               placeholder="Выберите категорию"
               disabled={!isEditing}
             />
@@ -182,7 +195,9 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
               label="Интервал доставки"
               options={deliveryIntervalOptions}
               value={localPreferences?.deliveryInterval || ""}
-              onValueChange={(value) => updatePreference("deliveryInterval", value)}
+              onValueChange={(value) =>
+                updatePreference("deliveryInterval", value)
+              }
               placeholder="Выберите интервал"
               disabled={!isEditing}
             />
@@ -196,13 +211,14 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
               }
               disabled={!isEditing}
             />
-            
 
             <StudioSelect
               label="Статус аккаунта"
               options={accountStatusOptions}
               value={localPreferences?.accountStatus || ""}
-              onValueChange={(value) => updatePreference("accountStatus", value)}
+              onValueChange={(value) =>
+                updatePreference("accountStatus", value)
+              }
               placeholder="Выберите статус"
               disabled={!isEditing}
             />
@@ -212,7 +228,9 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
               type="email"
               placeholder="your.email@example.com"
               value={localPreferences?.email || ""}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => updatePreference("email", e?.target?.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                updatePreference("email", e?.target?.value)
+              }
               disabled={!isEditing}
             />
 
@@ -257,6 +275,8 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
           </div>
         </div>
 
+        <Separator className="my-4" />
+
         {/* Delivery Preferences */}
         <div>
           <h4 className="font-medium text-foreground mb-3">
@@ -289,33 +309,32 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
               <CheckboxLabel
                 label="Отправлять уведомления о доставке по SMS"
                 checked={localPreferences?.smsNotifications || false}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  updatePreference("smsNotifications", e?.target?.checked)
+                onChange={(checked) =>
+                  checked && updatePreference("smsNotifications", true)
                 }
                 disabled={!isEditing}
               />
               <CheckboxLabel
                 label="Включать инструкции по уходу с каждой доставкой"
                 checked={localPreferences?.includeCareInstructions || false}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  updatePreference(
-                    "includeCareInstructions",
-                    e?.target?.checked,
-                  )
+                onChange={(checked) =>
+                  checked && updatePreference("includeCareInstructions", true)
                 }
                 disabled={!isEditing}
               />
               <CheckboxLabel
                 label="Удивлять меня сезонными сортами"
                 checked={localPreferences?.seasonalSurprises || false}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  updatePreference("seasonalSurprises", e?.target?.checked)
+                onChange={(checked) =>
+                  checked && updatePreference("seasonalSurprises", true)
                 }
                 disabled={!isEditing}
               />
             </div>
           </div>
         </div>
+
+        <Separator className="my-4" />
 
         {/* Allergies & Restrictions */}
         <div>
@@ -333,7 +352,7 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
           />
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

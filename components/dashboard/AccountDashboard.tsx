@@ -36,8 +36,6 @@ export default function AccountDashboard({ userData }: AccountDashboardProps) {
   const [activeTab, setActiveTab] = useState<string>("overview");
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  console.log("User Data:", userData);
-
   // Mock preferences data - Russian translations
   const [preferences, setPreferences] = useState<UserPreferences>({
     colorPalette: "warm",

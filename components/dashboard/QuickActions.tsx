@@ -1,10 +1,11 @@
 import React from "react";
 import Icon from "@/components/ui/AppIcon";
 import { actions } from "@/components/dashboard/mock-data";
+import { Card } from "../ui/card";
 
 const QuickActions = ({ onAction }: { onAction: (id: string) => void }) => {
   return (
-    <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
+    <Card className="p-4 md:p-6 shadow-natural">
       <h3 className="font-playfair text-lg font-semibold text-foreground mb-4">
         Быстрые действия
       </h3>
@@ -45,7 +46,7 @@ const QuickActions = ({ onAction }: { onAction: (id: string) => void }) => {
           </button>
         ))}
       </div>
-    </div>
+    </Card>
   );
 };
 

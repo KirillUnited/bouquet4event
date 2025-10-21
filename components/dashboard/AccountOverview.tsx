@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import Icon from "@/components/ui/AppIcon";
 import Image from "next/image";
+import { Badge, BadgeProps } from "../ui/badge";
 
 type AccountProps = {
   email: string;
@@ -60,20 +61,27 @@ export default function AccountOverview({ user, stats }: Props) {
     if (monthsActive >= 12)
       return {
         text: "Любитель цветов",
-        color: "bg-conversion text-conversion-foreground",
+        color: "bg-purple-100 text-purple-600",
+        variant: "secondary",
       };
     if (monthsActive >= 6)
-      return { text: "Друг сада", color: "bg-primary text-primary-foreground" };
+      return { 
+        text: "Друг сада", 
+        color: "bg-green-100 text-green-600",
+        variant: "secondary",
+      };
+
     return {
       text: "Новый цветовод",
       color: "bg-accent text-accent-foreground",
+      variant: "outline",
     };
   };
 
   const badge = membershipBadge();
 
   return (
-    <Card className="p-6 shadow-natural">
+    <Card className="p-4 md:p-6 shadow-natural">
       <div className="flex items-start space-x-4 mb-6">
         <div className="flex-shrink-0">
           <Image
@@ -88,17 +96,18 @@ export default function AccountOverview({ user, stats }: Props) {
           />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center space-x-3 mb-2">
-            <h2 className="font-playfair text-xl font-semibold text-foreground">
-              Добро пожаловать, {user?.name}!
+          <div className="flex items-start gap-3 flex-wrap mb-2">
+            <h2 className="max-md:text-2xl font-semibold text-foreground overflow-hidden">
+              Добро пожаловать, <span className="font-bold line-clamp-1 truncate">{user?.name}!</span>
             </h2>
-            <span
-              className={`px-2 py-1 rounded-full text-xs font-medium ${badge?.color}`}
+            <Badge
+              variant={badge?.variant as BadgeProps["variant"]}
+              className={`${badge?.color}`}
             >
               {badge?.text}
-            </span>
+            </Badge>
           </div>
-          <p className="text-muted-foreground mb-1">{user?.email}</p>
+          <p className="text-muted-foreground mb-1 line-clamp-1 truncate">{user?.email}</p>
           <p className="text-sm text-muted-foreground">
             Участник с {formatDate(user?.createdAt)}
           </p>
@@ -110,7 +119,7 @@ export default function AccountOverview({ user, stats }: Props) {
           <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mx-auto mb-2">
             <Icon name="Package" size={24} className="text-primary" />
           </div>
-          <p className="text-2xl font-bold text-foreground">
+          <p className="text-2xl font-bold text-foreground truncate">
             {stats?.totalDeliveries}
           </p>
           <p className="text-sm text-muted-foreground">Всего доставок</p>
@@ -120,7 +129,7 @@ export default function AccountOverview({ user, stats }: Props) {
           <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mx-auto mb-2">
             <Icon name="Heart" size={24} className="text-green-600" />
           </div>
-          <p className="text-2xl font-bold text-foreground">
+          <p className="text-2xl font-bold text-foreground truncate">
             {stats?.favoriteFlowers}
           </p>
           <p className="text-sm text-muted-foreground">Любимые цветы</p>
@@ -130,7 +139,7 @@ export default function AccountOverview({ user, stats }: Props) {
           <div className="flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-lg mx-auto mb-2">
             <Icon name="DollarSign" size={24} className="text-yellow-600" />
           </div>
-          <p className="text-2xl font-bold text-foreground">
+          <p className="text-2xl font-bold text-foreground truncate">
             {formatCurrency(stats?.accountSum)}
           </p>
           <p className="text-sm text-muted-foreground">Сумма на счету</p>
@@ -140,7 +149,7 @@ export default function AccountOverview({ user, stats }: Props) {
           <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg mx-auto mb-2">
             <Icon name="Users" size={24} className="text-purple-600" />
           </div>
-          <p className="text-2xl font-bold text-foreground">
+          <p className="text-2xl font-bold text-foreground truncate">
             {stats?.referrals}
           </p>
           <p className="text-sm text-muted-foreground">Приглашенные друзья</p>

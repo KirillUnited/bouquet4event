@@ -5,6 +5,7 @@ import Icon from "@/components/ui/AppIcon";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { CameraIcon, EyeIcon, RotateCwIcon, Share2Icon, StarIcon, XIcon } from "lucide-react";
+import { Card } from "../ui/card";
 
 type DeliveryStatus = "delivered" | "skipped" | "cancelled" | "scheduled";
 
@@ -75,10 +76,10 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
   };
 
   return (
-    <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
+    <Card className="p-4 md:p-6 shadow-natural">
       {/* Заголовок и фильтр */}
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="font-playfair text-lg font-semibold text-foreground">
+      <div className="flex items-center flex-wrap gap-2 justify-between mb-6">
+        <h3 className="font-semibold text-foreground">
           История доставок
         </h3>
         <div className="flex items-center space-x-2">
@@ -118,7 +119,7 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start flex-col md:flex-row gap-4 justify-between">
                     <div>
                       <h4 className="font-medium text-foreground mb-1">
                         {delivery.bouquetName}
@@ -147,39 +148,42 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
                     </div>
 
                     {/* Кнопки действий */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex-1 flex items-center flex-wrap justify-end gap-2">
                       {delivery.status === "delivered" && (
                         <>
                           <Button
+                          className="max-md:border border-border"
                             variant="ghost"
                             size="sm"
                             onClick={() => onReorder(delivery)}
                           >
                             <div className="flex items-center gap-2">
                               <RotateCwIcon size={16} />
-                              Повторить заказ
+                              <span className="max-md:sr-only">Повторить заказ</span>
                             </div>
                           </Button>
                           {!delivery.rated && (
                             <Button
+                          className="max-md:border border-border"
                               variant="ghost"
                               size="sm"
                               onClick={() => onRate(delivery.id)}
                             >
                               <div className="flex items-center gap-2">
                                 <StarIcon size={16} />
-                                Оценить
+                                <span className="max-md:sr-only">Оценить</span>
                               </div>
                             </Button>
                           )}
                           <Button
+                          className="max-md:border border-border"
                             variant="ghost"
                             size="sm"
                             onClick={() => onSharePhoto(delivery.id)}
                           >
                             <div className="flex items-center gap-2">
                               <Share2Icon size={16} />
-                              Поделиться фото
+                              <span className="max-md:sr-only">Поделиться фото</span>
                             </div>
                           </Button>
                         </>
@@ -187,33 +191,37 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
                       {delivery.status === "skipped" && (
                         <>
                           <Button
+                          className="max-md:border border-border"
                             variant="ghost"
                             size="sm"
                             onClick={() => onSharePhoto(delivery.id)}
                           >
                             <div className="flex items-center gap-2">
                               <CameraIcon size={16} />
-                              Поделиться фото
+                              <span className="max-md:sr-only">Поделиться фото</span>
                             </div>
                           </Button>
                         </>
                       )}
                       <Button
+                          className="max-md:border border-border"
                         variant="ghost"
                         size="sm"
                         onClick={() => setSelectedDelivery(delivery)}
                       >
                         <div className="flex items-center gap-2">
                           <EyeIcon size={16} />
-                          Подробнее
-                        </div>
+<span className="max-md:sr-only">
+                            Подробнее
+  
+</span>                        </div>
                       </Button>
                     </div>
                   </div>
 
                   {/* Отображение рейтинга */}
                   {delivery.rating && (
-                    <div className="flex items-center space-x-1 mt-2">
+                    <div className="flex items-center space-x-1 mt-4">
                       {[1, 2, 3, 4, 5].map((star) => (
                         <Icon
                           key={star}
@@ -335,7 +343,7 @@ const DeliveryHistory: React.FC<DeliveryHistoryProps> = ({
           </div>
         </div>
       )}
-    </div>
+    </Card>
   );
 };
 

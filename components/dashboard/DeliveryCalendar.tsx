@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import {Button} from "@/components/ui/button";
 import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon, XIcon } from "lucide-react";
+import { Card } from "../ui/card";
 
 type DeliveryStatus = "scheduled" | "delivered" | "skipped" | "cancelled";
 
@@ -104,10 +105,10 @@ const DeliveryCalendar: React.FC<DeliveryCalendarProps> = ({
   const weekDays = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"] as const;
 
   return (
-    <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
+    <Card className="p-4 md:p-6 shadow-natural">
       {/* Заголовок */}
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="font-playfair text-lg font-semibold text-foreground">
+      <div className="flex items-center gap-2 flex-wrap justify-between mb-6">
+        <h3 className="font-semibold text-foreground">
           Календарь доставок
         </h3>
         <div className="flex items-center space-x-2">
@@ -233,7 +234,7 @@ const DeliveryCalendar: React.FC<DeliveryCalendarProps> = ({
             </div>
           ))}
       </div>
-    </div>
+    </Card>
   );
 };
 

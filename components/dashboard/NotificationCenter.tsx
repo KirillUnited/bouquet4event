@@ -4,6 +4,7 @@ import { useState } from "react";
 import Icon from "@/components/ui/AppIcon";
 import {Button} from "@/components/ui/button";
 import { CheckCheckIcon } from "lucide-react";
+import { Card } from "../ui/card";
 
 type NotificationType = "delivery" | "reminder" | "promotion" | "update" | "default";
 
@@ -72,10 +73,10 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
   };
 
   return (
-    <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-3">
-          <h3 className="font-playfair text-lg font-semibold text-foreground">
+    <Card className="p-4 md:p-6 shadow-natural">
+      <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
+        <div className="flex items-center gap-3">
+          <h3 className="font-semibold text-foreground">
             Уведомления
           </h3>
           {unreadCount > 0 && (
@@ -85,7 +86,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
           )}
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center flex-wrap gap-2">
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value as "all" | "unread" | "read")}
@@ -198,7 +199,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
           })
         )}
       </div>
-    </div>
+    </Card>
   );
 };
 
