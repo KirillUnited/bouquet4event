@@ -14,6 +14,7 @@ import {
 import { CheckIcon, EditIcon } from "lucide-react";
 import StudioSelect from "./ui/StudioSelect";
 import InputLabel from "@/components/dashboard/ui/Input";
+import { Card } from "../ui/card";
 
 const PreferenceManager: React.FC<PreferenceManagerProps> = ({
   preferences,
@@ -58,9 +59,9 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
   );
 
   return (
-    <div className="bg-card rounded-lg border border-border p-6 shadow-natural">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="font-playfair text-lg font-semibold text-foreground">
+    <Card className="p-4 md:p-6 shadow-natural">
+      <div className="flex items-center gap-2 flex-wrap justify-between mb-6">
+        <h3 className="font-semibold text-foreground">
           Настройки цветов
         </h3>
         {!isEditing ? (
@@ -333,7 +334,7 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
           />
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
