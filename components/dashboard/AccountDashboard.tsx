@@ -27,6 +27,7 @@ import {
   userStats,
 } from "@/components/dashboard/mock-data";
 import { AccountDataProps } from "@/lib/api/account";
+import CompoundPreferenceManager from "@/components/dashboard/PreferenceManager";
 
 interface AccountDashboardProps {
   userData: AccountDataProps;
@@ -247,10 +248,21 @@ export default function AccountDashboard({ userData }: AccountDashboardProps) {
         )}
 
         {activeTab === "preferences" && (
-          <PreferenceManager
+          // <PreferenceManager
+          //   preferences={preferences}
+          //   onUpdatePreferences={handleUpdatePreferences}
+          // />
+          <CompoundPreferenceManager
             preferences={preferences}
             onUpdatePreferences={handleUpdatePreferences}
-          />
+          >
+            <CompoundPreferenceManager.ColorPalette />
+            <CompoundPreferenceManager.FlowerTypes />
+            <CompoundPreferenceManager.BouquetInfo />
+            <CompoundPreferenceManager.Allergies />
+            <CompoundPreferenceManager.Delivery />
+            <CompoundPreferenceManager.Account />
+          </CompoundPreferenceManager>
         )}
 
         {activeTab === "calendar" && (
