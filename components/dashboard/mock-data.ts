@@ -145,8 +145,8 @@ const deliveryHistory = [
 
 const tabs = [
   { id: "overview", name: "Обзор", icon: "Home" },
-  { id: "calendar", name: "Календарь", icon: "Calendar" },
   { id: "preferences", name: "Настройки", icon: "Settings" },
+  { id: "calendar", name: "Календарь", icon: "Calendar" },
   { id: "history", name: "История", icon: "Clock" },
   { id: "notifications", name: "Уведомления", icon: "Bell" },
 ];
