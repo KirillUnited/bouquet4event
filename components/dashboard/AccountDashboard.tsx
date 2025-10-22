@@ -246,18 +246,18 @@ export default function AccountDashboard({ userData }: AccountDashboardProps) {
           </>
         )}
 
+        {activeTab === "preferences" && (
+          <PreferenceManager
+            preferences={preferences}
+            onUpdatePreferences={handleUpdatePreferences}
+          />
+        )}
+
         {activeTab === "calendar" && (
           <DeliveryCalendar
             deliveries={deliveryData as any}
             onSkipDelivery={handleSkipDelivery}
             onReschedule={handleRescheduleDelivery}
-          />
-        )}
-
-        {activeTab === "preferences" && (
-          <PreferenceManager
-            preferences={preferences}
-            onUpdatePreferences={handleUpdatePreferences}
           />
         )}
 
