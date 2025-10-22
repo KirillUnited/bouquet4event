@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getNavItemIcon } from "@/lib/navigation";
 import { AuthButtonVariant } from "@/components/dashboard/AuthConstants";
+import { ChevronDownIcon } from "lucide-react";
 
 const ProfileIcon = getNavItemIcon(AuthButtonVariant.LABEL);
 const LogoutIcon = getNavItemIcon(AuthButtonVariant.LOGOUT);
@@ -52,7 +53,7 @@ export default function AuthDropdown({
           />
           <AvatarFallback className="text-xs">{`${user.name?.charAt(0)}`}</AvatarFallback>
         </Avatar>
-        <div className="flex flex-col text-start leading-none">
+        <div className="flex flex-col text-start leading-none overflow-hidden">
           <span className="max-w-[17ch] truncate text-sm leading-none font-semibold">
             {user.name || user.email}
           </span>
@@ -62,6 +63,7 @@ export default function AuthDropdown({
             </span>
           )}
         </div>
+        <ChevronDownIcon size={16} className="ml-auto size-4" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56">

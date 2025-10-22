@@ -34,7 +34,7 @@ const StudioSelect = ({
   const id = useId();
 
   return (
-    <div className={cn("w-full space-y-2", className)}>
+    <div className={cn("w-full flex flex-col gap-2", className)}>
       <Label htmlFor={id}>{label}</Label>
       <Select value={value} onValueChange={onValueChange} disabled={disabled}>
         <SelectTrigger id={id} className="w-full">
@@ -43,13 +43,11 @@ const StudioSelect = ({
         <SelectContent>
           <SelectGroup>
             <SelectLabel>{placeholder}</SelectLabel>
-            {
-              options?.map((option) => (
-                <SelectItem key={option?.value} value={option?.value}>
-                  {option?.label}
-                </SelectItem>
-              ))
-            }
+            {options?.map((option) => (
+              <SelectItem key={option?.value} value={option?.value}>
+                {option?.label}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>

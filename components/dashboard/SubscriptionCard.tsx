@@ -80,24 +80,24 @@ const SubscriptionCard = ({
           )}
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid sm:grid-cols-2 gap-4 mb-4">
         <div>
           <p className="text-sm text-muted-foreground mb-1">
             Следующая доставка
           </p>
-          <p className="font-medium text-foreground">
+          <p className="max-sm:text-sm font-medium text-foreground">
             {formatDate(subscription?.nextDelivery)}
           </p>
         </div>
         <div>
           <p className="text-sm text-muted-foreground mb-1">Частота доставки</p>
-          <p className="font-medium text-foreground">
+          <p className="max-sm:text-sm font-medium text-foreground">
             {subscription?.frequency}
           </p>
         </div>
       </div>
       <div className="flex items-center flex-wrap gap-4 justify-between pt-4 border-t border-border">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center flex-wrap gap-4">
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <Icon name="Calendar" size={16} />
             <span>доставки с {formatDate(subscription?.startDate)}</span>
@@ -109,10 +109,8 @@ const SubscriptionCard = ({
         </div>
         {subscription?.canUpgrade && (
           <Button
-            variant="outline"
             size="sm"
             onClick={() => onUpgrade(subscription?.id)}
-            className="text-conversion border-conversion hover:bg-conversion hover:text-conversion-foreground"
           >
             <div className="flex items-center gap-2">
               <ArrowUpIcon size={16} />

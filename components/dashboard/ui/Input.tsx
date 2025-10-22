@@ -19,7 +19,7 @@ const InputLabel = ({ label, type, value, onChange, disabled, placeholder, descr
   return (
     <div className='w-full flex flex-col gap-2'>
       <Label htmlFor={id}>{label}</Label>
-      <Input id={id} type={type} value={value} onChange={onChange} disabled={disabled} placeholder={placeholder} />
+      <Input className='max-w-full' id={id} type={type} value={value} onChange={onChange} disabled={disabled} placeholder={placeholder} />
       {description && <p className='text-sm text-muted-foreground'>{description}</p>}
     </div>
   )
