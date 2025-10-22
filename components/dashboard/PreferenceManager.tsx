@@ -64,6 +64,8 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
     [localPreferences.favoriteFlowers, updatePreference],
   );
 
+  console.log(localPreferences)
+
   return (
     <Card className="p-4 md:p-6 shadow-natural">
       <div className="flex items-center gap-2 flex-wrap justify-between mb-6">
@@ -310,7 +312,7 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
                 label="Отправлять уведомления о доставке по SMS"
                 checked={localPreferences?.smsNotifications || false}
                 onChange={(checked) =>
-                  checked && updatePreference("smsNotifications", true)
+                  updatePreference("smsNotifications", checked as boolean)
                 }
                 disabled={!isEditing}
               />
@@ -318,7 +320,7 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
                 label="Включать инструкции по уходу с каждой доставкой"
                 checked={localPreferences?.includeCareInstructions || false}
                 onChange={(checked) =>
-                  checked && updatePreference("includeCareInstructions", true)
+                  updatePreference("includeCareInstructions", checked as boolean)
                 }
                 disabled={!isEditing}
               />
@@ -326,7 +328,7 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
                 label="Удивлять меня сезонными сортами"
                 checked={localPreferences?.seasonalSurprises || false}
                 onChange={(checked) =>
-                  checked && updatePreference("seasonalSurprises", true)
+                  updatePreference("seasonalSurprises", checked as boolean)
                 }
                 disabled={!isEditing}
               />
