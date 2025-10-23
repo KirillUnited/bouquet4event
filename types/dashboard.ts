@@ -75,10 +75,6 @@ export interface PreferenceBlockProps {
   title?: string;
 }
 
-export interface PreferenceBlockProps {
-  title?: string;
-}
-
 // For AccountDashboard component
 export interface AccountDashboardProps {
   userData: UserData;

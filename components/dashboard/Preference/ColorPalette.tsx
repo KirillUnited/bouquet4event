@@ -9,14 +9,12 @@ interface ColorPaletteProps extends PreferenceBlockProps {}
 
 const ColorPalette: React.FC<ColorPaletteProps> = ({
   title = "Цветовая палитра",
-}: {
-  title: string;
-}) => {
+}: ColorPaletteProps) => {
   const { localPreferences, isEditing, updatePreference } =
     usePreferenceManager();
   return (
     <div className="flex flex-col gap-3">
-      <h4 className="font-medium text-foreground mb-3">{title}</h4>
+      {title && <h4 className="font-medium text-foreground mb-3">{title}</h4>}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {colorOptions?.map((option) => (
           <div
