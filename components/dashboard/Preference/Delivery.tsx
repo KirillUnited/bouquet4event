@@ -4,13 +4,18 @@ import StudioSelect from "../ui/StudioSelect";
 import InputLabel from "../ui/Input";
 import CheckboxLabel from "../ui/Checkbox";
 import { deliveryIntervalOptions } from "@/components/dashboard/mock-data";
+import { PreferenceBlockProps } from "@/types/dashboard";
+import { Separator } from "@/components/ui/separator";
+import { Card } from "@/components/ui/card";
 
-const Delivery: React.FC = () => {
+interface DeliveryProps extends PreferenceBlockProps {}
+
+const Delivery: React.FC<DeliveryProps> = ({ title }: DeliveryProps) => {
   const { localPreferences, isEditing, updatePreference } =
     usePreferenceManager();
   return (
-    <div>
-      <h4 className="font-medium text-foreground mb-3">Настройки доставки</h4>
+    <Card className="flex flex-col gap-3 p-4 md:p-6 shadow-natural">
+      {title && <h4 className="font-medium text-foreground mb-3">{title}</h4>}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <InputLabel
           label="Адрес доставки"
@@ -57,7 +62,10 @@ const Delivery: React.FC = () => {
           disabled={!isEditing}
         />
       </div>
-      <div className="space-y-3 mt-4">
+
+      <Separator className="my-4" />
+
+      <div className="space-y-3">
         <CheckboxLabel
           label="Отправлять уведомления о доставке по SMS"
           checked={localPreferences?.smsNotifications || false}
@@ -83,7 +91,7 @@ const Delivery: React.FC = () => {
           disabled={!isEditing}
         />
       </div>
-    </div>
+    </Card>
   );
 };
 

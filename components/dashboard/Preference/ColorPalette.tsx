@@ -3,13 +3,20 @@ import { usePreferenceManager } from "./Manager";
 import { colorOptions } from "@/components/dashboard/mock-data";
 import Icon from "@/components/ui/AppIcon";
 import { cn } from "@/lib/utils";
+import { PreferenceBlockProps } from "@/types/dashboard";
 
-const ColorPalette: React.FC = () => {
+interface ColorPaletteProps extends PreferenceBlockProps {}
+
+const ColorPalette: React.FC<ColorPaletteProps> = ({
+  title = "Цветовая палитра",
+}: {
+  title: string;
+}) => {
   const { localPreferences, isEditing, updatePreference } =
     usePreferenceManager();
   return (
     <div className="flex flex-col gap-3">
-      <h4 className="font-medium text-foreground mb-3">Цветовая палитра</h4>
+      <h4 className="font-medium text-foreground mb-3">{title}</h4>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {colorOptions?.map((option) => (
           <div

@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AccountOverview from "@/components/dashboard/AccountOverview";
 import { Button } from "@/components/ui/button";
 import Icon, { AppIconProps } from "@/components/ui/AppIcon";
 import SubscriptionCard from "@/components/dashboard/SubscriptionCard";
 import QuickActions from "@/components/dashboard/QuickActions";
 import DeliveryCalendar from "@/components/dashboard/DeliveryCalendar";
-import PreferenceManager from "@/components/dashboard/PreferenceManager";
+import PreferenceManager from "@/components/dashboard/Preference";
 import DeliveryHistory from "@/components/dashboard/DeliveryHistory";
 import NotificationCenter from "@/components/dashboard/NotificationCenter";
 import type {
@@ -27,7 +27,12 @@ import {
   userStats,
 } from "@/components/dashboard/mock-data";
 import { AccountDataProps } from "@/lib/api/account";
-import CompoundPreferenceManager from "@/components/dashboard/PreferenceManager";
+import { Separator } from "@/components/ui/separator";
+import { Card } from "@/components/ui/card";
+import {
+  BouquetInfoLabels,
+  PreferenceBlockTitles,
+} from "@/components/dashboard/Preference/constants";
 
 interface AccountDashboardProps {
   userData: AccountDataProps;
@@ -248,21 +253,34 @@ export default function AccountDashboard({ userData }: AccountDashboardProps) {
         )}
 
         {activeTab === "preferences" && (
-          // <PreferenceManager
-          //   preferences={preferences}
-          //   onUpdatePreferences={handleUpdatePreferences}
-          // />
-          <CompoundPreferenceManager
+          <PreferenceManager
             preferences={preferences}
             onUpdatePreferences={handleUpdatePreferences}
           >
-            <CompoundPreferenceManager.ColorPalette />
-            <CompoundPreferenceManager.FlowerTypes />
-            <CompoundPreferenceManager.BouquetInfo />
-            <CompoundPreferenceManager.Allergies />
-            <CompoundPreferenceManager.Delivery />
-            <CompoundPreferenceManager.Account />
-          </CompoundPreferenceManager>
+            <Card className="flex flex-col gap-3 p-4 md:p-6 shadow-natural">
+              <div className="md:space-y-6">
+                <PreferenceManager.ColorPalette
+                  title={PreferenceBlockTitles.COLOR_PALETTE}
+                />
+                <Separator className="my-4" />
+                <PreferenceManager.FlowerTypes
+                  title={PreferenceBlockTitles.FLOWER_TYPES}
+                />
+                <Separator className="my-4" />
+                <PreferenceManager.BouquetInfo
+                  title={PreferenceBlockTitles.BOUQUET_INFO}
+                />
+                <Separator className="my-4" />
+                <PreferenceManager.Allergies
+                  title={PreferenceBlockTitles.ALLERGIES}
+                />
+              </div>
+            </Card>
+            <PreferenceManager.Delivery
+              title={PreferenceBlockTitles.DELIVERY}
+            />
+            <PreferenceManager.Account title={PreferenceBlockTitles.ACCOUNT} />
+          </PreferenceManager>
         )}
 
         {activeTab === "calendar" && (

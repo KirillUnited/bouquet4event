@@ -38,7 +38,7 @@ export const usePreferenceManager = () => {
   return ctx;
 };
 
-export const PreferenceManager: React.FC<PreferenceManagerProps> = ({
+export const PrefManager: React.FC<PreferenceManagerProps> = ({
   preferences,
   onUpdatePreferences,
   children,
@@ -78,9 +78,7 @@ export const PreferenceManager: React.FC<PreferenceManagerProps> = ({
   return (
     <>
       <div className="flex items-center gap-2 flex-wrap justify-between mb-6">
-        <h3 className="font-semibold text-foreground">
-          Настройки предпочтений
-        </h3>
+        <h3 className="font-semibold text-foreground">Настройки профиля</h3>
         {!isEditing ? (
           <Button
             variant="outline"

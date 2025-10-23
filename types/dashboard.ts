@@ -7,7 +7,7 @@ export interface UserData {
 
 export interface Notification {
   id: number;
-  type: 'delivery' | 'promotion' | 'reminder' | 'update' | string;
+  type: "delivery" | "promotion" | "reminder" | "update" | string;
   title: string;
   message: string;
   createdAt: string;
@@ -39,7 +39,7 @@ export interface UserPreferences {
 export interface SubscriptionData {
   id: string;
   name: string;
-  status: 'active' | 'paused' | 'cancelled';
+  status: "active" | "paused" | "cancelled";
   nextDelivery: string;
   price: number;
   planName: string;
@@ -53,7 +53,7 @@ export interface SubscriptionData {
 export interface DeliveryData {
   id: string;
   date: string;
-  status: 'scheduled' | 'delivered' | 'cancelled';
+  status: "scheduled" | "delivered" | "cancelled";
   bouquetName: string;
   // Add other delivery properties as needed
 }
@@ -68,6 +68,10 @@ export interface UserStats {
 export interface PreferenceManagerProps {
   preferences: UserPreferences;
   onUpdatePreferences: (preferences: UserPreferences) => void;
+}
+
+export interface PreferenceBlockProps {
+  title?: string;
 }
 
 // For AccountDashboard component

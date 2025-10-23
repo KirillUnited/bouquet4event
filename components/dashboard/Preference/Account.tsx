@@ -3,13 +3,17 @@ import { usePreferenceManager } from "./Manager";
 import StudioSelect from "../ui/StudioSelect";
 import InputLabel from "../ui/Input";
 import { accountStatusOptions } from "@/components/dashboard/mock-data";
+import { PreferenceBlockProps } from "@/types/dashboard";
+import { Card } from "@/components/ui/card";
 
-const Account: React.FC = () => {
+interface AccountProps extends PreferenceBlockProps {}
+
+const Account: React.FC<AccountProps> = ({ title }: AccountProps) => {
   const { localPreferences, isEditing, updatePreference } =
     usePreferenceManager();
   return (
-    <div>
-      <h4 className="font-medium text-foreground">Настройки аккаунта</h4>
+    <Card className="flex flex-col gap-3 p-4 md:p-6 shadow-natural">
+      {title && <h4 className="font-medium text-foreground">{title}</h4>}
       <p className="text-sm text-muted-foreground">
         Вы вошли как {localPreferences?.email || "неизвестный пользователь"}
       </p>
@@ -53,7 +57,7 @@ const Account: React.FC = () => {
           disabled={!isEditing}
         />
       </div>
-    </div>
+    </Card>
   );
 };
 

@@ -3,16 +3,19 @@ import { usePreferenceManager } from "./Manager";
 import StudioSelect from "../ui/StudioSelect";
 import InputLabel from "../ui/Input";
 import { bouquetCategoryOptions } from "@/components/dashboard/mock-data";
-import { BouquetInfoLabels } from "@/components/dashboard/PreferenceManager/constants";
+import { BouquetInfoLabels } from "@/components/dashboard/Preference/constants";
+import { PreferenceBlockProps } from "@/types/dashboard";
 
-const BouquetInfo: React.FC = () => {
+interface BouquetInfoProps extends PreferenceBlockProps {}
+
+const BouquetInfo: React.FC<BouquetInfoProps> = ({
+  title,
+}: BouquetInfoProps) => {
   const { localPreferences, isEditing, updatePreference } =
     usePreferenceManager();
   return (
     <div>
-      <h4 className="font-medium text-foreground mb-3">
-        {BouquetInfoLabels.TITLE}
-      </h4>
+      {title && <h4 className="font-medium text-foreground mb-3">{title}</h4>}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <StudioSelect
           label="Категория букета"
@@ -29,7 +32,6 @@ const BouquetInfo: React.FC = () => {
           value={localPreferences?.bouquetWishes || ""}
           onChange={(e) => updatePreference("bouquetWishes", e?.target?.value)}
           disabled={!isEditing}
-          name="bouquetWishes"
         />
       </div>
     </div>

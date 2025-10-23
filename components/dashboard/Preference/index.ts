@@ -1,4 +1,4 @@
-import { PreferenceManager } from "./Manager";
+import { PrefManager } from "./Manager";
 import ColorPalette from "./ColorPalette";
 import FlowerTypes from "./FlowerTypes";
 import BouquetInfo from "./BouquetInfo";
@@ -6,7 +6,7 @@ import Allergies from "./Allergies";
 import Delivery from "./Delivery";
 import Account from "./Account";
 
-const CompoundPreferenceManager = Object.assign(PreferenceManager, {
+const PreferenceManager = Object.assign(PrefManager, {
   ColorPalette,
   FlowerTypes,
   BouquetInfo,
@@ -15,4 +15,4 @@ const CompoundPreferenceManager = Object.assign(PreferenceManager, {
   Account,
 });
 
-export default CompoundPreferenceManager;
+export default PreferenceManager;
