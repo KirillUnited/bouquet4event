@@ -68,6 +68,7 @@ export interface UserStats {
 export interface PreferenceManagerProps {
   preferences: UserPreferences;
   onUpdatePreferences: (preferences: UserPreferences) => void;
+  children?: React.ReactNode;
 }
 
 export interface PreferenceBlockProps {

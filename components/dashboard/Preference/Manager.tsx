@@ -3,7 +3,6 @@ import React, {
   useContext,
   useState,
   useCallback,
-  ReactNode,
 } from "react";
 import type {
   PreferenceManagerProps,
