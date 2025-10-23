@@ -3,7 +3,6 @@ import { usePreferenceManager } from "./Manager";
 import StudioSelect from "../ui/StudioSelect";
 import InputLabel from "../ui/Input";
 import { bouquetCategoryOptions } from "@/components/dashboard/mock-data";
-import { BouquetInfoLabels } from "@/components/dashboard/Preference/constants";
 import { PreferenceBlockProps } from "@/types/dashboard";
 
 interface BouquetInfoProps extends PreferenceBlockProps {}
