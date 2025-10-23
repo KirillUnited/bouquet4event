@@ -90,8 +90,8 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
             </Button>
             <Button variant="default" size="sm" onClick={handleSave}>
               <div className="flex items-center gap-2">
-                <EditIcon size={16} />
-                Редактировать настройки
+                <CheckIcon size={16} />
+                Сохранить изменения
               </div>
             </Button>
           </div>
@@ -368,22 +368,6 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
             placeholder="Выберите статус"
             disabled={!isEditing}
           />
-
-          {/*<InputLabel*/}
-          {/*  label={"Текущий пароль"}*/}
-          {/*  type="password"*/}
-          {/*  value={}*/}
-          {/*  onChange={() => console.log("Текущий пароль:")}*/}
-          {/*  disabled={!isEditing}*/}
-          {/*/>*/}
-
-          {/*<InputLabel*/}
-          {/*  label={"Новый пароль"}*/}
-          {/*  type="password"*/}
-          {/*  value={}*/}
-          {/*  onChange={() => console.log("Новый пароль изменен")}*/}
-          {/*  disabled={!isEditing}*/}
-          {/*/>*/}
         </div>
       </Card>
     </>
