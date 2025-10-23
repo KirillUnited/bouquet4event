@@ -68,38 +68,39 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
 
   return (
     <>
-      <Card className="flex flex-col gap-3 p-4 md:p-6 shadow-natural">
-        <div className="flex items-center gap-2 flex-wrap justify-between mb-6">
-          <h3 className="font-semibold text-foreground">
-            Настройки предпочтений
-          </h3>
-          {!isEditing ? (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsEditing(true)}
-            >
+      <div className="flex items-center gap-2 flex-wrap justify-between mb-6">
+        <h3 className="font-semibold text-foreground">
+          Настройки предпочтений
+        </h3>
+        {!isEditing ? (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsEditing(true)}
+          >
+            <div className="flex items-center gap-2">
+              <EditIcon size={16} />
+              Редактировать настройки
+            </div>
+          </Button>
+        ) : (
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="sm" onClick={handleCancel}>
+              Отмена
+            </Button>
+            <Button variant="default" size="sm" onClick={handleSave}>
               <div className="flex items-center gap-2">
-                <EditIcon size={16} />
-                Редактировать настройки
+                <CheckIcon size={16} />
+                Сохранить изменения
               </div>
             </Button>
-          ) : (
-            <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="sm" onClick={handleCancel}>
-                Отмена
-              </Button>
-              <Button variant="default" size="sm" onClick={handleSave}>
-                <div className="flex items-center gap-2">
-                  <CheckIcon size={16} />
-                  Сохранить изменения
-                </div>
-              </Button>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
+      </div>
+
+      {/* Color Preferences */}
+      <Card className="flex flex-col gap-3 p-4 md:p-6 shadow-natural">
         <div className="md:space-y-6">
-          {/* Color Preferences */}
           <div>
             <h4 className="font-medium text-foreground mb-3">
               Цветовая палитра
@@ -367,22 +368,6 @@ const PreferenceManager: React.FC<PreferenceManagerProps> = ({
             placeholder="Выберите статус"
             disabled={!isEditing}
           />
-
-          {/*<InputLabel*/}
-          {/*  label={"Текущий пароль"}*/}
-          {/*  type="password"*/}
-          {/*  value={}*/}
-          {/*  onChange={() => console.log("Текущий пароль:")}*/}
-          {/*  disabled={!isEditing}*/}
-          {/*/>*/}
-
-          {/*<InputLabel*/}
-          {/*  label={"Новый пароль"}*/}
-          {/*  type="password"*/}
-          {/*  value={}*/}
-          {/*  onChange={() => console.log("Новый пароль изменен")}*/}
-          {/*  disabled={!isEditing}*/}
-          {/*/>*/}
         </div>
       </Card>
     </>
