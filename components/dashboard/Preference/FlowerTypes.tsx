@@ -1,5 +1,5 @@
 import React from "react";
-import { usePreferenceManager } from "./PreferenceManager";
+import { usePreferenceManager } from "./Manager";
 import { flowerTypes } from "@/components/dashboard/mock-data";
 import CheckboxLabel from "@/components/dashboard/ui/Checkbox";
 

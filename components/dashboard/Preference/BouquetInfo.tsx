@@ -1,5 +1,5 @@
 import React from "react";
-import { usePreferenceManager } from "./PreferenceManager";
+import { usePreferenceManager } from "./Manager";
 import StudioSelect from "../ui/StudioSelect";
 import InputLabel from "../ui/Input";
 import { bouquetCategoryOptions } from "@/components/dashboard/mock-data";

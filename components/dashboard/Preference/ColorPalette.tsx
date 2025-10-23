@@ -1,5 +1,5 @@
 import React from "react";
-import { usePreferenceManager } from "./PreferenceManager";
+import { usePreferenceManager } from "./Manager";
 import { colorOptions } from "@/components/dashboard/mock-data";
 import Icon from "@/components/ui/AppIcon";
 import { cn } from "@/lib/utils";

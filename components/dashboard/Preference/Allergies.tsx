@@ -1,5 +1,5 @@
 import React from "react";
-import { usePreferenceManager } from "./PreferenceManager";
+import { usePreferenceManager } from "./Manager";
 import InputLabel from "../ui/Input";
 
 const Allergies: React.FC = () => {

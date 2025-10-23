@@ -1,4 +1,4 @@
-import { PreferenceManager } from "./PreferenceManager";
+import { PreferenceManager } from "./Manager";
 import ColorPalette from "./ColorPalette";
 import FlowerTypes from "./FlowerTypes";
 import BouquetInfo from "./BouquetInfo";

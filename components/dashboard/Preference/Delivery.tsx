@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { usePreferenceManager } from "./PreferenceManager";
+import { usePreferenceManager } from "./Manager";
 import StudioSelect from "../ui/StudioSelect";
 import InputLabel from "../ui/Input";
 import CheckboxLabel from "../ui/Checkbox";

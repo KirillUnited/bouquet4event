@@ -9,6 +9,8 @@ import type {
   PreferenceManagerProps,
   UserPreferences,
 } from "@/types/dashboard";
+import { Button } from "@/components/ui/button";
+import { CheckIcon, EditIcon } from "lucide-react";
 
 interface PreferenceManagerContextValue {
   localPreferences: UserPreferences;
@@ -74,18 +76,49 @@ export const PreferenceManager: React.FC<PreferenceManagerProps> = ({
   );
 
   return (
-    <PreferenceManagerContext.Provider
-      value={{
-        localPreferences,
-        isEditing,
-        setIsEditing,
-        updatePreference,
-        toggleFlowerType,
-        handleSave,
-        handleCancel,
-      }}
-    >
-      {children}
-    </PreferenceManagerContext.Provider>
+    <>
+      <div className="flex items-center gap-2 flex-wrap justify-between mb-6">
+        <h3 className="font-semibold text-foreground">
+          Настройки предпочтений
+        </h3>
+        {!isEditing ? (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsEditing(true)}
+          >
+            <div className="flex items-center gap-2">
+              <EditIcon size={16} />
+              Редактировать настройки
+            </div>
+          </Button>
+        ) : (
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="sm" onClick={handleCancel}>
+              Отмена
+            </Button>
+            <Button variant="default" size="sm" onClick={handleSave}>
+              <div className="flex items-center gap-2">
+                <CheckIcon size={16} />
+                Сохранить изменения
+              </div>
+            </Button>
+          </div>
+        )}
+      </div>
+      <PreferenceManagerContext.Provider
+        value={{
+          localPreferences,
+          isEditing,
+          setIsEditing,
+          updatePreference,
+          toggleFlowerType,
+          handleSave,
+          handleCancel,
+        }}
+      >
+        {children}
+      </PreferenceManagerContext.Provider>
+    </>
   );
 };
